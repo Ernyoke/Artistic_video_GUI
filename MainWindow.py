@@ -1,6 +1,145 @@
-from gui.MainWindow import Ui_MainWindow
+from gui.Ui_MainWindow import Ui_MainWindow
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QGraphicsScene, QGraphicsView, QSizePolicy, QFrame, QLabel, \
+    QVBoxLayout, QMessageBox
+from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtCore import QSize, Qt, pyqtSlot, pyqtSignal
+import os
+from Preferences import PreferencesDialog
 
 
-class MainWindow(Ui_MainWindow):
-    pass
+class SelectableGraphicsView(QGraphicsView):
 
+    # abusing the language like a b0$$
+    on_focus = pyqtSignal(QGraphicsView)
+
+    def __init__(self, scene, parent, path_to_image):
+        super(SelectableGraphicsView, self).__init__(scene, parent)
+        self.path_to_image = path_to_image
+        self.style_not_focused = 'border-style: solid ; border-width: 2px; border-color: black;'
+        self.style_focused = 'border-style: solid ; border-width: 2px; border-color: blue;'
+        self.style_hovered = 'border-style: solid ; border-width: 2px; border-color: white;'
+        self.setStyleSheet(self.style_not_focused)
+
+    def focusInEvent(self, QFocusEvent):
+        self.focus()
+        self.on_focus.emit(self)
+
+    def focus(self):
+        self.setStyleSheet(self.style_focused)
+
+    def un_focus(self):
+        self.setStyleSheet(self.style_not_focused)
+
+
+class MainWindow(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+        # set up slot connection
+        self.ui.browseButton.clicked.connect(self._browse_button_clicked)
+
+        self.ui.actionExit.triggered.connect(self._exit)
+        self.ui.actionAbout.triggered.connect(self._about)
+        self.ui.actionPreferences.triggered.connect(self._preferences)
+        self.preferences_dialog = PreferencesDialog()
+
+        self.ui.okButton.pressed.connect(self._ok_button_pressed)
+
+        # read styles
+        self.style_views = [
+            self._create_style_view(os.getcwd()+'/styles/style1', 'style1'),
+            self._create_style_view(os.getcwd()+'/styles/style2', 'style2')]
+
+        self.focused_style = self.style_views[0]
+        self.focused_style.focus()
+
+    def _create_style_view(self, style_path, style_name):
+        pixmap = self._read_image_pixmap(style_path)
+        if pixmap is not None:
+
+            # create a scene which will handle the graphical image
+            scene = QGraphicsScene(self)
+            scene.addPixmap(pixmap)
+
+            # create the the widget which will display the image
+            graphics_view = SelectableGraphicsView(scene, self, style_path)
+
+            # set its maximum size to 100 by 100 pixels
+            size = QSize(100, 100)
+            graphics_view.setMaximumSize(size)
+
+            # set the size policy to fixed so the widgets wont change their size
+            size_policy = QSizePolicy()
+            size_policy.setHorizontalPolicy(QSizePolicy.Fixed)
+            size_policy.setVerticalPolicy(QSizePolicy.Fixed)
+            graphics_view.setSizePolicy(size_policy)
+
+            # disable the scrollbars for the graphics view
+            graphics_view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+            graphics_view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+
+            # display the widget with a label indicating the stlye name
+            frame = QFrame(self.ui.scrollArea)
+            vertical_layout = QVBoxLayout(frame)
+            frame.setLayout(vertical_layout)
+            vertical_layout.addWidget(graphics_view)
+            vertical_layout.addWidget(QLabel(style_name, frame).setAlignment(Qt.AlignHCenter))
+            self.ui.horizontalLayout_2.addWidget(frame)
+
+            # connect the signal and slots
+            graphics_view.on_focus.connect(self._style_selector)
+
+            return graphics_view
+
+    @pyqtSlot()
+    def _browse_button_clicked(self):
+        file_dialog = QFileDialog(self)
+        file_dialog.setFileMode(QFileDialog.ExistingFile)
+        file_dialog.setNameFilters(["Images (*.png *.jpg)", "Videos(*.gif, *.mp4)"])
+        if file_dialog.exec_():
+            if len(file_dialog.selectedFiles()) > 0:
+                selected_file_path = file_dialog.selectedFiles()[0]
+                self.ui.browseLineEdit.setText(selected_file_path)
+                pixmap = self._read_image_pixmap(selected_file_path)
+                if pixmap is not None:
+                    scene = QGraphicsScene()
+                    scene.addPixmap(pixmap)
+                    self.ui.inputImageView.setScene(scene)
+                else:
+                    print("isnull")
+
+    def _read_image_pixmap(self, path):
+        image = QImage()
+        if image.load(path):
+            return QPixmap.fromImage(image)
+        return None
+
+    @pyqtSlot(SelectableGraphicsView)
+    def _style_selector(self, graphics_view):
+        # if selection was changed, don't focus other styles, focus just the one selected
+        for view in self.style_views:
+            if view != graphics_view:
+                view.un_focus()
+                self.focused_style = view
+
+    @pyqtSlot()
+    def _about(self):
+        title = "About"
+        content = "Copyright @ Ervin Szilagyi, Sapientia EMTE 2017"
+        QMessageBox.about(self, title, content)
+
+    @pyqtSlot()
+    def _ok_button_pressed(self):
+        print("OK")
+
+    @pyqtSlot()
+    def _preferences(self):
+        self.preferences_dialog.show()
+
+
+    @pyqtSlot()
+    def _exit(self):
+        self.close()
