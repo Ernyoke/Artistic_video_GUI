@@ -61,7 +61,7 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="learningRateInput">
          <property name="inputMethodHints">
-          <set>Qt::ImhPreferNumbers</set>
+          <set>Qt::ImhNone</set>
          </property>
         </widget>
        </item>
@@ -82,14 +82,14 @@
        <item row="3" column="1">
         <widget class="QLineEdit" name="contentWeightInput">
          <property name="inputMethodHints">
-          <set>Qt::ImhDigitsOnly</set>
+          <set>Qt::ImhNone</set>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="iterationsInput">
          <property name="inputMethodHints">
-          <set>Qt::ImhFormattedNumbersOnly</set>
+          <set>Qt::ImhNone</set>
          </property>
         </widget>
        </item>
