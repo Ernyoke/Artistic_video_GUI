@@ -5,7 +5,8 @@ from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QSize, Qt, QCoreApplication, pyqtSlot, pyqtSignal
 import os
 from Preferences import PreferencesDialog
-from utils import input_type, IMAGE, VIDEO, UnsupportedExtension
+from artistic_video.utils import get_input_type, InputType, NotSupportedInput, get_separator
+from Worker import Worker
 
 VIDEO_ICON = 'input/video_icon.png'
 
@@ -15,9 +16,10 @@ class SelectableGraphicsView(QGraphicsView):
     # abusing the language like a b0$$
     on_focus = pyqtSignal(QGraphicsView)
 
-    def __init__(self, scene, parent, path_to_image):
+    def __init__(self, scene, parent, path_to_image, path_to_icon):
         super(SelectableGraphicsView, self).__init__(scene, parent)
         self.path_to_image = path_to_image
+        self.path_to_icon = path_to_icon
         self.style_not_focused = 'border-style: solid ; border-width: 2px; border-color: black;'
         self.style_focused = 'border-style: solid ; border-width: 2px; border-color: blue;'
         self.style_hovered = 'border-style: solid ; border-width: 2px; border-color: white;'
@@ -53,19 +55,38 @@ class MainWindow(QMainWindow):
         self.ui.okButton.pressed.connect(self._ok_button_pressed)
 
         # read styles
+        sep = get_separator()
         self.style_views = [
-            self._create_style_view(os.getcwd()+'/styles/style1.jpg', 'style1'),
-            self._create_style_view(os.getcwd()+'/styles/style2.jpg', 'style2')]
+            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style1.jpg',
+                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style1.jpg', 'style1'),
+            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style2.jpg',
+                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style1.jpg', 'style2'),
+            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style3.jpg',
+                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style3.jpg', 'style3'),
+            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style4.jpg',
+                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style4.jpg', 'style4'),
+            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style5.jpg',
+                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style5.jpg', 'style5')]
 
         self.focused_style = self.style_views[0]
         self.focused_style.focus()
+
+        input_image_scene = QGraphicsScene()
+        input_image_scene.addPixmap(self._read_input_pixmap(os.getcwd() + '/other/original.png'))
+        self.ui.inputImageView.setScene(input_image_scene)
+
+        stylized_image_scene = QGraphicsScene()
+        stylized_image_scene.addPixmap(self._read_input_pixmap(os.getcwd() + '/other/stylized.png'))
+        self.ui.styleImageView.setScene(stylized_image_scene)
+
+        self.selected_file_path = None
 
     def _set_application_properties(self):
         QCoreApplication.setOrganizationName("Sapientia EMTE");
         QCoreApplication.setOrganizationDomain("https://github.com/Ernyoke/Artistic_video_GUI");
         QCoreApplication.setApplicationName("Deepart");
 
-    def _create_style_view(self, style_path, style_name):
+    def _create_style_view(self, style_path, path_to_icon, style_name):
         pixmap = self._read_input_pixmap(style_path)
         if pixmap is not None:
 
@@ -74,7 +95,7 @@ class MainWindow(QMainWindow):
             scene.addPixmap(pixmap)
 
             # create the the widget which will display the image
-            graphics_view = SelectableGraphicsView(scene, self, style_path)
+            graphics_view = SelectableGraphicsView(scene, self, style_path, path_to_icon)
 
             # set its maximum size to 100 by 100 pixels
             graphics_view.setMaximumSize(QSize(100, 100))
@@ -112,9 +133,9 @@ class MainWindow(QMainWindow):
         file_dialog.setNameFilters(["Images (*.png *.jpg)", "Videos(*.gif, *.mp4)"])
         if file_dialog.exec_():
             if len(file_dialog.selectedFiles()) > 0:
-                selected_file_path = file_dialog.selectedFiles()[0]
-                self.ui.browseLineEdit.setText(selected_file_path)
-                pixmap = self._read_input_pixmap(selected_file_path)
+                self.selected_file_path = file_dialog.selectedFiles()[0]
+                self.ui.browseLineEdit.setText(self.selected_file_path)
+                pixmap = self._read_input_pixmap(self.selected_file_path)
                 if pixmap is not None:
                     scene = QGraphicsScene()
                     scene.addPixmap(pixmap)
@@ -130,11 +151,11 @@ class MainWindow(QMainWindow):
                 return QPixmap.fromImage(image)
 
         try:
-            if input_type(path) == IMAGE:
+            if get_input_type(path) == InputType.IMAGE:
                 return load_image(path)
-            elif input_type(path) == VIDEO:
+            elif get_input_type(path) == InputType.VIDEO:
                 return load_image(VIDEO_ICON)
-        except UnsupportedExtension:
+        except NotSupportedInput:
             return None
 
     @pyqtSlot(SelectableGraphicsView)
@@ -153,7 +174,11 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def _ok_button_pressed(self):
-        print("OK")
+        worker = Worker()
+        worker.init_values(self.selected_file_path, self.focused_style.path_to_image)
+        worker.work_started.connect(self._change_okbtn_to_stop)
+        worker.work_finished.connect(self._change_stopbtn_to_ok)
+        worker.start()
 
     @pyqtSlot()
     def _preferences(self):
@@ -162,3 +187,13 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def _exit(self):
         self.close()
+
+    @pyqtSlot()
+    def _change_okbtn_to_stop(self):
+        print("STOP")
+        self.ui.okButton.setText("STOP")
+
+    @pyqtSlot()
+    def _change_stopbtn_to_ok(self):
+        print("OK")
+        self.ui.okButton.setText("OK")
