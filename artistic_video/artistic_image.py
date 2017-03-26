@@ -8,7 +8,7 @@ from operator import mul
 import cv2
 import struct
 
-from atomos.atomic import AtomicBoolean
+from artistic_video.Atomic import AtomicBoolean
 from PyQt5.Qt import QObject, pyqtSlot, pyqtSignal
 
 from artistic_video.image import imread, imsave
@@ -23,7 +23,7 @@ class ArtisticVideo(QObject):
 
     def __init__(self, parent=None):
         super(ArtisticVideo, self).__init__(parent)
-        self.stop = False
+        self.stop = AtomicBoolean()
 
     iter_changed = pyqtSignal(int, int)
     frame_changed = pyqtSignal(int, int)
@@ -329,7 +329,7 @@ class ArtisticVideo(QObject):
         checkpoint_iteration (int): every time when the iterator hits a multiple of this value, an image is yielded back
         """
 
-        self.stop = False
+        self.stop.set(False)
 
         # get an instance of the VGG network
         net = VGG19(network_path)
@@ -383,7 +383,7 @@ class ArtisticVideo(QObject):
                 for i in range(iterations):
 
                     # stop the main loop
-                    if self.stop:
+                    if self.stop.get():
                         return
 
                     # print the progress in every iteration
@@ -536,4 +536,4 @@ class ArtisticVideo(QObject):
         as soon as it wil be safe.
         :return: It has no return value
         """
-        self.stop = True
+        self.stop.set(True)

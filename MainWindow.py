@@ -7,7 +7,7 @@ import os
 from Preferences import PreferencesDialog
 from artistic_video.utils import get_input_type, InputType, NotSupportedInput, get_separator
 from Worker import Worker
-from Progressbar import Progressbar
+from Progressbar import ProgressbarVideo, ProgressbarImage, ProgressbarVideoOpticalFlow
 
 VIDEO_ICON = 'input/video_icon.png'
 
@@ -82,7 +82,7 @@ class MainWindow(QMainWindow):
 
         self.selected_file_path = None
 
-        self.progress_bar = Progressbar(self)
+        self.progress_bar = None
 
         # init the worker thread
         self.worker = Worker(self.progress_bar)
@@ -144,6 +144,7 @@ class MainWindow(QMainWindow):
             if len(file_dialog.selectedFiles()) > 0:
                 self.selected_file_path = file_dialog.selectedFiles()[0]
                 self.ui.browseLineEdit.setText(self.selected_file_path)
+                self.progress_bar = self._progress_bar_factory(self.selected_file_path, False)
                 pixmap = self._read_input_pixmap(self.selected_file_path)
                 if pixmap is not None:
                     scene = QGraphicsScene()
@@ -167,6 +168,18 @@ class MainWindow(QMainWindow):
         except NotSupportedInput:
             return None
 
+    def _progress_bar_factory(self, path, optical_flow):
+        try:
+            if get_input_type(path) == InputType.IMAGE:
+                return ProgressbarImage(self)
+            elif get_input_type(path) == InputType.VIDEO:
+                if optical_flow:
+                    return ProgressbarVideoOpticalFlow(self)
+                else:
+                    return ProgressbarVideo(self)
+        except NotSupportedInput:
+            return None
+
     @pyqtSlot(SelectableGraphicsView)
     def _style_selector(self, graphics_view):
         # if selection was changed, don't focus other styles, focus just the one selected
@@ -183,8 +196,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def _ok_button_pressed(self):
-        self.worker.init_values(self.selected_file_path, self.focused_style.path_to_image)
-        self.worker.start()
+        self.worker.launch(self.progress_bar, self.selected_file_path, self.focused_style.path_to_image)
 
     @pyqtSlot()
     def _preferences(self):

@@ -24,15 +24,11 @@ class Worker(QThread):
     def __del__(self):
         self.wait()
 
-    def init_values(self, content_image_path, style_image_path):
-        """
-        Acts as a setter function for preparing the data needed for the Worker.run() method.
-        :param content_image_path: A string containing the path of the content image.
-        :param style_image_path: A String containing the path of the style image.
-        :return: Does not have a return value.
-        """
+    def launch(self, progress_bar, content_image_path, style_image_path):
+        self.progress_bar = progress_bar
         self.content_image = content_image_path
         self.style_image = style_image_path
+        self.start()
 
     # define signals
     work_started = pyqtSignal()
@@ -64,9 +60,8 @@ class Worker(QThread):
             self.progress_bar.show()
             self.progress_bar.cancel_progress.connect(artistic.stop_running, Qt.DirectConnection)
 
-            # connect the progressbars to the ArtisticVideo
-            artistic.iter_changed.connect(self.progress_bar.update_iter_bar)
-            artistic.frame_changed.connect(self.progress_bar.update_frame_bar)
+            # connect the progressbar to the ArtisticVideo
+            self.progress_bar.hook_up(artistic)
 
             # emit work_started signal for the MainWindow
             self.work_started.emit()
@@ -91,9 +86,8 @@ class Worker(QThread):
             # up with the Worker.exit() slot.
             self.progress_bar.cancel_progress.disconnect(artistic.stop_running)
 
-            # disconnect the progressbars
-            artistic.iter_changed.disconnect(self.progress_bar.update_iter_bar)
-            artistic.frame_changed.disconnect(self.progress_bar.update_frame_bar)
+            # disconnect the progressbar
+            self.progress_bar.unhook(artistic)
 
             self.progress_bar.set_to_ok()
             self.is_work_in_progress = False
