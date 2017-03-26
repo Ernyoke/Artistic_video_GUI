@@ -9,7 +9,7 @@ import cv2
 import struct
 
 from atomos.atomic import AtomicBoolean
-from PyQt5.Qt import QObject, pyqtSlot
+from PyQt5.Qt import QObject, pyqtSlot, pyqtSignal
 
 from artistic_video.image import imread, imsave
 from artistic_video.video import convert_to_frames, convert_to_video, make_opt_flow
@@ -24,6 +24,9 @@ class ArtisticVideo(QObject):
     def __init__(self, parent=None):
         super(ArtisticVideo, self).__init__(parent)
         self.stop = False
+
+    iter_changed = pyqtSignal(int, int)
+    frame_changed = pyqtSignal(int, int)
 
     def _compute_content_features(self, net, content_image):
         """Computes the content features by evaluating the content layers.
@@ -406,6 +409,9 @@ class ArtisticVideo(QObject):
                     if (checkpoint_iterations and i % checkpoint_iterations == 0) or last_step:
                         yield (i, best_image.reshape(content_image_shape[1:]))
 
+                    # emit a signal to the UI with the value of current iteration
+                    self.iter_changed.emit(i, iterations)
+
     def stylize(self,
                 network_path,
                 content_image_path,
@@ -482,6 +488,7 @@ class ArtisticVideo(QObject):
                     forw_cons_path=None
             ):
                 imsave(output_path + str('out.jpg') + '.jpg', image)
+            self.frame_changed.emit(1, 1)
 
         elif content_type == InputType.VIDEO:
             for index, frame_name in enumerate(frame_list):
@@ -520,6 +527,7 @@ class ArtisticVideo(QObject):
                     ):
                         imsave(output_path + str(index) + '.jpg', image)
                         # convert_to_video("output_ffmpeg", ".mp4", "frames")
+                    self.frame_changed.emit(index, len(frame_list))
 
     @pyqtSlot()
     def stop_running(self):

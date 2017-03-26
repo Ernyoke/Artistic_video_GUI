@@ -7,6 +7,7 @@ import os
 from Preferences import PreferencesDialog
 from artistic_video.utils import get_input_type, InputType, NotSupportedInput, get_separator
 from Worker import Worker
+from Progressbar import Progressbar
 
 VIDEO_ICON = 'input/video_icon.png'
 
@@ -81,8 +82,10 @@ class MainWindow(QMainWindow):
 
         self.selected_file_path = None
 
+        self.progress_bar = Progressbar(self)
+
         # init the worker thread
-        self.worker = Worker()
+        self.worker = Worker(self.progress_bar)
         self.worker.work_started.connect(self._disable_ok_btn)
         self.worker.work_finished.connect(self._enable_ok_btn)
 

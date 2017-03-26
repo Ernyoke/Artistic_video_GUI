@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84ea280a-e38a-4440-b35f-8932279f7bce" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Progressbar.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gui/progressbar.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Artistic_video_GUI.iml" afterPath="$PROJECT_DIR$/.idea/Artistic_video_GUI.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MainWindow.py" afterPath="$PROJECT_DIR$/MainWindow.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Progressbar.py" afterPath="$PROJECT_DIR$/Progressbar.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Worker.py" afterPath="$PROJECT_DIR$/Worker.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/artistic_video/artistic_image.py" afterPath="$PROJECT_DIR$/artistic_video/artistic_image.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/artistic_video/main.py" afterPath="$PROJECT_DIR$/artistic_video/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/generate_gui.sh" afterPath="$PROJECT_DIR$/gui/generate_gui.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Ui_Progressbar.py" afterPath="$PROJECT_DIR$/gui/Ui_Progressbar.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/progressbar.ui" afterPath="$PROJECT_DIR$/gui/progressbar.ui" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,21 +19,21 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Artistic_video_GUI$main.coverage" NAME="main Coverage Results" MODIFIED="1490400510424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/artistic_video" />
-    <SUITE FILE_PATH="coverage/Artistic_video_GUI$Main.coverage" NAME="Main Coverage Results" MODIFIED="1490492159490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Artistic_video_GUI$Main.coverage" NAME="Main Coverage Results" MODIFIED="1490554876041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.45609635">
+    <splitter split-orientation="horizontal" split-proportion="0.5489212">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="MainWindow.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MainWindow.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="511">
-                  <caret line="195" column="34" lean-forward="false" selection-start-line="195" selection-start-column="34" selection-end-line="195" selection-end-column="34" />
+                <state relative-caret-position="919">
+                  <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#43#0" expanded="true" />
                   </folding>
@@ -58,21 +55,9 @@
             <entry file="file://$PROJECT_DIR$/Worker.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="280">
-                  <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+                  <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
                   <folding>
-                    <element signature="e#0#65#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Preferences.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Preferences.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="120">
-                  <caret line="27" column="8" lean-forward="true" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="29" />
-                  <folding>
-                    <element signature="e#0#61#0" expanded="true" />
+                    <element signature="e#0#69#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -105,10 +90,19 @@
           <file leaf-file-name="artistic_image.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/artistic_video/artistic_image.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-3198">
-                  <caret line="333" column="0" lean-forward="true" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
+                <state relative-caret-position="6660">
+                  <caret line="336" column="0" lean-forward="false" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#36#0" expanded="true" />
+                    <marker date="1490553414271" expanded="true" signature="12937:16591" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="14122:16591" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="15389:16591" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="15493:16591" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="17103:21927" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="19139:19861" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="19950:21927" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="20010:21927" ph="..." />
+                    <marker date="1490553414271" expanded="true" signature="20796:21927" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -117,7 +111,7 @@
           <file leaf-file-name="tensor_util.py" pinned="false" current-in-tab="false">
             <entry file="file:///usr/local/lib/python3.5/dist-packages/tensorflow/python/framework/tensor_util.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="211">
+                <state relative-caret-position="5820">
                   <caret line="301" column="0" lean-forward="false" selection-start-line="301" selection-start-column="0" selection-end-line="301" selection-end-column="0" />
                   <folding />
                 </state>
@@ -134,25 +128,15 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Ui_Progressbar.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/gui/Ui_Progressbar.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="200">
-                  <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="23" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="artistic_image.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="artistic_image.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/artistic_video/artistic_image.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="542">
-                  <caret line="520" column="14" lean-forward="true" selection-start-line="520" selection-start-column="14" selection-end-line="520" selection-end-column="14" />
+                <state relative-caret-position="185">
+                  <caret line="525" column="49" lean-forward="false" selection-start-line="525" selection-start-column="49" selection-end-line="525" selection-end-column="49" />
                   <folding>
                     <element signature="e#0#36#0" expanded="true" />
                   </folding>
@@ -164,17 +148,17 @@
             <entry file="file://$PROJECT_DIR$/gui/generate_gui.sh">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="120">
-                  <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+                  <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Progressbar.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Progressbar.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Progressbar.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="349">
-                  <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+                <state relative-caret-position="499">
+                  <caret line="33" column="43" lean-forward="true" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
                   <folding>
                     <element signature="e#0#35#0" expanded="true" />
                   </folding>
@@ -218,6 +202,7 @@
       <find>_get_warped_image(prev_frame, backward_optical_flow)</find>
       <find>print</find>
       <find>stop</find>
+      <find>pog</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -241,9 +226,9 @@
         <option value="$PROJECT_DIR$/artistic_video/main.py" />
         <option value="$PROJECT_DIR$/gui/generate_gui.sh" />
         <option value="$PROJECT_DIR$/gui/Ui_Progressbar.py" />
-        <option value="$PROJECT_DIR$/MainWindow.py" />
         <option value="$PROJECT_DIR$/artistic_video/artistic_image.py" />
         <option value="$PROJECT_DIR$/Worker.py" />
+        <option value="$PROJECT_DIR$/MainWindow.py" />
         <option value="$PROJECT_DIR$/Progressbar.py" />
       </list>
     </option>
@@ -276,6 +261,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -318,8 +305,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -618,14 +603,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="2497" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20120241" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13547094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33231395" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33231395" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -655,23 +641,13 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/artistic_video/main.py</url>
-          <line>87</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/artistic_video/main.py</url>
-          <line>24</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/artistic_video/artistic_image.py</url>
-          <line>530</line>
+          <line>538</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Progressbar.py</url>
-          <line>35</line>
+          <line>37</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
@@ -982,48 +958,14 @@
     <entry file="file://$PROJECT_DIR$/gui/generate_gui.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/Ui_Preferences.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2420">
-          <caret line="121" column="17" lean-forward="false" selection-start-line="121" selection-start-column="17" selection-end-line="121" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Preferences.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="27" column="8" lean-forward="true" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.5/dist-packages/atomos/atomic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/Ui_Progressbar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="23" />
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/tensorflow/python/framework/tensor_util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
+        <state relative-caret-position="5820">
           <caret line="301" column="0" lean-forward="false" selection-start-line="301" selection-start-column="0" selection-end-line="301" selection-end-column="0" />
           <folding />
         </state>
@@ -1039,32 +981,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gui/Ui_Progressbar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.5/dist-packages/atomos/atomic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/artistic_video/artistic_image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6660">
+          <caret line="336" column="0" lean-forward="false" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <marker date="1490553414271" expanded="true" signature="12937:16591" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="14122:16591" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="15389:16591" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="15493:16591" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="17103:21927" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="19139:19861" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="19950:21927" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="20010:21927" ph="..." />
+            <marker date="1490553414271" expanded="true" signature="20796:21927" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/Ui_Preferences.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="121" column="17" lean-forward="false" selection-start-line="121" selection-start-column="17" selection-end-line="121" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="195" column="34" lean-forward="false" selection-start-line="195" selection-start-column="34" selection-end-line="195" selection-end-column="34" />
+        <state relative-caret-position="919">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Progressbar.py">
+    <entry file="file://$PROJECT_DIR$/Preferences.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="-381">
+          <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/artistic_video/artistic_image.py">
+    <entry file="file://$PROJECT_DIR$/Progressbar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3198">
-          <caret line="333" column="0" lean-forward="true" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
+        <state relative-caret-position="499">
+          <caret line="33" column="43" lean-forward="true" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1072,9 +1057,9 @@
     <entry file="file://$PROJECT_DIR$/Worker.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
-          <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
           <folding>
-            <element signature="e#0#65#0" expanded="true" />
+            <element signature="e#0#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
