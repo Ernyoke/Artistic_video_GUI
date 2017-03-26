@@ -81,6 +81,12 @@ class MainWindow(QMainWindow):
 
         self.selected_file_path = None
 
+        # init the worker thread
+        self.worker = Worker()
+        self.worker.work_started.connect(self._disable_ok_btn)
+        self.worker.work_finished.connect(self._enable_ok_btn)
+
+
     def _set_application_properties(self):
         QCoreApplication.setOrganizationName("Sapientia EMTE");
         QCoreApplication.setOrganizationDomain("https://github.com/Ernyoke/Artistic_video_GUI");
@@ -174,11 +180,8 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def _ok_button_pressed(self):
-        worker = Worker()
-        worker.init_values(self.selected_file_path, self.focused_style.path_to_image)
-        worker.work_started.connect(self._change_okbtn_to_stop)
-        worker.work_finished.connect(self._change_stopbtn_to_ok)
-        worker.start()
+        self.worker.init_values(self.selected_file_path, self.focused_style.path_to_image)
+        self.worker.start()
 
     @pyqtSlot()
     def _preferences(self):
@@ -189,11 +192,9 @@ class MainWindow(QMainWindow):
         self.close()
 
     @pyqtSlot()
-    def _change_okbtn_to_stop(self):
-        print("STOP")
-        self.ui.okButton.setText("STOP")
+    def _disable_ok_btn(self):
+        self.ui.okButton.setEnabled(False)
 
     @pyqtSlot()
-    def _change_stopbtn_to_ok(self):
-        print("OK")
-        self.ui.okButton.setText("OK")
+    def _enable_ok_btn(self):
+        self.ui.okButton.setEnabled(True)
