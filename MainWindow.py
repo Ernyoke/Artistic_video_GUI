@@ -1,8 +1,8 @@
 from gui.Ui_MainWindow import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QGraphicsScene, QGraphicsView, QSizePolicy, QFrame, QLabel, \
-    QVBoxLayout, QMessageBox
+    QVBoxLayout, QMessageBox, QWidget
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtCore import QSize, Qt, QCoreApplication, pyqtSlot, pyqtSignal
+from PyQt5.QtCore import QSize, Qt, QCoreApplication, pyqtSlot, pyqtSignal, QEvent
 import os
 from Preferences import PreferencesDialog
 from artistic_video.utils import get_input_type, InputType, NotSupportedInput, get_separator
@@ -61,7 +61,7 @@ class MainWindow(QMainWindow):
             self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style1.jpg',
                                     os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style1.jpg', 'style1'),
             self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style2.jpg',
-                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style1.jpg', 'style2'),
+                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style2.jpg', 'style2'),
             self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style3.jpg',
                                     os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style3.jpg', 'style3'),
             self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style4.jpg',
@@ -96,7 +96,7 @@ class MainWindow(QMainWindow):
         QCoreApplication.setApplicationName("Deepart");
 
     def _create_style_view(self, style_path, path_to_icon, style_name):
-        pixmap = self._read_input_pixmap(style_path)
+        pixmap = self._read_input_pixmap(path_to_icon)
         if pixmap is not None:
 
             # create a scene which will handle the graphical image
@@ -107,7 +107,7 @@ class MainWindow(QMainWindow):
             graphics_view = SelectableGraphicsView(scene, self, style_path, path_to_icon)
 
             # set its maximum size to 100 by 100 pixels
-            graphics_view.setMaximumSize(QSize(100, 100))
+            graphics_view.setMaximumSize(QSize(90, 90))
 
             # set the size policy to fixed so the widgets wont change their size
             size_policy = QSizePolicy()
