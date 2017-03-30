@@ -32,6 +32,7 @@ class ProgressBar(QDialog):
         self.ui.cancelButton.setText("OK")
         self.ui.cancelButton.clicked.connect(self.close)
 
+    @pyqtSlot('QString')
     def set_status(self, status):
         self.ui.statusLabel.setText(status)
 

@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
         self.progress_bar = None
 
         # init the worker thread
-        self.worker = Worker(self.progress_bar)
+        self.worker = Worker()
         self.worker.work_started.connect(self._disable_ok_btn)
         self.worker.work_finished.connect(self._enable_ok_btn)
 
@@ -145,6 +145,8 @@ class MainWindow(QMainWindow):
                 self.selected_file_path = file_dialog.selectedFiles()[0]
                 self.ui.browseLineEdit.setText(self.selected_file_path)
                 self.progress_bar = self._progress_bar_factory(self.selected_file_path, False)
+                self.progress_bar.show()
+                self.progress_bar.hide()
                 pixmap = self._read_input_pixmap(self.selected_file_path)
                 if pixmap is not None:
                     scene = QGraphicsScene()

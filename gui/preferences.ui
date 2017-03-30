@@ -45,9 +45,26 @@
         <widget class="QLineEdit" name="outputFolderInput"/>
        </item>
        <item row="0" column="2">
-        <widget class="QPushButton" name="browseButton">
+        <widget class="QPushButton" name="outputFolderBrowseButton">
          <property name="text">
           <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>VGG path:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="vggInput"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="vggBrowseButton">
+         <property name="text">
+          <string>PushButton</string>
          </property>
         </widget>
        </item>
@@ -79,6 +96,13 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Content Weight:</string>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="1">
         <widget class="QLineEdit" name="contentWeightInput">
          <property name="inputMethodHints">
@@ -100,12 +124,18 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label">
+       <item row="8" column="1">
+        <widget class="QToolButton" name="defaultValuesButton">
          <property name="text">
-          <string>Content Weight:</string>
+          <string>Use default values</string>
          </property>
         </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="temporalWeightInput"/>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="tvWeightInput"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_3">
@@ -121,16 +151,10 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QLineEdit" name="tvWeightInput"/>
-       </item>
-       <item row="6" column="1">
-        <widget class="QLineEdit" name="temporalWeightInput"/>
-       </item>
-       <item row="7" column="1">
-        <widget class="QToolButton" name="defaultValuesButton">
+       <item row="4" column="2">
+        <widget class="QLabel" name="label_11">
          <property name="text">
-          <string>Use default values</string>
+          <string>[float]</string>
          </property>
         </widget>
        </item>
@@ -155,8 +179,8 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
-        <widget class="QLabel" name="label_11">
+       <item row="6" column="2">
+        <widget class="QLabel" name="label_13">
          <property name="text">
           <string>[float]</string>
          </property>
@@ -169,15 +193,18 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
-        <widget class="QLabel" name="label_13">
-         <property name="text">
-          <string>[float]</string>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="1">
         <widget class="QLineEdit" name="styleWeightInput"/>
+       </item>
+       <item row="7" column="1">
+        <widget class="QCheckBox" name="deepFlowCheckBox">
+         <property name="toolTip">
+          <string extracomment="Deep Flow functionality is not available under Microsoft Windows operating systems."/>
+         </property>
+         <property name="text">
+          <string>Use deep flow</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
