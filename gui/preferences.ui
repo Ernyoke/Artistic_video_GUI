@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>339</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,6 +34,23 @@
        <string>Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="2">
+        <widget class="QPushButton" name="vggBrowseButton">
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="outputFolderBrowseButton">
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="vggInput"/>
+       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_7">
          <property name="text">
@@ -44,13 +61,6 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="outputFolderInput"/>
        </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="outputFolderBrowseButton">
-         <property name="text">
-          <string>Browse</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
@@ -58,15 +68,18 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="vggInput"/>
-       </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="vggBrowseButton">
-         <property name="text">
-          <string>PushButton</string>
+       <item row="2" column="1">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-        </widget>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>

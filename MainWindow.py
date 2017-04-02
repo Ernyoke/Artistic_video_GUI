@@ -9,7 +9,7 @@ from artistic_video.utils import get_input_type, InputType, NotSupportedInput, g
 from Worker import Worker
 from Progressbar import ProgressbarVideo, ProgressbarImage, ProgressbarVideoOpticalFlow
 
-VIDEO_ICON = 'input/video_icon.png'
+VIDEO_ICON = os.getcwd() + get_separator() + 'other' + get_separator() + 'video_icon.png'
 
 
 class SelectableGraphicsView(QGraphicsView):
@@ -89,7 +89,6 @@ class MainWindow(QMainWindow):
         self.worker.work_started.connect(self._disable_ok_btn)
         self.worker.work_finished.connect(self._enable_ok_btn)
 
-
     def _set_application_properties(self):
         QCoreApplication.setOrganizationName("Sapientia EMTE");
         QCoreApplication.setOrganizationDomain("https://github.com/Ernyoke/Artistic_video_GUI");
@@ -144,9 +143,7 @@ class MainWindow(QMainWindow):
             if len(file_dialog.selectedFiles()) > 0:
                 self.selected_file_path = file_dialog.selectedFiles()[0]
                 self.ui.browseLineEdit.setText(self.selected_file_path)
-                self.progress_bar = self._progress_bar_factory(self.selected_file_path, False)
-                self.progress_bar.show()
-                self.progress_bar.hide()
+                self.progress_bar = self._progress_bar_factory(self.selected_file_path, True)
                 pixmap = self._read_input_pixmap(self.selected_file_path)
                 if pixmap is not None:
                     scene = QGraphicsScene()

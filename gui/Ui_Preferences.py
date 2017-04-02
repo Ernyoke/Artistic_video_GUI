@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'preferences.ui'
 #
-# Created by: PyQt5 UI code generator 5.6
+# Created by: PyQt5 UI code generator 5.8.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_PreferencesDialog(object):
     def setupUi(self, PreferencesDialog):
         PreferencesDialog.setObjectName("PreferencesDialog")
-        PreferencesDialog.resize(400, 300)
+        PreferencesDialog.resize(400, 339)
         self.gridLayout = QtWidgets.QGridLayout(PreferencesDialog)
         self.gridLayout.setObjectName("gridLayout")
         self.buttonBox = QtWidgets.QDialogButtonBox(PreferencesDialog)
@@ -26,24 +26,26 @@ class Ui_PreferencesDialog(object):
         self.gridLayout_3 = QtWidgets.QGridLayout(self.settings)
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_3.setObjectName("gridLayout_3")
+        self.vggBrowseButton = QtWidgets.QPushButton(self.settings)
+        self.vggBrowseButton.setObjectName("vggBrowseButton")
+        self.gridLayout_3.addWidget(self.vggBrowseButton, 1, 2, 1, 1)
+        self.outputFolderBrowseButton = QtWidgets.QPushButton(self.settings)
+        self.outputFolderBrowseButton.setObjectName("outputFolderBrowseButton")
+        self.gridLayout_3.addWidget(self.outputFolderBrowseButton, 0, 2, 1, 1)
+        self.vggInput = QtWidgets.QLineEdit(self.settings)
+        self.vggInput.setObjectName("vggInput")
+        self.gridLayout_3.addWidget(self.vggInput, 1, 1, 1, 1)
         self.label_7 = QtWidgets.QLabel(self.settings)
         self.label_7.setObjectName("label_7")
         self.gridLayout_3.addWidget(self.label_7, 0, 0, 1, 1)
         self.outputFolderInput = QtWidgets.QLineEdit(self.settings)
         self.outputFolderInput.setObjectName("outputFolderInput")
         self.gridLayout_3.addWidget(self.outputFolderInput, 0, 1, 1, 1)
-        self.outputFolderBrowseButton = QtWidgets.QPushButton(self.settings)
-        self.outputFolderBrowseButton.setObjectName("outputFolderBrowseButton")
-        self.gridLayout_3.addWidget(self.outputFolderBrowseButton, 0, 2, 1, 1)
         self.label_6 = QtWidgets.QLabel(self.settings)
         self.label_6.setObjectName("label_6")
         self.gridLayout_3.addWidget(self.label_6, 1, 0, 1, 1)
-        self.vggInput = QtWidgets.QLineEdit(self.settings)
-        self.vggInput.setObjectName("vggInput")
-        self.gridLayout_3.addWidget(self.vggInput, 1, 1, 1, 1)
-        self.vggBrowseButton = QtWidgets.QPushButton(self.settings)
-        self.vggBrowseButton.setObjectName("vggBrowseButton")
-        self.gridLayout_3.addWidget(self.vggBrowseButton, 1, 2, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_3.addItem(spacerItem, 2, 1, 1, 1)
         self.tabWidget.addTab(self.settings, "")
         self.advSettings = QtWidgets.QWidget()
         self.advSettings.setObjectName("advSettings")
@@ -126,10 +128,10 @@ class Ui_PreferencesDialog(object):
     def retranslateUi(self, PreferencesDialog):
         _translate = QtCore.QCoreApplication.translate
         PreferencesDialog.setWindowTitle(_translate("PreferencesDialog", "Dialog"))
-        self.label_7.setText(_translate("PreferencesDialog", "Output folder:"))
+        self.vggBrowseButton.setText(_translate("PreferencesDialog", "Browse"))
         self.outputFolderBrowseButton.setText(_translate("PreferencesDialog", "Browse"))
+        self.label_7.setText(_translate("PreferencesDialog", "Output folder:"))
         self.label_6.setText(_translate("PreferencesDialog", "VGG path:"))
-        self.vggBrowseButton.setText(_translate("PreferencesDialog", "PushButton"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.settings), _translate("PreferencesDialog", "Settings"))
         self.label_14.setText(_translate("PreferencesDialog", "Temporal Wieght:"))
         self.label_5.setText(_translate("PreferencesDialog", "TV Viewght:"))

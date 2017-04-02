@@ -1,7 +1,7 @@
 import sys
 from enum import Enum
-from os import listdir, system
-from os.path import isfile, join, basename, abspath, dirname, splitext
+from os import listdir, system, getcwd
+from os.path import isfile, join, basename, splitext
 
 
 class NotSupportedOS(Exception):
@@ -74,7 +74,11 @@ def get_input_type(path):
 
 
 def get_main_path():
-    return dirname(abspath(__file__))
+    """
+    Returns the working directory.
+    :return: A string containing the working directory path.
+    """
+    return getcwd()
 
 
 def get_files_from_folder(folder):
