@@ -1,11 +1,11 @@
 from gui.Ui_MainWindow import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QGraphicsScene, QGraphicsView, QSizePolicy, QFrame, QLabel, \
-    QVBoxLayout, QMessageBox, QWidget
+    QVBoxLayout, QMessageBox
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtCore import QSize, Qt, QCoreApplication, pyqtSlot, pyqtSignal, QEvent
+from PyQt5.QtCore import QSize, Qt, QCoreApplication, pyqtSlot, pyqtSignal, QSettings
 import os
-from Preferences import PreferencesDialog
-from artistic_video.utils import get_input_type, InputType, NotSupportedInput, get_separator
+from Preferences import PreferencesDialog, USE_DEEPFLOW_ID, USE_DEEPFLOW
+from artistic_video.utils import get_input_type, get_os_type, get_separator, InputType, NotSupportedInput, OS
 from Worker import Worker
 from Progressbar import ProgressbarVideo, ProgressbarImage, ProgressbarVideoOpticalFlow
 
@@ -138,12 +138,17 @@ class MainWindow(QMainWindow):
     def _browse_button_clicked(self):
         file_dialog = QFileDialog(self)
         file_dialog.setFileMode(QFileDialog.ExistingFile)
-        file_dialog.setNameFilters(["Images (*.png *.jpg)", "Videos(*.gif, *.mp4)"])
+        file_dialog.setNameFilters(["Images/Videos (*.png *.jpg, *.gif, *.mp4)"])
         if file_dialog.exec_():
             if len(file_dialog.selectedFiles()) > 0:
                 self.selected_file_path = file_dialog.selectedFiles()[0]
                 self.ui.browseLineEdit.setText(self.selected_file_path)
-                self.progress_bar = self._progress_bar_factory(self.selected_file_path, True)
+
+                # get the flag for the optical flow usage
+                settings = QSettings
+                optical_flow = settings.settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW)
+
+                self.progress_bar = self._progress_bar_factory(self.selected_file_path, optical_flow)
                 pixmap = self._read_input_pixmap(self.selected_file_path)
                 if pixmap is not None:
                     scene = QGraphicsScene()
@@ -172,7 +177,7 @@ class MainWindow(QMainWindow):
             if get_input_type(path) == InputType.IMAGE:
                 return ProgressbarImage(self)
             elif get_input_type(path) == InputType.VIDEO:
-                if optical_flow:
+                if optical_flow and get_os_type() != OS.WIN:
                     return ProgressbarVideoOpticalFlow(self)
                 else:
                     return ProgressbarVideo(self)

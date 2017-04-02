@@ -113,7 +113,7 @@ class Ui_PreferencesDialog(object):
         self.styleWeightInput.setObjectName("styleWeightInput")
         self.gridLayout_2.addWidget(self.styleWeightInput, 4, 1, 1, 1)
         self.deepFlowCheckBox = QtWidgets.QCheckBox(self.advSettings)
-        self.deepFlowCheckBox.setToolTip("")
+        self.deepFlowCheckBox.setToolTipDuration(-1)
         self.deepFlowCheckBox.setObjectName("deepFlowCheckBox")
         self.gridLayout_2.addWidget(self.deepFlowCheckBox, 7, 1, 1, 1)
         self.tabWidget.addTab(self.advSettings, "")
@@ -127,7 +127,7 @@ class Ui_PreferencesDialog(object):
 
     def retranslateUi(self, PreferencesDialog):
         _translate = QtCore.QCoreApplication.translate
-        PreferencesDialog.setWindowTitle(_translate("PreferencesDialog", "Dialog"))
+        PreferencesDialog.setWindowTitle(_translate("PreferencesDialog", "Preferences"))
         self.vggBrowseButton.setText(_translate("PreferencesDialog", "Browse"))
         self.outputFolderBrowseButton.setText(_translate("PreferencesDialog", "Browse"))
         self.label_7.setText(_translate("PreferencesDialog", "Output folder:"))
@@ -146,6 +146,7 @@ class Ui_PreferencesDialog(object):
         self.label_9.setText(_translate("PreferencesDialog", "[int]"))
         self.label_13.setText(_translate("PreferencesDialog", "[float]"))
         self.label_12.setText(_translate("PreferencesDialog", "[float]"))
+        self.deepFlowCheckBox.setToolTip(_translate("PreferencesDialog", "<html><head/><body><p>Deep Flow functionality is not available under Microsoft Windows operating systems.</p></body></html>"))
         self.deepFlowCheckBox.setText(_translate("PreferencesDialog", "Use deep flow"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.advSettings), _translate("PreferencesDialog", "Advanced Settings"))
 
