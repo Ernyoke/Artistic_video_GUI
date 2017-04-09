@@ -138,21 +138,21 @@ class MainWindow(QMainWindow):
     def _browse_button_clicked(self):
         file_dialog = QFileDialog(self)
         file_dialog.setFileMode(QFileDialog.ExistingFile)
-        file_dialog.setNameFilters(["Images/Videos (*.png *.jpg, *.gif, *.mp4)"])
+        file_dialog.setNameFilters(["Images/Videos (*.png *.jpg *.gif *.mp4)"])
         if file_dialog.exec_():
             if len(file_dialog.selectedFiles()) > 0:
                 self.selected_file_path = file_dialog.selectedFiles()[0]
                 self.ui.browseLineEdit.setText(self.selected_file_path)
 
                 # get the flag for the optical flow usage
-                settings = QSettings
-                optical_flow = settings.settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW)
+                settings = QSettings()
+                optical_flow = settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW)
 
                 self.progress_bar = self._progress_bar_factory(self.selected_file_path, optical_flow)
-                pixmap = self._read_input_pixmap(self.selected_file_path)
-                if pixmap is not None:
+                pix_map = self._read_input_pixmap(self.selected_file_path)
+                if pix_map is not None:
                     scene = QGraphicsScene()
-                    scene.addPixmap(pixmap)
+                    scene.addPixmap(pix_map)
                     self.ui.inputImageView.setScene(scene)
                 else:
                     print("isnull")

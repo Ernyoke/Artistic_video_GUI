@@ -1,10 +1,15 @@
 import artistic_video.utils as utils
+from os import mkdir
 
 
 FRAME_NAME = 'frame%05d'
 
 SYS_PLATFORM = utils.get_os_type()
 SEPARATOR = utils.get_separator()
+
+
+class OpticalFlowException(Exception):
+    pass
 
 
 def _ffmpeg():
@@ -22,7 +27,7 @@ def _ffmpeg():
     return None
 
 
-def convert_to_frames(video_path, output_folder="frames", ext=".jpg"):
+def convert_to_frames(video_path, output_folder, ext='.jpg'):
     """
     This function transforms a video into frames.
     :param video_path: A string with the path to the video which will be cut into frames
@@ -32,6 +37,12 @@ def convert_to_frames(video_path, output_folder="frames", ext=".jpg"):
     :return: An integer which is the error code of the ffmpeg termination. If the process is successful
     than 0 will be returned.
     """
+
+    try:
+        mkdir(output_folder)
+    except FileExistsError:
+        pass
+
     frames = utils.get_files_from_folder(output_folder)
     frames.sort()
     error_code = 0
@@ -50,7 +61,7 @@ def convert_to_frames(video_path, output_folder="frames", ext=".jpg"):
 
 
 def convert_to_video(output_name="ffmpeg_vid", ext=".mp4",
-                     frames_folder="frames", frame_name=FRAME_NAME, frame_ext=".png"):
+                     frames_folder="frames", frame_name=FRAME_NAME, frame_ext=".jpg"):
     """
     This function converts a list of frames into a video.
     :param output_name: A string with the path to the output video.
@@ -66,7 +77,7 @@ def convert_to_video(output_name="ffmpeg_vid", ext=".mp4",
     return error_code
 
 
-def make_opt_flow(frame1, frame2, output_folder="frames"+SEPARATOR+"flow"):
+def make_opt_flow(frame1, frame2, output_folder):
     """
     This function creates the forward and backward optical flow for the given frames.
     :param frame1: a string containing the first frame path
@@ -75,6 +86,14 @@ def make_opt_flow(frame1, frame2, output_folder="frames"+SEPARATOR+"flow"):
     otherwise the flow files wont be created.
     :return: A tuple with the file names of the 2 optical flow files.
     """
+
+    # attempt to create output folder
+    try:
+        mkdir(output_folder)
+    except FileExistsError:
+        pass
+    except:
+        raise OpticalFlowException()
 
     if SYS_PLATFORM == utils.OS.LINUX:
         flow_command_line = utils.get_main_path() + "/artistic_video/linux/bin/run-deepflow.sh"

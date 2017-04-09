@@ -11,9 +11,9 @@ import struct
 from artistic_video.Atomic import AtomicBoolean
 from PyQt5.Qt import QObject, pyqtSlot, pyqtSignal
 
-from artistic_video.image import imread, imsave
+from artistic_video.Image import imread, imsave
 from artistic_video.Video import convert_to_frames, convert_to_video, make_opt_flow
-from artistic_video.utils import get_input_type, InputType
+from artistic_video.utils import get_input_type, get_separator, get_base_name, InputType
 
 CONTENT_LAYER = ('relu4_2',)
 STYLE_LAYERS = ('relu1_1', 'relu2_1', 'relu3_1', 'relu4_1', 'relu5_1')
@@ -446,8 +446,12 @@ class ArtisticVideo(QObject):
             frame = imread(content_image_path)
         elif content_type == InputType.VIDEO:
 
+            # frame output folder
+            file_name = get_base_name(content_image_path)
+            frames_output_folder = 'frames' + get_separator() + file_name
+
             # try to cut the video intro frames
-            error_code, frame_list = convert_to_frames(content_image_path, 'frames', '.png')
+            error_code, frame_list = convert_to_frames(content_image_path, frames_output_folder, '.jpg')
 
             if error_code != 0:
                 raise FFMPEGException(error_code)
@@ -463,10 +467,12 @@ class ArtisticVideo(QObject):
                     backward_flow_list = {}
                     forward_consistency_list = {}
                     backward_consistency_list = {}
+                    # flow_output_folder = get_separator() + 'frames' + get_separator() +
                     for i in range(0, len(frame_list) - 1):
                         if not self.stop.get():
                             forward_flow, backward_flow, forward_consistency, backward_consistency \
-                                = make_opt_flow(frame_list[i], frame_list[i + 1])
+                                = make_opt_flow(frame_list[i], frame_list[i + 1], frames_output_folder +
+                                                get_separator() + 'flow')
                             forward_flow_list[frame_list[i]] = forward_flow
                             backward_flow_list[frame_list[i]] = backward_flow
                             forward_consistency_list[frame_list[i]] = forward_consistency

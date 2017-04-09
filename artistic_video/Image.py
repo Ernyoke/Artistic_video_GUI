@@ -10,7 +10,7 @@ def imread(path):
         img = scipy.misc.imread(path).astype(np.float)
         if len(img.shape) == 2:
             # grayscale
-            img = np.dstack((img,img,img))
+            img = np.dstack((img, img, img))
         return __preprocess(img)
     except FileNotFoundError as err:
         raise err
