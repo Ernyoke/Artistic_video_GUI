@@ -1,0 +1,4 @@
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Bevezet\IeC {\H o}}{11}
+\select@language {magyar} \contentsline {chapter}{\numberline {2}A rendszer}{12}
+\select@language {magyar} \contentsline {section}{\numberline {2.1}\IeC {\'A}ttekint\IeC {\'e}s}{12}
+\select@language {magyar} \contentsline {chapter}{\numberline {3}\IeC {\"O}sszefoglal\IeC {\'o}}{13}
