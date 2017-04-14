@@ -1,5 +1,5 @@
-import test_artistic_image as ai
-import test_utils as ui
+import artistic_video.tests.test_artistic_image as ai
+import artistic_video.tests.test_utils as ui
 
 import unittest
 
