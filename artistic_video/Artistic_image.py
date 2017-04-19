@@ -38,6 +38,11 @@ class ArtisticVideo(QObject):
     flow_created = pyqtSignal(int, int)     # emitted when the forward and backward flow is created for 2 frames
     set_status = pyqtSignal(str)            # display a status on the progressbar
 
+    @staticmethod
+    def size_of_tensor(tensor):
+        """returns the size of a tensor"""
+        return reduce(mul, (d.value for d in tensor.get_shape()), 1)
+
     def _compute_content_features(self, net, content_image):
         """Computes the content features by evaluating the content layers.
             Inputs are:
@@ -192,19 +197,15 @@ class ArtisticVideo(QObject):
         shape: the shape of the input image
         """
 
-        def size_of_tensor(tensor):
-            """returns the size of a tensor"""
-            return reduce(mul, (d.value for d in tensor.get_shape()), 1)
-
         # get the shape of the input image
         shape = image.get_shape()
 
         # compute the denoising loss
         tv_loss = tv_weight * 2 * (
             (tf.nn.l2_loss(image[:, 1:, :, :] - image[:, :shape[1] - 1, :, :]) /
-             size_of_tensor(image[:, 1:, :, :])) +
+             self.size_of_tensor(image[:, 1:, :, :])) +
             (tf.nn.l2_loss(image[:, :, 1:, :] - image[:, :, :shape[2] - 1, :]) /
-             size_of_tensor(image[:, :, 1:, :])))
+             self.size_of_tensor(image[:, :, 1:, :])))
 
         return tv_loss
 
@@ -273,7 +274,7 @@ class ArtisticVideo(QObject):
             image, flow_map[0], flow_map[1],
             interpolation=cv2.INTER_CUBIC, borderMode=cv2.BORDER_TRANSPARENT)
 
-        # return warped_image
+        return warped_image
 
     def _temporal_loss(self, x, w, c):
         """
@@ -286,20 +287,22 @@ class ArtisticVideo(QObject):
         """
         c = c[np.newaxis, :, :, :]
         D = float(x.size)
+        # D = self.size_of_tensor(x)
         loss = (1. / D) * tf.reduce_sum(c * tf.nn.l2_loss(x - w))
         return tf.cast(loss, tf.float32)
 
-    def _compute_shortterm_temporal_loss(self, prev_frame, backward_flow_path, forward_weights):
+    def _compute_shortterm_temporal_loss(self, sess, image, content_image, prev_frame, backward_flow_path, forward_weights):
         """
         :param prev_frame: a numpy array containing the previous frame
         :param backward_flow_path: a string containing the path to the backward optical flow file (.flo)
         :param forward_weights: a string containing the path to the consistency check weights file
         :return: a tensor with the loss
         """
+        img = sess.run(image.assign(content_image.reshape((1,) + content_image.shape)))
         backward_optical_flow = self._read_flow_file(backward_flow_path)
         warped_image = self._get_warped_image(prev_frame, backward_optical_flow).astype(np.float32)
         content_weights = self._read_consistency_file(forward_weights)
-        return self._temporal_loss(prev_frame, warped_image, content_weights)
+        return self._temporal_loss(img, warped_image, content_weights)
 
     def _print_progress(self, iteration, total_iterations):
         print('Iteration %d/%d' % (iteration, total_iterations))
@@ -321,22 +324,37 @@ class ArtisticVideo(QObject):
             print('Temporal loss: %g' % temporal_loss.eval())
         print('Total loss: %g' % total_loss.eval())
 
-    def create_image(self, network_path, content_image, styles_images, iterations,
-                     content_weight, style_weight, tv_weight, learning_rate,
-                     use_deepflow=False, prev_frame=None, backw_flow_path=None, forw_cons_path=None,
+    def create_image(self,
+                     network_path,
+                     content_image,
+                     styles_images,
+                     iterations,
+                     content_weight,
+                     style_weight,
+                     tv_weight,
+                     learning_rate,
+                     use_deepflow=False,
+                     temporal_weight = 0,
+                     prev_frame=None,
+                     backw_flow_path=None,
+                     forw_cons_path=None,
                      checkpoint_iterations=None):
         """
-        Inputs:
-        network_path (string): the path of the VGG network from the hard drive
-        content_image (): the content of the image which will be stylized
-        style_images (list[]): a list with the style images
-        iterations (int): number of iteration for the training optimization
-        content_weight (int):
-        style_weight (int):
-        style_blend_weight (list[int]):
-        tv_weight (int):
-        learning_rate (int): learning rate
-        checkpoint_iteration (int): every time when the iterator hits a multiple of this value, an image is yielded back
+        :param network_path: 
+        :param content_image: 
+        :param styles_images: 
+        :param iterations: 
+        :param content_weight: 
+        :param style_weight: 
+        :param tv_weight: 
+        :param learning_rate: 
+        :param use_deepflow: 
+        :param temporal_weight: 
+        :param prev_frame: 
+        :param backw_flow_path: 
+        :param forw_cons_path: 
+        :param checkpoint_iterations: 
+        :return: 
         """
 
         self.stop.set(False)
@@ -370,17 +388,6 @@ class ArtisticVideo(QObject):
             # total variation denoising
             tv_loss = self._compute_denoise_loss(image, tv_weight)
 
-            # temporal loss
-            temporal_loss = tf.Variable(0, tf.int32)
-            if use_deepflow:
-                temporal_loss = self._compute_shortterm_temporal_loss(prev_frame, backw_flow_path, forw_cons_path)
-
-            # overall loss
-            loss = content_loss + style_loss + tv_loss + tf.cast(temporal_loss, tf.float32)
-
-            # optimizer setup
-            train_step = tf.train.AdamOptimizer(learning_rate).minimize(loss)
-
             # optimization
             # a placeholder for the best loss value
             minimum_loss = float('inf')
@@ -389,7 +396,24 @@ class ArtisticVideo(QObject):
             best_image = None
 
             with tf.Session() as sess:
+
+                # temporal loss
+                temporal_loss = tf.Variable(0, tf.int32)
+                if use_deepflow:
+                    temporal_loss = temporal_weight * self._compute_shortterm_temporal_loss(sess, image,
+                                                                                            content_image,
+                                                                                            prev_frame,
+                                                                                            backw_flow_path,
+                                                                                            forw_cons_path)
+
+                # overall loss
+                loss = content_loss + style_loss + tv_loss + tf.cast(temporal_loss, tf.float32)
+
+                # optimizer setup
+                train_step = tf.train.AdamOptimizer(learning_rate).minimize(loss)
+
                 sess.run(tf.global_variables_initializer())
+
                 for i in range(iterations):
 
                     # stop the main loop
@@ -402,8 +426,7 @@ class ArtisticVideo(QObject):
                     # check if is last step from of the iterations
                     last_step = i == iterations - 1
                     if last_step:
-                        pass
-                        # _print_losses(content_loss, style_loss, tv_loss, loss, temporal_loss)
+                        self._print_losses(content_loss, style_loss, tv_loss, loss, temporal_loss)
 
                     # evaluate the optimizer
                     train_step.run()
@@ -431,9 +454,24 @@ class ArtisticVideo(QObject):
                 content_weight,
                 style_weight,
                 tv_veight,
-                temporal_veight,
+                temporal_weight,
                 learning_rate,
                 use_deepflow=False):
+
+        """
+        :param network_path: 
+        :param content_image_path: 
+        :param style_images_path: 
+        :param output_path: 
+        :param iterations: 
+        :param content_weight: 
+        :param style_weight: 
+        :param tv_veight: 
+        :param temporal_weight: 
+        :param learning_rate: 
+        :param use_deepflow: 
+        :return: 
+        """
 
         self.set_status.emit("Preprocessing...")
 
@@ -510,10 +548,7 @@ class ArtisticVideo(QObject):
                     style_weight=style_weight,
                     tv_weight=tv_veight,
                     learning_rate=learning_rate,
-                    use_deepflow=False,
-                    prev_frame=None,
-                    backw_flow_path=None,
-                    forw_cons_path=None
+                    use_deepflow=False
             ):
                 imsave(output_path + str('out.jpg') + '.jpg', image)
             self.frame_changed.emit(1, 1)
@@ -551,7 +586,8 @@ class ArtisticVideo(QObject):
                                 style_weight=style_weight,
                                 tv_weight=tv_veight,
                                 learning_rate=learning_rate,
-                                use_deepflow=True,
+                                use_deepflow=use_deepflow,
+                                temporal_weight=temporal_weight,
                                 prev_frame=prev_frame_name,
                                 backw_flow_path=current_backward_flow,
                                 forw_cons_path=current_forward_consistency

@@ -1,11 +1,11 @@
-import utils
+from artistic_video.utils import get_base_name
 import unittest
 
 
 class UtilsTests(unittest.TestCase):
     def test_base_name(self):
         path = '/asd/asdwww/basename.ext'
-        basename = utils.get_base_name(path)
+        basename = get_base_name(path)
         self.assertEqual('basename', basename, "The returned basename is not correct!")
 
     def runTest(self):
