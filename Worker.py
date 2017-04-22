@@ -28,8 +28,6 @@ class Worker(QThread):
 
     def launch(self, progress_bar, content_image_path, style_image_path):
         self.progress_bar = progress_bar
-        # set up gui signal-slots
-        self.show_progress_bar.connect(self.progress_bar.show)
 
         self.content_image = content_image_path
         self.style_image = style_image_path
@@ -65,6 +63,9 @@ class Worker(QThread):
             # connect the progressbar to the ArtisticVideo
             self.progress_bar.hook_up(artistic)
 
+            # connect the progressbar to the Worker
+            self.show_progress_bar.connect(self.progress_bar.show)
+
             # set up the Progressbar dialog. Connect the Cancel button to the stop_running method from the
             # ArtisticVideo. This should be able to close the ongoing process.
             self.show_progress_bar.emit()
@@ -90,6 +91,9 @@ class Worker(QThread):
             # disconnect the Cancel button from the ArtisticVideo. Change the Cancel button status to OK and hook it
             # up with the Worker.exit() slot.
             self.progress_bar.unhook(artistic)
+
+            # disconnect the Worker from the ProgressBar
+            self.show_progress_bar.disconnect(self.progress_bar.show)
 
             self.progress_bar.set_to_ok()
             self.is_work_in_progress = False

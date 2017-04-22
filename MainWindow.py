@@ -28,10 +28,10 @@ class SelectableGraphicsView(QGraphicsView):
 
     def focusInEvent(self, QFocusEvent):
         self.focus()
-        self.on_focus.emit(self)
 
     def focus(self):
         self.setStyleSheet(self.style_focused)
+        self.on_focus.emit(self)
 
     def un_focus(self):
         self.setStyleSheet(self.style_not_focused)
@@ -58,16 +58,30 @@ class MainWindow(QMainWindow):
         # read styles
         sep = get_separator()
         self.style_views = [
-            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style1.jpg',
-                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style1.jpg', 'style1'),
-            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style2.jpg',
-                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style2.jpg', 'style2'),
-            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style3.jpg',
-                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style3.jpg', 'style3'),
-            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style4.jpg',
-                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style4.jpg', 'style4'),
-            self._create_style_view(os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'style5.jpg',
-                                    os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'style5.jpg', 'style5')]
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'tihanyi_tzara.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style1.jpg', 'Tihanyi'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'aba_novak_vilmos_onarckep.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style2.jpg', 'Aba Novák'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'csontvary_kosztka_tivadar_traui_tajkep_naplemente_idejen.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style3.jpg', 'Csontváry'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'munkacsi_mihaly_vihar_a_pusztan.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style4.jpg', 'Munkácsi'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'aba-novak_vilmos_selfportrait.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style5.jpg', 'Aba Novák'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'ripl_ronai_jozsef_apam_es_piacsek_bacsi_vorosbor_mellett.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style6.jpg', 'Ripl Rónai'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'reti_alfred.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style7.jpg', 'Réti Alfréd'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'magyar_nepmesek.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style8.jpg', 'Népmesék')]
 
         self.focused_style = self.style_views[0]
         self.focused_style.focus()
@@ -173,16 +187,20 @@ class MainWindow(QMainWindow):
             return None
 
     def _progress_bar_factory(self, path, optical_flow):
+        progress_bar = None
         try:
             if get_input_type(path) == InputType.IMAGE:
-                return ProgressbarImage(self)
+                progress_bar = ProgressbarImage(self)
             elif get_input_type(path) == InputType.VIDEO:
                 if optical_flow and get_os_type() != OS.WIN:
-                    return ProgressbarVideoOpticalFlow(self)
+                    progress_bar = ProgressbarVideoOpticalFlow(self)
                 else:
-                    return ProgressbarVideo(self)
+                    progress_bar = ProgressbarVideo(self)
         except NotSupportedInput:
             return None
+
+        progress_bar.setModal(True)
+        return progress_bar
 
     @pyqtSlot(SelectableGraphicsView)
     def _style_selector(self, graphics_view):
@@ -190,7 +208,7 @@ class MainWindow(QMainWindow):
         for view in self.style_views:
             if view != graphics_view:
                 view.un_focus()
-                self.focused_style = view
+        self.focused_style = graphics_view
 
     @pyqtSlot()
     def _about(self):
