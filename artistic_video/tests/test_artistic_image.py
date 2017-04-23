@@ -16,22 +16,23 @@ class ArtisticImageTests(unittest.TestCase):
 
     @unittest.skip
     def test_read_flow_file(self):
-        flow_file = self.ai._read_flow_file(cwd+'/flow_files/overwatch_1_overwatch_1_backward.flo')
+        flow_file = self.ai._read_flow_from_file(cwd + '/test_input/input_frame00001_input_frame00002_backward.flo')
         self.assertEqual(np.any(flow_file), not None, "Flow file could not be read!")
 
-    @unittest.skip
     def test_read_weights_file(self):
-        weights_file = self.ai._read_weights_file(cwd+'/flow_files/overwatch_1_overwatch_1_backward_reliable.txt')
+        weights_file = self.ai._read_consistency_file(cwd +
+                                                  '/test_input/input_frame00001_input_frame00002_backward_reliable.txt')
         self.assertEqual(np.any(weights_file), not None, "Flow file could not be read!")
 
     @unittest.skip
     def test_get_warped_image(self):
-        flow = self.ai._read_flow_file(cwd + '/flow_files/overwatch_1_overwatch_1_backward.flo')
-        frame = image.imread(cwd + '/images/overwatch_1.mp4_frame00001.png')
+        flow = self.ai._read_flow_from_file(cwd + '/test_input/input_frame00001_input_frame00002_backward.flo')
+        frame = image.imread(cwd + '/test_input/styleized_frame00001.jpg')
         warped = self.ai._get_warped_image(frame, flow)
-        cv2.imwrite(cwd + '/im.png', warped)
-        self.assertEqual(True, True, "")
+        image.imsave(cwd + '/test_outputs/result_test_get_warped_image.jpg', warped)
+        self.assertEqual(warped is not None, True, "")
 
+    @unittest.skip
     def test_stylize_video(self):
         for _, im in self.ai.create_image(network_path='../../imagenet-vgg-verydeep-19.mat',
                                           content_image=image.imread(cwd + '/test_input/input_frame00002.jpg'),
@@ -49,7 +50,7 @@ class ArtisticImageTests(unittest.TestCase):
                                           forw_cons_path=cwd +
                                                   '/test_input/input_frame00001_input_frame00002_backward_reliable.txt'
                                           ):
-            image.imsave(cwd + '/test_outputs/result.jpg', im)
+            image.imsave(cwd + '/test_outputs/result_test_stylize_video.jpg', im)
         self.assertEqual(True, True, "")
 
 

@@ -209,11 +209,11 @@ class ArtisticVideo(QObject):
 
         return tv_loss
 
-    def _read_flow_file(self, flow_path):
+    def _read_flow_from_file(self, flow_path):
         """
-    
-        :param flow_path:
-        :return:
+        This method reads the flow (.flo) files into a 3D numpy array.
+        :param flow_path: a string containing the path to the flow (.flo) file
+        :return: a 3D numpy array with float32 values containing the flow values
         """
         with open(flow_path, 'rb') as f:
             # read the header (4 bytes)
@@ -223,11 +223,12 @@ class ArtisticVideo(QObject):
             width = struct.unpack('i', f.read(4))[0]
             height = struct.unpack('i', f.read(4))[0]
 
-            flow = np.ndarray((2, width, height), dtype=np.float32)
-            for y in range(height):
-                for x in range(width):
-                    flow[1, x, y] = struct.unpack('f', f.read(4))[0]
-                    flow[0, x, y] = struct.unpack('f', f.read(4))[0]
+            # make a 3 dimensional numpy array and unpack the values
+            flow = np.ndarray((2, height, width), dtype=np.float32)
+            for i in range(height):
+                for j in range(width):
+                    flow[1, i, j] = struct.unpack('f', f.read(4))[0]
+                    flow[0, i, j] = struct.unpack('f', f.read(4))[0]
         return flow
 
     def _read_consistency_file(self, path):
@@ -240,14 +241,22 @@ class ArtisticVideo(QObject):
         """
         with open(path) as f:
             lines = f.readlines()
-            header = list(map(int, lines[0].split(' ')))
-            width = header[0]
-            height = header[1]
+            width, height = [int(i) for i in lines[0].split(' ')]
             values = np.zeros((height, width), dtype=np.float32)
-            for i in range(1, len(lines)):
-                line = lines[i].rstrip().split(' ')
-                values[i - 1] = np.array(list(map(np.float32, line)))
-                values[i - 1] = list(map(lambda x: 0. if x < 255. else 1., values[i - 1]))
+            for i in range(0, len(lines) - 1):
+                line = lines[i + 1].rstrip().split(' ')
+                consistency_values = np.array([np.float32(j) for j in line])
+
+                def convert(value):
+                    """
+                    :param value: a float32 containing a consistency value
+                    :return: either 0 or 1
+                    """
+                    if value < 255:
+                        return 0
+                    return 1
+
+                values[i] = list(map(convert, consistency_values))
 
             # expand to 3 channels
             weights = np.dstack([values.astype(np.float32)] * 3)
@@ -261,13 +270,12 @@ class ArtisticVideo(QObject):
         :param flow: a numpy array containing the flow inputs
         :return: a numpy array containing the warped image
         """
-        channels, width, height = flow.shape
-        print(flow.shape)
+        channels, height, width = flow.shape
         flow_map = np.zeros((channels, height, width), dtype=np.float32)
-        for y in range(height):
-            flow_map[1, y, :] = float(y) + flow[1, :, y]
-        for x in range(width):
-            flow_map[0, :, x] = float(x) + flow[0, x, :]
+        for i in range(height):
+            flow_map[1, i, :] += float(i)
+        for i in range(width):
+            flow_map[0, :, i] += float(i)
 
         # remap pixels to optical flow
         warped_image = cv2.remap(
@@ -287,7 +295,6 @@ class ArtisticVideo(QObject):
         """
         c = c[np.newaxis, :, :, :]
         D = float(x.size)
-        # D = self.size_of_tensor(x)
         loss = (1. / D) * tf.reduce_sum(c * tf.nn.l2_loss(x - w))
         return tf.cast(loss, tf.float32)
 
@@ -299,7 +306,7 @@ class ArtisticVideo(QObject):
         :return: a tensor with the loss
         """
         img = sess.run(image.assign(content_image.reshape((1,) + content_image.shape)))
-        backward_optical_flow = self._read_flow_file(backward_flow_path)
+        backward_optical_flow = self._read_flow_from_file(backward_flow_path)
         warped_image = self._get_warped_image(prev_frame, backward_optical_flow).astype(np.float32)
         content_weights = self._read_consistency_file(forward_weights)
         return self._temporal_loss(img, warped_image, content_weights)
