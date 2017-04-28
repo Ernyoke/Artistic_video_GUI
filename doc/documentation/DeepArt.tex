@@ -251,7 +251,27 @@ english abstract
 \capterro{Întroducere}
 \capteren{Indroduction}
 
-intro
+Napjainkban a képfeldolgozás egy eléggé elterjedt kutatási terület. A kutatások célja főleg az információ kinyerésére, gépi látás kivitelézésére irányult. Minderre kiváló megoldást jelentett a deep konvolúciós hálok (ConvNets)\cite{1}\cite{2} sikeres használata növelve ezzel ezek népszerűségét. Fontos megjegyezni, hogy a konvolúciós neuron hálok felfedezése már pár évtizede történt, tehát maga a technológia már régebb ismert volt. Az újrafelfedezésüket és hirtelen népszerűség növekedését annak köszönhetik, hogy az utóbbi években olyan hardveres megoldások jelentek meg amik lehetővé teszik az ilyen típusú hálok létrehozását és működtetését. 
+\newline 
+\indent
+Az Nvidia cég 2007-ben bevezette az Nvidia CUDA platformot\cite{3}. Ez egy komoly, használható fejlesztőkörnyezetett jelentett olyan fejlesztők számára akik nagy méretű adatpárhuzamos algoritmusokat szerettek volna fejleszteni. A CUDA környezet direkt elérhetőséget nyújt a videókártya utasításkészletéhez megengedve ezzel ennek a programozását. Ugyanakkor számos olyan videókártya került piacra ami egyre komolyabb számítási készségekkel bírt. Ezt a lehetőséget értelemszerűen a kutatók ki is használták így számos újabb publikáció és javaslat jelent meg amik neuron hálókat használnak az illető probléma megoldására.
+\newline
+\indent
+A deep konvolúciós hálok népszerűségének növekedésével egyre több olyan fejlesztői környezet jelent meg amiknek célja a mesterséges intelligencia feladatok megoldása. Ilyen könyvtárak például a Caffe\cite{4}, Keras\cite{5}, Theano\cite{6}, Tensorflow\cite{7}, Torch\cite{8} stb. Ezek a környezetekben, habár különböző stílusban de egyazon problémákra hivatottak gyors és egyszerű megoldásokat ajánla ugyanúgy mezei szoftverfejlesztők, mint kutatók számára.
+\newline
+\indent
+Az gépi látás egyik fontos alkalmazási területe a képen levő tárgyak, élőlények emberek felismerése. Ilyen területen a konvolúciós hálok kimagasló teljesítményt nyújtanak, olyannyira, hogy egyes kisérletek szerint ez már nemhogy az emberi látással megegyező, hanem azt felülmúló teljesítméynt nyújtanak\cite{9}. Feltevődik a kérdés, hogyha ennyire szofisztikált a gépi látás, akkor nem-e lehetne használni arra, hogy új képeket alkosson. Amint kiderült erre is alkalmasak. Az általam bemutandó dolgozat is ezt a témát próbálja megcélozni. A gépi látás a tárgyak, élőlények mellett képes felismerni maga a kép művészeti stílusát. Ez elsősorban kihasználható arra, hogy híres művészek alkotásait csoportosítsuk, rendszerezzül\cite{10}, de amint e dolgozatból ki fog derülni, ki lehet használni arra is, hogy egy művészeti stílust egy adott festményről átvigyük egy mindennapi képre, fotóra. 
+\newline
+\indent
+A dolgozatom célja magyar híres festőművészek festészeti stílusát átvenni és ezt alkalmazni midennapi képekre illetve mozgóképekre. Eddigiekben, ahhoz hogy egy mindennapi fényképből művészeti képet varázsoljunk, képszerkesztő szoftverek segítségével lehetett elérni manuálisan. Mindezt egy olyan egyén végezhette, akinek képszerkesztési illetve képmanipulálási szakismere volt adott képszerkesztési szoftverkörnyezetben. Magatól értődik az, hogy ez mozgóképek esetében egy időigényes folyamat. Dolgozatom mindezekre megoldást próbál adni, azáltal, hogy az általam elkészített szoftvert bárki használhatja, nincs szükség különböző képszerkesztői szakértelemre, emellett a folyamat ideje jelentősen csökkenni fog. 
+
+%-------------------------------------------------------------
+\chapter{Hasonló rendszerek feltérképezése}
+\capterro{Studiu bibliografic}
+\capteren{Bibliographic study}
+
+bib study
+
 
 
 %-------------------------------------------------------------
@@ -285,7 +305,35 @@ a rendszer
 \begin{thebibliography}{1}
 
 \bibitem {1}
-\url{https://www.google.com} (2017.04.20)
+Krizhevsky, A., Sutskever, I., and Hinton, G. E. ImageNet classification with deep convolutional neural networks (2012)
+
+\bibitem{2}
+Zeiler, M. D. and Fergus, R. Visualizing and understanding convolutional networks (2013)
+
+\bibitem{3}
+\url {https://en.wikipedia.org/wiki/CUDA} (2017.04.24)
+
+\bibitem{4}
+\url {http://caffe.berkeleyvision.org} (2017.04.24)
+
+\bibitem{5}
+\url {https://keras.io/} (2017.04.24)
+
+\bibitem{6}
+\url {http://deeplearning.net/software/theano/} (2017.04.24)
+
+\bibitem{7}
+\url {https://www.tensorflow.org/} (2017.04.24)
+
+\bibitem{8}
+\url {http://torch.ch/} (2017.04.24)
+
+\bibitem{9}
+\url {https://computerstories.net/microsoft-computer-outperforms-human-image-recognition-12028} (2017.04.29)
+
+\bibitem{10}
+Kevin Alfianto, Mei-Chen Yeh, Kai-Lung Hua - Artist-based Classification via Deep Learning with Multi-scale Weighted Pooling (2016)
+
 
 
 
