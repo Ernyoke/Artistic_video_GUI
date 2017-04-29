@@ -269,9 +269,22 @@ A dolgozatom célja magyar híres festőművészek festészeti stílusát átven
 \chapter{Hasonló rendszerek feltérképezése}
 \capterro{Studiu bibliografic}
 \capteren{Bibliographic study}
-
-bib study
-
+A neuron hálok használata a számítástechnikában nem egy újonnan kialakult terület. Frank Rosenblatt 1958-ban publikált egy olyan mintafelismerő algoritmust\cite{11}, ami egyszerű összeadást és kivonást használva képes volt "tanulni". A rendszer képes volt finomhangolni állapotát a bekövetkező iterációk során. Ezt az alogritmust perceptronnak nevezzük. 1975-ben Paul Werbos bevezette a backpropagation algoritmust\cite{12}, amit a perceptronnal együtt használva megoldotta a perceptron azon problémáját miszerint az csak lineárisan elválasztható osztályokat volt képes kategorizálni. Habár a neuron hálok tanulmányozása eléggé igéretesnek látszott, számítási igényük, komplexitásuk és lassú válaszidejük miatt a kutatók arra következtetésre jutottak, hogy a gyakorlatban még nem lehet alkalmazni őket.
+\newline
+\indent
+Yann LeCun professzor és csapata 1998-ban egy újabb topologiájú hálot vezetett be\cite{13}. A LeNet-5 elnevezésű háló konvoluciós rétegeket is tartalmazott ezért konvolúciós neuron hálonak nevezzük. A publikáció célja kézzel írott számjegyek kategorizálása volt, létrehozva ezáltal a MNIST adatbázist, ami 60000 28x28-as felbontású kézzel írott számjegyet tartalmaz, emellett tartalmaz egy 10000 tagból álló teszthalmazt. A dolgozatban bemutatott LeNet-5 háló 0,7\%-os hiba aránnyal volt képes kategorizálni a számjegyeket, ami messze felülmúlta a többrétegű perceptronos megoldást. 
+\newline
+\indent
+Dave Steinkraus, Patrice Simard és Ian Buck 2005-ben publikált dolgozata\cite{14} letette az alapjait a neuronhálók videokártyán történő programozásának. A videókártyán történő adatpárhuzamos programozás hatalmas performancia növekedést jelentett a processzoron futó neuronhálókkal szemben. Előtérbe kerül a deep learning és a mély konvolúciós hálok használata\cite{1}\cite{2}.
+\newline
+\indent
+Eddigiekben sikerült nagyon pontos felismerő illetve osztályozó rendszereket alkotni. A mély konvolúciós hálok használata azonban nem merül ki ennyiben. 2015-ben publikálásra került egy olyan deep learning-et használó algoritmus, ami képes képes illetve festmények művészeti stílusát átvinni egy másik digitális képre\cite{15}. Mostani dolgozatom is erre a publikációra alapoz, az ebben bemutatott módszereket próbálja alkalmazni illetve továbbfejleszteni. A tanuláshoz egy korábban bevezetett és gépi látáshoz használt, előre betanított neuron hálót használnak fel, a VGG-19-et. Yaroslav Nikulin és Roman Novak tudományos kutatása\cite{16} ezzel szemben eddig ugyanezt a módszert alkalmazta más ismertebb előre betanított hálókra, mint például AlexNet, GoogLeNet vagy VGG-16. Ugyanúgy a VGG-16 háló használata is kíváló eredményeket mutatott míg a GoogLeNet és az AlexNet architektúrájuk miatt komolyabb információvesztéshez vezetnek így a végeredmény nem lesz annyira látványos. Ugyanúgy kísérletek irányultak az eredi eljárás optimalizálására, megjelentek olyan rendszerek amik sajátos, erre a célre betanított neuron hálókat alkalmaznak\cite{17}\cite{18}\cite{19}.
+\newline
+\indent
+2016-ban a Prisma labs inc. kiadta mobilos applikációját Prisma név alatt\cite{20}. Az aplikáció előre megadott ismert festői/grafikai stíusokat alkalmazza a telefon kamerája által készített képekre. Az applikáció az előbbiekben bemutatott kutatásokra alapoz. Ugyanakor fontos megjegyezni, hogy maga a stílus alkalmazását a különböző fotókra nem az okostelefon végzi. A szerkeszteni kívánt képet a telefon felkülde egy szervergépre ami majd válaszként a szerkeztett képet küldi vissza. 
+\newline
+\indent
+Maga stílusátvitel nem csak állóképekre alkalmazható, ezt bizonyította Manuel R., Alexey D., Thomas B. tudományos dolgozata\cite{21}, valamit ezt próbalja megoldani a jelenlegi dolgozatom is. Értelemszerűen egy adott videót több álló képkocka alkot. Viszont ahhoz, hogy látványos művészeti mozgóképet gyátsunk, nem elegendő maga a videót darabokra vágni és minden képkockára alkalmazni a stílust. Erre adott megoldást Manuel R. és társainak kutatása. 
 
 
 %-------------------------------------------------------------
@@ -334,6 +347,38 @@ Zeiler, M. D. and Fergus, R. Visualizing and understanding convolutional network
 \bibitem{10}
 Kevin Alfianto, Mei-Chen Yeh, Kai-Lung Hua - Artist-based Classification via Deep Learning with Multi-scale Weighted Pooling (2016)
 
+\bibitem{11}
+Rosenblatt F. - The Perceptron: A Probabilistic Model For Information Storage And Organization In The Brain (1958)
+
+\bibitem{12}
+Werbos, P.J. - Beyond Regression: New Tools for Prediction and Analysis in the Behavioral Sciences (1975)
+ 
+\bibitem{13}
+LeCun, Yann, Léon Bottou, Yoshua Bengio, Patrick Haffner - Gradient-based learning applied to document recognition (1998)
+
+\bibitem{14}
+Dave Steinkraus, Patrice Simard. Ian Buck - Using GPUs for Machine Learning Algorithms (2005)
+
+\bibitem{15}
+Leon A. Gatys, Alexander S. Ecker, Matthias Bethge - A neural algorithm of artistic style (2015)
+
+\bibitem{16}
+Yaroslav Nikulin, Roman Novak - Exploring the Neural Algorithm of Artistic Style (2016)
+
+\bibitem{17}
+Justin Johnson, Alexandre Alahi, Li Fei-Fei - Perceptual Losses for Real-Time Style Transfer and Super-Resolution
+
+\bibitem{18}
+Ulyanov, D., Lebedev, V., Vedaldi, A., and Lempitsky - Texture networks: Feed-forward synthesis of textures and stylized images
+
+\bibitem{19}
+Ulyanov, D., Lebedev, V., Vedaldi, A., and Lempitsky - Instance Normalization: The Missing Ingredient for Fast Stylization
+
+\bibitem{20}
+\url{https://en.wikipedia.org/wiki/Prisma_(app)} (2017.04.29)
+
+\bibitem{21}
+Manuel Ruder, Alexey Dosovitskiy, Thomas Brox - Artistic style transfer for videos
 
 
 
