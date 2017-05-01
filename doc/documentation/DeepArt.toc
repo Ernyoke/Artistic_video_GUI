@@ -2,4 +2,8 @@
 \select@language {magyar} \contentsline {chapter}{\numberline {2}Hasonl\IeC {\'o} rendszerek felt\IeC {\'e}rk\IeC {\'e}pez\IeC {\'e}se}{13}
 \select@language {magyar} \contentsline {chapter}{\numberline {3}A rendszer}{15}
 \select@language {magyar} \contentsline {section}{\numberline {3.1}\IeC {\'A}ttekint\IeC {\'e}s}{15}
-\select@language {magyar} \contentsline {chapter}{\numberline {4}\IeC {\"O}sszefoglal\IeC {\'o}}{16}
+\select@language {magyar} \contentsline {section}{\numberline {3.2}A tan\IeC {\'\i }t\IeC {\'a}si m\IeC {\'o}dszer \IeC {\'a}ll\IeC {\'o}k\IeC {\'e}pek eset\IeC {\'e}ben}{17}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}Az eredeti k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{17}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}Az st\IeC {\'\i }lus k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{18}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}A rendszer tesztel\IeC {\'e}se}{20}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{21}

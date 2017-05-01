@@ -18,6 +18,7 @@
 \usepackage{tocloft}
 \usepackage{indentfirst}
 \usepackage{url}
+\usepackage{listings}
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
 
 %---------------------------------------------------------
@@ -94,13 +95,15 @@
 \end{center}
 
 \begin{center}
- 	\vspace{2cm}\LARGE \textbf{DeepArt}\\
+ 	\vspace{2cm}\LARGE \textbf{Párhuzamos képstílus átruházás konvolúciós neuronhálokkal}\\
 	 \vspace{1cm}\LARGE \textbf{MESTERI DISSZERTÁCIÓ}\\
 \end{center}
 
 \vspace{2cm}
 \begin{figure}[htb]
-\hspace{5.7cm}\includegraphics[bb = 0 0 160 160]{sapi.jpg}
+\begin{center}
+\includegraphics{sapientia_logo.png}
+\end{center}
 \end{figure}
 
 \vspace{2cm}
@@ -113,7 +116,7 @@
 \end{center}
 
 \begin{center}
-    \vspace{0.5cm}\textbf{2017 Június}
+    \vspace{0.5cm}\textbf{2017 Július}
 \end{center}
 \vspace*{\fill}
 %roman borito
@@ -134,7 +137,9 @@
 
 \vspace{2cm}
 \begin{figure}[htb]
-\hspace{5.7cm}\includegraphics[bb = 0 0 160 160]{sapi.jpg}
+	\begin{center}
+		\includegraphics{sapientia_logo.png}
+	\end{center}
 \end{figure}
 
 \vspace{2cm}
@@ -147,7 +152,7 @@
 \end{center}
 
 \begin{center}
-    \vspace{1cm}\textbf{2017 Iunie}
+    \vspace{1cm}\textbf{2017 Iulie}
 \end{center}
 
 %angol borito
@@ -163,13 +168,15 @@
 \end{center}
 
 \begin{center}
-    \vspace{3cm}\LARGE \textbf{DeepArt}\\
+    \vspace{3cm}\LARGE \textbf{Parallel artistic style transfer using deep convolutional neural networks}\\
     \vspace{1cm}\LARGE \textbf{Master Thesis}\\
 \end{center}
 
 \vspace{2cm}
 \begin{figure}[htb]
-\hspace{5.7cm}\includegraphics[bb = 0 0 160 160]{sapi.jpg}
+	\begin{center}
+		\includegraphics{sapientia_logo.png}
+	\end{center}
 \end{figure}
 
 \vspace{2cm}
@@ -181,7 +188,7 @@
 \end{center}
 
 \begin{center}
-    \vspace{1cm}\textbf{2017 June}
+    \vspace{1cm}\textbf{2017 July}
 \end{center}
 
 %eredetisegi nyilatkozat
@@ -296,8 +303,95 @@ Maga stílusátvitel nem csak állóképekre alkalmazható, ezt bizonyította Ma
 \section{Áttekintés}
 \secro{Privire de ansamblu asupra}
 \secen{Overview}
+Dolgozatom célja egy olyan multiplatform számítástechnikai szoftver tervezése és fejlesztése ami deep learning-et használva képes híres magyar festők festményeinek a stílusát átvenni és alkalmazni a felhasználó által megadott digitális képekre illetve videókra. A fejlesztett szoftver könnyen használható grafikus felhasználói felülettel rendelkezik és támogatja a Linux valamint a Microsoft Windows alapú operációs rendszereket. A szoftver futtatásához a felhasználónak rendelkeznie kell egy olyan videókártyával ami támogatja az Nvidia CUDA platformot. 
+\newline
+\indent
+A szoftver fejlesztése Python3.5\cite{23} programozási nyelvben történt, viszont egyes esetekben felhasználásra kerülnek egyes előre legyártott önállóan is futtatható állományok. Emellett még használva vannak a következő Python könyvtárak:
 
-a rendszer
+\begin{itemize}
+	\item numpy\cite{24}: használata elengedhetetlen akkor ha többdimenziós tömbökkel szeretnénk dolgozni. Nagyon sok matematikai próblémára tartalmaz előre definiált megoldást és efelett tökéletesen használható a tensorflow könyvtár mellett
+	\item tensorflow\cite{7}: talán egyik legismertebb deep learning és mély konvolúciós hálók tanítására kifejlesztett könyvtár. Teljes mértékben támogatja a videókártyán történő programozást.
+	\item PyQt\cite{25}: a szoftver grafikus felhasználói felületének a megvalósításához használatos, emellett komoly feladat orientált párhuzamosítást tud biztosítani.
+	\item OpenCV\cite{26}: képfeldolgozásra szakosodott könyvtár, főleg a különböző kiterjesztésű képek beolvasására és mentésére volt használva.
+\end{itemize}
+
+A rendszer működése felülnézetből nagyon egyszerű \ref{felulnezet_1}. A felhasználó kiválaszt egy bemeneti állományt, ami kép kiterjesztésű (.jpg, .png) vagy mozgókép kiterjesztésű (.gif, .avi, .mp4) lehet valamint kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén egyszerűen lefuttatja a tanulási algoritmust amely során az átveszi a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd minden képkockára alkalmazva lesz a tanítási algoritmus. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Ezek után, függetlenül, hogy kép vagy videó lett a végeredmény, a rendszer kimenti azt egy megadott folderbe.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.5]{software_overview.png}
+		\caption{{A rendszer működése felülnézetből}}
+		\label{felulnezet_1}
+	\end{center}
+\end{figure}
+
+\section{A tanítási módszer állóképek esetében}
+\secro{A tanítási módszer állóképek esetében}
+\secen{A tanítási módszer állóképek esetében}
+
+A rendszer tanításához állokép esetében két legalább képt bemenet szükséges, az eredeti kép amire át szeretnénk ruházni a stílust és a stílust tartalmazó kép, aminek a stílusát át szeretnénk ruházni. Mindkét bemenet esetében felírunk egy veszteség függvényt amik részei a végső nagy tanítási függvénynek.
+
+\subsection{Az eredeti kép tanításának a veszteségi függvénye}
+\ssecro{Az eredeti kép tanításának a veszteségi függvénye}
+\ssecen{Az eredeti kép tanításának a veszteségi függvénye}
+A mély neurálos hálók (Deep Neural Networks) azon típúsai amik a legeredményesebbek a képfeldolgozási feladatok elvégzésben a konvolúciós hálok. Mesterséges intelligencia területén a konvolúciós hálók olyan feed-forward típusú neuronhálók, amiket a biológiai elsődleges látókéregről mintáztak. A háló kifejezetten arra volt tervezve és kifejlesztve, hogy kétdimenziós formákat ismerjen fel. A háló alapértelmezetten több rétegből tevődik össze:
+
+\begin{itemize}
+	\item konvolúciós réteg: a konvolúciós hálók alapkövei. A réteg súlyai úgynevezett konvolúciós szűrők alkotják, amelyek a forward pass lépés során tanítva vannak. Ez a tanítás lépés úgy történik, hogy a szűrőt végigtoljuk a bemeneten és konvolúciónak nevezett műveletet végzünk. 
+	\item pooling layer: arra használatos, hogy a bemeneti adathalmazt méretét leszűkítsük úgy hogy a halmaz adott értékein valamely matematikai műveletet végzünk (átlagszámolás, maximum számolás, minimum számolás). Erre azért van szükségünk, hogy növeljük a tanulás gyorsaságát, csökkentsük a számítások komplexitását megakadályozva ezzel az "overfitting" bekövetkezését.
+	\item fully connected layer: minden bemenet mindem más bemenettel kapcsolatban áll.
+\end{itemize}
+
+A konvolúciós hálók súlyzókként konvolúciós szűrőket tartalmaznak. Ezek, tárgyfelisrmerés tanítása esetében, az adott bemeneti kép különböző tulajdonságait fogják tartalmazni. Annak függvényében, hogy a háló topológiájában egy adott réteg hol helyezkedik el, más tulajdonságokat fognak raktározni a szűrök. Az bemeneti réteghez közel álló alacsony szintű rétegek az adott kép pixelinformációit próbálják megjegyezni ezzel szemben a magasabb szinten levő rétegek szűrői különböző tárgyakat, formákat próbálnak megjegyezn\cite{27}\cite{28}. A hálók által tartalmazott információ vizualizálható azáltal, hogy rekonstruáljuk a bemeneti képet a súlyzók alapján. Alacsony rétegek esetében apró módósításokkal visszanyerhető az eredeti kép míg magasabb rétegek esetében objektumok, formák nyerhetők vissza.
+
+Az eredi kép tanításához egy már előre betanított mély konvolúciós neuronhálót használunk fel. A háló tudományos kontextusban VGG-19 név alatt terjedt el amit Simonyan K. és  Zisserman A. vezetett be publikációjukban\cite{29} ahol még a "model E" nevet viselte. Ez a háló gép látás és tárgyfelismerés céljából volt bevezetve olyan eredményeket produkálva e téren amik az emberi látással versengenek. Rétegei és topologiájának részletes bemutatása a \cite{29} publikációban történik, valamint a \ref{vgg_19} figurán is látható. Fontos megjegyezni, hogy a háló rétegeiből használva volt a 16 konvolúciós réteg, valamint az 5 pooling réteg, a teljesen összekötött rétegek nem voltak használva.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.3]{vgg19_cropped.png}
+		\caption{VGG-19 háló topológiája\cite{30}}
+		\label{vgg_19}
+	\end{center}
+\end{figure}
+
+A választás azért esett erre az előre betanított hálóra, mivel Yaroslav N. és Roman N. kutatása alapján\cite{16} összehasonlítva a AlexNet, GoogLeNet VGG-16 és VGG-19 halókat, a VGG-19 használata során sikerült a leglátványosabb képeket készíteni.
+\newline
+\indent
+A konvolúciós neuron háló minden rétege tartalmaz egy adott számú szűrőt, amik különbőző tulajdonságokat tartalmaznak a bementi képről. Ebből kifolyólag maga a bemenet kódolva van a szűrőkben. Egy \(N\) tulajdonságót tartalmazó réteg \(N\) szűrővel rendelkezik amelyek mérete \(M\). Maga a réteg kimenete lementhető egy \(N * M\) -es mátrixban. Egy adott réteg válasza egy bemeneti képre vizualizálható, ha gradient descent módszert alkalmazunk egy fehér zajt tartalmazó bemeneti képen. Tehát, legyen \(R^l\) egy adott az \(l\) haló válasza egy adott bemeneti képre. Legyen \(W^l\) ugyanaz ar \(l\) háló válasza egy adott fehér zajt tartalmazó bemeneti kép esetében. Akkor felírható a veszteség függvény mint:
+
+\begin{equation}
+L(\vec{x}, \vec{r}, l) = \frac{1}{2}\sum{R^l_{ij} - W^l_{ij}}
+\end{equation}
+
+Ahol \(\vec{x}\) a bemeneti képet jeleni, \(\vec{r}\) pedig azt a kimeneti képet jelenti amit a rendszer generál a rétegek tulajdonságaiból.
+Mindez Tensorflow környezetben a következőképpen nézne ki:
+
+\begin{lstlisting}[language=Python]
+for layer_name in CONTENT_LAYER:
+	content_loss += content_weight * (2 * tf.nn.l2_loss(
+		all_layers[layer_name] - content_features[layer_name]) /
+		content_features[layer_name].size)
+
+content_loss /= len(CONTENT_LAYER)
+return content_loss
+
+\end{lstlisting}
+
+A \(CONTENT\_LAYER\) tuple típusú ami tartalmazza azoknak a rétegeknek az azonosítóját amik részt vesznek a veszteség függvény kiszámításában. A \(content\_features\) valtozó egy lista, ez tartalmazza az összes réteg válaszát a bemeneti eredeti képre. A visszaküldött érték egy tensor típusú, egyik részét fogja képezni a végső optimalizálandó veszteségfüggvénynek. 
+
+
+\subsection{Az stílus kép tanításának a veszteségi függvénye}
+\ssecro{Az stílus kép tanításának a veszteségi függvénye}
+\ssecen{Az stílus kép tanításának a veszteségi függvénye}
+
+as
+
+%----------------------------------------------------------------
+\chapter{A rendszer tesztelése}
+\capterro{Testarea sistemului}
+\capteren{The testing of the system}
+
+testing
 
 %----------------------------------------------------------------
 \chapter{Összefoglaló}
@@ -360,7 +454,7 @@ LeCun, Yann, Léon Bottou, Yoshua Bengio, Patrick Haffner - Gradient-based learn
 Dave Steinkraus, Patrice Simard. Ian Buck - Using GPUs for Machine Learning Algorithms (2005)
 
 \bibitem{15}
-Leon A. Gatys, Alexander S. Ecker, Matthias Bethge - A neural algorithm of artistic style (2015)
+Gatys, L. A., Ecker, A. S., Bethge - A neural algorithm of artistic style (2015)
 
 \bibitem{16}
 Yaroslav Nikulin, Roman Novak - Exploring the Neural Algorithm of Artistic Style (2016)
@@ -378,8 +472,34 @@ Ulyanov, D., Lebedev, V., Vedaldi, A., and Lempitsky - Instance Normalization: T
 \url{https://en.wikipedia.org/wiki/Prisma_(app)} (2017.04.29)
 
 \bibitem{21}
-Manuel Ruder, Alexey Dosovitskiy, Thomas Brox - Artistic style transfer for videos
+Manuel Ruder, Alexey Dosovitskiy, Thomas Brox - Artistic style transfer for videos (2016)
 
+\bibitem{22}
+asd
+
+\bibitem{23}
+\url{https://www.python.org/} (2017.04.30)
+
+\bibitem{24}
+\url{http://www.numpy.org/} (2017.04.30)
+
+\bibitem{25}
+\url{https://www.riverbankcomputing.com/software/pyqt/intro} (2017.04.30)
+
+\bibitem{26}
+\url{http://opencv.org/} (2017.04.30)
+
+\bibitem{27}
+Gatys, L. A., Ecker, A. S., Bethge, M. Texture synthesis and the controlled generation of natural stimuli using convolutional neural networks (2015)
+
+\bibitem{28}
+url{https://research.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html} (2017.05.01)
+
+\bibitem{29}
+Simonyan, K., Zisserman, A. - Very Deep Convolutional Networks for Large-Scale ImageRecognition (2015)
+
+\bibitem{30}
+http://dandxy89.github.io/ImageModels/vgg19/ (2017.05.01)
 
 
 \end{thebibliography}
