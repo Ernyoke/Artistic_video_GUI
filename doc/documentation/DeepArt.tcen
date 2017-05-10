@@ -3,7 +3,8 @@
 \select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{3.}The system}{15}
 \select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.1.}Overview}{15}
 \select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.2.}A tan\IeC {\'\i }t\IeC {\'a}si m\IeC {\'o}dszer \IeC {\'a}ll\IeC {\'o}k\IeC {\'e}pek eset\IeC {\'e}ben}{17}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.1.}Az eredeti k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{17}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.2.}Az st\IeC {\'\i }lus k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{18}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{20}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{21}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.1.}The loss function of the content image}{17}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.2.}The loss function of the style image}{19}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.3.}Denoising the stylized image}{20}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{21}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{22}
