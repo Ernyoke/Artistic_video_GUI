@@ -6,5 +6,10 @@
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.1.}Az eredeti k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{17}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.2.}Az st\IeC {\'\i }lus k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{19}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.3.}Reducerea zgomotului din imagenea stilizata}{20}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}Testarea sistemului}{21}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{22}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.4.}Definirea si \IeC {\^\i }nv\IeC {\u a}\IeC {\textcommabelow t}area func\IeC {\textcommabelow t}iei de pierdere totala la imagini statice}{21}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.3.}A tan\IeC {\'\i }t\IeC {\'a}si m\IeC {\'o}dszer mozg\IeC {\'o}k\IeC {\'e}pek eset\IeC {\'e}ben}{21}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.1.}Naiv megk\IeC {\"o}zel\IeC {\'\i }t\IeC {\'e}s}{21}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.2.}A hal\IeC {\'o} inicializ\IeC {\'a}l\IeC {\'a}sa k\IeC {\'e}pkock\IeC {\'a}k eset\IeC {\'e}be}{22}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Optical flow bevezet\IeC {\'e}se}{22}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}Testarea sistemului}{24}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{25}

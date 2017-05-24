@@ -19,6 +19,7 @@
 \usepackage{indentfirst}
 \usepackage{url}
 \usepackage{listings}
+\usepackage{amsmath}
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
 
 %---------------------------------------------------------
@@ -426,6 +427,102 @@ A két veszteségfüggvényt alkalmazva sikeresen át tudjuk ruházni a stílust
 L_{tv}(\vec{a}, \vec{x}) = \sum_{i,j} \left|(X_{ij} - A_{{i+1}j})\right| + \sum_{i, j} \left|(X_{ij} - A_{i {j+1}})\right|
 \end{equation}
 
+\subsection{A teljes veszteségfüggvény felírása és tanítása statikus képek esetében}
+\ssecro{Definirea si învățarea funcției de pierdere totala la imagini statice}
+\ssecen{The definition and optimization of the total loss function for static images}
+
+Eddig bemutatásra került a stílus kép tanításának veszteségfüggvénye, az eredeti kép veszteség függvényének tanítása valamint egy veszteségfüggvény a kimeneti kép zajtalanítására. A végső veszteségfüggvény egyszerűen felírható a három veszteségfüggvény összegeként. 
+
+\begin{equation}
+L = L_{content} + L_{style} + L_{tv}
+\end{equation}
+
+A teljes veszteségfüggvény tanítására az Adam\cite{32} optimalizáló algoritmus alkalmaztuk. Az Adam ( Adaptive Moment Estimation) momentum algoritmus egy sztochasztikus gradiens alapú optimalizáló algoritmus. Az algoritmus felhasználja a elsődleges, valamint a másodlagos gradiensek átlagát ahhoz, hogy a veszteségfüggvényt minimalizálja. Az optimalizálási lépések a következő eljárás szerint történnek:
+
+\begin{equation}
+\begin{aligned}
+(m_t)_i=\beta_1(m_{t-1})_i + (1 - \beta_1)(\nabla L(W_t))_i \\
+(v_t)_i=\beta_2(m_{t-1})_i + (1 - \beta_2)(\nabla L(W_t))^2_i \\
+\\
+(W_{t+1})_i = (W_t)_i - \alpha \frac{\sqrt{1-(\beta_2)^t_i}}{1-(\beta_1)^t_i} \frac{(m_t)_i}{\sqrt{(v_t)_i} + \varepsilon} \\ 
+\cite{33}
+\end{aligned}
+\end{equation}
+
+Ahol, \(m\) és \(v\) jelentik az elsőfokú valamint másodfokú gradienseket, \(W\) jelenti a súlyzókat, \(\beta_1\) és \(\beta_2\) jelentik a momentumokat, emellet \(\varepsilon\) egy nagyon kis értékű szám annak érdekében, hogy elkerüljük a 0-val való osztást.
+\newline
+\indent
+Értelemszerűen a tensorflow deep learning könyvtár beépítetten tartalmazza a Adam optimalizációs algoritmust, ezért ennek a leprogramozására nincs szükség. 
+
+\section{A tanítási módszer mozgóképek esetében}
+\secro{A tanítási módszer mozgóképek esetében}
+\secen{A tanítási módszer mozgóképek esetében}
+
+\subsection{Naiv megközelítés}
+\ssecro{Naiv megközelítés}
+\ssecen{Naív approach}
+
+Eddigiekben bemutatásra keszült miképpen vihető át a stílus egyik statikus képről a másikra. Mindenki tisztába van azzal, hogy egy videó statikus képek sorozatából tevődik össze, amiket képkockáknak (frame) nevezünk. Ennek megfelelően a naiv megközelítés az lenne, hogy ha adott egy videó, akkor vágjuk azt darabokra, pontosabban statikus képkockákra, majd az összes képkockára alkalmazzuk a stílus átruházási módszert.
+\newline
+\indent
+A bemeneti videót frame-ekre való bontásához az ffmpeg nyílt forráskodú alkalmazást használtuk. Az ffmpeg parancssorból futtatható, a következő paraméterek szükségesek, ahhoz, hogy a mozgóképet statikus képek sorozatává alakítsa:
+
+\begin{lstlisting}[language=bash]
+ffmpeg -i <input_video_path> -f image2 frame%05d.<ext>
+\end{lstlisting}
+
+A \(frame\%05d.<ext>\) egy mintát jelent ami szerint a képkockák elnevezését határozza meg. Az \(<ext>\) a képkockák kiterjesztését jelenti.
+\newline
+\indent
+Miután a stílus átruházása az összes képkockára megtörtént, vesszük az összes stilizált képkockát és felépítjük belölük a kimeneti videót. Ez ugyancsak megoldható az ffmpeg alkalmazással.
+
+\begin{lstlisting}[language=bash]
+ffmpeg "-i" frame%05d.<ext> output_name.<ext>
+\end{lstlisting}
+
+A naiv megközelítés működik, a kimenet egy olyan videó lesz, amely tartalmazza a bemeneti stíluskép jellegzetességeit. Ugyanakkor észlelhető, hogy az eredmény nem valami esztétikus. Észlelhető, hogy a képkockák közötti átmenet nem valami folyamatos. Emellett különböző zajokat, úgynevezett artifact-eket észlelhetünk. 
+
+\subsection{A haló inicializálása képkockák esetében}
+\ssecro{A haló inicializálása képkockák esetébe}
+\ssecen{A haló inicializálása képkockák esetébe}
+Amint említettük, a háló inicalizálására egy fehér zaj képet használtunk statikus bemeneti képre való stílusátruházáskor. Több képkocka esetében ezzel az a gond, hogy a képkockák nem fognak egyanabba a lokális minimumba konvergálni tanításkor. Végeredményképp az átmenet egyik képkockáról a másikra nem lesz folyamatos.
+\newline
+\indent
+Egy megoldás kísérlet erre az lenne, hogy a ha egy képkocka stilizálása történik, a hálót ne fehér zaj képpel inicializáljuk, hanem az előtte levő stilizált képkockával. Ez simább átmenetet fog eredményezni abban az esetben, ha a képkockákon nincs mozgás. Ennek a módszernek a használata szükségszerű viszont nem elégséges ahhoz, hogy szemnek is kellemes eredményt kapjunk.
+
+\subsection{Optical flow bevezetése}
+\ssecro{Optical flow bevezetése}
+\ssecen{Optical flow bevezetése}
+
+Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képt képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
+Az optical flow meghatározásához a DeepMatching - Deepflow algoritmust használtuk. Ennek a kimenete egy .flo kiterjesztésű fájl ami tartalmazza adott pixelek esetében a horizontális és vertikális elmozdulás vektorokat.
+\newline
+\indent
+Az optical flow meghatározásával egy mozgóképen meghatározhatók azok a régiók, amik statikusak (adott időn belül az illető régióban nincs változás, úgymond nincs mozgás) valamint azokat a régiókat ahol változás történik. Ami még fontos nekünk meghatározni egy adott mozgó objektum/személy esetében azt az kétdimenziós intervallumot, amelyben mozog. Meghatórozzuk a mozgási határait (lásd: ). Ennek a metódusát Sundaran és társai írják le a ... publikációjukban.
+\newline
+\indent
+Két egymést követő képkocka esetében meghatározható az optical flow előre, tehát az képkockák időrendi sorrendjében, valamint meghatározható visszafele, az időrendi sorrend ellentett irányában. Jelölje \(w(i, j)\) az előre történő optical flow-t, valamint \(\hat{w}(i, j)\) a visszafele történő optical flow-t. Ekkor felírható a w torzítása a w alapján:
+
+\begin{equation}
+\tilde{w}(i, j) = w((i, j) + \hat{w}(i, j))
+\end{equation}
+
+A mozgás néküli zónák meghatározhatóak a következőképpen:
+\begin{equation} \label{eq:1}
+|\tilde{w} + \hat{w}|^2 > 0.01(|\tilde{w}|^2 + |\hat{w}|^2) + 0.5
+\end{equation}
+
+A mozgási határok pedig meghatározhatóak:
+\begin{equation} \label{eq:2}
+|\nabla\hat{u}| + |\nabla\hat{v}| > 0.01|\tilde{w}|^2 + 0.002
+\end{equation}
+
+A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix ami tartalmazza a mozgás néküli zonánkat valamint a mozgási határokat. Ezt a mátrixot átalakítjuk olyan módon, hogy a mozgási határokra 1-est rakunk, a többi érték 0-ás lesz, jelöljük ez a mátixot \(c^{(i-1,i)}\)-vel az \(i-1\) és \(i\)-dik képkocka között. Ezt felhasználva felírhatjuk egy újabb veszteség függvényt: 
+
+\begin{equation} \label{eq:2}
+L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
+\end{equation}
+
 
 
 %----------------------------------------------------------------
@@ -545,6 +642,15 @@ Simonyan, K., Zisserman, A. - Very Deep Convolutional Networks for Large-Scale I
 
 \bibitem{31}
 \url{https://en.wikipedia.org/wiki/Total_variation_denoising} (2017.05.03)
+
+\bibitem{32}
+Kingma D. P., Lei Ba, J. - ADAM: A method for stochastic optimization (2015)
+
+\bibitem{33}
+\url{http://caffe.berkeleyvision.org/tutorial/solver.html} (2017.05.14)
+
+\bibitem{34}
+\url{https://www.mathworks.com/discovery/optical-flow.html} (2017.05.18)
 
 
 \end{thebibliography}
