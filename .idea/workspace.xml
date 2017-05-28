@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84ea280a-e38a-4440-b35f-8932279f7bce" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images/loss_chart_for_images.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Artistic_video_GUI.iml" afterPath="$PROJECT_DIR$/.idea/Artistic_video_GUI.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images/total_loss_values.png" afterPath="$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images/total_loss_values.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/artistic_video/Artistic_image.py" afterPath="$PROJECT_DIR$/artistic_video/Artistic_image.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images/loss_chart_for_images.py" afterPath="$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images/loss_chart_for_images.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +16,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Artistic_video_GUI$main.coverage" NAME="main Coverage Results" MODIFIED="1490400510424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/artistic_video" />
     <SUITE FILE_PATH="coverage/Artistic_video_GUI$Main.coverage" NAME="Main Coverage Results" MODIFIED="1496008280588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Artistic_video_GUI$loss_chart_for_images.coverage" NAME="loss_chart_for_images Coverage Results" MODIFIED="1496009280859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images" />
+    <SUITE FILE_PATH="coverage/Artistic_video_GUI$loss_chart_for_images.coverage" NAME="loss_chart_for_images Coverage Results" MODIFIED="1496009611941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -41,8 +39,8 @@
       <file leaf-file-name="loss_chart_for_images.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images/loss_chart_for_images.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="25" column="51" lean-forward="false" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+            <state relative-caret-position="389">
+              <caret line="28" column="38" lean-forward="false" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -998,8 +996,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/artistic_video/additional/loss_chart_for_images/loss_chart_for_images.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="25" column="51" lean-forward="false" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+        <state relative-caret-position="389">
+          <caret line="28" column="38" lean-forward="false" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

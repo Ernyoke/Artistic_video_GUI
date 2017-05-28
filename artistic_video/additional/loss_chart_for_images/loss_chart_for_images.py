@@ -26,6 +26,7 @@ def draw_chart():
     sub_plot.legend(loc='upper right', shadow=True)
     plt.grid(True)
     plt.ylabel("Error value")
+    plt.gcf().subplots_adjust(left=0.2)
     plt.xlabel("Iterations")
     plt.show()
     fig.savefig('total_loss_values')
