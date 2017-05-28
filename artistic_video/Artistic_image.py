@@ -7,6 +7,7 @@ from functools import reduce
 from operator import mul
 import cv2
 import struct
+import time
 
 from artistic_video.Atomic import AtomicBoolean
 from PyQt5.Qt import QObject, pyqtSlot, pyqtSignal
@@ -32,6 +33,8 @@ class ArtisticVideo(QObject):
     def __init__(self, parent=None):
         super(ArtisticVideo, self).__init__(parent)
         self.stop = AtomicBoolean()
+        self.log = True
+        self.log_dir = 'logs'
 
     iter_changed = pyqtSignal(int, int)     # emitted when an iteration is done in case of an image
     frame_changed = pyqtSignal(int, int)    # emitted when a frame is completed
@@ -331,6 +334,19 @@ class ArtisticVideo(QObject):
             print('Temporal loss: %g' % temporal_loss.eval())
         print('Total loss: %g' % total_loss.eval())
 
+    def _log_losses(self, losses):
+        """
+        :param losses:
+        :return:
+        """
+        if self.log:
+            time_stamp = time.time()
+            if losses:
+                log_file_name = self.log_dir + get_separator() + 'log_losses_' + str(time_stamp) + '.txt'
+                with open(log_file_name, 'w') as log_file:
+                    for loss in losses:
+                        log_file.write(str(loss) + ' ')
+
     def create_image(self,
                      network_path,
                      content_image,
@@ -395,6 +411,9 @@ class ArtisticVideo(QObject):
             # total variation denoising
             tv_loss = self._compute_denoise_loss(image, tv_weight)
 
+            # declare a list for holding all lass values (used for logging and charts)
+            loss_values = []
+
             # optimization
             # a placeholder for the best loss value
             minimum_loss = float('inf')
@@ -434,12 +453,14 @@ class ArtisticVideo(QObject):
                     last_step = i == iterations - 1
                     if last_step:
                         self._print_losses(content_loss, style_loss, tv_loss, loss, temporal_loss)
+                        self._log_losses(loss_values)
 
                     # evaluate the optimizer
                     train_step.run()
 
                     # compute total loss
                     total_loss = loss.eval()
+                    loss_values.append(total_loss)
 
                     # if the total loss is smaller than the minimum loss, keep the artisitc image
                     if total_loss < minimum_loss:
