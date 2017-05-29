@@ -102,6 +102,7 @@ class MainWindow(QMainWindow):
         self.worker = Worker()
         self.worker.work_started.connect(self._disable_ok_btn)
         self.worker.work_finished.connect(self._enable_ok_btn)
+        self.worker.display_image.connect(self._display_stylized_image)
 
     def _set_application_properties(self):
         QCoreApplication.setOrganizationName("Sapientia EMTE");
@@ -235,3 +236,12 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def _enable_ok_btn(self):
         self.ui.okButton.setEnabled(True)
+
+    @pyqtSlot(str)
+    def _display_stylized_image(self, path):
+        if path is not None:
+            pix_map = self._read_input_pixmap(path)
+            if pix_map is not None:
+                scene = QGraphicsScene()
+                scene.addPixmap(pix_map)
+                self.ui.styleImageView.setScene(scene)

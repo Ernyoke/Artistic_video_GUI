@@ -37,7 +37,7 @@ class ArtisticVideo(QObject):
         self.log_dir = 'logs'
 
     iter_changed = pyqtSignal(int, int)     # emitted when an iteration is done in case of an image
-    frame_changed = pyqtSignal(int, int)    # emitted when a frame is completed
+    frame_changed = pyqtSignal(int, int)    # emitted when a frame is completed to the Progressbar
     flow_created = pyqtSignal(int, int)     # emitted when the forward and backward flow is created for 2 frames
     set_status = pyqtSignal(str)            # display a status on the progressbar
 
@@ -471,7 +471,7 @@ class ArtisticVideo(QObject):
                         yield (i, best_image.reshape(content_image_shape[1:]))
 
                     # emit a signal to the UI with the value of current iteration
-                    self.iter_changed.emit(i, iterations)
+                    self.iter_changed.emit(i+1, iterations)
 
     def stylize(self,
                 network_path,
@@ -505,6 +505,7 @@ class ArtisticVideo(QObject):
 
         frame = np.zeros([1, 1, 1], dtype=np.float)
         frame_list = []
+        save_path = ''
 
         # read the input image
         content_type = get_input_type(content_image_path)
@@ -578,7 +579,8 @@ class ArtisticVideo(QObject):
                     learning_rate=learning_rate,
                     use_deepflow=False
             ):
-                imsave(output_path + str('out.jpg') + '.jpg', image)
+                save_path = output_path + 'out' + '.jpg'
+                imsave(save_path, image)
             self.frame_changed.emit(1, 1)
 
         elif content_type == InputType.VIDEO:
@@ -599,8 +601,10 @@ class ArtisticVideo(QObject):
                                 learning_rate=learning_rate,
                                 use_deepflow=False
                         ):
-                            imsave(output_path + str(index) + '.jpg', image)
+                            save_path = output_path + str(index) + '.jpg'
+                            imsave(save_path, image)
                             self.frame_changed.emit(0, len(frame_list))
+
                     else:
                         prev_frame_name = frame_list[index - 1]
                         current_backward_flow = backward_flow_list[frame_name]
@@ -620,14 +624,17 @@ class ArtisticVideo(QObject):
                                 backw_flow_path=current_backward_flow,
                                 forw_cons_path=current_forward_consistency
                         ):
-                            imsave(output_path + str(index) + '.jpg', image)
+                            save_path = output_path + str(index) + '.jpg'
+                            imsave(save_path, image)
                             # convert_to_video("output_ffmpeg", ".mp4", "frames")
                             self.frame_changed.emit(index, len(frame_list))
+
                 else:
                     return
 
         if not self.stop.get():
             self.set_status.emit("Progress completed!")
+            return save_path
 
     @pyqtSlot()
     def stop_running(self):

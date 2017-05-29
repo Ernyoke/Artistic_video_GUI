@@ -38,6 +38,7 @@ class Worker(QThread):
     # define signals
     work_started = pyqtSignal()
     work_finished = pyqtSignal()
+    display_image = pyqtSignal(str)
 
     def run(self):
         """
@@ -74,19 +75,21 @@ class Worker(QThread):
             self.work_started.emit()
             self.is_work_in_progress = True
 
-            artistic.stylize(vgg_location,
-                             self.content_image,
-                             [self.style_image],
-                             output_location,
-                             iterations,
-                             content_weight,
-                             style_weight,
-                             tv_weight,
-                             temporal_weight,
-                             learning_rate,
-                             True)
+            stylized_path = artistic.stylize(vgg_location,
+                                             self.content_image,
+                                             [self.style_image],
+                                             output_location,
+                                             iterations,
+                                             content_weight,
+                                             style_weight,
+                                             tv_weight,
+                                             temporal_weight,
+                                             learning_rate,
+                                             True)
 
             self.work_finished.emit()
+            if stylized_path is not None:
+                self.display_image.emit(stylized_path)
 
             # disconnect the Cancel button from the ArtisticVideo. Change the Cancel button status to OK and hook it
             # up with the Worker.exit() slot.
