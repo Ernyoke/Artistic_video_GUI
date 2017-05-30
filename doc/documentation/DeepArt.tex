@@ -316,7 +316,7 @@ A szoftver fejlesztése Python3.5\cite{23} programozási nyelvben történt, vis
 	\item OpenCV\cite{26}: képfeldolgozásra szakosodott könyvtár, főleg a különböző kiterjesztésű képek beolvasására és mentésére volt használva.
 \end{itemize}
 
-A rendszer működése felülnézetből nagyon egyszerű \ref{felulnezet_1}. A felhasználó kiválaszt egy bemeneti állományt, ami kép kiterjesztésű (.jpg, .png) vagy mozgókép kiterjesztésű (.gif, .avi, .mp4) lehet valamint kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén egyszerűen lefuttatja a tanulási algoritmust amely során az átveszi a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd minden képkockára alkalmazva lesz a tanítási algoritmus. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Ezek után, függetlenül, hogy kép vagy videó lett a végeredmény, a rendszer kimenti azt egy megadott folderbe.
+A rendszer működése felülnézetből nagyon egyszerű (\ref{felulnezet_1} ábra). A felhasználó kiválaszt egy bemeneti állományt, ami kép kiterjesztésű (.jpg, .png) vagy mozgókép kiterjesztésű (.gif, .avi, .mp4) lehet valamint kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén egyszerűen lefuttatja a tanulási algoritmust amely során az átveszi a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd minden képkockára alkalmazva lesz a tanítási algoritmus. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Ezek után, függetlenül, hogy kép vagy videó lett a végeredmény, a rendszer kimenti azt egy megadott folderbe.
 
 \begin{figure}[h]
 	\begin{center}
@@ -350,7 +350,7 @@ Az eredi kép tanításához egy már előre betanított mély konvolúciós neu
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[scale=0.7]{vgg19.png}
+		\includegraphics[scale=0.7]{VGG19.png}
 		\caption{VGG-19 (Model E) háló topológiája\cite{29}}
 		\label{vgg_19}
 	\end{center}
@@ -449,6 +449,14 @@ A teljes veszteségfüggvény tanítására az Adam\cite{32} optimalizáló algo
 \end{aligned}
 \end{equation}
 
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.9]{total_loss_values.png}
+		\caption{Tanítási függvény optimalizálása különböző tanítási ráták esetében}
+		\label{total_loss}
+	\end{center}
+\end{figure}
+
 Ahol, \(m\) és \(v\) jelentik az elsőfokú valamint másodfokú gradienseket, \(W\) jelenti a súlyzókat, \(\beta_1\) és \(\beta_2\) jelentik a momentumokat, emellet \(\varepsilon\) egy nagyon kis értékű szám annak érdekében, hogy elkerüljük a 0-val való osztást.
 \newline
 \indent
@@ -460,7 +468,7 @@ Ahol, \(m\) és \(v\) jelentik az elsőfokú valamint másodfokú gradienseket, 
 
 \subsection{Naiv megközelítés}
 \ssecro{Naiv megközelítés}
-\ssecen{Naív approach}
+\ssecen{Naiv approach}
 
 Eddigiekben bemutatásra keszült miképpen vihető át a stílus egyik statikus képről a másikra. Mindenki tisztába van azzal, hogy egy videó statikus képek sorozatából tevődik össze, amiket képkockáknak (frame) nevezünk. Ennek megfelelően a naiv megközelítés az lenne, hogy ha adott egy videó, akkor vágjuk azt darabokra, pontosabban statikus képkockákra, majd az összes képkockára alkalmazzuk a stílus átruházási módszert.
 \newline
@@ -491,8 +499,8 @@ Amint említettük, a háló inicalizálására egy fehér zaj képet használtu
 Egy megoldás kísérlet erre az lenne, hogy a ha egy képkocka stilizálása történik, a hálót ne fehér zaj képpel inicializáljuk, hanem az előtte levő stilizált képkockával. Ez simább átmenetet fog eredményezni abban az esetben, ha a képkockákon nincs mozgás. Ennek a módszernek a használata szükségszerű viszont nem elégséges ahhoz, hogy szemnek is kellemes eredményt kapjunk.
 
 \subsection{Optical flow bevezetése}
-\ssecro{Optical flow bevezetése}
-\ssecen{Optical flow bevezetése}
+\ssecro{Introducerea optical flow-ului}
+\ssecen{Introduction of the optical flow}
 
 Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képt képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
 Az optical flow meghatározásához a DeepMatching - Deepflow algoritmust használtuk. Ennek a kimenete egy .flo kiterjesztésű fájl ami tartalmazza adott pixelek esetében a horizontális és vertikális elmozdulás vektorokat.
@@ -523,6 +531,94 @@ A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix ami 
 L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
 \end{equation}
 
+
+\section{A rendszer tervezése és kivitelezése}
+\secro{Proiectarea și implementarea sistemului}
+\secen{The design and implementation of the system}
+
+\subsection{A rendszer interakciós és viselkedési modellje}
+\ssecro{Modelul de interacțiune și comportament al sistemului}
+\ssecen{Interraction and behavioral model of the system}
+
+A rendszer interakciós modellje (\ref{use_case_diagram}. ábra) a lehető legegyszerűbb. Egyetlen aktort határozunk meg, aki maga a felhasználó. A rendszer esetében nem beszélhetünk bármilyen adminisztrációs felületről mivel nem rendelkezik semmiféle háttértárral valamint nem pillanatnyilag nem definiál semmifel hálózati komponenst.
+\newline
+\indent
+A felhasználónak lehetősége van új kép illetve videó anyag bevitelére. Ez a funkcionalitást egyazon komponens végzi aminek a egyik feladata eldönteni, hogy a kijelölt bemenet kép vagy videó típusú. A felhasználónak lehetősége van a meghatározott kiterjesztésű fájlok közül választani bemenethez.
+\newline
+\indent
+A felhasználónak lehetősége van a rendszer által biztósított stílusok közül választani. A felhasználó nem határozhat meg új stílust. A rendszer nem biztosít erre adminisztrációs felületet.
+\newline
+\indent
+A felhasználó meghatározhatja az átruházási folyamat tanítási paramétereit. A rendszer erre biztosít alapértelmezett értékeket amiket a felhasználó változtathat. A rendszer megjegyzi az új paramétereket, ezek új indításkor is megmaradnak. A rendszer az alapértelmezett paramétereket is megjegyzi, ezeket a felhasználó bármikor visszálíthatja az erre kifejlesztett opció használatával.
+\newline
+\indent
+A felhasználó meghatározhatja az utvonalat ahova a kimenet le lesz mentve. A mentést a rendszer automatikusan el fogja végezni az átruházási folyamat után.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.55]{use_case.png}
+		\caption{A rendszer viselkedési modellje}
+		\label{use_case_diagram}
+	\end{center}
+\end{figure}
+
+A rendszer interakciós modelljét az \ref{felulnezet_1}. ábra tartalmazza. A felhasználó kiválaszt egy bemeneti állományt a rendszer által meghatározott kiterjesztések közül(.jpg, .png, .gif, .avi, .mp4), majd kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén lefuttatja a 3.2-es fejezetben ismertetett taítási algoritmust amely során az átruházza a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd alkalmazva lesz a 3.3-as fejezet tanítási metódusa. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Végezetül a rendszer lementi a megadott helyre a kimeneti állományt.
+
+\subsection{A rendszer strukturális modellje}
+\ssecro{Modelul structural al sistemului}
+\ssecen{Structural model of the system}
+
+A rendszer a következő komponensekből tevődik össze (\ref{component_diagram}. ábra):
+\begin{itemize}
+	\item Main Window: az aplikáció fő ablaka, ez az ablak jelenik meg az applikáció indításakor, valamint erről az ablakról lehet kiválasztani a bemeneti adatot és a stílus képet. Az ablak Start gombjának a lenyomásával indítható az átruházási folyamat. Az ablak tartalmaz két beágyazott területet, ahol a bemeneti adat, valamint a végeredmény tekinthető meg.
+	\item Settings Dialog: a főablak menüsorából (Menu Bar) jeleníthető meg. Fő feladata egy grafikus felület biztosítása a különféle beállítások és tanítási paraméterek megadásához. A felhasználó megadhatja az útvonalat ahhoz a mappához, ahova a kimenet lesz tárolva, megadhatja a bemeneti VGG19 háló útvonalat valamint a tanítási paramétereket.
+	\item ProgressBar Dialog: a feladata kimutatni a felhasználó számára, hogy az átruházás milyen státusban van, mennyi van még hátra amig a folyamat befejeződik. Erre azért van szükség, mivel az átruházási folyamat időigényes, ezért fontos a felhasználó tudtára adni, hogy milyen állapotban van a folyamat. A folyamat befejeztekor egy jelzést küld a Main Window komponensnek, ami ki fogja jelezni a felhasználónak a végeredményt.
+	\item Artistic Video creator: ez képezi az aplikáció magját, ez az a komponens, ami elvégzi maga az átruházási folyamatot. A bemeneti paramétereket/adatokat a Main Window komponenstől kapja. Az átruházási folyamat a videó kártyán fog futni, de ettől föggetlenül a komponens jelzéseket fog küldeni a ProgressBar komponensnek.
+	\item Image handler: feladata a bemeneti képek beolvasása és kiíratása a merevlemezre. Beolvasáskor egy preprocesszálás műveletet végez, majd kimenetkor egy poszprocesszálás művelet lesz elvégezve. Fontos megjegyezni, hogy ezt a komponens a processzálások miatt nem ajánlott használni applikáción belüli képkijelzésre, például a Main Window komponens esetében.  
+	\item Video handler: feladata a bemeneti videot képkockákra vágni és a kimeneti képkockákból videót készíteni. A képkockák egy temporális folderbe lesznek elmentve vágás után, ezeknek a beolvasását a Image handler komponens végzi majd.
+	\item VGG19 handler: a komponens feladata ez előre betanított és kimentett VGG19 háló beolvasása és átalakítása egy olyan hálóvá amit a Tensorflow könyvtár fel tud dolgozni majd.
+\end{itemize}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.5]{component_diagram.png}
+		\caption{A rendszert alkotó komponensek}
+		\label{component_diagram}
+	\end{center}
+\end{figure}
+
+\subsection{Többszálas megoldás és kommunikáció a komponensek között}
+\ssecro{Proiectarea pe mai multe fire computaționale a unelor componente}
+\ssecen{Multithreaded design and communication of components}
+
+A egy bemeneti képre való stílus átruházás időigényes folyamat. Mozgókép esetében ez a folyamat időigénye lineárisan növekedik a képkockák számának szorzatával. Annak érdekében, hogy az alkalmazásunk reszponzív legyen elhagyhatatlan aspektus egy olyan modell kialakítása ami igénybe veszi a modern processzorok többszálas működési tulajdonságát. Az Artistic video creator komponens működése során ugyan igénybe veszi a videó kártya számítási kapacítását, de ez semmiképp sem jelenti azt, hogy a futási idő elhanyagolható. Ugyanakkor fontos kiemelni azt is, azon függvényhívások sorozata ami a videókártyán fog elvégződni, szinkron módon történik. Valójában a programunk meghívja az adott függvényt majd addig várakozik, amig megoldás nem érkezett erre.
+\newline
+\indent
+Alkalmazásunk esetében megkülönböztetünk egy főszálat valamint egy mellékszálat (\ref{seq_diagram}. ábra). A főszálon fog futni a Main Window és a köréje csoportosulú felhasználói felülettel rendelkező komponensek, mint például a Settings vagy a ProgressBar. Az alkalmazás indításakor csak a főszál indul el ami létrehozza a Main Window és Settings komponenseket. Ezt követően, ha a felhasználó megadja a bemeneti állományt, létrejön a ProgressBar komponens. A ProgressBar azért jön létre csak ebben a pillanatban, mivel a rendszernek el kell döntenie a bemenet típusát és ennek függvényében egy factory modell segítségével dönti el, hogy milyen típusú komponens jön létre. Ebben a pillanatban azonban a Progressbar komponens még nem látható a felhasználó számára.
+\newline
+\indent
+Ha felhasználó úgy dönt, hogy a megfelelő bemenetet választotta ki, elindíthatja az átruházási folyamatot. Ekkor egy külön szál jön létre (Worker thread), ami átveszi a bemeneti adatokat és elkezdi a folyamatot. A terhelés ebben a pillanatban átkerül a másodlagos szálra, ennek eredményeképp a főszál nem fog blokkolódni. Így az felhasználói felület aktív marad a felhasználó számára és ki fogja tudni szolgálni annak kéréseit.
+A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a ProgressBar komponenssel és jelzéseket küld a munkafolyamat státusáról így ez ki tudja jelezni, hogy mennyi munka van még hátra. A munkafolyamat bármikor leállítható még azelőtt, hogy az átruházás befejeződött volna. Ilyenkor a ProgressBar üzenetet küld az Artistic Video creator komponensnek, ami beállít egy saját leállításra szánt flag-et. A folyamat két iteráció között állítható le, ha az illető flag be volt állítva. Miután a munkafolyamat sikeresen leállt, egy jelzés fog érkezni a ProgressBar komponenshez ami majd nyugtázni fogja. Ha a munkafolyamat bevégződőtt, vagy a felhasználó által megszakításra került, a másodlagos szál el fog halni, az ezáltal igényelt erőforrások pedig fel fognak szabadulni.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.5]{seq_diagram.png}
+		\caption{Átruházás szekvencia diagrammja}
+		\label{seq_diagram}
+	\end{center}
+\end{figure}
+
+\subsection{Az implementáció során felépített objektumok bemutatása}
+\ssecro{Prezentarea obiectelor utilizate pe parcursul implementației}
+\ssecen{Objects used during implementation of the system}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.2]{main_ui.png}
+		\caption{A rendszer felhasználói felülete}
+		\label{graphical_ui)}
+	\end{center}
+\end{figure}
 
 
 %----------------------------------------------------------------

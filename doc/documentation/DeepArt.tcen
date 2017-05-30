@@ -8,8 +8,13 @@
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.3.}Denoising the stylized image}{20}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.4.}The definition and optimization of the total loss function for static images}{21}
 \select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.3.}A tan\IeC {\'\i }t\IeC {\'a}si m\IeC {\'o}dszer mozg\IeC {\'o}k\IeC {\'e}pek eset\IeC {\'e}ben}{21}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.1.}Na\IeC {\'\i }v approach}{21}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.1.}Naiv approach}{21}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.2.}A hal\IeC {\'o} inicializ\IeC {\'a}l\IeC {\'a}sa k\IeC {\'e}pkock\IeC {\'a}k eset\IeC {\'e}be}{22}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Optical flow bevezet\IeC {\'e}se}{22}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{24}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{25}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Introduction of the optical flow}{23}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}The design and implementation of the system}{24}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Interraction and behavioral model of the system}{24}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}Structural model of the system}{25}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.3.}Multithreaded design and communication of components}{26}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.4.}Objects used during implementation of the system}{28}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{31}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{32}
