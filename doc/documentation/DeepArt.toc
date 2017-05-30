@@ -16,5 +16,5 @@
 \select@language {magyar} \contentsline {subsection}{\numberline {3.4.2}A rendszer struktur\IeC {\'a}lis modellje}{25}
 \select@language {magyar} \contentsline {subsection}{\numberline {3.4.3}T\IeC {\"o}bbsz\IeC {\'a}las megold\IeC {\'a}s \IeC {\'e}s kommunik\IeC {\'a}ci\IeC {\'o} a komponensek k\IeC {\"o}z\IeC {\"o}tt}{26}
 \select@language {magyar} \contentsline {subsection}{\numberline {3.4.4}Az implement\IeC {\'a}ci\IeC {\'o} sor\IeC {\'a}n fel\IeC {\'e}p\IeC {\'\i }tett objektumok bemutat\IeC {\'a}sa}{28}
-\select@language {magyar} \contentsline {chapter}{\numberline {4}A rendszer tesztel\IeC {\'e}se}{31}
-\select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{32}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}A rendszer tesztel\IeC {\'e}se}{32}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{33}
