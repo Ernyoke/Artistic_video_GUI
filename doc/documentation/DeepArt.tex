@@ -20,6 +20,7 @@
 \usepackage{url}
 \usepackage{listings}
 \usepackage{amsmath}
+\usepackage{subfig}
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
 
 %---------------------------------------------------------
@@ -608,9 +609,20 @@ A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a 
 	\end{center}
 \end{figure}
 
-\subsection{Az implementáció során felépített objektumok bemutatása}
-\ssecro{Prezentarea obiectelor utilizate pe parcursul implementației}
-\ssecen{Objects used during implementation of the system}
+\subsection{A rendszer implementálása}
+\ssecro{Impementarea sistemului}
+\ssecen{The implementation of the system}
+
+A rendszer implementációja Python környezetben történt. Ahogy már a bevezetőben is említésre került, aaz alábba könyvtárak kerültek felhasználásra: numpy, Tensorflow, opencv, PyQt. Az elkövetkezőkben ki szeretnék térni a PyQt könyvtár bemutatására ugyanis a szoftver jelentős része ennek a felhasználásával valósult meg és az implementációban használt egyes tervezési minták a PyQt sajátosságait próbálják kiaknázni.
+\newline
+\indent
+A PyQt a híres Qt könyvtárra épül. A Qt egy C++ könyvtár aminek célja olyan grafikus szoftverek megvalósítása amik különböző platformokat is támogatnak. A Qt univerzális megoldást ad a grafikus felületek elkészítésére, de emellett számos más komponenseket is impementál, mint például tömbök, listák, konténerek, párhuzamos szálak, smartpointerek, hálozati protokollok, stb. A Qt egyik újítása a SIGNAL-ok és a SLOT-ok bevezetése. Ennek működése egyszerű, egy adott osztály adattagjai és metódusai mellett deklarálhatóak SIGNAL-ok és SLOT-ok is. Egy osztály egyes metódusai jelzésket adhatnak ki SIGNAL-ok segítségével amire a SLOT metódusok csatlakozhatnak. Egy adott SIGNAL kibocsátásakor a rá csatkakozott összes SLOT függvény le fog futni. Például egy grafikus felületen levő gomb lenyomásakor kibocsájtunk egy SIGNAL-t amire a neki megfelelő SLOT függvény meghívódik és lefut. A jelzéskibocsájtás működik többszálas program esetében is, az is megoldható, hogy egy adott jelzésre egy más szálon futó metódus válaszoljon. Természetesen a SIGNAL-SLOT megoldás a PyQt esetében is tökéletesen működik és egy nagyon kényelmes megoldást biztosít a grafikus felület és a business logika összekötésében.
+\newline
+\indent
+A PyQt egy másik előnye az, hogy elegánsan megoldható a modell-nézet-kontroller szoftverfejlesztési minta. Maga a nézet megvalósítható XML leíró nyelv segítségével. Ebből autmatikusan generálható egy Python osztály, ami fel fogja építeni maga a kinézetet. Ezt a kontrollerbe be lehet integrálni kompozicióval majd a SIGNAL-SLOT-ok összekötése után használni lehet azt. 
+\newline
+\indent
+A továbbiakban részletes bemutatásra és elemzésre kerül az aplikációnk objektum orientált megvalósítása (\ref{class_diagram)}. ábra).
 
 \begin{figure}[h]
 	\begin{center}
@@ -626,6 +638,40 @@ A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a 
 		\caption{A rendszer felhasználói felülete}
 		\label{graphical_ui)}
 	\end{center}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\subfloat[Aba Novak Vilmos - Önarckép]{
+		\includegraphics[width=40mm]{aba_novak_vilmos_onarckep.jpg}
+	}
+	\subfloat[Aba Novak Vilmos - Selfportrait]{
+		\includegraphics[width=40mm]{aba-novak_vilmos_selfportrait.jpg}
+	}
+	\subfloat[Csontvary Kosztka Tivadar - Traui tájkép naplemente idején]{
+		\includegraphics[width=40mm]{csontvary_kosztka_tivadar_traui_tajkep_naplemente_idejen.jpg}
+	}
+	\hspace{0mm}
+	\subfloat[Iványi Grunwald Béla - Parkrészlet Kecskeméten]{
+		\includegraphics[width=40mm]{ivanyi_grunwald_bela_parkreszlet_kecskemeten.jpg}
+	}
+	\subfloat[Munkácsi Mihály - Vihar a pusztán]{
+		\includegraphics[width=40mm]{munkacsi_mihaly_vihar_a_pusztan}
+	}
+	\subfloat[Réti Alfréd]{
+		\includegraphics[width=40mm]{reti_alfred.jpg}
+	}
+	\hspace{0mm}
+	\subfloat[Ripl-Rónai József - Apám és Piacsek bácsi vörösbor mellett]{
+		\includegraphics[width=40mm]{ripl_ronai_jozsef_apam_es_piacsek_bacsi_vorosbor_mellett.jpg}
+	}
+	\subfloat[Tihanyi Tzara]{
+		\includegraphics[width=40mm]{tihanyi_tzara.jpg}
+	}
+	\subfloat[Magyar Népmesék]{
+		\includegraphics[width=40mm]{magyar_nepmesek.jpg}
+	}
+	\caption{Stílusképek}
 \end{figure}
 
 

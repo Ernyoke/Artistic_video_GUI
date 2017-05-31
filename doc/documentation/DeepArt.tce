@@ -15,6 +15,6 @@
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Modelul de interac\IeC {\textcommabelow t}iune \IeC {\textcommabelow s}i comportament al sistemului}{24}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}Modelul structural al sistemului}{25}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.3.}Proiectarea pe mai multe fire computa\IeC {\textcommabelow t}ionale a unelor componente}{26}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.4.}Prezentarea obiectelor utilizate pe parcursul implementa\IeC {\textcommabelow t}iei}{28}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}Testarea sistemului}{32}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{33}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.4.}Impementarea sistemului}{28}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}Testarea sistemului}{33}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{34}
