@@ -601,7 +601,7 @@ Alkalmazásunk esetében megkülönböztetünk egy főszálat valamint egy mell�
 Ha felhasználó úgy dönt, hogy a megfelelő bemenetet választotta ki, elindíthatja az átruházási folyamatot. Ekkor egy külön szál jön létre (Worker thread), ami átveszi a bemeneti adatokat és elkezdi a folyamatot. A terhelés ebben a pillanatban átkerül a másodlagos szálra, ennek eredményeképp a főszál nem fog blokkolódni. Így az felhasználói felület aktív marad a felhasználó számára és ki fogja tudni szolgálni annak kéréseit.
 A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a ProgressBar komponenssel és jelzéseket küld a munkafolyamat státusáról így ez ki tudja jelezni, hogy mennyi munka van még hátra. A munkafolyamat bármikor leállítható még azelőtt, hogy az átruházás befejeződött volna. Ilyenkor a ProgressBar üzenetet küld az Artistic Video creator komponensnek, ami beállít egy saját leállításra szánt flag-et. A folyamat két iteráció között állítható le, ha az illető flag be volt állítva. Miután a munkafolyamat sikeresen leállt, egy jelzés fog érkezni a ProgressBar komponenshez ami majd nyugtázni fogja. Ha a munkafolyamat bevégződőtt, vagy a felhasználó által megszakításra került, a másodlagos szál el fog halni, az ezáltal igényelt erőforrások pedig fel fognak szabadulni.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 	\begin{center}
 		\includegraphics[scale=0.5]{seq_diagram.png}
 		\caption{Átruházás szekvencia diagrammja}
@@ -622,25 +622,49 @@ A PyQt a híres Qt könyvtárra épül. A Qt egy C++ könyvtár aminek célja ol
 A PyQt egy másik előnye az, hogy elegánsan megoldható a modell-nézet-kontroller szoftverfejlesztési minta. Maga a nézet megvalósítható XML leíró nyelv segítségével. Ebből autmatikusan generálható egy Python osztály, ami fel fogja építeni maga a kinézetet. Ezt a kontrollerbe be lehet integrálni kompozicióval majd a SIGNAL-SLOT-ok összekötése után használni lehet azt. 
 \newline
 \indent
-A továbbiakban részletes bemutatásra és elemzésre kerül az aplikációnk objektum orientált megvalósítása (\ref{class_diagram)}. ábra).
+A továbbiakban részletes bemutatásra és elemzésre kerül az aplikációnk objektum orientált megvalósítása (\ref{class_diagram}. ábra).
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 	\begin{center}
 		\includegraphics[scale=0.45]{class_diagram.png}
 		\caption{A rendszer osztálydiagrammja}
-		\label{class_diagram)}
+		\label{class_diagram}
 	\end{center}
 \end{figure}
 
-\begin{figure}[h]
+\subsubsection{A főablak (Main Window) komponens implementálásának bemutatása}
+
+\begin{figure}[!htbp]
 	\begin{center}
-		\includegraphics[scale=0.2]{main_ui.png}
+		\includegraphics[scale=0.7]{mainwindow_component.png}
+		\caption{MainWindow}
+		\label{mainwindow_class}
+	\end{center}
+\end{figure}
+
+A MainWindow komponens magába foglalja a fő felhasználói implementációját meg pár ehhez szorosan kapcsolódó segítő segítő osztályt(\ref{mainwindow_class}. ábra). Maga a fő ablak megvalósítását két részre bontottuk: maga a nézettel foglalkozó osztály(Ui\_MainWindow) és maga a back-end logikával foglalkozó osztályra (MainWindow). Az Ui\_MainWindow egyetlen feladata maga felhasználói felület nézetének definiálása, ezért ezt kompozicióval integrálujk a MainWindow osztályba. A felület (lásd: \ref{graphical_ui)}. ábra) rendelkezik két grafikus kép kijelzésére szánt ablakkal, amik QGraphicsScene típusúak. Ezek közül a bal ablakba fog megjelenni a bemeneti kép amit a felhasználó megad. A QGraphicsScene sajnos nem képes videóanyag beágyazására, ezért az alkalmazás egy előre megadott képet fog ilyenkor kijelezni a felhasználónak. 
+\newline
+\indent
+A bemenet magadása a "Browse..." nyomógomb lenyomásával történik, ami jelzést fog küldeni a \_browse\_button\_clicked metódusnak. Ez létre fog hozni QFileDialog típusú beépített fájlböngésző ablakot. Ez fel van konfigurálva olyan módon, hogy csak az előre kijelölt típusú fájlkiterjesztéseket lehessen beolvasni ("Images/Videos (*.png *.jpg *.gif *.mp4)"). Ha fájlkiválasztás megtörtént, akkor a fájlnak az utvonala megjelenik a "Browse..." nyomógomb melletti szövegdobozban.
+\newline
+\indent
+A MainWindow belső osztályként tartalmazza a SelectableGraphicsView osztályt. Ennek célja a stílusképek közötti váltogatás megoldása(\ref{mainwindow_class}. ábra). Az alkalmazás összes előredefiniált stílusképe látható a \ref{styles}. ábrán. Alapértelmezetten a PyQt nem tartalmaz ilyen típusú előredefiniált osztályt, ezért ezt külön le kellett implementálni. A SelectableGraphicsView a QGraphicsView beépített PyQt osztályból származik. Ez azért került választásra mivel a QGraphicsView alkalmas bármiféle statikus grafikus elem beágyazására és ugyanakkor egy olyan területet kínál ami, ha nem fér ki teljesen a képernyőn, akkor scroll-ozni lehet. A SelectableGrahicsView biztosítja, hogy az alkalmazás futásának minden pillanatában egy stílus ki van jelölve. A felhasználó váltogathat ezen stílusok között. A SelectableGraphicsView típusú objektum minden váltogatás esetében jelzést fog küldeni a MainWindow objektumnak, ami lementi azt, hogy az épp kijelölt stílus bemeneti stílus képek a merev lemezen hol talalható.
+\newline
+\indent
+A főablak egyik fontos objektuma a Worker típusú objektum. Ez a típus a QThread beépített osztály leszármazottja, ami a párhuzamosításért felelős. A Worker típusú objektum felüldefiniálja a QThread run metódusát ami külön szálon fog majd lefutni. Ebben a metódusban lesz létrehozva az ArtisticVideo objektum ami a stílusátruházást végzi. Kezdetben a Worker objektumot a MainWindow inicializálja, az inicializálás még a főszálon történik. Miután ez megtörtént, a főablakon levő "Start" nyomógomb lenyomásával, meghívódik a run metódus. A Worker objektum kapcsolatban áll a MainWindow és a ProgressBar típusú objektumokkal is, amiknek különféle jelzéseket tud küldeni (work\_started, work\_finised, show\_progress, display\_image).
+\newline
+\indent
+Ugyancsak a MainWindow tartalmazza a ProgressBar létrehozásával felelős factory típusú metódust. Amint emlitettem, a felhasználó "Browse..." lenyomásával beolvashat statikus képet vagy mozgó kép típusú fájlt. Ezekre az átruházás különböző folyamatokat vesznek igénybe. Ahhoz, hogy a felhasználó részletesebb tájékoztatást kapjon arról, hogy mi folyik a háttérben, ezért három típusú progress sávval rendelkező dialogus ablakot implementáltunk le, amik egy közös ősosztállyal rendelkeznek.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.35]{main_ui.png}
 		\caption{A rendszer felhasználói felülete}
 		\label{graphical_ui)}
 	\end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htbp]
 	\centering
 	\subfloat[Aba Novak Vilmos - Önarckép]{
 		\includegraphics[width=40mm]{aba_novak_vilmos_onarckep.jpg}
@@ -672,6 +696,63 @@ A továbbiakban részletes bemutatásra és elemzésre kerül az aplikációnk o
 		\includegraphics[width=40mm]{magyar_nepmesek.jpg}
 	}
 	\caption{Stílusképek}
+	\label{styles}
+\end{figure}
+
+\subsubsection{A beállítások (Settings) komponens  bemutatása}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.7]{preferences.png}
+		\caption{A beállítások komponens osztálydiagrammja}
+		\label{preferences_class}
+	\end{center}
+\end{figure}
+
+A bellítások komponens két objektumot tartalmaz, egyik a PreferencesDialog típusú objektum és az ebbe beágyazott nézetért felelős UiPreferencesDialog objektum. Értelemszerűen a PreferencesDialog tartalmazza a működési logikát.
+\newline
+\indent
+A PreferencesDialog a beépített QDialog osztály leszármazottja, örökli ennek tulajdonságait. Szülő objektumként természetesen a MainWindow objektumot kapja meg, ami Qt-ben annyit jelent, hogy ha a szülő objektum elhal, akkor fel fogja szabadítani a gyerek objektumot is, tehát valójában a szülő objektum felelős a gyerek objektum életciklusáért.
+A beállítások dialogus két tab-ot tartalmaz:
+
+\begin{itemize}
+	\item Settings: itt meg lehet adni a foldert ahova a kimenet automatikus mentve lesz. Ugyanitt meg kell adni az előre betanított háló útvonalát.
+	\item Advanced Settings: it a tanítással kapcsolator paramétereket lehet szabályozni. Ilyen paraméterek:
+	\begin{itemize}
+		\item Learning rate - tanítási együttható 
+		\item Iteration per Frame - egy adott képkocka esetében a maximálos tanítási iterációk száma;
+		\item Content Weight - súlyzó, a bemeneti kép veszteségfüggvénye esetében használatos;
+		\item Style Weight - súlyzó, a stílus veszteségfüggvényének az együtthatója;
+		\item Temporal Weight - súlyzó, a mozgóképek esetében bevezetett veszteségfüggvény együtthatója.
+		\item Use deep flow - egy flag-et állít, ezzel kikapcsolható az időigényes deep flow módszer használata, cserébe gyengébb minőségű videó lesz az eredmény. 
+	\end{itemize}
+\end{itemize}
+
+Az beállítások komponens tárolja az előre megadott (default) értékeket a paraméterek esetében, ugyanakkor az is el lesz tárolva amit felhasználó módosít ezeken. A módosított értékek megmaradnak akkor is ha az alkalmazást bezárjuk majd újraindítjuk. Erre beéppített QSettings objektum használtuk, ami megoldja az beállítások tárolását és vissaolvasását. A QSettings kulcs-érték táblákba tárolja az paramétereket. Ezek majd az aplikációnk bármelyik objektumából elérhetőek, ha példányosítjuk a QSettings osztályt és megadjuk az adatbázisunk nevét ahova a paraméterek mentve lettek.
+\newline
+\indent
+Az alapértelmezett beállítások bármikor visszállíthatóak a "Use default values" gomb lenyomásával ugyanis ezek a paraméterek hardcode-olva vannak az aplikáción belül.
+
+\begin{figure}[!htbp]
+	\centering
+	\subfloat[Settings tab]{
+		\includegraphics[width=65mm]{settings.png}
+	}
+	\subfloat[Advanced Settings tab]{
+		\includegraphics[width=65mm]{advanced_settings.png}
+	}
+	\caption{Settings dialog}
+	\label{settings_dialog}
+\end{figure}
+
+\subsubsection{A progress sáv (Progress bar) komponens bemutatása}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.7]{progressbar.png}
+		\caption{Progressbar}
+		\label{progressbar_class}
+	\end{center}
 \end{figure}
 
 

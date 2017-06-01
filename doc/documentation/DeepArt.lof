@@ -6,18 +6,24 @@
 \select@language {magyar} \contentsline {figure}{\numberline {3.3.}{\ignorespaces Tan\IeC {\'\i }t\IeC {\'a}si f\IeC {\"u}ggv\IeC {\'e}ny optimaliz\IeC {\'a}l\IeC {\'a}sa k\IeC {\"u}l\IeC {\"o}nb\IeC {\"o}z\IeC {\H o} tan\IeC {\'\i }t\IeC {\'a}si r\IeC {\'a}t\IeC {\'a}k eset\IeC {\'e}ben\relax }}{22}
 \select@language {magyar} \contentsline {figure}{\numberline {3.4.}{\ignorespaces A rendszer viselked\IeC {\'e}si modellje\relax }}{25}
 \select@language {magyar} \contentsline {figure}{\numberline {3.5.}{\ignorespaces A rendszert alkot\IeC {\'o} komponensek\relax }}{27}
-\select@language {magyar} \contentsline {figure}{\numberline {3.6.}{\ignorespaces \IeC {\'A}truh\IeC {\'a}z\IeC {\'a}s szekvencia diagrammja\relax }}{29}
+\select@language {magyar} \contentsline {figure}{\numberline {3.6.}{\ignorespaces \IeC {\'A}truh\IeC {\'a}z\IeC {\'a}s szekvencia diagrammja\relax }}{28}
 \select@language {magyar} \contentsline {figure}{\numberline {3.7.}{\ignorespaces A rendszer oszt\IeC {\'a}lydiagrammja\relax }}{30}
-\select@language {magyar} \contentsline {figure}{\numberline {3.8.}{\ignorespaces A rendszer felhaszn\IeC {\'a}l\IeC {\'o}i fel\IeC {\"u}lete\relax }}{31}
-\select@language {magyar} \contentsline {figure}{\numberline {3.9.}{\ignorespaces St\IeC {\'\i }lusk\IeC {\'e}pek\relax }}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aba Novak Vilmos - \IeC {\"O}narck\IeC {\'e}p}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aba Novak Vilmos - Selfportrait}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Csontvary Kosztka Tivadar - Traui t\IeC {\'a}jk\IeC {\'e}p naplemente idej\IeC {\'e}n}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Iv\IeC {\'a}nyi Grunwald B\IeC {\'e}la - Parkr\IeC {\'e}szlet Kecskem\IeC {\'e}ten}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Munk\IeC {\'a}csi Mih\IeC {\'a}ly - Vihar a puszt\IeC {\'a}n}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(f)}{\ignorespaces {R\IeC {\'e}ti Alfr\IeC {\'e}d}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(g)}{\ignorespaces {Ripl-R\IeC {\'o}nai J\IeC {\'o}zsef - Ap\IeC {\'a}m \IeC {\'e}s Piacsek b\IeC {\'a}csi v\IeC {\"o}r\IeC {\"o}sbor mellett}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(h)}{\ignorespaces {Tihanyi Tzara}}}{32}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(i)}{\ignorespaces {Magyar N\IeC {\'e}pmes\IeC {\'e}k}}}{32}
+\select@language {magyar} \contentsline {figure}{\numberline {3.8.}{\ignorespaces MainWindow\relax }}{31}
+\select@language {magyar} \contentsline {figure}{\numberline {3.9.}{\ignorespaces A rendszer felhaszn\IeC {\'a}l\IeC {\'o}i fel\IeC {\"u}lete\relax }}{32}
+\select@language {magyar} \contentsline {figure}{\numberline {3.10.}{\ignorespaces St\IeC {\'\i }lusk\IeC {\'e}pek\relax }}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aba Novak Vilmos - \IeC {\"O}narck\IeC {\'e}p}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aba Novak Vilmos - Selfportrait}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Csontvary Kosztka Tivadar - Traui t\IeC {\'a}jk\IeC {\'e}p naplemente idej\IeC {\'e}n}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Iv\IeC {\'a}nyi Grunwald B\IeC {\'e}la - Parkr\IeC {\'e}szlet Kecskem\IeC {\'e}ten}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Munk\IeC {\'a}csi Mih\IeC {\'a}ly - Vihar a puszt\IeC {\'a}n}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(f)}{\ignorespaces {R\IeC {\'e}ti Alfr\IeC {\'e}d}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(g)}{\ignorespaces {Ripl-R\IeC {\'o}nai J\IeC {\'o}zsef - Ap\IeC {\'a}m \IeC {\'e}s Piacsek b\IeC {\'a}csi v\IeC {\"o}r\IeC {\"o}sbor mellett}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(h)}{\ignorespaces {Tihanyi Tzara}}}{33}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(i)}{\ignorespaces {Magyar N\IeC {\'e}pmes\IeC {\'e}k}}}{33}
+\select@language {magyar} \contentsline {figure}{\numberline {3.11.}{\ignorespaces A be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok komponens oszt\IeC {\'a}lydiagrammja\relax }}{34}
+\select@language {magyar} \contentsline {figure}{\numberline {3.12.}{\ignorespaces Settings dialog\relax }}{35}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Settings tab}}}{35}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Advanced Settings tab}}}{35}
+\select@language {magyar} \contentsline {figure}{\numberline {3.13.}{\ignorespaces Progressbar\relax }}{36}
 \select@language {magyar} \addvspace {10\p@ }
 \select@language {magyar} \addvspace {10\p@ }

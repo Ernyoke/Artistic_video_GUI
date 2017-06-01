@@ -15,6 +15,9 @@
 \select@language {magyar} \contentsline {subsection}{\numberline {3.4.1}A rendszer interakci\IeC {\'o}s \IeC {\'e}s viselked\IeC {\'e}si modellje}{24}
 \select@language {magyar} \contentsline {subsection}{\numberline {3.4.2}A rendszer struktur\IeC {\'a}lis modellje}{25}
 \select@language {magyar} \contentsline {subsection}{\numberline {3.4.3}T\IeC {\"o}bbsz\IeC {\'a}las megold\IeC {\'a}s \IeC {\'e}s kommunik\IeC {\'a}ci\IeC {\'o} a komponensek k\IeC {\"o}z\IeC {\"o}tt}{26}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.4.4}A rendszer implement\IeC {\'a}l\IeC {\'a}sa}{28}
-\select@language {magyar} \contentsline {chapter}{\numberline {4}A rendszer tesztel\IeC {\'e}se}{33}
-\select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{34}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.4.4}A rendszer implement\IeC {\'a}l\IeC {\'a}sa}{29}
+\select@language {magyar} \contentsline {subsubsection}{\numberline {3.4.4.1}A f\IeC {\H o}ablak (Main Window) komponens implement\IeC {\'a}l\IeC {\'a}s\IeC {\'a}nak bemutat\IeC {\'a}sa}{29}
+\select@language {magyar} \contentsline {subsubsection}{\numberline {3.4.4.2}A be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok (Settings) komponens bemutat\IeC {\'a}sa}{34}
+\select@language {magyar} \contentsline {subsubsection}{\numberline {3.4.4.3}A progress s\IeC {\'a}v (Progress bar) komponens bemutat\IeC {\'a}sa}{35}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}A rendszer tesztel\IeC {\'e}se}{37}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{38}
