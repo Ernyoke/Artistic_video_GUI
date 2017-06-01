@@ -1,4 +1,4 @@
-from artistic_video.Artistic_image import ArtisticVideo
+from artistic_video.ArtisticVideo import ArtisticVideo
 import unittest
 import numpy as np
 import os

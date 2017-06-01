@@ -80,8 +80,11 @@ class MainWindow(QMainWindow):
                 os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'reti_alfred.jpg',
                 os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style7.jpg', 'Réti Alfréd'),
             self._create_style_view(
-                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'magyar_nepmesek.jpg',
-                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style8.jpg', 'Népmesék')]
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'magyar_nepmesek_2.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style8.jpg', 'Népmesék'),
+            self._create_style_view(
+                os.getcwd() + sep + 'styles' + sep + 'styles' + sep + 'Hungarian' + sep + 'ivanyi_grunwald_bela_parkreszlet_kecskemeten.jpg',
+                os.getcwd() + sep + 'styles' + sep + 'icons' + sep + 'Hungarian' + sep + 'style9.jpg', 'Wald Béla')]
 
         self.focused_style = self.style_views[0]
         self.focused_style.focus()

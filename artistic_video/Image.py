@@ -1,8 +1,9 @@
 import numpy as np
 import cv2
+import scipy.misc
 
 
-MEAN_PIXEL = np.array([103.939, 116.779, 123.68])
+MEAN_PIXEL = np.array([123.68, 116.779, 103.939])
 
 
 def imread(path):
@@ -21,7 +22,7 @@ def imread(path):
     img = img.astype(np.float)
 
     # convert bgr to rgb
-    # img = img[..., ::-1]
+    img = img[..., ::-1]
 
     img = _preprocess(img)
     return img
@@ -34,14 +35,15 @@ def imsave(path, img):
     :return: has no return value
     """
     if not (img is None):
-        img = _postprocess(img)
         img = np.clip(img, 0, 255).astype(np.uint8)
+        img = _postprocess(img)
 
         # convert rgb to bgr
         # img = img[..., ::-1]
 
         # save the image
-        cv2.imwrite(path, img)
+        scipy.misc.imsave(path, img)
+        # cv2.imwrite(path, img)
 
 
 def _preprocess(image):

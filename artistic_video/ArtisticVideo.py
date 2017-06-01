@@ -285,7 +285,7 @@ class ArtisticVideo(QObject):
             image, flow_map[0], flow_map[1],
             interpolation=cv2.INTER_CUBIC, borderMode=cv2.BORDER_TRANSPARENT)
 
-        return warped_image
+        return warped_image.astype(np.float32)
 
     def _temporal_loss(self, x, w, c):
         """
@@ -310,7 +310,7 @@ class ArtisticVideo(QObject):
         """
         img = sess.run(image.assign(content_image.reshape((1,) + content_image.shape)))
         backward_optical_flow = self._read_flow_from_file(backward_flow_path)
-        warped_image = self._get_warped_image(prev_frame, backward_optical_flow).astype(np.float32)
+        warped_image = self._get_warped_image(prev_frame, backward_optical_flow)
         content_weights = self._read_consistency_file(forward_weights)
         return self._temporal_loss(img, warped_image, content_weights)
 
@@ -397,7 +397,11 @@ class ArtisticVideo(QObject):
 
         # make stylized image using back-propagation
         with tf.Graph().as_default():
-            initial = tf.random_normal(content_image_shape) * 0.256
+            if prev_frame is not None:
+                initial = self._get_warped_image(prev_frame, self._read_flow_from_file(backw_flow_path))
+                initial = initial[np.newaxis, :]
+            else:
+                initial = tf.random_normal(content_image_shape) * 0.256
 
             image = tf.Variable(initial)
             all_layers = net.get_layer_tensors_all(image)
@@ -620,7 +624,7 @@ class ArtisticVideo(QObject):
                                 learning_rate=learning_rate,
                                 use_deepflow=use_deepflow,
                                 temporal_weight=temporal_weight,
-                                prev_frame=prev_frame_name,
+                                prev_frame=imread(prev_frame_name),
                                 backw_flow_path=current_backward_flow,
                                 forw_cons_path=current_forward_consistency
                         ):

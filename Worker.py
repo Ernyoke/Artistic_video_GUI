@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, pyqtSlot, QSettings
-from artistic_video.Artistic_image import ArtisticVideo
+from artistic_video.ArtisticVideo import ArtisticVideo
 from Preferences import CONTENT_WEIGHT_ID, STYLE_WEIGHT_ID, TV_WEIGHT_ID, TEMPORAL_WEIGHT_ID, LEARNING_RATE_ID, \
     ITERATIONS_ID, OUTPUT_LOCATION_ID, VGG_LOCATION_ID, CONTENT_WEIGHT, STYLE_WEIGHT, TV_WEIGHT, TEMPORAL_WEIGHT, LEARNING_RATE, \
     STYLE_SCALE, ITERATIONS, OUTPUT_LOCATION, VGG_LOCATION

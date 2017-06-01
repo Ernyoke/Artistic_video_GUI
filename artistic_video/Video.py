@@ -144,4 +144,4 @@ def _run_consistency_check(forward_flow, backward_flo, output_folder="frames"+SE
 
         arguments = [forward_flow, backward_flo, output_folder+SEPARATOR+file_name]
         utils.run_binary(command, arguments)
-        return output_folder+file_name
+        return output_folder+SEPARATOR+file_name
