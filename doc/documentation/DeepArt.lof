@@ -21,9 +21,12 @@
 \select@language {magyar} \contentsline {subfigure}{\numberline {(h)}{\ignorespaces {Tihanyi Tzara}}}{33}
 \select@language {magyar} \contentsline {subfigure}{\numberline {(i)}{\ignorespaces {Magyar N\IeC {\'e}pmes\IeC {\'e}k}}}{33}
 \select@language {magyar} \contentsline {figure}{\numberline {3.11.}{\ignorespaces A be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok komponens oszt\IeC {\'a}lydiagrammja\relax }}{34}
-\select@language {magyar} \contentsline {figure}{\numberline {3.12.}{\ignorespaces Settings dialog\relax }}{35}
+\select@language {magyar} \contentsline {figure}{\numberline {3.12.}{\ignorespaces Be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok dialogus ablak\relax }}{35}
 \select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Settings tab}}}{35}
 \select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Advanced Settings tab}}}{35}
-\select@language {magyar} \contentsline {figure}{\numberline {3.13.}{\ignorespaces Progressbar\relax }}{36}
+\select@language {magyar} \contentsline {figure}{\numberline {3.13.}{\ignorespaces A progress s\IeC {\'a}v komponens oszt\IeC {\'a}lydiagrammja\relax }}{36}
+\select@language {magyar} \contentsline {figure}{\numberline {3.14.}{\ignorespaces Progress s\IeC {\'a}v statikus k\IeC {\'e}p eset\IeC {\'e}ben\relax }}{37}
+\select@language {magyar} \contentsline {figure}{\numberline {3.15.}{\ignorespaces Progress s\IeC {\'a}v vide\IeC {\'o} eset\IeC {\'e}ben (deepflow kikapcsolva)\relax }}{37}
+\select@language {magyar} \contentsline {figure}{\numberline {3.16.}{\ignorespaces Progress s\IeC {\'a}v vide\IeC {\'o} eset\IeC {\'e}ben (deepflow bekapcsolva)\relax }}{38}
 \select@language {magyar} \addvspace {10\p@ }
 \select@language {magyar} \addvspace {10\p@ }

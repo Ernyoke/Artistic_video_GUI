@@ -741,7 +741,7 @@ Az alapértelmezett beállítások bármikor visszállíthatóak a "Use default 
 	\subfloat[Advanced Settings tab]{
 		\includegraphics[width=65mm]{advanced_settings.png}
 	}
-	\caption{Settings dialog}
+	\caption{Beállítások dialogus ablak}
 	\label{settings_dialog}
 \end{figure}
 
@@ -750,8 +750,46 @@ Az alapértelmezett beállítások bármikor visszállíthatóak a "Use default 
 \begin{figure}[!htbp]
 	\begin{center}
 		\includegraphics[scale=0.7]{progressbar.png}
-		\caption{Progressbar}
+		\caption{A progress sáv komponens osztálydiagrammja}
 		\label{progressbar_class}
+	\end{center}
+\end{figure}
+
+A progress sáv komponens feladata kimutatni a felhasználó számára a hátrelevő munkamennyiséget. Statikus képek esetében kimutatásre kerül az, hogy az össziterációk számának hány százaléke volt elvégezve. Mozgóképek esetén emellett kimutatásre kerül, hogy a képkockák közül hány százalékre volt stílus átruházva az összes képkockákból. Ha deep flow metódus is használatra kerül, akkor ennek is egy külön sáv fogja valós időben kijelezni, hogy hány képkocka van még hátra amire alkalmazni kell a deep flow metódust. Ezekből következtethető, hogy három típusú ProgressBar osztály példányosítható, amelyek az alábbiak:
+
+\begin{itemize}
+	\item ProgressBarImage(\ref{progressbar_image_ui}. ábra)
+	\item ProgressBarVideo(\ref{progressbar_video_no_deeplfow_ui}. ábra)
+	\item ProgressBarVideoOpticalFlow (\ref{progressbar_video_deeplfow_ui}. ábra)
+\end{itemize}
+
+Mind a három egy közös ősosztályból öröklődik, ez a sima ProgressBar osztály. A ProgressBar osztály a beépített QDialog-ból öröklődik. A QDialog előnye, hogy be meg lehet határozni, hogy amikor a dialogus ablak fókuszban van, akkor ne lehessen interakciónálni a szűlő osztály interfészével. Ez fontos aspektus, mivel amikor maga a stílus átruházás történik, akkor nem szeretnénk, ha a felhasználó a fő ablakkal interakciónáljon, esetlegesen egy másik átruházási folyamatot indítson. Ez az aplikáció összeomlásához vezetne.
+\newline
+\indent
+Ahogyan már a MainWindow esetében is bemutatásra került, a ProgressBar típusú osztályok létrehozása a factory modell segítségével történik. Az hogy melyiket fogjuk példányosítani, az a bemeneti állomány típúsától, valamint a beállításoktól függ. A ProgressBar ősosztály SLOT metódust tartalmat a "Cancel\textbackslash OK" nyomógomb lekezelésére, és a státus üzenet kiíratására, amit a többi származtatott osztály is örökölni fog. 
+A videóval kapcsolatos ablakok emellet SLOT függvényeket definiálnak annak érdekében, hogy ki tudják jelezni hány képkocka van még hátra.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.5]{progressbar_image.png}
+		\caption{Progress sáv statikus kép esetében}
+		\label{progressbar_image_ui}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.5]{progressbar_video_no_deepflow.png}
+		\caption{Progress sáv videó esetében (deepflow kikapcsolva)}
+		\label{progressbar_video_no_deeplfow_ui}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.5]{progressbar_video_deepflow.png}
+		\caption{Progress sáv videó esetében (deepflow bekapcsolva)}
+		\label{progressbar_video_deeplfow_ui}
 	\end{center}
 \end{figure}
 
