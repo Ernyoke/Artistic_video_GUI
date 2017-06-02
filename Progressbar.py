@@ -83,10 +83,14 @@ class ProgressbarVideo(ProgressBar):
     def hook_up(self, artistic):
         artistic.iter_changed.connect(self.update_iter_bar)
         artistic.frame_changed.connect(self.update_frame_bar)
+        artistic.set_status.connect(self.set_status)
+        self.cancel_progress.connect(artistic.stop_running, Qt.DirectConnection)
 
     def unhook(self, artistic):
         artistic.iter_changed.disconnect(self.update_iter_bar)
         artistic.frame_changed.disconnect(self.update_frame_bar)
+        artistic.set_status.disconnect(self.set_status)
+        self.cancel_progress.disconnect(artistic.stop_running)
 
     @pyqtSlot(int, int)
     def update_iter_bar(self, current, maximum):

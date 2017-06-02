@@ -589,11 +589,11 @@ class ArtisticVideo(QObject):
 
         elif content_type == InputType.VIDEO:
             for index, frame_name in enumerate(frame_list):
-                print('Stylizing frame', frame_name)
-                self.set_status.emit("Stylizing frame " + content_image_path)
                 if not self.stop.get():
+                    print('Stylizing frame', frame_name)
+                    self.set_status.emit("Stylizing frame " + content_image_path)
                     frame = imread(frame_name)
-                    if index == 0:
+                    if index == 0 or not use_deepflow:
                         for iteration, image in self.create_image(
                                 network_path=network_path,
                                 content_image=frame,
@@ -609,7 +609,7 @@ class ArtisticVideo(QObject):
                             imsave(save_path, image)
                             self.frame_changed.emit(0, len(frame_list))
 
-                    else:
+                    elif use_deepflow:
                         prev_frame_name = frame_list[index - 1]
                         current_backward_flow = backward_flow_list[frame_name]
                         current_forward_consistency = forward_consistency_list[frame_name]

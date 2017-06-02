@@ -13,7 +13,7 @@ STYLE_SCALE = 1.0
 ITERATIONS = 500
 OUTPUT_LOCATION = os.getcwd() + get_separator() + 'output' + get_separator()
 VGG_LOCATION = os.getcwd() + get_separator() + 'imagenet-vgg-verydeep-19.mat'
-USE_DEEPFLOW = False
+USE_DEEPFLOW = 'False'
 
 CONTENT_WEIGHT_ID = 'preferences/content_weight'
 STYLE_WEIGHT_ID = 'preferences/style_weight'
@@ -24,6 +24,18 @@ ITERATIONS_ID = 'preferences/iterations'
 OUTPUT_LOCATION_ID = 'preferences/output_location'
 VGG_LOCATION_ID = 'preferences/vgg_location'
 USE_DEEPFLOW_ID = 'preferences/use_deepflow'
+
+
+def str_to_bool(str):
+    if str.lower() == 'true':
+        return True
+    return False
+
+
+def boo_to_str(bool):
+    if bool:
+        return 'True'
+    return 'False'
 
 
 class PreferencesDialog(QDialog):
@@ -84,7 +96,7 @@ class PreferencesDialog(QDialog):
         self.ui.iterationsInput.setText(str(self.settings.value(ITERATIONS_ID, str(ITERATIONS))))
         self.ui.outputFolderInput.setText(str(self.settings.value(OUTPUT_LOCATION_ID, OUTPUT_LOCATION)))
         self.ui.vggInput.setText(str(self.settings.value(VGG_LOCATION_ID, VGG_LOCATION)))
-        self.ui.deepFlowCheckBox.setChecked(bool(self.settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW)))
+        self.ui.deepFlowCheckBox.setChecked(str_to_bool(self.settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW)))
 
     @pyqtSlot()
     def _use_default_values(self):
@@ -130,7 +142,7 @@ class PreferencesDialog(QDialog):
             self.settings.setValue(ITERATIONS_ID, iterations)
             self.settings.setValue(OUTPUT_LOCATION_ID, output_location)
             self.settings.setValue(VGG_LOCATION_ID, vgg_location)
-            self.settings.setValue(USE_DEEPFLOW_ID, use_deepflow)
+            self.settings.setValue(USE_DEEPFLOW_ID, boo_to_str(use_deepflow))
 
     @pyqtSlot()
     def _browse_output_folder(self):

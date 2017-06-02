@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, pyqtSlot, QSettings
 from artistic_video.ArtisticVideo import ArtisticVideo
 from Preferences import CONTENT_WEIGHT_ID, STYLE_WEIGHT_ID, TV_WEIGHT_ID, TEMPORAL_WEIGHT_ID, LEARNING_RATE_ID, \
-    ITERATIONS_ID, OUTPUT_LOCATION_ID, VGG_LOCATION_ID, CONTENT_WEIGHT, STYLE_WEIGHT, TV_WEIGHT, TEMPORAL_WEIGHT, LEARNING_RATE, \
-    STYLE_SCALE, ITERATIONS, OUTPUT_LOCATION, VGG_LOCATION
+    ITERATIONS_ID, OUTPUT_LOCATION_ID, VGG_LOCATION_ID, USE_DEEPFLOW_ID, CONTENT_WEIGHT, STYLE_WEIGHT, TV_WEIGHT, TEMPORAL_WEIGHT, LEARNING_RATE, \
+    STYLE_SCALE, ITERATIONS, OUTPUT_LOCATION, VGG_LOCATION, USE_DEEPFLOW, str_to_bool
 
 
 class Worker(QThread):
@@ -59,6 +59,7 @@ class Worker(QThread):
             iterations = int(settings.value(ITERATIONS_ID, str(ITERATIONS)))
             output_location = settings.value(OUTPUT_LOCATION_ID, OUTPUT_LOCATION)
             vgg_location = settings.value(VGG_LOCATION_ID, VGG_LOCATION)
+            use_deepflow = str_to_bool(settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW))
 
             artistic = ArtisticVideo()
             # connect the progressbar to the ArtisticVideo
@@ -85,7 +86,7 @@ class Worker(QThread):
                                              tv_weight,
                                              temporal_weight,
                                              learning_rate,
-                                             True)
+                                             use_deepflow)
 
             self.work_finished.emit()
             if stylized_path is not None:

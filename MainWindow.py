@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog, QGraphicsScene, QGraphicsV
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QSize, Qt, QCoreApplication, pyqtSlot, pyqtSignal, QSettings
 import os
-from Preferences import PreferencesDialog, USE_DEEPFLOW_ID, USE_DEEPFLOW
+from Preferences import PreferencesDialog, USE_DEEPFLOW_ID, USE_DEEPFLOW, str_to_bool
 from artistic_video.utils import get_input_type, get_os_type, get_separator, InputType, NotSupportedInput, OS
 from Worker import Worker
 from Progressbar import ProgressbarVideo, ProgressbarImage, ProgressbarVideoOpticalFlow
@@ -164,7 +164,7 @@ class MainWindow(QMainWindow):
 
                 # get the flag for the optical flow usage
                 settings = QSettings()
-                optical_flow = settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW)
+                optical_flow = str_to_bool(settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW))
 
                 self.progress_bar = self._progress_bar_factory(self.selected_file_path, optical_flow)
                 pix_map = self._read_input_pixmap(self.selected_file_path)
