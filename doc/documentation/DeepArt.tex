@@ -428,13 +428,13 @@ Feladatpárhuzamosítás esetében külömböző gráfrészletek lesznek megtan�
 
 
 \section{A tanítási módszer állóképek esetében}
-\secro{A tanítási módszer állóképek esetében}
-\secen{A tanítási módszer állóképek esetében}
+\secro{Metoda de antrenare în cazul imaginilor statice}
+\secen{Learning method in case of static image inputs}
 
 A rendszer tanításához állokép esetében két legalább képet bemenet szükséges, az eredeti kép, amire át szeretnénk ruházni a stílust és a stílust tartalmazó kép, aminek a stílusát át szeretnénk ruházni. Mindkét bemenet esetében felírunk egy veszteség függvényt amik részei a végső nagy tanítási függvénynek.
 
 \subsection{Az eredeti kép tanításának a veszteségi függvénye}
-\ssecro{Az eredeti kép tanításának a veszteségi függvénye}
+\ssecro{Funcția de pierdere în cazul imaginii originale}
 \ssecen{The loss function of the content image}
 
 A mély neurálos hálók (Deep Neural Networks) azon típusai amik a legeredményesebbek a képfeldolgozási feladatok elvégzésben a konvolúciós hálók. Mesterséges intelligencia területén a konvolúciós hálók olyan feed-forward típusú neuronhálók, amiket a biológiai elsődleges látókéregről mintáztak. A háló kifejezetten arra volt tervezve és kifejlesztve, hogy kétdimenziós formákat ismerjen fel. A háló alapértelmezetten több rétegből tevődik össze:
@@ -484,7 +484,7 @@ A \(CONTENT\_LAYER\) tuple típusú ami tartalmazza azoknak a rétegeknek az azo
 
 
 \subsection{Az stílus kép tanításának a veszteségi függvénye}
-\ssecro{Az stílus kép tanításának a veszteségi függvénye}
+\ssecro{Funcția de pierdere în cazul imaginii de stil}
 \ssecen{The loss function of the style image}
 Az előbbiekben az eredeti bemeneti kép tartalmára voltunk kíváncsiak. A stílus kép esetében viszont nem maga a kép tartalma a fontos. Ebben az esetben egy mintázatot szeretnénk kinyerni a stílusképből. Ehhez fontos megismerni maga a Gramm mátrix fogalmát. Hogyha adott egy vektorhalmazunk \(v1...vn\), akkor a \(G\) Gramm mátrixot a következő eljárás szerint határozzuk meg\cite{30}:
 
@@ -519,6 +519,35 @@ Az összes stílus réteg válasza felírható, mint egy összeg, ahol \(w_l\) e
 L_{style}(\vec{a}, \vec{x}) = \sum w_lE_l
 \end{equation}
 
+A Gramm mátrix számolása Tensorflow környezetben a következőképpen történik:
+
+\begin{lstlisting}[language=Python]
+# reshape the tensor to be 2 dimensional
+features = tf.reshape(layer, (-1, number_of_channels))
+# create Gram matrix which basically is the product of
+# the mat with itself
+gram = tf.matmul(tf.transpose(features), features) / size
+\end{lstlisting}
+
+Maga a veszteségfüggvény meg a következőképpen implementálható Tensorflow könyvtár függvényei felhasználva:
+
+\begin{lstlisting}[language=Python]	
+# iterate through style layers
+for style_layer in STYLE_LAYERS:
+	# get the style layer
+	layer = all_layers[style_layer]
+	# compute the Gram matrix for the layer
+	gram = self._create_gram_matrix(layer)
+	# append the gram value to a list
+	style_gram = style_features[i][style_layer]
+	# compute the style loss for the layer and 
+	# add it to a list
+	style_loss = style_weight * (2 * 
+		tf.nn.l2_loss(gram - style_gram) / style_gram.size)
+\end{lstlisting}
+
+A \(style\_features\) valtozó, ugyanúgy mint a \(content\_features\) esetében, egy lista, ez tartalmazza az összes réteg válaszát a bemeneti stílus képre.
+
 \subsection{A stilizált kép tisztítása}
 \ssecro{Reducerea zgomotului din imagenea stilizata}
 \ssecen{Denoising the stylized image}
@@ -527,6 +556,15 @@ A két veszteségfüggvényt alkalmazva sikeresen át tudjuk ruházni a stílust
 \begin{equation}
 L_{tv}(\vec{a}, \vec{x}) = \sum_{i,j} \left|(X_{ij} - A_{{i+1}j})\right| + \sum_{i, j} \left|(X_{ij} - A_{i {j+1}})\right|
 \end{equation}
+
+Ennek az implementációja pedig:
+\begin{lstlisting}[language=Python]	
+ tv_loss = tv_weight * 2 * (
+(tf.nn.l2_loss(image[:, 1:, :, :] - image[:, :shape[1] - 1, :, :]) /
+self.size_of_tensor(image[:, 1:, :, :])) +
+(tf.nn.l2_loss(image[:, :, 1:, :] - image[:, :, :shape[2] - 1, :]) /
+self.size_of_tensor(image[:, :, 1:, :])))
+\end{lstlisting}
 
 \subsection{A teljes veszteségfüggvény felírása és tanítása statikus képek esetében}
 \ssecro{Definirea si învățarea funcției de pierdere totala la imagini statice}
@@ -564,11 +602,11 @@ Ahol, \(m\) és \(v\) jelentik az elsőfokú valamint másodfokú gradienseket, 
 Értelemszerűen a tensorflow deep learning könyvtár beépítetten tartalmazza a Adam optimalizációs algoritmust, ezért ennek a leprogramozására nincs szükség. 
 
 \section{A tanítási módszer mozgóképek esetében}
-\secro{A tanítási módszer mozgóképek esetében}
-\secen{A tanítási módszer mozgóképek esetében}
+\secro{Metoda de antrenare in cazul imaginilor video}
+\secen{Learning method in case of video inputs}
 
 \subsection{Naiv megközelítés}
-\ssecro{Naiv megközelítés}
+\ssecro{Abordarea naivă}
 \ssecen{Naiv approach}
 
 Eddigiekben bemutatásra keszült miképpen vihető át a stílus egyik statikus képről a másikra. Mindenki tisztába van azzal, hogy egy videó statikus képek sorozatából tevődik össze, amiket képkockáknak (frame) nevezünk. Ennek megfelelően a naiv megközelítés az lenne, hogy ha adott egy videó, akkor vágjuk azt darabokra, pontosabban statikus képkockákra, majd az összes képkockára alkalmazzuk a stílus átruházási módszert.
@@ -592,8 +630,8 @@ ffmpeg "-i" frame%05d.<ext> output_name.<ext>
 A naiv megközelítés működik, a kimenet egy olyan videó lesz, amely tartalmazza a bemeneti stíluskép jellegzetességeit. Ugyanakkor észlelhető, hogy az eredmény nem valami esztétikus. Észlelhető, hogy a képkockák közötti átmenet nem valami folyamatos. Emellett különböző zajokat, úgynevezett artifact-eket észlelhetünk. 
 
 \subsection{A haló inicializálása képkockák esetében}
-\ssecro{A haló inicializálása képkockák esetébe}
-\ssecen{A haló inicializálása képkockák esetébe}
+\ssecro{Inițializarea rețelei pentru frame-uri}
+\ssecen{The initialization of the neural net for the frames}
 Amint említettük, a háló inicalizálására egy fehér zaj képet használtunk statikus bemeneti képre való stílusátruházáskor. Több képkocka esetében ezzel az a gond, hogy a képkockák nem fognak egyanabba a lokális minimumba konvergálni tanításkor. Végeredményképp az átmenet egyik képkockáról a másikra nem lesz folyamatos.
 \newline
 \indent
@@ -905,7 +943,7 @@ A videóval kapcsolatos ablakok emellet SLOT függvényeket definiálnak annak �
 
 \begin{figure}[!htbp]
 	\begin{center}
-		\includegraphics[scale=0.65]{artisticvideo.png}
+		\includegraphics[scale=0.65]{artistic_video.png}
 		\caption{A stílusátruházó (Artistic video creator) komponens osztálydiagrammja}
 		\label{artisticvideo_class}
 	\end{center}
