@@ -58,11 +58,13 @@
 \newlistof{indice}{tce}{\nombreindice}
 
 \newcommand\capterro[1]{%
-  \addcontentsline{tce}{chapter}{\protect\makebox[1.3em][l]{\thechapter.}#1}}
+	\addcontentsline{tce}{chapter}{\protect\makebox[1.3em][l]{\thechapter.}#1}}
 \newcommand\secro[1]{%
-  \addcontentsline{tce}{section}{\protect\makebox[2.8em][l]{\thesection.}#1}}
+	\addcontentsline{tce}{section}{\protect\makebox[2.8em][l]{\thesection.}#1}}
 \newcommand\ssecro[1]{%
-\addcontentsline{tce}{subsection}{\protect\makebox[3em][l]{\thesubsection.}#1}}
+	\addcontentsline{tce}{subsection}{\protect\makebox[3em][l]{\thesubsection.}#1}}
+\newcommand\sssecro[1]{%
+	\addcontentsline{tce}{subsubsection}{\protect\makebox[3em][l]{\thesubsubsection.}#1}}
 
 %angol tartalom def
 %---------------------------------------------------------
@@ -71,11 +73,13 @@
 \newlistof{indiceen}{tcen}{\tcontents}
 
 \newcommand\capteren[1]{%
-  \addcontentsline{tcen}{chapter}{\protect\makebox[1.3em][l]{\thechapter.}#1}}
+	 \addcontentsline{tcen}{chapter}{\protect\makebox[1.3em][l]{\thechapter.}#1}}
 \newcommand\secen[1]{%
-  \addcontentsline{tcen}{section}{\protect\makebox[2.8em][l]{\thesection.}#1}}
+	 \addcontentsline{tcen}{section}{\protect\makebox[2.8em][l]{\thesection.}#1}}
 \newcommand\ssecen[1]{%
-\addcontentsline{tcen}{subsection}{\protect\makebox[3em][l]{\thesubsection.}#1}}
+	\addcontentsline{tcen}{subsection}{\protect\makebox[3em][l]{\thesubsection.}#1}}
+\newcommand\sssecen[1]{%
+	\addcontentsline{tcen}{subsubsection}{\protect\makebox[3em][l]{\thesubsubsection.}#1}}
 
 %---------------------------------------------------------
 \newcommand*{\field}[1]{\mathbb{#1}}
@@ -197,7 +201,22 @@
 %-------------------------------------------------------------
 \newpage
 \thispagestyle{empty}
-eredetisegi nyilatkozat
+\begin{center}
+	\textbf{Declaraţie}
+\end{center}
+\leavevmode
+\\[2cm]
+\indent
+Subsemnata/ul ............................................................., absolvent(ă) al/a specializării ......................................, promoţia ................... cunoscând prevederile Legii Educaţiei Naţionale 1/2011 şi a Codului de etică şi deontologie profesională a Universităţii Sapientia cu privire la furt intelectual declar pe propria răspundere că prezenta lucrare de disertație se bazează pe activitatea personală, cercetarea/proiectarea este efectuată de mine, informaţiile şi datele preluate din literatura de specialitate sunt citate în mod corespunzător.
+\newline
+\\[7cm]
+\indent
+\begin{tabular}{lcccccccccccccccccl}
+	Localitatea, & & &&&& &&&&&&&&&&&& Absolvent:\\
+	Data: &&&&&& &&&&&&&&&&&&Semnătura..................\\
+\end{tabular}
+
+
 %kivonat magyar
 %-------------------------------------------------------------
 \newpage
@@ -326,6 +345,87 @@ A rendszer működése felülnézetből nagyon egyszerű (\ref{felulnezet_1} áb
 		\label{felulnezet_1}
 	\end{center}
 \end{figure}
+
+\section{Párhuzamos gépi tanulás Tensorflow segítségével}
+\secro{Învățare automată cu ajutorul librăriei Tensorflow}
+\secen{Parallel machine learning using Tensorflow}
+
+\subsection{A Tensorflow alap konceptusai}
+\ssecro{Conceptele de bază a librăriei Tensorflow}
+\ssecen{The basic concepts of Tensorflow library}
+
+A Tensorflow egy gépi tanításra alkalmas könyvtár. Tensorflow segítségével leírt algoritmus nagyon kevés kódmodosítással számos eszközön futtatható, kezdve a mobil eszközöktől egészen a GPU-kal ellátott osztott rendszerekig. Főleg a deep learning típusú algoritmusok implementálására használatos, viszont flexibilitásából adódóan számos más tanítási folyamat elvégzésére is képes \cite{35}.
+\newline
+\indent
+A Tensorflow működése leíraható egy irányított gráf segítségével. A gráf az adat áramlását reprezentálja, míg a gráfban levő csúcsok jelentik a kontrollt az adat áramlása fölött. Egy ilyen gráfban minden csúcsnak 0 vagy több bemenetele van, valamint 0 vagy több kimenettel rendelkezik. Minden csúcs egy operációt jelent. A csúcsok közt folyó adatothalmazokat tenzoroknak nevezzük. Valójában egy tenzor egy N dimenziós tömböt jelent. Speciális élek is létezhetnek a gráfban az adatfolyam kontrollálására. Ilyen él lehet például egy olyan ami megtiltja, hogy adat folyon át rajta \cite{35}.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{tensorflow_graph.png}
+		\caption{Tensorflow számítási gráf\cite{35}}
+		\label{tensorflow_graph}
+	\end{center}
+\end{figure}
+
+Az operációknak lehetnek nevük és attributumaik. A kernel egy operáció implementációja ami egy adott típusú hardveren (CPU vagy GPU) fut. Különféle típusú kerneleket különböztetünk meg, amik lehetnek alap matematikai műveletek (összeadás, kivonás, szorzás, osztás, logaritmus, kisebb, nagyobb, egyenlőség, stb.), tömb műveletek (konkatenálás, felvágás, rang, stb.), mátrix műveletek (mátrix szorzás, inverz, determináns, stb.), neuron háló réteg típusok (softmax, szigmoid, ReLu, konvolúciós, stb.), szinkronizációs műveletek (mutex műveletek, sorba állítás) és adatfolyam kontrollálásra szolgáló műveletek.
+\newline
+\indent
+Ahhoz, hogy a számítási gráfban definiált műveleteket elvégezhessük, szessziókat (session) kell definiálni. Szessziók használata megengedi a teljes gráf kiértékelését vagy akár részleges kiértékelést is. A gráf kiértékelése a szesszió Run függvényével történik. 
+\newline
+\indent
+A váltózó egy olyan tenzot ami megtartja az értékét többszörös számítási gráf kiértékelés esetén is. A változó egy olyan tenzorra utal aminek tartalma megváltozhat, ezzel ellentétben létezik a konstans aminek tartalma nem változhat.
+\newline
+\indent
+A Tensorflow párhuzamosításra úgynevezett processzeket használ (\ref{single_proc_vs_multiple_proc}. ábra). A kliens szoftver egy szesszió interfészen keresztül kommunikál a master processzel és a worker proceszekkel. Mindenik procesz felelős egy vagy több számítási eszközért (computation device), amik lehetnek CPU magok vagy GPU kártyák. Ezek az eszközök lehetnek lokálisak, ami azt jelenti, hogy ugyanabban a rendszerben helyezkednek el, vagy lehetnek osztottak, ez esetben külön rendszerekben helyezkednek el a különféle eszközök. Minden eszköz saját névvel rendelkezik\cite{35}.
+
+\subsection{Futtatás egyetlen készülék esetében}
+\ssecro{Execuție pe un simplu device}
+\ssecen{Execution in case of a single device}
+Egyetlen eszköz jelenlétében a csúcsok egymást követően lesznek kiértékelve figyelembe véve a közöttük levő dependenciákat. Minden csúcs esetében számolva van, hogy hány dependenciát tartalmaz, ha ezek közül egyik ki volt értékelve, akkor ez a számláló csökken. Mikor a számláló elérta a 0-át, akkor továbblép és kiértékeli e következő csúcsot. A kiértékelésre várakozó csúcsok egy listába vannak elhelyezve.
+
+\subsection{Futtatás több készülék esetében}
+\ssecro{Execuție pe mai multe device-uri}
+\ssecen{Execution in case of multiple devices}
+Több készülék esetében szükséges eldönteni, hogy az adott csúcsok melyik készüléken fognak kiértékelődni, valamint fontos megoldani a készülékek közötti kommunikációt.
+\newline
+\indent
+A csúcsok elhelyezése egy mohó esztimációs módszert követ. Minden csúcs esetében megesztimálható, hogy a bemeneti és kimeneti tenzorok mérete byte-ban. Ugyanakkor megesztimálható a futási idő adott csúcsok esetében. Ezután egy szimuláció fog lefutni ami az összes csúcs esetében kilistázza a használható eszközöket majd kiértékeli a futási időt valamit a kommunikáció idejét az eddigi elhelyezett csúcsokkal. A mohó algoritmus szerint arra az eszközre fog kerülni, ami a szimuláció során a legjobb eredményt adta.
+\newline
+\indent
+Az eszközök közötti kommunikációt Send-Receive csúcsok beiktatásával oldja meg. Ezek a csúcsok ugyanakkor megoldják az eszközök közötti szinkronizációt is. Osztott rendszerek esetében ugyancsak Send-Receive csúcsok oldják meg a kommunikációt. Ezek TCP és RDMA protokollokat használnak az adat mozgatásához\cite{35}.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.6]{single_proc_vs_multiple_proc.png}
+		\caption{Egyetlen procesz összehasonlítása több proceszes működéssel\cite{35}}
+		\label{single_proc_vs_multiple_proc}
+	\end{center}
+\end{figure}
+
+\subsection{Párhuzamos tanítás}
+\ssecro{Antrenare paralelă}
+\ssecen{Parallel trainig}
+
+A Tensorflow könyvtár az adatpárhuzamosítást megközelíti úgy adatpárhuzamosítás szempontjából, mint feladat párhuzamosítás szempontjából. Adatpárhuzamosítás esetében az adatot kisebb csomagokba bontja, majd ezeket párhuzamosan bemenetként táplálja a megfelelő csomópontonknak. A kiértékelendő csomópontokból egy másolat kerül az összes szálra (\ref{data_parallel_tf_model}. ábra). A végeredményt egy redukciós művelet gyűjti össze.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.5]{data_parallel_tf_model.png}
+		\caption{Adatpárhuzamos szinkron és aszinkron csomópont kiértékelés\cite{35}}
+		\label{data_parallel_tf_model}
+	\end{center}
+\end{figure}
+
+Feladatpárhuzamosítás esetében külömböző gráfrészletek lesznek megtanítva ugyanabban az időben különböző szálakon. Mikor a tanítás befejeződik, akkor az a procesz egy újabb gráfrészlet kiértékelésének fog neki. Ilyenfajta tanítás esetében fontos figyelembe venni azt, hogy egyes gráfrészletek csak akkor értékelhetőek ki, ha már előttük egy másik gráfrészlet le volt futtatva. Feladatpárhuzamos tanítást a \ref{data_parallel_tf_model}. ábra szemlélteti.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{task_parallel_tf_model.png}
+		\caption{Feladatpárhuzamos tanítás\cite{35}}
+		\label{task_parallel_tf_model}
+	\end{center}
+\end{figure}
+
 
 \section{A tanítási módszer állóképek esetében}
 \secro{A tanítási módszer állóképek esetében}
@@ -633,6 +733,8 @@ A továbbiakban részletes bemutatásra és elemzésre kerül az aplikációnk o
 \end{figure}
 
 \subsubsection{A főablak (Main Window) komponens implementálásának bemutatása}
+\sssecro{Implementarea componentei Main Window}
+\sssecen{The implementation of the Main Window component}
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -699,7 +801,9 @@ Ugyancsak a MainWindow tartalmazza a ProgressBar létrehozásával felelős fact
 	\label{styles}
 \end{figure}
 
-\subsubsection{A beállítások (Settings) komponens  bemutatása}
+\subsubsection{A beállítások (Settings) komponens implementálása}
+\sssecro{Implementarea componentei Settings}
+\sssecen{The implementation of the Settings component}
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -745,11 +849,13 @@ Az alapértelmezett beállítások bármikor visszállíthatóak a "Use default 
 	\label{settings_dialog}
 \end{figure}
 
-\subsubsection{A progress sáv (Progress bar) komponens bemutatása}
+\subsubsection{A progress sáv (Progress bar) komponens implementálása}
+\sssecro{Implementarea componentei Progress bar}
+\sssecen{The implementation of the Progress bar component}
 
 \begin{figure}[!htbp]
 	\begin{center}
-		\includegraphics[scale=0.7]{progressbar.png}
+		\includegraphics[scale=0.65]{progressbar.png}
 		\caption{A progress sáv komponens osztálydiagrammja}
 		\label{progressbar_class}
 	\end{center}
@@ -793,6 +899,43 @@ A videóval kapcsolatos ablakok emellet SLOT függvényeket definiálnak annak �
 	\end{center}
 \end{figure}
 
+\subsubsection{A stílusátruházó (Artistic video creator) komponens impementálása}
+\sssecro{Implementarea componentei Artistic video creator}
+\sssecen{The implementation of the Artistic video creatorr component}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.65]{artisticvideo.png}
+		\caption{A stílusátruházó (Artistic video creator) komponens osztálydiagrammja}
+		\label{artisticvideo_class}
+	\end{center}
+\end{figure}
+
+A stílusátrhuzázó komponenst az ArtisticVideo, VGG19 és AtomBoolean osztályok alkotják (\ref{artisticvideo_class}. ábra). Ezek körül az ArtisticVideo osztály felelől a stílus átruházásával, a VGG19 osztály felelős az előredefiniált neuronháló beolvasásával. Az AtomBoolean egy segítő osztály, több szálról is módosítható flag-et definiál. Ezek mellett komponens még használ két csoport segítőfüggvényt amikot az Image meg a Video állományokba csoporosítottunk.
+\newline
+\indent
+Az ArtisticVideo osztályt a Worker objektum példányosítja. Mivel a Worker objektumunk a mellákszálöóon fut, ezzért az ArtisticVideo objektumunk metódusai is a mellékszálon fognak elvégződni. Az ArtisicVideo-nak két fontos metódusa a create\_image és a stylize. A create\_image megkapja a bemenet útvonalát, amit az Image vagy Video segítő függvénycsomagok segítségével beolvas és feldolgoz. Amiután ez megtörtént, egyenként minden képkockára meghívódik a stylize metódus. A stylize metódus tartalmazza a tanítási algoritmus. Ennek a függvény eredménye minden esetben egy stilizált kép, kivételes eset, ha a tanítás megszakad, ekkor a visszatérített érték a null (None). Ugyancsak a create\_image metódusra hárul a képkockákból videót alkotni. 
+\newline
+\indent
+Az ArtisticVideo jelzéseket küld a főablak és a progress dialógus komponenseknek. A Qt kimondja, hogy a felhasználói felület mindenképpen a fő szálon kell fusson ezért az ArtisticVideo nem oldhatja meg az, hogy függvényhívással módosítja a felhasználói felületet. Ez mindenképp jelzéssel kell megoldani, kikötve azt, hogy a jelzésre válaszoló függvény a fő szálon fut. Az ArtisticVideo osztály által definiált jelzések:
+
+\begin{itemize}
+	\item flow\_created: akkor bocsájtódik ki amikor egy adott képkocka esetében a deep flow eljárás lefutott. Csak mozgóképek esetében bocsájtódik ki;
+	\item frame\_changed: akkor küldődik, amikor egy képkockára sikeresen át lett ruházva a stílus;
+	\item iter\_changed: egy kép esetében minden eltelt tanítási iteráció esetén kibocsájtódik;
+	\item set\_status: a progress dialógs ablakon levő státus üzenetet lehet állítani ezzel.
+\end{itemize}
+
+A VGG19 osztály a bemeneti hálót parszolja és felépíti az alkalmazásban használatos hálót. Mivel a háló mérete nagy (549MB), ezért a merevlemezről törénő beolvasás egyszer történik. A háló a memóriában marad amig szükség van erre. Ennek hátránya a memória foglalása, de ekkora memóriahasználat modern számítógépek esetében nem jelent gondot.
+\newline
+\indent
+Ugyanehhez a komponenshez sorolhatunk két segítő (utility) függvéyneket tartalmaza csomagot: az egyik csoport az Image, a másik a Video névre hallgat.
+\newline
+\indent
+Az Image csomag tartalmaz egy imread függvényt statikus kép beolvasására és egy imwrite függvényt statikus kép mentésére. Beolvasáskor preprocesszálás történik a bemeneti adaton, ami azt jelenti, hogy a színcsatornákból kivonódnak a következő középértékek: [123.68, 116.779, 103.939]. Ez arra szolgál, a hogy a pixelértékek 0-ás körüli értékeket vegyenek fel. Mentéskör ezek az értékeket hozzádajuk a kimeneti kép színcsatornáihoz.
+\newline
+\indent
+A Video csomag tartalmaz egy convert\_to\_frames függvényt ami a megadott útvonalon levő videót képkockákká alakítja. Ezeket a képkockákat majd az imread-del fogjuk feldolgozni. Emellett tartalmazza a convert\_to\_video függvényt, ami a kimentett képsorozazoz fogja videóvá alakítani. Továbbá tartalmazza a make\_opt\_flow és \_run\_consistency\_check függvényeket, amik az optical flow és képkockák mozgási határait eredményezik. Mindkét esetben a függvény egy külső bináris állomány futtatásával végzi el a feladatot. Ezek a binárisok nem saját programkódok a készítők lefordított állományait használtuk fel\cite{34}.
 
 %----------------------------------------------------------------
 \chapter{A rendszer tesztelése}
@@ -920,6 +1063,9 @@ Kingma D. P., Lei Ba, J. - ADAM: A method for stochastic optimization (2015)
 
 \bibitem{34}
 \url{https://www.mathworks.com/discovery/optical-flow.html} (2017.05.18)
+
+\bibitem{35}
+Martin Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard, Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mane, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viegas, Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng - TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems (2015)
 
 
 \end{thebibliography}
