@@ -1,5 +1,6 @@
-import artistic_video.utils as utils
+import artistic_video.Utils as utils
 from os import mkdir
+from os.path import dirname, abspath
 
 
 FRAME_NAME = 'frame%05d'
@@ -20,10 +21,11 @@ def _ffmpeg():
     /linux/bin/ffmpeg - for Linux operating systems
     :return: a string which contains the command line needed to run ffmpeg
     """
+    dir_name = dirname(abspath(__file__))
     if SYS_PLATFORM == utils.OS.WIN:
-        return ".\\artistic_video\\windows\\bin\\ffmpeg.exe"
+        return dir_name + '\\windows\\bin\\ffmpeg.exe'
     elif SYS_PLATFORM == utils.OS.LINUX:
-        return utils.get_main_path()+"/artistic_video/linux/bin/ffmpeg"
+        return dir_name + '/linux/bin/ffmpeg'
     return None
 
 
@@ -72,7 +74,7 @@ def convert_to_video(output_name="ffmpeg_vid", ext=".mp4",
     :return: An integer which is the error code of the ffmpeg termination. If the process is successful
     than 0 will be returned.
     """
-    arguments = ["-i", frames_folder+SEPARATOR+frame_name+frame_ext, output_name+ext]
+    arguments = ['-y', '-i', frames_folder + SEPARATOR + frame_name + frame_ext, output_name+ext]
     error_code = utils.run_binary(_ffmpeg(), arguments)
     return error_code
 

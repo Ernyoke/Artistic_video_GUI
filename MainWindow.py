@@ -5,7 +5,7 @@ from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QSize, Qt, QCoreApplication, pyqtSlot, pyqtSignal, QSettings
 import os
 from Preferences import PreferencesDialog, USE_DEEPFLOW_ID, USE_DEEPFLOW, str_to_bool
-from artistic_video.utils import get_input_type, get_os_type, get_separator, InputType, NotSupportedInput, OS
+from artistic_video.Utils import get_input_type, get_os_type, get_separator, InputType, NotSupportedInput, OS
 from Worker import Worker
 from Progressbar import ProgressbarVideo, ProgressbarImage, ProgressbarVideoOpticalFlow
 
@@ -105,7 +105,6 @@ class MainWindow(QMainWindow):
         self.worker = Worker()
         self.worker.work_started.connect(self._disable_ok_btn)
         self.worker.work_finished.connect(self._enable_ok_btn)
-        self.worker.display_image.connect(self._display_stylized_image)
 
     def _set_application_properties(self):
         QCoreApplication.setOrganizationName("Sapientia EMTE");
@@ -166,7 +165,10 @@ class MainWindow(QMainWindow):
                 settings = QSettings()
                 optical_flow = str_to_bool(settings.value(USE_DEEPFLOW_ID, USE_DEEPFLOW))
 
+                if self.progress_bar is not None:
+                    self.progress_bar.display_stylized_image.disconnect(self._display_stylized_image)
                 self.progress_bar = self._progress_bar_factory(self.selected_file_path, optical_flow)
+                self.progress_bar.display_stylized_image.connect(self._display_stylized_image)
                 pix_map = self._read_input_pixmap(self.selected_file_path)
                 if pix_map is not None:
                     scene = QGraphicsScene()

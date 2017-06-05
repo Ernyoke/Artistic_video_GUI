@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QDialog, QFileDialog, QMessageBox
 from gui.Ui_Preferences import Ui_PreferencesDialog
 from PyQt5.Qt import QDoubleValidator, QIntValidator, QSettings, pyqtSlot
 import os
-from artistic_video.utils import get_separator, get_os_type, OS
+from artistic_video.Utils import get_separator, get_os_type, OS
 
 CONTENT_WEIGHT = 5e0
 STYLE_WEIGHT = 1e2

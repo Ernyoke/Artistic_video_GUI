@@ -57,6 +57,11 @@ def get_separator():
     return "\\" if get_os_type() == OS.WIN else "/"
 
 
+def get_file_extension(path):
+    _, file_extension = splitext(path)
+    return file_extension
+
+
 def get_input_type(path):
     """
     Decide weather the input type is IMAGE or VIDEO. Raise NotSupportedInput exception if the input type is neither
@@ -64,7 +69,7 @@ def get_input_type(path):
     :param path: A string which contains a path to the input file
     :return: an InputType which can be IMAGE or VIDEO
     """
-    _, file_extension = splitext(path)
+    file_extension = get_file_extension(path)
     if file_extension in SUPPORTED_IMAGE_TYPES:
         return InputType.IMAGE
     elif file_extension in SUPPORTED_VIDEO_TYPES:

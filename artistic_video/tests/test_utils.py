@@ -1,4 +1,4 @@
-from artistic_video.utils import get_base_name
+from artistic_video.Utils import get_base_name
 import unittest
 
 

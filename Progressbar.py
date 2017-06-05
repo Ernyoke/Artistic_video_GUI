@@ -10,6 +10,7 @@ class ProgressBar(QDialog):
         super().__init__(parent)
 
     cancel_progress = pyqtSignal()
+    display_stylized_image = pyqtSignal(str)
 
     def show(self):
         super().show()
@@ -53,6 +54,7 @@ class ProgressbarImage(ProgressBar):
     def hook_up(self, artistic):
         artistic.iter_changed.connect(self.update_iter_bar)
         artistic.set_status.connect(self.set_status)
+        artistic.frame_changed.connect(self.update_frame_bar)
         self.cancel_progress.connect(artistic.stop_running, Qt.DirectConnection)
 
     def unhook(self, artistic):
@@ -64,6 +66,10 @@ class ProgressbarImage(ProgressBar):
     def update_iter_bar(self, current, maximum):
         self.ui.iterationsBar.setMaximum(maximum)
         self.ui.iterationsBar.setValue(current)
+
+    @pyqtSlot(int, int, str)
+    def update_frame_bar(self, current, maximum, stylized_image_path):
+        self.display_stylized_image.emit(stylized_image_path)
 
 
 class ProgressbarVideo(ProgressBar):
@@ -93,14 +99,15 @@ class ProgressbarVideo(ProgressBar):
         self.cancel_progress.disconnect(artistic.stop_running)
 
     @pyqtSlot(int, int)
-    def update_iter_bar(self, current, maximum):
+    def update_iter_bar(self, current, maximum, ):
         self.ui.iterationsBar.setMaximum(maximum)
         self.ui.iterationsBar.setValue(current)
 
-    @pyqtSlot(int, int)
-    def update_frame_bar(self, current, maximum):
+    @pyqtSlot(int, int, str)
+    def update_frame_bar(self, current, maximum, stylized_image_path):
         self.ui.framesBar.setMaximum(maximum)
         self.ui.framesBar.setValue(current)
+        self.display_stylized_image.emit(stylized_image_path)
 
 
 class ProgressbarVideoOpticalFlow(ProgressBar):
@@ -141,10 +148,11 @@ class ProgressbarVideoOpticalFlow(ProgressBar):
         self.ui.iterationsBar.setMaximum(maximum)
         self.ui.iterationsBar.setValue(current)
 
-    @pyqtSlot(int, int)
-    def update_frame_bar(self, current, maximum):
+    @pyqtSlot(int, int, str)
+    def update_frame_bar(self, current, maximum, stylized_image_path):
         self.ui.framesBar.setMaximum(maximum)
         self.ui.framesBar.setValue(current)
+        self.display_stylized_image.emit(stylized_image_path)
 
     @pyqtSlot(int, int)
     def update_flow_bar(self, current, maximum):

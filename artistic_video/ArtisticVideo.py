@@ -14,12 +14,12 @@ from PyQt5.Qt import QObject, pyqtSlot, pyqtSignal
 
 from artistic_video.Image import imread, imsave
 from artistic_video.Video import convert_to_frames, convert_to_video, make_opt_flow
-from artistic_video.utils import get_input_type, get_separator, get_base_name, InputType
+from artistic_video.Utils import get_input_type, get_separator, get_base_name, get_file_extension, InputType
 
 CONTENT_LAYER = ('relu4_2',)
 STYLE_LAYERS = ('relu1_1', 'relu2_1', 'relu3_1', 'relu4_1', 'relu5_1')
 
-BENCHMARK = True
+BENCHMARK = False
 
 
 class FFMPEGException(Exception):
@@ -38,7 +38,7 @@ class ArtisticVideo(QObject):
         self.log_dir = 'logs'
 
     iter_changed = pyqtSignal(int, int)     # emitted when an iteration is done in case of an image
-    frame_changed = pyqtSignal(int, int)    # emitted when a frame is completed to the Progressbar
+    frame_changed = pyqtSignal(int, int, str)    # emitted when a frame is completed to the Progressbar
     flow_created = pyqtSignal(int, int)     # emitted when the forward and backward flow is created for 2 frames
     set_status = pyqtSignal(str)            # display a status on the progressbar
 
@@ -492,28 +492,47 @@ class ArtisticVideo(QObject):
                     # emit a signal to the UI with the value of current iteration
                     self.iter_changed.emit(i+1, iterations)
 
+    def _read_style_images(self, style_images_path, content_shape):
+        """
+        Reads the style images from the storage. Resizes them according the shape of the content image.
+        :param style_images_path: A list containing string values which hold the paths to the style images.
+        :param content_shape: The shape of the content image. The styles images will be resized according the shape.
+        :return: A list with the images.
+        """
+        style_images = []
+        for style_image in style_images_path:
+            style_images.append(imread(style_image))
+
+        for i in range(len(style_images)):
+            style_scale = 1.0
+
+            # resize style images
+            style_images[i] = scipy.misc.imresize(style_images[i], style_scale *
+                                                  content_shape[1] / style_images[i].shape[1])
+        return style_images
+
     def stylize(self,
                 network_path,
-                content_image_path,
+                content_path,
                 style_images_path,
                 output_path,
                 iterations,
                 content_weight,
                 style_weight,
-                tv_veight,
+                tv_weight,
                 temporal_weight,
                 learning_rate,
                 use_deepflow=False):
 
         """
         :param network_path: 
-        :param content_image_path: 
+        :param content_path:
         :param style_images_path: 
         :param output_path: 
         :param iterations: 
         :param content_weight: 
         :param style_weight: 
-        :param tv_veight: 
+        :param tv_weight:
         :param temporal_weight: 
         :param learning_rate: 
         :param use_deepflow: 
@@ -522,27 +541,44 @@ class ArtisticVideo(QObject):
 
         self.set_status.emit("Preprocessing...")
 
-        frame = np.zeros([1, 1, 1], dtype=np.float)
-        frame_list = []
-        save_path = ''
-
         # read the input image
-        content_type = get_input_type(content_image_path)
+        content_type = get_input_type(content_path)
         if content_type == InputType.IMAGE:
-            frame = imread(content_image_path)
+            frame = imread(content_path)
+            style_images = self._read_style_images(style_images_path, frame.shape)
+            print("Stylizing image", content_path)
+            self.set_status.emit("Stylizing image " + content_path)
+            for iteration, image in self.create_image(
+                    network_path=network_path,
+                    content_image=frame,
+                    styles_images=style_images,
+                    iterations=iterations,
+                    content_weight=content_weight,
+                    style_weight=style_weight,
+                    tv_weight=tv_weight,
+                    learning_rate=learning_rate,
+                    use_deepflow=False
+            ):
+                save_path = output_path + 'out' + '.jpg'
+                imsave(save_path, image)
+                self.frame_changed.emit(1, 1, save_path)
+
         elif content_type == InputType.VIDEO:
 
             # frame output folder
-            file_name = get_base_name(content_image_path)
+            file_name = get_base_name(content_path)
+            file_extension = get_file_extension(content_path)
+
             frames_output_folder = 'frames' + get_separator() + file_name
 
             # try to cut the video intro frames
-            error_code, frame_list = convert_to_frames(content_image_path, frames_output_folder, '.jpg')
+            error_code, frame_list = convert_to_frames(content_path, frames_output_folder, '.jpg')
 
             if error_code != 0:
                 raise FFMPEGException(error_code)
 
             frame = imread(frame_list[0])
+            style_images = self._read_style_images(style_images_path, frame.shape)
 
             if error_code == 0:
 
@@ -553,7 +589,6 @@ class ArtisticVideo(QObject):
                     backward_flow_list = {}
                     forward_consistency_list = {}
                     backward_consistency_list = {}
-                    # flow_output_folder = get_separator() + 'frames' + get_separator() +
                     for i in range(0, len(frame_list) - 1):
                         if not self.stop.get():
                             forward_flow, backward_flow, forward_consistency, backward_consistency \
@@ -563,7 +598,7 @@ class ArtisticVideo(QObject):
                             backward_flow_list[frame_list[i]] = backward_flow
                             forward_consistency_list[frame_list[i]] = forward_consistency
                             backward_consistency_list[frame_list[i]] = backward_consistency
-                            self.flow_created.emit(i, len(frame_list) - 1)
+                            self.flow_created.emit(i + 1, len(frame_list) - 1)
                         else:
                             return
 
@@ -571,42 +606,12 @@ class ArtisticVideo(QObject):
                 print("Exited with ffmpeg error code: ", error_code)
                 return
 
-        # read the style images
-        style_images = []
-        for style_image in style_images_path:
-            style_images.append(imread(style_image))
+            tmp_output_path = output_path + file_name + get_separator()
 
-        content_shape = frame.shape
-        for i in range(len(style_images)):
-            style_scale = 1.0
-
-            # resize style images
-            style_images[i] = scipy.misc.imresize(style_images[i], style_scale *
-                                                  content_shape[1] / style_images[i].shape[1])
-
-        if content_type == InputType.IMAGE:
-            print("Stylizing image", content_image_path)
-            self.set_status.emit("Stylizing image " + content_image_path)
-            for iteration, image in self.create_image(
-                    network_path=network_path,
-                    content_image=frame,
-                    styles_images=style_images,
-                    iterations=iterations,
-                    content_weight=content_weight,
-                    style_weight=style_weight,
-                    tv_weight=tv_veight,
-                    learning_rate=learning_rate,
-                    use_deepflow=False
-            ):
-                save_path = output_path + 'out' + '.jpg'
-                imsave(save_path, image)
-            self.frame_changed.emit(1, 1)
-
-        elif content_type == InputType.VIDEO:
             for index, frame_name in enumerate(frame_list):
                 if not self.stop.get():
                     print('Stylizing frame', frame_name)
-                    self.set_status.emit("Stylizing frame " + content_image_path)
+                    self.set_status.emit("Stylizing frame " + content_path)
                     frame = imread(frame_name)
                     if index == 0 or not use_deepflow:
                         for iteration, image in self.create_image(
@@ -616,13 +621,13 @@ class ArtisticVideo(QObject):
                                 iterations=iterations,
                                 content_weight=content_weight,
                                 style_weight=style_weight,
-                                tv_weight=tv_veight,
+                                tv_weight=tv_weight,
                                 learning_rate=learning_rate,
                                 use_deepflow=False
                         ):
                             save_path = output_path + str(index) + '.jpg'
                             imsave(save_path, image)
-                            self.frame_changed.emit(0, len(frame_list))
+                            self.frame_changed.emit(0, len(frame_list), save_path)
 
                     elif use_deepflow:
                         prev_frame_name = frame_list[index - 1]
@@ -635,7 +640,7 @@ class ArtisticVideo(QObject):
                                 iterations=iterations,
                                 content_weight=content_weight,
                                 style_weight=style_weight,
-                                tv_weight=tv_veight,
+                                tv_weight=tv_weight,
                                 learning_rate=learning_rate,
                                 use_deepflow=use_deepflow,
                                 temporal_weight=temporal_weight,
@@ -643,17 +648,18 @@ class ArtisticVideo(QObject):
                                 backw_flow_path=current_backward_flow,
                                 forw_cons_path=current_forward_consistency
                         ):
-                            save_path = output_path + str(index) + '.jpg'
+                            save_path = tmp_output_path + str(index.n.zfill(5)) + '.jpg'
                             imsave(save_path, image)
-                            # convert_to_video("output_ffmpeg", ".mp4", "frames")
-                            self.frame_changed.emit(index, len(frame_list))
+                            self.frame_changed.emit(index, len(frame_list), save_path)
 
                 else:
                     return
 
+        convert_to_video(file_name + "_stylized", get_file_extension(content_path),
+                         output_path, file_name + "%05d", file_extension)
+
         if not self.stop.get():
             self.set_status.emit("Progress completed!")
-            return save_path
 
     @pyqtSlot()
     def stop_running(self):
