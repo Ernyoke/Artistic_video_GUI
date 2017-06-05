@@ -19,6 +19,8 @@ from artistic_video.utils import get_input_type, get_separator, get_base_name, I
 CONTENT_LAYER = ('relu4_2',)
 STYLE_LAYERS = ('relu1_1', 'relu2_1', 'relu3_1', 'relu4_1', 'relu5_1')
 
+BENCHMARK = True
+
 
 class FFMPEGException(Exception):
     def __init__(self, error_code):
@@ -33,7 +35,6 @@ class ArtisticVideo(QObject):
     def __init__(self, parent=None):
         super(ArtisticVideo, self).__init__(parent)
         self.stop = AtomicBoolean()
-        self.log = True
         self.log_dir = 'logs'
 
     iter_changed = pyqtSignal(int, int)     # emitted when an iteration is done in case of an image
@@ -334,18 +335,29 @@ class ArtisticVideo(QObject):
             print('Temporal loss: %g' % temporal_loss.eval())
         print('Total loss: %g' % total_loss.eval())
 
-    def _log_losses(self, losses):
+    def _benchmarks(self, losses, start_time, end_time):
         """
         :param losses:
         :return:
         """
-        if self.log:
+
+        if BENCHMARK:
+            # print losses
             time_stamp = time.time()
             if losses:
                 log_file_name = self.log_dir + get_separator() + 'log_losses_' + str(time_stamp) + '.txt'
                 with open(log_file_name, 'w') as log_file:
                     for loss in losses:
                         log_file.write(str(loss) + ' ')
+
+            # print time
+            time_file_name = self.log_dir + get_separator() + 'log_time_' + str(time_stamp) + '.txt'
+            with open(time_file_name, 'w') as log_file:
+                log_file.write("Start time: " + str(time.strftime("%a, %d %b %Y %H:%M:%S +0000",
+                                                                  time.gmtime(start_time))) + "\n")
+                log_file.write("End time: " + str(time.strftime("%a, %d %b %Y %H:%M:%S +0000",
+                                                                  time.gmtime(end_time))) + "\n")
+                log_file.write("Time passed (in seconds): " + str(end_time - start_time) + "\n")
 
     def create_image(self,
                      network_path,
@@ -379,6 +391,8 @@ class ArtisticVideo(QObject):
         :param checkpoint_iterations: 
         :return: 
         """
+
+        start_time = time.time()
 
         self.stop.set(False)
 
@@ -457,7 +471,8 @@ class ArtisticVideo(QObject):
                     last_step = i == iterations - 1
                     if last_step:
                         self._print_losses(content_loss, style_loss, tv_loss, loss, temporal_loss)
-                        self._log_losses(loss_values)
+                        end_time = time.time()
+                        self._benchmarks(loss_values, start_time, end_time)
 
                     # evaluate the optimizer
                     train_step.run()

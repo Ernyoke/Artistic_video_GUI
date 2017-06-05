@@ -980,7 +980,83 @@ A Video csomag tartalmaz egy convert\_to\_frames függvényt ami a megadott útv
 \capterro{Testarea sistemului}
 \capteren{The testing of the system}
 
-testing
+A rendszer tesztelése alatt fel szerettük volna mérni, hogy a rendszer hogyan viselkedik a mindennapi használatban. Többek között választ szerettünk volna kapni olyan kérdésekre, hogy a rendszer mennyi idő alatt ruházza át a stílust egy statikus képre, mekkor a memória igénye, mekkora a maximális képméret amire még működöképes.
+
+\section{A tesztrendszer ismertetése}
+\secro{Configurația de test}
+\secen{Test configuration}
+
+A rendszer tesztelésére a kovetkező konfigurációt használtuk:
+
+\begin{itemize}
+	\item \textbf{Alaplap:} MSI Z170A-G45 GAMING
+	\item \textbf{Processzor:} Intel(R) Core(TM) Skylake i7-6700 ("non-K") CPU @ 3.40GHz (Turbo Boost: 3.90GHz)
+	\item \textbf{Videokártya:} GIGABYTE GeForce GTX 1080 G1 GAMING 8GB DDR5X 256-bit
+	\item \textbf{RAM Memória:} Corsair Vengeance LPX Black 32GB DDR4 3000MHz
+	\item \textbf{Merev lemez}: HyperX Savage SSD, 240GB, 2.5", SATA III
+	\item \textbf{Operációs rendszer:} Ubuntu 17.04 LTS
+\end{itemize}
+
+A használt videókártya egy nVidia GeForce GTX 1080 volt, ennek is a Gigabyte által kiadott G1 GAMING változata. A kártya főleg játékra van tervezve, de kiemelkedő hardver tulajdonságainak megfelelően tökéletesen használható párhuzam gépi tanulásra is. A videókártya a Pascal architektúrával rendelkezik. A kártya alapfrekvenciája 1695 MHz, terhelés alatt felugorhat 1860MHz-re. A kártya 2560 CUDA maggal rendelkezik valamint 8GB DDR5X típusú memóriával amiből gépi tanulásra használható 7860MB.
+\newline
+\indent 
+A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott. A rendszer egyes limitációkkal támogatja a Microsoft Windows operációs rendszert is, viszont a limitációk miatt az összes teszt nem végezhető el azalatt, ezért az Ubuntu-ra esett választás. A operációs rendszerünk az ekkori legújabb nVidia driver-ekkel volt ellátva ami a 375.66 változat. A Pascal architektúrának támogató CUDA 8.0-ás videókártya fejlesztő könyvtárat használtuk. Emellett a Tensorflow igényeli a cudnn videó kártya memórájával foglalkoző könyvtárat is.
+
+\section{Egy képkockára történő stílusátruházási idő és memória igénye}
+\secro{Timpul și memoria necesară transferări stilului pe o imagine statică}
+\secen{The amount of time and memory needed for transfering the style to a frame}
+
+Első tesztelési esetként az szerettük volna lemérni, hogy mennyi idő szükséges egy statikus képre történő stílusátruházáshoz. A művelethez a videókártya párhuzamos számítási képességeit is igénybe vesszük. Maga a stílusátrhuzás a videókártyán fog történni. Ehhez a teszthez kiválasztottunk pár ismertebb felbontással rendelkező bemeneti képet és mindenik esetben lemértük az átruházáshoz szükséges időd. Az átruházáshoz ugyanazt a stílusképet használtunk mindenik bemenet esetében. A stílus kép felbontása $600 \times $855 pixel volt. A következő eredményeket kaptuk (\ref{time_per_res}. 
+ábra):
+
+\begin{center}
+	\begin{tabular}{ | l | l |}
+		\hline
+		Felbontás(pixel) & Idő(másodperc) \\ \hline
+		$320 \times $240 & 23.126104 \\ \hline
+		$640 \times $480 & 82.640347 \\ \hline
+		$720 \times $480 & 93.487573 \\ \hline
+		$800 \times $600 & 127.973041 \\ \hline
+		$1024 \times $764 & 203.892024 \\ \hline
+		$1280 \times $720 & 245.769916 \\ \hline
+		$1366 \times $768 & 279.945757 \\ \hline
+	\end{tabular}
+\end{center}
+
+A \ref{time_per_res}. diagrammból lekövetkeztethetjük az, hogy az igényelt idő lineárisan nő a felbontás növekedésének megfelelően ugyanaz a stílus kép használatával. Az is egyértelművé válik, hogy a stílusátruházás high definition(HD) felbontású képek esetében elég időigényessé válik, ugyanis közel 5 percre van szükség egyetlen bemenet elvégzésére.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{time_per_res.png}
+		\caption{Stílusátruházási idő különböző felbontásokra}
+		\label{time_per_res}
+	\end{center}
+\end{figure}
+
+Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kihasználtságát is. Amint észlelhettük, még az alacsony felbontású képek esetében is eléggé időigényes a folyamat. Feltételeztük, hogy a Tensorflow könyvtár a kártyát maximálisan ki tudja használni. A tesztéli folyamathoz egy teljesen egyedülálő programot készítettünk. Ezt a stílusátruházás előtt el kell indítani. A program a gpustats\cite{36} könyvtárat használja a videókártya működési paramétereinek a lekérdezésére. A programunk minden másodpercben lekéri egyszer a videókártya terheltségi százalékát és kimenti az egy fájlba amit később fel lehet használni.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{gpu_usage.png}
+		\caption{Videókártya terhelése átruházás közben}
+		\label{gpu_usage}
+	\end{center}
+\end{figure}
+
+A \ref{gpu_usage}. diagramm igazolta előrejelzésünket. A videókártya használati százaléka az művelet elején felugrik szinte maximálisra és azon marad addig amig be nem fejezte azt. A \ref{gpu_usage}. ábrán látható diagramm $640 \times $480-as febontásra keszült, de hasonló eredményeket kapunk bármely más felbontás esetében is.
+\newline
+\indent
+Továbbá azt szerettünk volna mérni, hogy mekkora a memórahasználat egy különböző felbontások esetében. Itt a logika azt sugallná, hogy a felbontásokkal arányosan lineárisan nőni fog. Ezzel ellenben a ábra azt igazolja, hogy a Tensorflow működése nem egyezik meg a előrejelzésünkkel. A mérés hasonlóan mint a kihasználtság esetében egy külön program méri ami egy külön processzen fut. A mérésre ugyancsak a gpustats könyvtárat használtuk.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{gpu_memory_usage.png}
+		\caption{Videókártya memóriájának a kihasználtsága}
+		\label{gpu_memory_usage}
+	\end{center}
+\end{figure} 
+
+A \ref{gpu_memory_usage}. diagramm $640 \times $480 felbontású kép esetében mért értékeket ábrázolja. A videokártyán maximálisan 7860MB volt használható a Tensorflow által. Amint látható, a Tensorflow a kezdetben lefoglalja az összes használható videómemóriát, majd ennek a felhasználásával végzi el a feladatát. A memóriahasználat ugyanakkora $1366 \times $768 felbontás esetében is. Mindez felvet egy másik kérdést, azt hogy mekkora az a maximális felbontás ami még elfér egy GTX 1080 típusú kártya memóriájában.
 
 %----------------------------------------------------------------
 \chapter{Összefoglaló}
@@ -1104,6 +1180,9 @@ Kingma D. P., Lei Ba, J. - ADAM: A method for stochastic optimization (2015)
 
 \bibitem{35}
 Martin Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard, Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mane, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viegas, Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng - TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems (2015)
+
+\bibitem{36}
+gpustats library: \url{https://github.com/dukestats/gpustats} (2017.06.04)
 
 
 \end{thebibliography}

@@ -1,0 +1,3 @@
+Start time: Du, 04 iun 2017 18:54:44 +0000
+End time: Du, 04 iun 2017 18:58:08 +0000
+Time passed (in seconds): 203.8920247554779
