@@ -589,10 +589,10 @@ class ArtisticVideo(QObject):
                     backward_flow_list = {}
                     forward_consistency_list = {}
                     backward_consistency_list = {}
-                    for i in range(0, len(frame_list) - 1):
+                    for i in range(1, len(frame_list)):
                         if not self.stop.get():
                             forward_flow, backward_flow, forward_consistency, backward_consistency \
-                                = make_opt_flow(frame_list[i], frame_list[i + 1], frames_output_folder +
+                                = make_opt_flow(frame_list[i - 1], frame_list[i], frames_output_folder +
                                                 get_separator() + 'flow')
                             forward_flow_list[frame_list[i]] = forward_flow
                             backward_flow_list[frame_list[i]] = backward_flow
@@ -625,9 +625,9 @@ class ArtisticVideo(QObject):
                                 learning_rate=learning_rate,
                                 use_deepflow=False
                         ):
-                            save_path = output_path + str(index) + '.jpg'
+                            save_path = tmp_output_path + file_name + str(index).zfill(5) + '.jpg'
                             imsave(save_path, image)
-                            self.frame_changed.emit(0, len(frame_list), save_path)
+                            self.frame_changed.emit(index + 1, len(frame_list), save_path)
 
                     elif use_deepflow:
                         prev_frame_name = frame_list[index - 1]
@@ -648,15 +648,15 @@ class ArtisticVideo(QObject):
                                 backw_flow_path=current_backward_flow,
                                 forw_cons_path=current_forward_consistency
                         ):
-                            save_path = tmp_output_path + str(index.n.zfill(5)) + '.jpg'
+                            save_path = tmp_output_path + file_name + str(index).zfill(5) + '.jpg'
                             imsave(save_path, image)
-                            self.frame_changed.emit(index, len(frame_list), save_path)
+                            self.frame_changed.emit(index + 1, len(frame_list), save_path)
 
                 else:
                     return
 
-        convert_to_video(file_name + "_stylized", get_file_extension(content_path),
-                         output_path, file_name + "%05d", file_extension)
+            convert_to_video(output_path + file_name + "_stylized", get_file_extension(content_path),
+                             output_path + file_name, file_name + '%05d', '.jpg')
 
         if not self.stop.get():
             self.set_status.emit("Progress completed!")
