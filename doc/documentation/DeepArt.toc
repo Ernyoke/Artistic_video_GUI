@@ -10,22 +10,23 @@
 \select@language {magyar} \contentsline {section}{\numberline {3.3}A tan\IeC {\'\i }t\IeC {\'a}si m\IeC {\'o}dszer \IeC {\'a}ll\IeC {\'o}k\IeC {\'e}pek eset\IeC {\'e}ben}{23}
 \select@language {magyar} \contentsline {subsection}{\numberline {3.3.1}Az eredeti k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{23}
 \select@language {magyar} \contentsline {subsection}{\numberline {3.3.2}Az st\IeC {\'\i }lus k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak a vesztes\IeC {\'e}gi f\IeC {\"u}ggv\IeC {\'e}nye}{26}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.3.3}A stiliz\IeC {\'a}lt k\IeC {\'e}p tiszt\IeC {\'\i }t\IeC {\'a}sa}{27}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.3.4}A teljes vesztes\IeC {\'e}gf\IeC {\"u}ggv\IeC {\'e}ny fel\IeC {\'\i }r\IeC {\'a}sa \IeC {\'e}s tan\IeC {\'\i }t\IeC {\'a}sa statikus k\IeC {\'e}pek eset\IeC {\'e}ben}{28}
-\select@language {magyar} \contentsline {section}{\numberline {3.4}A tan\IeC {\'\i }t\IeC {\'a}si m\IeC {\'o}dszer mozg\IeC {\'o}k\IeC {\'e}pek eset\IeC {\'e}ben}{28}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.4.1}Naiv megk\IeC {\"o}zel\IeC {\'\i }t\IeC {\'e}s}{28}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.4.2}A hal\IeC {\'o} inicializ\IeC {\'a}l\IeC {\'a}sa k\IeC {\'e}pkock\IeC {\'a}k eset\IeC {\'e}ben}{30}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.4.3}Optical flow bevezet\IeC {\'e}se}{30}
-\select@language {magyar} \contentsline {section}{\numberline {3.5}A rendszer tervez\IeC {\'e}se \IeC {\'e}s kivitelez\IeC {\'e}se}{31}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.5.1}A rendszer interakci\IeC {\'o}s \IeC {\'e}s viselked\IeC {\'e}si modellje}{31}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.5.2}A rendszer struktur\IeC {\'a}lis modellje}{32}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.5.3}T\IeC {\"o}bbsz\IeC {\'a}las megold\IeC {\'a}s \IeC {\'e}s kommunik\IeC {\'a}ci\IeC {\'o} a komponensek k\IeC {\"o}z\IeC {\"o}tt}{33}
-\select@language {magyar} \contentsline {subsection}{\numberline {3.5.4}A rendszer implement\IeC {\'a}l\IeC {\'a}sa}{36}
-\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.1}A f\IeC {\H o}ablak (Main Window) komponens implement\IeC {\'a}l\IeC {\'a}s\IeC {\'a}nak bemutat\IeC {\'a}sa}{36}
-\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.2}A be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok (Settings) komponens implement\IeC {\'a}l\IeC {\'a}sa}{41}
-\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.3}A progress s\IeC {\'a}v (Progress bar) komponens implement\IeC {\'a}l\IeC {\'a}sa}{42}
-\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.4}A st\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'o} (Artistic video creator) komponens impement\IeC {\'a}l\IeC {\'a}sa}{43}
-\select@language {magyar} \contentsline {chapter}{\numberline {4}A rendszer tesztel\IeC {\'e}se}{47}
-\select@language {magyar} \contentsline {section}{\numberline {4.1}A tesztrendszer ismertet\IeC {\'e}se}{47}
-\select@language {magyar} \contentsline {section}{\numberline {4.2}Egy k\IeC {\'e}pkock\IeC {\'a}ra t\IeC {\"o}rt\IeC {\'e}n\IeC {\H o} st\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'a}si id\IeC {\H o} \IeC {\'e}s mem\IeC {\'o}ria ig\IeC {\'e}nye}{48}
-\select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{51}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.3.3}A stiliz\IeC {\'a}lt k\IeC {\'e}p tiszt\IeC {\'\i }t\IeC {\'a}sa}{28}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.3.4}A teljes vesztes\IeC {\'e}gf\IeC {\"u}ggv\IeC {\'e}ny fel\IeC {\'\i }r\IeC {\'a}sa \IeC {\'e}s tan\IeC {\'\i }t\IeC {\'a}sa statikus k\IeC {\'e}pek eset\IeC {\'e}ben}{29}
+\select@language {magyar} \contentsline {section}{\numberline {3.4}A tan\IeC {\'\i }t\IeC {\'a}si m\IeC {\'o}dszer mozg\IeC {\'o}k\IeC {\'e}pek eset\IeC {\'e}ben}{29}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.4.1}Naiv megk\IeC {\"o}zel\IeC {\'\i }t\IeC {\'e}s}{29}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.4.2}A hal\IeC {\'o} inicializ\IeC {\'a}l\IeC {\'a}sa k\IeC {\'e}pkock\IeC {\'a}k eset\IeC {\'e}ben}{31}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.4.3}Optical flow bevezet\IeC {\'e}se}{31}
+\select@language {magyar} \contentsline {section}{\numberline {3.5}A rendszer tervez\IeC {\'e}se \IeC {\'e}s kivitelez\IeC {\'e}se}{32}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.5.1}A rendszer interakci\IeC {\'o}s \IeC {\'e}s viselked\IeC {\'e}si modellje}{32}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.5.2}A rendszer struktur\IeC {\'a}lis modellje}{33}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.5.3}T\IeC {\"o}bbsz\IeC {\'a}las megold\IeC {\'a}s \IeC {\'e}s kommunik\IeC {\'a}ci\IeC {\'o} a komponensek k\IeC {\"o}z\IeC {\"o}tt}{34}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.5.4}A rendszer implement\IeC {\'a}l\IeC {\'a}sa}{37}
+\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.1}A f\IeC {\H o}ablak (Main Window) komponens implement\IeC {\'a}l\IeC {\'a}s\IeC {\'a}nak bemutat\IeC {\'a}sa}{37}
+\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.2}A be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok (Settings) komponens implement\IeC {\'a}l\IeC {\'a}sa}{42}
+\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.3}A progress s\IeC {\'a}v (Progress bar) komponens implement\IeC {\'a}l\IeC {\'a}sa}{43}
+\select@language {magyar} \contentsline {subsubsection}{\numberline {3.5.4.4}A st\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'o} (Artistic video creator) komponens impement\IeC {\'a}l\IeC {\'a}sa}{44}
+\select@language {magyar} \contentsline {section}{\numberline {3.6}Limit\IeC {\'a}ci\IeC {\'o}k}{47}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}A rendszer tesztel\IeC {\'e}se}{48}
+\select@language {magyar} \contentsline {section}{\numberline {4.1}A tesztrendszer ismertet\IeC {\'e}se}{48}
+\select@language {magyar} \contentsline {section}{\numberline {4.2}Egy k\IeC {\'e}pkock\IeC {\'a}ra t\IeC {\"o}rt\IeC {\'e}n\IeC {\H o} st\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'a}si id\IeC {\H o} \IeC {\'e}s mem\IeC {\'o}ria ig\IeC {\'e}nye}{49}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{52}

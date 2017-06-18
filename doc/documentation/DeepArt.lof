@@ -7,34 +7,35 @@
 \select@language {magyar} \contentsline {figure}{\numberline {3.4.}{\ignorespaces Adatp\IeC {\'a}rhuzamos szinkron \IeC {\'e}s aszinkron csom\IeC {\'o}pont ki\IeC {\'e}rt\IeC {\'e}kel\IeC {\'e}s\cite {35}\relax }}{22}
 \select@language {magyar} \contentsline {figure}{\numberline {3.5.}{\ignorespaces Feladatp\IeC {\'a}rhuzamos tan\IeC {\'\i }t\IeC {\'a}s\cite {35}\relax }}{23}
 \select@language {magyar} \contentsline {figure}{\numberline {3.6.}{\ignorespaces VGG-19 (Model E) h\IeC {\'a}l\IeC {\'o} topol\IeC {\'o}gi\IeC {\'a}ja\cite {29}\relax }}{25}
-\select@language {magyar} \contentsline {figure}{\numberline {3.7.}{\ignorespaces Tan\IeC {\'\i }t\IeC {\'a}si f\IeC {\"u}ggv\IeC {\'e}ny optimaliz\IeC {\'a}l\IeC {\'a}sa k\IeC {\"u}l\IeC {\"o}nb\IeC {\"o}z\IeC {\H o} tan\IeC {\'\i }t\IeC {\'a}si r\IeC {\'a}t\IeC {\'a}k eset\IeC {\'e}ben\relax }}{29}
-\select@language {magyar} \contentsline {figure}{\numberline {3.8.}{\ignorespaces A rendszer viselked\IeC {\'e}si modellje\relax }}{32}
-\select@language {magyar} \contentsline {figure}{\numberline {3.9.}{\ignorespaces A rendszert alkot\IeC {\'o} komponensek\relax }}{34}
-\select@language {magyar} \contentsline {figure}{\numberline {3.10.}{\ignorespaces \IeC {\'A}truh\IeC {\'a}z\IeC {\'a}s szekvencia diagrammja\relax }}{35}
-\select@language {magyar} \contentsline {figure}{\numberline {3.11.}{\ignorespaces A rendszer oszt\IeC {\'a}lydiagrammja\relax }}{37}
-\select@language {magyar} \contentsline {figure}{\numberline {3.12.}{\ignorespaces MainWindow\relax }}{38}
-\select@language {magyar} \contentsline {figure}{\numberline {3.13.}{\ignorespaces A rendszer felhaszn\IeC {\'a}l\IeC {\'o}i fel\IeC {\"u}lete\relax }}{39}
-\select@language {magyar} \contentsline {figure}{\numberline {3.14.}{\ignorespaces St\IeC {\'\i }lusk\IeC {\'e}pek\relax }}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aba Novak Vilmos - \IeC {\"O}narck\IeC {\'e}p}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aba Novak Vilmos - Selfportrait}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Csontvary Kosztka Tivadar - Traui t\IeC {\'a}jk\IeC {\'e}p naplemente idej\IeC {\'e}n}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Iv\IeC {\'a}nyi Grunwald B\IeC {\'e}la - Parkr\IeC {\'e}szlet Kecskem\IeC {\'e}ten}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Munk\IeC {\'a}csi Mih\IeC {\'a}ly - Vihar a puszt\IeC {\'a}n}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(f)}{\ignorespaces {R\IeC {\'e}ti Alfr\IeC {\'e}d}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(g)}{\ignorespaces {Ripl-R\IeC {\'o}nai J\IeC {\'o}zsef - Ap\IeC {\'a}m \IeC {\'e}s Piacsek b\IeC {\'a}csi v\IeC {\"o}r\IeC {\"o}sbor mellett}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(h)}{\ignorespaces {Tihanyi Tzara}}}{40}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(i)}{\ignorespaces {Magyar N\IeC {\'e}pmes\IeC {\'e}k}}}{40}
-\select@language {magyar} \contentsline {figure}{\numberline {3.15.}{\ignorespaces A be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok komponens oszt\IeC {\'a}lydiagrammja\relax }}{41}
-\select@language {magyar} \contentsline {figure}{\numberline {3.16.}{\ignorespaces Be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok dialogus ablak\relax }}{42}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Settings tab}}}{42}
-\select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Advanced Settings tab}}}{42}
-\select@language {magyar} \contentsline {figure}{\numberline {3.17.}{\ignorespaces A progress s\IeC {\'a}v komponens oszt\IeC {\'a}lydiagrammja\relax }}{43}
-\select@language {magyar} \contentsline {figure}{\numberline {3.18.}{\ignorespaces Progress s\IeC {\'a}v statikus k\IeC {\'e}p eset\IeC {\'e}ben\relax }}{44}
-\select@language {magyar} \contentsline {figure}{\numberline {3.19.}{\ignorespaces Progress s\IeC {\'a}v vide\IeC {\'o} eset\IeC {\'e}ben (deepflow kikapcsolva)\relax }}{44}
-\select@language {magyar} \contentsline {figure}{\numberline {3.20.}{\ignorespaces Progress s\IeC {\'a}v vide\IeC {\'o} eset\IeC {\'e}ben (deepflow bekapcsolva)\relax }}{44}
-\select@language {magyar} \contentsline {figure}{\numberline {3.21.}{\ignorespaces A st\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'o} (Artistic video creator) komponens oszt\IeC {\'a}lydiagrammja\relax }}{45}
+\select@language {magyar} \contentsline {figure}{\numberline {3.7.}{\ignorespaces A st\IeC {\'\i }l\IeC {\'u}s s\IeC {\'u}lyz\IeC {\'o} m\IeC {\'o}dos\IeC {\'\i }t\IeC {\'a}s\IeC {\'a}nak eredm\IeC {\'e}nyei\relax }}{27}
+\select@language {magyar} \contentsline {figure}{\numberline {3.8.}{\ignorespaces Tan\IeC {\'\i }t\IeC {\'a}si f\IeC {\"u}ggv\IeC {\'e}ny optimaliz\IeC {\'a}l\IeC {\'a}sa k\IeC {\"u}l\IeC {\"o}nb\IeC {\"o}z\IeC {\H o} tan\IeC {\'\i }t\IeC {\'a}si r\IeC {\'a}t\IeC {\'a}k eset\IeC {\'e}ben\relax }}{30}
+\select@language {magyar} \contentsline {figure}{\numberline {3.9.}{\ignorespaces A rendszer viselked\IeC {\'e}si modellje\relax }}{33}
+\select@language {magyar} \contentsline {figure}{\numberline {3.10.}{\ignorespaces A rendszert alkot\IeC {\'o} komponensek\relax }}{35}
+\select@language {magyar} \contentsline {figure}{\numberline {3.11.}{\ignorespaces \IeC {\'A}truh\IeC {\'a}z\IeC {\'a}s szekvencia diagrammja\relax }}{36}
+\select@language {magyar} \contentsline {figure}{\numberline {3.12.}{\ignorespaces A rendszer oszt\IeC {\'a}lydiagrammja\relax }}{38}
+\select@language {magyar} \contentsline {figure}{\numberline {3.13.}{\ignorespaces MainWindow\relax }}{39}
+\select@language {magyar} \contentsline {figure}{\numberline {3.14.}{\ignorespaces A rendszer felhaszn\IeC {\'a}l\IeC {\'o}i fel\IeC {\"u}lete\relax }}{40}
+\select@language {magyar} \contentsline {figure}{\numberline {3.15.}{\ignorespaces St\IeC {\'\i }lusk\IeC {\'e}pek\relax }}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Aba Novak Vilmos - \IeC {\"O}narck\IeC {\'e}p}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Aba Novak Vilmos - Selfportrait}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Csontvary Kosztka Tivadar - Traui t\IeC {\'a}jk\IeC {\'e}p naplemente idej\IeC {\'e}n}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Iv\IeC {\'a}nyi Grunwald B\IeC {\'e}la - Parkr\IeC {\'e}szlet Kecskem\IeC {\'e}ten}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Munk\IeC {\'a}csi Mih\IeC {\'a}ly - Vihar a puszt\IeC {\'a}n}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(f)}{\ignorespaces {R\IeC {\'e}ti Alfr\IeC {\'e}d}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(g)}{\ignorespaces {Ripl-R\IeC {\'o}nai J\IeC {\'o}zsef - Ap\IeC {\'a}m \IeC {\'e}s Piacsek b\IeC {\'a}csi v\IeC {\"o}r\IeC {\"o}sbor mellett}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(h)}{\ignorespaces {Tihanyi Tzara}}}{41}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(i)}{\ignorespaces {Magyar N\IeC {\'e}pmes\IeC {\'e}k}}}{41}
+\select@language {magyar} \contentsline {figure}{\numberline {3.16.}{\ignorespaces A be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok komponens oszt\IeC {\'a}lydiagrammja\relax }}{42}
+\select@language {magyar} \contentsline {figure}{\numberline {3.17.}{\ignorespaces Be\IeC {\'a}ll\IeC {\'\i }t\IeC {\'a}sok dialogus ablak\relax }}{43}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Settings tab}}}{43}
+\select@language {magyar} \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Advanced Settings tab}}}{43}
+\select@language {magyar} \contentsline {figure}{\numberline {3.18.}{\ignorespaces A progress s\IeC {\'a}v komponens oszt\IeC {\'a}lydiagrammja\relax }}{44}
+\select@language {magyar} \contentsline {figure}{\numberline {3.19.}{\ignorespaces Progress s\IeC {\'a}v statikus k\IeC {\'e}p eset\IeC {\'e}ben\relax }}{45}
+\select@language {magyar} \contentsline {figure}{\numberline {3.20.}{\ignorespaces Progress s\IeC {\'a}v vide\IeC {\'o} eset\IeC {\'e}ben (deepflow kikapcsolva)\relax }}{45}
+\select@language {magyar} \contentsline {figure}{\numberline {3.21.}{\ignorespaces Progress s\IeC {\'a}v vide\IeC {\'o} eset\IeC {\'e}ben (deepflow bekapcsolva)\relax }}{45}
+\select@language {magyar} \contentsline {figure}{\numberline {3.22.}{\ignorespaces A st\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'o} (Artistic video creator) komponens oszt\IeC {\'a}lydiagrammja\relax }}{46}
 \select@language {magyar} \addvspace {10\p@ }
-\select@language {magyar} \contentsline {figure}{\numberline {4.1.}{\ignorespaces St\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'a}si id\IeC {\H o} k\IeC {\"u}l\IeC {\"o}nb\IeC {\"o}z\IeC {\H o} felbont\IeC {\'a}sokra\relax }}{49}
-\select@language {magyar} \contentsline {figure}{\numberline {4.2.}{\ignorespaces Vide\IeC {\'o}k\IeC {\'a}rtya terhel\IeC {\'e}se \IeC {\'a}truh\IeC {\'a}z\IeC {\'a}s k\IeC {\"o}zben\relax }}{49}
-\select@language {magyar} \contentsline {figure}{\numberline {4.3.}{\ignorespaces Vide\IeC {\'o}k\IeC {\'a}rtya mem\IeC {\'o}ri\IeC {\'a}j\IeC {\'a}nak a kihaszn\IeC {\'a}lts\IeC {\'a}ga\relax }}{50}
+\select@language {magyar} \contentsline {figure}{\numberline {4.1.}{\ignorespaces St\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'a}si id\IeC {\H o} k\IeC {\"u}l\IeC {\"o}nb\IeC {\"o}z\IeC {\H o} felbont\IeC {\'a}sokra\relax }}{50}
+\select@language {magyar} \contentsline {figure}{\numberline {4.2.}{\ignorespaces Vide\IeC {\'o}k\IeC {\'a}rtya terhel\IeC {\'e}se \IeC {\'a}truh\IeC {\'a}z\IeC {\'a}s k\IeC {\"o}zben\relax }}{50}
+\select@language {magyar} \contentsline {figure}{\numberline {4.3.}{\ignorespaces Vide\IeC {\'o}k\IeC {\'a}rtya mem\IeC {\'o}ri\IeC {\'a}j\IeC {\'a}nak a kihaszn\IeC {\'a}lts\IeC {\'a}ga\relax }}{51}
 \select@language {magyar} \addvspace {10\p@ }

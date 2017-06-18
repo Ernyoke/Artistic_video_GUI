@@ -167,7 +167,6 @@
 \newpage
 \thispagestyle{empty}
 \begin{center}
-    %\Large BABE\c{S}-BOLYAI UNIVERSITY CLUJ-NAPOCA\\
     \Large SAPIENTIA UNIVERSITY TÂRGU MURE\c{S}\\
     \Large FACULTY OF TECHNICAL AND HUMAN SCIENCES\\
     \Large SOFTWARE DEVELOPMENT SPECIALIZATION\\
@@ -225,10 +224,16 @@ Subsemnata/ul ............................................................., abs
     \Large KIVONAT
 \end{center}
 
-kivonat
+Az évek során számos festőművészeti irányzat alakult ki. Mindenik rendelkezik a saját stílusával, ismertetőivel. Manapság a számítógépes látás eljutott arra a pontra, hogy képes legyen ezeket vonásokat felismerni és kategorizálni. Feltevődik a kérdés, hogy nem-e lehetne a megfordítani a folyamatot oly módon, hogy a számítógép képes legyen művészeti képet alkotni?
+\newline
+\indent
+Különböző stílusirányzatok alkalmazása képzett festőművészeknek is kihívást jelenthet, nem beszélve arról, hogy a munka elvégzése rengeteg időt vehet igénybe. Dolgozatom célja egy olyan alkalmazás készítése ami rövid idő alatt képes híres magyar festők művészeti irányzatait alkalmazni és átruházni azt mindennapi képekre illetve mozgóképekre.
+\newline
+\indent
+A dolgozat a deep learning gépi tanulási módszert használja arra, hogy a művészeti kép vonásait alkalmazza mindennapi képekre illetve videókra. Mozgóképek esetében egy olyan megoldást mutat be az átruházásra, ami figyelembe veszi képkockák közötti átmeneteket, váltakozásokat is. Az átruházás folyamata kihasználja a számítógép videókártyája által biztosított párhuzamosítási lehetőségeket, lényegesen gyorsítva ezzel a folyamatot. 
 
 \begin{flushright}
-\textbf{Szilagyi Ervin,}\\
+\textbf{Szilágyi Ervin,}\\
 .........................
 \end{flushright}
 
@@ -240,10 +245,16 @@ kivonat
     \Large ABSTRACT
 \end{center}
 
-abstract
+Pe parcursul anilor s-au dezvoltat numeroase curente artistice în domeniul picturii si a artelor plastice. Fiecare curent artistic posedă un stil unic care îl caracterizează. În prezent stiința prelucrării imaginilor pe calculator a ajuns la un nivel, la care are posibilitatea de a recunoaște și de a cataloga curentele artistice. Se poate pune intrebarea dacă s-ar putea inversa acest proces îtrucât calculatorul să fie capabil de a creea imagini artistice.
+\newline
+\indent
+Aplicarea trăsăturilor ale anumitor curente artistice la crearea unor picturi artistice reprezintă o provocare chiar și pentru un artist instruit. Totodată, timpul necesar creării unor picturi sau imagini artistice nu poate fi neglijat. Scopul acestei teze este de a prezenta și de a implementa o aplicație care să fie capabilă să preia trăsăturile artistice de pe picturi recunscute ale marilor pictori maghiari. Aceste trăsături vor transferate și aplicate pe imagini neartistice și pe videouri.
+\newline
+\indent
+Modalitatea de transfer a stilului artistic prezentată în această lucrare se bazează pe învățare automată folosind metoda deep learning. În cazul videoclipurilor se prezintă o metodă care ia în atenție și tranzițiile de pe un frame pe celălalt. Procesul de transfer a stilului se folosește de capabilitatea de multithreading a plăcii video, reducând astel timpul procesului semnificativ. 
 
 \begin{flushright}
-\textbf{Szilagyi Ervin,}\\
+\textbf{Szilágyi Ervin,}\\
 .........................
 \end{flushright}
 
@@ -255,11 +266,16 @@ abstract
     \Large ABSTRACT
 \end{center}
 
-english abstract
-
+Over the years several artistic movements were developed which had a considerable impact on the painting and fine arts. Every movement has an unique style with its own properties. In the present days computer vision reached to the point where distinguishing artistic style features does not represent a problem. A simple computer can recognize and group painting by their art movements. We can ask the question if there is possibility to reverse this process meaning that the machine itself would be able to create artistic pictures.  
+\newline
+\indent
+Applying style features from a give artistic movement consists a challenge even from a well-trained artist. Meanwhile, the necessary time for being able to create a good looking artistic picture is not neglectable at all. The scope of this project is to present and implement a solution which is able to transfer the style features from creation of well-known Hungarian painters and apply the features to images and videos created by the user.
+\newline
+\indent
+The artistic style transfer is done using deep learning, a widespread machine learning method used for computer vision applications. The project also contains a solution which takes in consideration the transition and the temporal differences between frames in case of video input. The style transferring process is using the capability of the video card which is running massively parallel application. By using the data parallelization capability of a video card, we can reduce the learning time considerably. 
 
 \begin{flushright}
-\textbf{Szilagyi Ervin,}\\
+\textbf{Szilágyi Ervin,}\\
 .........................
 \end{flushright}
 
@@ -354,10 +370,10 @@ A rendszer működése felülnézetből nagyon egyszerű (\ref{felulnezet_1} áb
 \ssecro{Conceptele de bază a librăriei Tensorflow}
 \ssecen{The basic concepts of Tensorflow library}
 
-A Tensorflow egy gépi tanításra alkalmas könyvtár. Tensorflow segítségével leírt algoritmus nagyon kevés kódmodosítással számos eszközön futtatható, kezdve a mobil eszközöktől egészen a GPU-kal ellátott osztott rendszerekig. Főleg a deep learning típusú algoritmusok implementálására használatos, viszont flexibilitásából adódóan számos más tanítási folyamat elvégzésére is képes \cite{35}.
+A Tensorflow egy gépi tanításra alkalmas könyvtár. Tensorflow segítségével leírt algoritmus nagyon kevés kódmódosítással számos eszközön futtatható, kezdve a mobil eszközöktől egészen a GPU-kal ellátott osztott rendszerekig. Főleg a deep learning típusú algoritmusok implementálására használatos, viszont flexibilitásából adódóan számos más tanítási folyamat elvégzésére is képes \cite{35}.
 \newline
 \indent
-A Tensorflow működése leíraható egy irányított gráf segítségével. A gráf az adat áramlását reprezentálja, míg a gráfban levő csúcsok jelentik a kontrollt az adat áramlása fölött. Egy ilyen gráfban minden csúcsnak 0 vagy több bemenetele van, valamint 0 vagy több kimenettel rendelkezik. Minden csúcs egy operációt jelent. A csúcsok közt folyó adatothalmazokat tenzoroknak nevezzük. Valójában egy tenzor egy N dimenziós tömböt jelent. Speciális élek is létezhetnek a gráfban az adatfolyam kontrollálására. Ilyen él lehet például egy olyan ami megtiltja, hogy adat folyon át rajta \cite{35}.
+A Tensorflow működése leírható egy irányított gráf segítségével. A gráf az adat áramlását reprezentálja, míg a gráfban levő csúcsok jelentik a kontrollt az adat áramlása fölött. Egy ilyen gráfban minden csúcsnak 0 vagy több bemenetele van, valamint 0 vagy több kimenettel rendelkezik. Minden csúcs egy operációt jelent. A csúcsok közt folyó adathalmazokat tenzoroknak nevezzük. Valójában egy tenzor egy N dimenziós tömböt jelent. Speciális élek is létezhetnek a gráfban az adatfolyam kontrollálására. Ilyen él lehet például egy olyan, ami megtiltja, hogy adat folyjon át rajta \cite{35}.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -367,13 +383,13 @@ A Tensorflow működése leíraható egy irányított gráf segítségével. A g
 	\end{center}
 \end{figure}
 
-Az operációknak lehetnek nevük és attributumaik. A kernel egy operáció implementációja ami egy adott típusú hardveren (CPU vagy GPU) fut. Különféle típusú kerneleket különböztetünk meg, amik lehetnek alap matematikai műveletek (összeadás, kivonás, szorzás, osztás, logaritmus, kisebb, nagyobb, egyenlőség, stb.), tömb műveletek (konkatenálás, felvágás, rang, stb.), mátrix műveletek (mátrix szorzás, inverz, determináns, stb.), neuron háló réteg típusok (softmax, szigmoid, ReLu, konvolúciós, stb.), szinkronizációs műveletek (mutex műveletek, sorba állítás) és adatfolyam kontrollálásra szolgáló műveletek.
+Az operációknak lehetnek nevük és attribútumaik. A kernel egy operáció implementációja, ami egy adott típusú hardveren (CPU vagy GPU) fut. Különféle típusú kerneleket különböztetünk meg, amik lehetnek alap matematikai műveletek (összeadás, kivonás, szorzás, osztás, logaritmus, kisebb, nagyobb, egyenlőség, stb.), tömb műveletek (konkatenálás, felvágás, rang, stb.), mátrix műveletek (mátrix szorzás, inverz, determináns, stb.), neuron háló réteg típusok (softmax, szigmoid, ReLu, konvolúciós, stb.), szinkronizációs műveletek (mutex műveletek, sorba állítás) és adatfolyam kontrollálásra szolgáló műveletek.
 \newline
 \indent
 Ahhoz, hogy a számítási gráfban definiált műveleteket elvégezhessük, szessziókat (session) kell definiálni. Szessziók használata megengedi a teljes gráf kiértékelését vagy akár részleges kiértékelést is. A gráf kiértékelése a szesszió Run függvényével történik. 
 \newline
 \indent
-A váltózó egy olyan tenzot ami megtartja az értékét többszörös számítási gráf kiértékelés esetén is. A változó egy olyan tenzorra utal aminek tartalma megváltozhat, ezzel ellentétben létezik a konstans aminek tartalma nem változhat.
+A változó egy olyan tenzor ami megtartja az értékét többszörös számítási gráf kiértékelés esetén is. A változó egy olyan tenzorra utal aminek tartalma megváltozhat, ezzel ellentétben létezik a konstans aminek tartalma nem változhat.
 \newline
 \indent
 A Tensorflow párhuzamosításra úgynevezett processzeket használ (\ref{single_proc_vs_multiple_proc}. ábra). A kliens szoftver egy szesszió interfészen keresztül kommunikál a master processzel és a worker proceszekkel. Mindenik procesz felelős egy vagy több számítási eszközért (computation device), amik lehetnek CPU magok vagy GPU kártyák. Ezek az eszközök lehetnek lokálisak, ami azt jelenti, hogy ugyanabban a rendszerben helyezkednek el, vagy lehetnek osztottak, ez esetben külön rendszerekben helyezkednek el a különféle eszközök. Minden eszköz saját névvel rendelkezik\cite{35}.
@@ -381,7 +397,7 @@ A Tensorflow párhuzamosításra úgynevezett processzeket használ (\ref{single
 \subsection{Futtatás egyetlen készülék esetében}
 \ssecro{Execuție pe un simplu device}
 \ssecen{Execution in case of a single device}
-Egyetlen eszköz jelenlétében a csúcsok egymást követően lesznek kiértékelve figyelembe véve a közöttük levő dependenciákat. Minden csúcs esetében számolva van, hogy hány dependenciát tartalmaz, ha ezek közül egyik ki volt értékelve, akkor ez a számláló csökken. Mikor a számláló elérta a 0-át, akkor továbblép és kiértékeli e következő csúcsot. A kiértékelésre várakozó csúcsok egy listába vannak elhelyezve.
+Egyetlen eszköz jelenlétében a csúcsok egymást követően lesznek kiértékelve figyelembe véve a közöttük levő dependenciákat. Minden csúcs esetében számolva van, hogy hány dependenciát tartalmaz, ha ezek közül egyik ki volt értékelve, akkor ez a számláló csökken. Mikor a számláló elérta a 0-át, akkor tovább lép és kiértékeli e következő csúcsot. A kiértékelésre várakozó csúcsok egy listába vannak elhelyezve.
 
 \subsection{Futtatás több készülék esetében}
 \ssecro{Execuție pe mai multe device-uri}
@@ -445,9 +461,9 @@ A mély neurálos hálók (Deep Neural Networks) azon típusai amik a legeredmé
 	\item fully connected layer: minden bemenet mindem más bemenettel kapcsolatban áll.
 \end{itemize}
 
-A konvolúciós hálók súlyzókként konvolúciós szűrőket tartalmaznak. Ezek, tárgyfelisrmerés tanítása esetében, az adott bemeneti kép különböző tulajdonságait fogják tartalmazni. Annak függvényében, hogy a háló topológiájában egy adott réteg hol helyezkedik el, más tulajdonságokat fognak raktározni a szűrök. Az bemeneti réteghez közel álló alacsony szintű rétegek az adott kép pixelinformációit próbálják megjegyezni ezzel szemben a magasabb szinten levő rétegek szűrői különböző tárgyakat, formákat próbálnak megjegyezni\cite{27}\cite{28}. A hálók által tartalmazott információ vizualizálható azáltal, hogy rekonstruáljuk a bemeneti képet a súlyzók alapján. Alacsony rétegek esetében apró módosításokkal visszanyerhető az eredeti kép míg magasabb rétegek esetében objektumok, formák nyerhetők vissza.
+A konvolúciós hálók súlyzókként konvolúciós szűrőket tartalmaznak. Ezek, objektum felisrmerés tanítása esetében, az adott bemeneti kép különböző tulajdonságait fogják tartalmazni. Annak függvényében, hogy a háló topológiájában egy adott réteg hol helyezkedik el, más tulajdonságokat fognak raktározni a szűrök. Az bemeneti réteghez közel álló alacsony szintű rétegek az adott kép pixelinformációit próbálják megjegyezni ezzel szemben a magasabb szinten levő rétegek szűrői különböző tárgyakat, formákat próbálnak megjegyezni\cite{27}\cite{28}. A hálók által tartalmazott információ vizualizálható azáltal, hogy rekonstruáljuk a bemeneti képet a súlyzók alapján. Alacsony rétegek esetében apró módosításokkal visszanyerhető az eredeti kép míg magasabb rétegek esetében objektumok, formák nyerhetők vissza.
 
-Az eredi kép tanításához egy már előre betanított mély konvolúciós neuronhálót használunk fel. A háló tudományos kontextusban VGG-19 név alatt terjedt el amit Simonyan K. és  Zisserman A. vezetett be publikációjukban\cite{29} ahol még a "model E" nevet viselte. Ez a háló gép látás és tárgyfelismerés céljából volt bevezetve olyan eredményeket produkálva e téren amik az emberi látással versengenek. Rétegei és topológiájának részletes bemutatása a \cite{29} publikációban történik, valamint a \ref{vgg_19} figurán is látható. Fontos megjegyezni, hogy a háló rétegeiből használva volt a 16 konvolúciós réteg, valamint az 5 pooling réteg, a teljesen összekötött rétegek nem voltak használva.
+Az eredi kép tanításához egy már előre betanított mély konvolúciós neuronhálót használunk fel. A háló tudományos kontextusban VGG-19 név alatt terjedt el amit Simonyan K. és  Zisserman A. vezetett be publikációjukban\cite{29} ahol még a "model E" nevet viselte. Ez a háló gépi látás és tárgyfelismerés céljából volt bevezetve olyan eredményeket produkálva e téren amik az emberi látással versengenek. Rétegei és topológiájának részletes bemutatása a \cite{29} publikációban történik, valamint a \ref{vgg_19} figurán is látható. Fontos megjegyezni, hogy a háló rétegeiből használva volt a 16 konvolúciós réteg, valamint az 5 pooling réteg, a teljesen összekötött rétegek nem voltak használva.
 
 \begin{figure}[h]
 	\begin{center}
@@ -460,7 +476,7 @@ Az eredi kép tanításához egy már előre betanított mély konvolúciós neu
 A választás azért esett erre az előre betanított hálóra, mivel Yaroslav N. és Roman N. kutatása alapján\cite{16} összehasonlítva a AlexNet, GoogLeNet VGG-16 és VGG-19 halókat, a VGG-19 használata során sikerült a leglátványosabb képeket készíteni.
 \newline
 \indent
-A konvolúciós neuron háló minden rétege tartalmaz egy adott számú szűrőt, amik különbőző tulajdonságokat tartalmaznak a bementi képről. Ebből kifolyólag maga a bemenet kódolva van a szűrőkben. Egy \(N\) tulajdonságót tartalmazó réteg \(N\) szűrővel rendelkezik amelyek mérete \(M\). Maga a réteg kimenete lementhető egy \(N * M\) -es mátrixban. Egy adott réteg válasza egy bemeneti képre vizualizálható, ha gradient descent módszert alkalmazunk egy fehér zajt tartalmazó bemeneti képen. Tehát, legyen \(R^l\) egy adott az \(l\) haló válasza egy adott bemeneti képre. Legyen \(W^l\) ugyanaz az \(l\) háló válasza egy adott fehér zajt tartalmazó bemeneti kép esetében. Akkor felírható a veszteség függvény mint:
+A konvolúciós neuron háló minden rétege tartalmaz egy adott számú szűrőt, amik különbőző tulajdonságokat tartalmaznak a bementi képről. Ebből kifolyólag maga a bemenet kódolva van a szűrőkben. Egy \(N\) tulajdonságót tartalmazó réteg \(N\) szűrővel rendelkezik amelyek mérete \(M\). Maga a réteg kimenete lementhető egy \(N * M\) -es mátrixban. Egy adott réteg válasza egy bemeneti képre vizualizálható, ha gradient descent módszert alkalmazunk egy fehér zajt tartalmazó bemeneti képen. Tehát, legyen \(R^l\) egy adott az \(l\) haló válasza egy adott bemeneti képre. Legyen \(W^l\) ugyanaz az \(l\) háló válasza egy adott fehér zajt tartalmazó bemeneti kép esetében. Akkor felírható a veszteségfüggvény mint:
 
 \begin{equation}
 L_{content}(\vec{x}, \vec{r}, l) = \frac{1}{2}\sum{R^l_{ij} - W^l_{ij}}
@@ -486,13 +502,13 @@ A \(CONTENT\_LAYER\) tuple típusú ami tartalmazza azoknak a rétegeknek az azo
 \subsection{Az stílus kép tanításának a veszteségi függvénye}
 \ssecro{Funcția de pierdere în cazul imaginii de stil}
 \ssecen{The loss function of the style image}
-Az előbbiekben az eredeti bemeneti kép tartalmára voltunk kíváncsiak. A stílus kép esetében viszont nem maga a kép tartalma a fontos. Ebben az esetben egy mintázatot szeretnénk kinyerni a stílusképből. Ehhez fontos megismerni maga a Gramm mátrix fogalmát. Hogyha adott egy vektorhalmazunk \(v1...vn\), akkor a \(G\) Gramm mátrixot a következő eljárás szerint határozzuk meg\cite{30}:
+Az előbbiekben az eredeti bemeneti kép tartalmára voltunk kíváncsiak. A stílus kép esetében viszont nem maga a kép tartalma a fontos. Ebben az esetben egy mintázatot szeretnénk kinyerni a stílusképből. Ehhez fontos megismerni maga a Gramm mátrix fogalmát. Hogyha adott egy vektorhalmazunk \(v_1...v_n\), akkor a \(G\) Gramm mátrixot a következő eljárás szerint határozzuk meg\cite{30}:
 
 \begin{equation}
 G_{ij} = v_i \cdot v_j
 \end{equation}
 
-Tehát hogyha az \(A\) mátrixunk oszlopait maga a \(v1, v2 ... vn\) vektorok képezik, akkor a \(G\) Gramm mátrix a következőképpen kapható meg:
+Tehát hogyha az \(A\) mátrixunk oszlopait maga a \(v_1, v_2 ... v_n\) vektorok képezik, akkor a \(G\) Gramm mátrix a következőképpen kapható meg:
 
 \begin{equation}
 G_{ij} = A A^T
@@ -507,7 +523,7 @@ Hogyha az \(l\) rétegnek \(N\) szűrője van, akkor \(G \in R^{N_l*N_l}\), ahol
 G^l_{ij} = \sum_{k} F^l_{ik} \cdot F^l_{jk}
 \end{equation}
 
-Ahhoz, hogy megkapjuk egy adott háló által generált mintát, textúrát, hasonlóan mint az előzőekben, fehér zaj képet adunk bemenetként. A veszteségfüggvény egyetlen hálóra felírható mint a fehér zaj képre adott válasz és a stílus képre adott válasz átlagos négyzetes hibájaként. A \(G\) jelenti a fehér zaj képre adott választ, az \(A\) pedig a stílus képre adott választ.
+Ahhoz, hogy megkapjuk egy adott háló által generált mintát, textúrát, hasonlóan mint az előzőekben, fehér zaj képet adunk bemenetként. A veszteségfüggvény egyetlen rétegre felírható mint a fehér zaj kép Gramm mátrixa és a stílus kép Gramm mátrixának átlagos négyzetes hibájaként. A \(G\) jelöli a fehér zaj kép Gramm mátrixát, az \(A\) pedig a stílus kép Gramm mátrixát.
 
 \begin{equation}
 E_l = \frac{1}{4N^2_l M^2_l} \sum_{i,j} (G_{ij} - A_{lj})^2
@@ -518,6 +534,16 @@ Az összes stílus réteg válasza felírható, mint egy összeg, ahol \(w_l\) e
 \begin{equation}
 L_{style}(\vec{a}, \vec{x}) = \sum w_lE_l
 \end{equation}
+
+A \ref{style_factor}. ábra szemlélteti a stílus súlyzó változtatásának hatását. A bemeneti kép a "Sapientia épülete", a stíluskép Munkácsy Mihály "Vihar a pusztán" mesterműve. Az ábra bemutatja, hogy miképpen változik a kimeneti kép a stílús súlyzójának függvényében.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.33]{style_factor.png}
+		\caption{A stílús súlyzó módosításának eredményei}
+		\label{style_factor}
+	\end{center}
+\end{figure}
 
 A Gramm mátrix számolása Tensorflow környezetben a következőképpen történik:
 
@@ -627,7 +653,7 @@ Miután a stílus átruházása az összes képkockára megtörtént, vesszük a
 ffmpeg "-i" frame%05d.<ext> output_name.<ext>
 \end{lstlisting}
 
-A naiv megközelítés működik, a kimenet egy olyan videó lesz, amely tartalmazza a bemeneti stíluskép jellegzetességeit. Ugyanakkor észlelhető, hogy az eredmény nem valami esztétikus. Észlelhető, hogy a képkockák közötti átmenet nem valami folyamatos. Emellett különböző zajokat, úgynevezett artifact-eket észlelhetünk. 
+A naiv megközelítés működik, a kimenet egy olyan videó lesz, amely tartalmazza a bemeneti stíluskép jellegzetességeit. Ugyanakkor észlelhető, hogy az eredmény nem valami esztétikus. Észlelhető, hogy a képkockák közötti átmenet nem folyamatos. Emellett különböző zajokat, úgynevezett "artifact"-eket észlelhetünk. 
 
 \subsection{A haló inicializálása képkockák esetében}
 \ssecro{Inițializarea rețelei pentru frame-uri}
@@ -641,14 +667,14 @@ Egy megoldás kísérlet erre az lenne, hogy a ha egy képkocka stilizálása t�
 \ssecro{Introducerea optical flow-ului}
 \ssecen{Introduction of the optical flow}
 
-Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képt képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
+Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képet képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek, mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
 Az optical flow meghatározásához a DeepMatching - Deepflow algoritmust használtuk. Ennek a kimenete egy .flo kiterjesztésű fájl ami tartalmazza adott pixelek esetében a horizontális és vertikális elmozdulás vektorokat.
 \newline
 \indent
-Az optical flow meghatározásával egy mozgóképen meghatározhatók azok a régiók, amik statikusak (adott időn belül az illető régióban nincs változás, úgymond nincs mozgás) valamint azokat a régiókat ahol változás történik. Ami még fontos nekünk meghatározni egy adott mozgó objektum/személy esetében azt az kétdimenziós intervallumot, amelyben mozog. Meghatórozzuk a mozgási határait (lásd: ). Ennek a metódusát Sundaran és társai írják le a ... publikációjukban.
+Az optical flow meghatározásával egy mozgóképen meghatározhatók azok a régiók, amik statikusak (adott időn belül az illető régióban nincs változás, úgymond nincs mozgás) valamint azokat a régiókat ahol változás történik. Ami még fontos nekünk meghatározni egy adott mozgó objektum/személy esetében azt az kétdimenziós intervallumot, amelyben mozog. Meghatározzuk a mozgási határait (lásd: ). Ennek a metódusát Sundaran és társai írják le a ... publikációjukban.
 \newline
 \indent
-Két egymést követő képkocka esetében meghatározható az optical flow előre, tehát az képkockák időrendi sorrendjében, valamint meghatározható visszafele, az időrendi sorrend ellentett irányában. Jelölje \(w(i, j)\) az előre történő optical flow-t, valamint \(\hat{w}(i, j)\) a visszafele történő optical flow-t. Ekkor felírható a w torzítása a w alapján:
+Két egymást követő képkocka esetében meghatározható az optical flow előre, tehát az képkockák időrendi sorrendjében, valamint meghatározható visszafele, az időrendi sorrend ellentett irányában. Jelölje \(w(i, j)\) az előre történő optical flow-t, valamint \(\hat{w}(i, j)\) a visszafele történő optical flow-t. Ekkor felírható a w torzítása a w alapján:
 
 \begin{equation}
 \tilde{w}(i, j) = w((i, j) + \hat{w}(i, j))
@@ -664,7 +690,7 @@ A mozgási határok pedig meghatározhatóak:
 |\nabla\hat{u}| + |\nabla\hat{v}| > 0.01|\tilde{w}|^2 + 0.002
 \end{equation}
 
-A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix ami tartalmazza a mozgás néküli zonánkat valamint a mozgási határokat. Ezt a mátrixot átalakítjuk olyan módon, hogy a mozgási határokra 1-est rakunk, a többi érték 0-ás lesz, jelöljük ez a mátixot \(c^{(i-1,i)}\)-vel az \(i-1\) és \(i\)-dik képkocka között. Ezt felhasználva felírhatjuk egy újabb veszteség függvényt: 
+A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix, ami tartalmazza a mozgás nélküli zónánkat valamint a mozgási határokat. Ezt a mátrixot átalakítjuk olyan módon, hogy a mozgási határokra 1-est rakunk, a többi érték 0-ás lesz, jelöljük ez a mátrixot \(c^{(i-1,i)}\)-vel az \(i-1\) és \(i\)-dik képkocka között. Ezt felhasználva felírhatjuk egy újabb veszteség függvényt: 
 
 \begin{equation} \label{eq:2}
 L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
@@ -682,16 +708,16 @@ L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
 A rendszer interakciós modellje (\ref{use_case_diagram}. ábra) a lehető legegyszerűbb. Egyetlen aktort határozunk meg, aki maga a felhasználó. A rendszer esetében nem beszélhetünk bármilyen adminisztrációs felületről mivel nem rendelkezik semmiféle háttértárral valamint nem pillanatnyilag nem definiál semmifel hálózati komponenst.
 \newline
 \indent
-A felhasználónak lehetősége van új kép illetve videó anyag bevitelére. Ez a funkcionalitást egyazon komponens végzi aminek a egyik feladata eldönteni, hogy a kijelölt bemenet kép vagy videó típusú. A felhasználónak lehetősége van a meghatározott kiterjesztésű fájlok közül választani bemenethez.
+A felhasználónak lehetősége van új kép illetve videó anyag bevitelére. Ez a funkcionalitást egyazon komponens végzi aminek az egyik feladata eldönteni, hogy a kijelölt bemenet kép vagy videó típusú. A felhasználónak lehetősége van a meghatározott kiterjesztésű fájlok közül választani bemenethez.
 \newline
 \indent
-A felhasználónak lehetősége van a rendszer által biztósított stílusok közül választani. A felhasználó nem határozhat meg új stílust. A rendszer nem biztosít erre adminisztrációs felületet.
+A felhasználónak lehetősége van a rendszer által biztosított stílusok közül választani. A felhasználó nem határozhat meg új stílust. A rendszer nem biztosít erre adminisztrációs felületet.
 \newline
 \indent
-A felhasználó meghatározhatja az átruházási folyamat tanítási paramétereit. A rendszer erre biztosít alapértelmezett értékeket amiket a felhasználó változtathat. A rendszer megjegyzi az új paramétereket, ezek új indításkor is megmaradnak. A rendszer az alapértelmezett paramétereket is megjegyzi, ezeket a felhasználó bármikor visszálíthatja az erre kifejlesztett opció használatával.
+A felhasználó meghatározhatja az átruházási folyamat tanítási paramétereit. A rendszer erre biztosít alapértelmezett értékeket, amiket a felhasználó változtathat. A rendszer megjegyzi az új paramétereket, ezek új indításkor is megmaradnak. A rendszer az alapértelmezett paramétereket is megjegyzi, ezeket a felhasználó bármikor visszaállíthatja az erre kifejlesztett opció használatával.
 \newline
 \indent
-A felhasználó meghatározhatja az utvonalat ahova a kimenet le lesz mentve. A mentést a rendszer automatikusan el fogja végezni az átruházási folyamat után.
+A felhasználó meghatározhatja az útvonalat ahova a kimenet le lesz mentve. A mentést a rendszer automatikusan el fogja végezni az átruházási folyamat után.
 
 \begin{figure}[h]
 	\begin{center}
@@ -701,7 +727,7 @@ A felhasználó meghatározhatja az utvonalat ahova a kimenet le lesz mentve. A 
 	\end{center}
 \end{figure}
 
-A rendszer interakciós modelljét az \ref{felulnezet_1}. ábra tartalmazza. A felhasználó kiválaszt egy bemeneti állományt a rendszer által meghatározott kiterjesztések közül(.jpg, .png, .gif, .avi, .mp4), majd kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén lefuttatja a 3.2-es fejezetben ismertetett taítási algoritmust amely során az átruházza a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd alkalmazva lesz a 3.3-as fejezet tanítási metódusa. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Végezetül a rendszer lementi a megadott helyre a kimeneti állományt.
+A rendszer interakciós modelljét az \ref{felulnezet_1}. ábra tartalmazza. A felhasználó kiválaszt egy bemeneti állományt a rendszer által meghatározott kiterjesztések közül(.jpg, .png, .gif, .avi, .mp4), majd kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén lefuttatja a 3.2-es fejezetben ismertetett tanítási algoritmust amely során az átruházza a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd alkalmazva lesz a 3.3-as fejezet tanítási metódusa. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Végezetül a rendszer lementi a megadott helyre a kimeneti állományt.
 
 \subsection{A rendszer strukturális modellje}
 \ssecro{Modelul structural al sistemului}
@@ -709,13 +735,15 @@ A rendszer interakciós modelljét az \ref{felulnezet_1}. ábra tartalmazza. A f
 
 A rendszer a következő komponensekből tevődik össze (\ref{component_diagram}. ábra):
 \begin{itemize}
-	\item Main Window: az aplikáció fő ablaka, ez az ablak jelenik meg az applikáció indításakor, valamint erről az ablakról lehet kiválasztani a bemeneti adatot és a stílus képet. Az ablak Start gombjának a lenyomásával indítható az átruházási folyamat. Az ablak tartalmaz két beágyazott területet, ahol a bemeneti adat, valamint a végeredmény tekinthető meg.
-	\item Settings Dialog: a főablak menüsorából (Menu Bar) jeleníthető meg. Fő feladata egy grafikus felület biztosítása a különféle beállítások és tanítási paraméterek megadásához. A felhasználó megadhatja az útvonalat ahhoz a mappához, ahova a kimenet lesz tárolva, megadhatja a bemeneti VGG19 háló útvonalat valamint a tanítási paramétereket.
-	\item ProgressBar Dialog: a feladata kimutatni a felhasználó számára, hogy az átruházás milyen státusban van, mennyi van még hátra amig a folyamat befejeződik. Erre azért van szükség, mivel az átruházási folyamat időigényes, ezért fontos a felhasználó tudtára adni, hogy milyen állapotban van a folyamat. A folyamat befejeztekor egy jelzést küld a Main Window komponensnek, ami ki fogja jelezni a felhasználónak a végeredményt.
-	\item Artistic Video creator: ez képezi az aplikáció magját, ez az a komponens, ami elvégzi maga az átruházási folyamatot. A bemeneti paramétereket/adatokat a Main Window komponenstől kapja. Az átruházási folyamat a videó kártyán fog futni, de ettől föggetlenül a komponens jelzéseket fog küldeni a ProgressBar komponensnek.
-	\item Image handler: feladata a bemeneti képek beolvasása és kiíratása a merevlemezre. Beolvasáskor egy preprocesszálás műveletet végez, majd kimenetkor egy poszprocesszálás művelet lesz elvégezve. Fontos megjegyezni, hogy ezt a komponens a processzálások miatt nem ajánlott használni applikáción belüli képkijelzésre, például a Main Window komponens esetében.  
-	\item Video handler: feladata a bemeneti videot képkockákra vágni és a kimeneti képkockákból videót készíteni. A képkockák egy temporális folderbe lesznek elmentve vágás után, ezeknek a beolvasását a Image handler komponens végzi majd.
-	\item VGG19 handler: a komponens feladata ez előre betanított és kimentett VGG19 háló beolvasása és átalakítása egy olyan hálóvá amit a Tensorflow könyvtár fel tud dolgozni majd.
+	\item Main Window: az applikáció fő ablaka, ez az ablak jelenik meg az applikáció indításakor, valamint erről az ablakról lehet kiválasztani a bemeneti adatot és a stílus képet. Az ablak Start gombjának a lenyomásával indítható az átruházási folyamat. Az ablak tartalmaz két beágyazott területet, ahol a bemeneti adat, valamint a végeredmény tekinthető meg.
+	\item Settings: a főablak menüsorából (Menu Bar) jeleníthető meg. Fő feladata egy grafikus felület biztosítása a különféle beállítások és tanítási paraméterek megadásához. A felhasználó megadhatja az útvonalat ahhoz a mappához, ahova a kimenet lesz tárolva, megadhatja a bemeneti VGG19 háló útvonalat valamint a tanítási paramétereket.
+	\item Progress bar: a feladata kimutatni a felhasználó számára, hogy az átruházás milyen státusban van, mennyi van még hátra amig a folyamat befejeződik. Erre azért van szükség, mivel az átruházási folyamat időigényes, ezért fontos a felhasználó tudtára adni, hogy milyen állapotban van a folyamat. A folyamat befejeztekor egy jelzést küld a Main Window komponensnek, ami ki fogja jelezni a felhasználónak a végeredményt.
+	\item Artistic Video creator: ez képezi az applikáció magját, ez az a komponens, ami elvégzi maga az átruházási folyamatot. A bemeneti paramétereket/adatokat a Main Window komponenstől kapja. Az átruházási folyamat a videó kártyán fog futni, de ettől függetlenül a komponens jelzéseket fog küldeni a Progress bar komponensnek. Ehhez a komponenshez tartoznak a következő modulok:
+	\begin{itemize}
+		\item Képkezelő: feladata a bemeneti képek beolvasása és kiíratása a merevlemezre. Beolvasáskor egy preprocesszálás műveletet végez, majd kimenetkor egy posztprocesszálás művelet lesz elvégezve. Fontos megjegyezni, hogy ezt a modult a processzálások miatt nem ajánlott használni a komponensen kívül.  
+		\item Videó kezelő: feladata a bemeneti videot képkockákra vágni és a kimeneti képkockákból videót készíteni. A képkockák egy temporális folderbe lesznek elmentve vágás után, ezeknek a beolvasását a képkezelő modul végzi majd.
+		\item VGG19 kezelő: a modul feladata ez előre betanított és kimentett VGG19 háló beolvasása és átalakítása egy olyan hálóvá amit a Tensorflow könyvtár fel tud dolgozni majd.
+	\end{itemize}
 \end{itemize}
 
 \begin{figure}[h]
@@ -730,14 +758,14 @@ A rendszer a következő komponensekből tevődik össze (\ref{component_diagram
 \ssecro{Proiectarea pe mai multe fire computaționale a unelor componente}
 \ssecen{Multithreaded design and communication of components}
 
-A egy bemeneti képre való stílus átruházás időigényes folyamat. Mozgókép esetében ez a folyamat időigénye lineárisan növekedik a képkockák számának szorzatával. Annak érdekében, hogy az alkalmazásunk reszponzív legyen elhagyhatatlan aspektus egy olyan modell kialakítása ami igénybe veszi a modern processzorok többszálas működési tulajdonságát. Az Artistic video creator komponens működése során ugyan igénybe veszi a videó kártya számítási kapacítását, de ez semmiképp sem jelenti azt, hogy a futási idő elhanyagolható. Ugyanakkor fontos kiemelni azt is, azon függvényhívások sorozata ami a videókártyán fog elvégződni, szinkron módon történik. Valójában a programunk meghívja az adott függvényt majd addig várakozik, amig megoldás nem érkezett erre.
+Egy bemeneti képre való stílus átruházás időigényes folyamat. Mozgókép esetében ez a folyamat időigénye lineárisan növekedik a képkockák számának szorzatával. Annak érdekében, hogy az alkalmazásunk reszponzív legyen elhagyhatatlan aspektus egy olyan modell kialakítása ami igénybe veszi a modern processzorok többszálas működési tulajdonságát. Az Artistic video creator komponens működése során ugyan igénybe veszi a videókártya számítási kapacitását, de ez semmiképp sem jelenti azt, hogy a futási idő elhanyagolható. Ugyanakkor fontos kiemelni azt is, azon függvényhívások sorozata ami a videókártyán fog elvégződni, szinkron módon történik. Valójában a programunk meghívja az adott függvényt majd addig várakozik, amig megoldás nem érkezett erre.
 \newline
 \indent
-Alkalmazásunk esetében megkülönböztetünk egy főszálat valamint egy mellékszálat (\ref{seq_diagram}. ábra). A főszálon fog futni a Main Window és a köréje csoportosulú felhasználói felülettel rendelkező komponensek, mint például a Settings vagy a ProgressBar. Az alkalmazás indításakor csak a főszál indul el ami létrehozza a Main Window és Settings komponenseket. Ezt követően, ha a felhasználó megadja a bemeneti állományt, létrejön a ProgressBar komponens. A ProgressBar azért jön létre csak ebben a pillanatban, mivel a rendszernek el kell döntenie a bemenet típusát és ennek függvényében egy factory modell segítségével dönti el, hogy milyen típusú komponens jön létre. Ebben a pillanatban azonban a Progressbar komponens még nem látható a felhasználó számára.
+Alkalmazásunk esetében megkülönböztetünk egy főszálat valamint egy mellékszálat (\ref{seq_diagram}. ábra). A főszálon fog futni a Main Window és a köréje csoportosuló felhasználói felülettel rendelkező komponensek, mint például a Settings vagy a ProgressBar. Az alkalmazás indításakor csak a főszál indul el ami létrehozza a Main Window és Settings komponenseket. Ezt követően, ha a felhasználó megadja a bemeneti állományt, létrejön a ProgressBar komponens. A ProgressBar azért jön létre csak ebben a pillanatban, mivel a rendszernek el kell döntenie a bemenet típusát és ennek függvényében egy factory modell segítségével dönti el, hogy milyen típusú komponens jön létre. Ebben a pillanatban azonban a Progressbar komponens még nem látható a felhasználó számára.
 \newline
 \indent
 Ha felhasználó úgy dönt, hogy a megfelelő bemenetet választotta ki, elindíthatja az átruházási folyamatot. Ekkor egy külön szál jön létre (Worker thread), ami átveszi a bemeneti adatokat és elkezdi a folyamatot. A terhelés ebben a pillanatban átkerül a másodlagos szálra, ennek eredményeképp a főszál nem fog blokkolódni. Így az felhasználói felület aktív marad a felhasználó számára és ki fogja tudni szolgálni annak kéréseit.
-A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a ProgressBar komponenssel és jelzéseket küld a munkafolyamat státusáról így ez ki tudja jelezni, hogy mennyi munka van még hátra. A munkafolyamat bármikor leállítható még azelőtt, hogy az átruházás befejeződött volna. Ilyenkor a ProgressBar üzenetet küld az Artistic Video creator komponensnek, ami beállít egy saját leállításra szánt flag-et. A folyamat két iteráció között állítható le, ha az illető flag be volt állítva. Miután a munkafolyamat sikeresen leállt, egy jelzés fog érkezni a ProgressBar komponenshez ami majd nyugtázni fogja. Ha a munkafolyamat bevégződőtt, vagy a felhasználó által megszakításra került, a másodlagos szál el fog halni, az ezáltal igényelt erőforrások pedig fel fognak szabadulni.
+A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a ProgressBar komponenssel és jelzéseket küld a munkafolyamat státusáról így ez ki tudja jelezni, hogy mennyi munka van még hátra. A munkafolyamat bármikor leállítható még azelőtt, hogy az átruházás befejeződött volna. Ilyenkor a ProgressBar üzenetet küld az Artistic Video creator komponensnek, ami beállít egy saját leállításra szánt flag-et. A folyamat két iteráció között állítható le, ha az illető flag be volt állítva. Miután a munkafolyamat sikeresen leállt, egy jelzés fog érkezni a ProgressBar komponenshez ami majd nyugtázni fogja. Ha a munkafolyamat bevégződött, vagy a felhasználó által megszakításra került, a másodlagos szál el fog halni, az ezáltal igényelt erőforrások pedig fel fognak szabadulni.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -751,16 +779,16 @@ A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a 
 \ssecro{Impementarea sistemului}
 \ssecen{The implementation of the system}
 
-A rendszer implementációja Python környezetben történt. Ahogy már a bevezetőben is említésre került, aaz alábba könyvtárak kerültek felhasználásra: numpy, Tensorflow, opencv, PyQt. Az elkövetkezőkben ki szeretnék térni a PyQt könyvtár bemutatására ugyanis a szoftver jelentős része ennek a felhasználásával valósult meg és az implementációban használt egyes tervezési minták a PyQt sajátosságait próbálják kiaknázni.
+A rendszer implementációja Python környezetben történt. Ahogy már a bevezetőben is említésre került, az alábbi könyvtárak kerültek felhasználásra: numpy, Tensorflow, opencv, PyQt. Az elkövetkezőkben ki szeretnék térni a PyQt könyvtár bemutatására ugyanis a szoftver jelentős része ennek a felhasználásával valósult meg és az implementációban használt egyes tervezési minták a PyQt sajátosságait próbálják kiaknázni.
 \newline
 \indent
-A PyQt a híres Qt könyvtárra épül. A Qt egy C++ könyvtár aminek célja olyan grafikus szoftverek megvalósítása amik különböző platformokat is támogatnak. A Qt univerzális megoldást ad a grafikus felületek elkészítésére, de emellett számos más komponenseket is impementál, mint például tömbök, listák, konténerek, párhuzamos szálak, smartpointerek, hálozati protokollok, stb. A Qt egyik újítása a SIGNAL-ok és a SLOT-ok bevezetése. Ennek működése egyszerű, egy adott osztály adattagjai és metódusai mellett deklarálhatóak SIGNAL-ok és SLOT-ok is. Egy osztály egyes metódusai jelzésket adhatnak ki SIGNAL-ok segítségével amire a SLOT metódusok csatlakozhatnak. Egy adott SIGNAL kibocsátásakor a rá csatkakozott összes SLOT függvény le fog futni. Például egy grafikus felületen levő gomb lenyomásakor kibocsájtunk egy SIGNAL-t amire a neki megfelelő SLOT függvény meghívódik és lefut. A jelzéskibocsájtás működik többszálas program esetében is, az is megoldható, hogy egy adott jelzésre egy más szálon futó metódus válaszoljon. Természetesen a SIGNAL-SLOT megoldás a PyQt esetében is tökéletesen működik és egy nagyon kényelmes megoldást biztosít a grafikus felület és a business logika összekötésében.
+A PyQt a híres Qt könyvtárra épül. A Qt egy C++ könyvtár, aminek célja olyan grafikus szoftverek megvalósítása amik különböző platformokat is támogatnak. A Qt univerzális megoldást ad a grafikus felületek elkészítésére, de emellett számos más komponenseket is implementál, mint például tömbök, listák, konténerek, párhuzamos szálak, smartpointerek, hálózati protokollok, stb. A Qt egyik újítása a SIGNAL-ok és a SLOT-ok bevezetése. Ennek működése egyszerű, egy adott osztály adattagjai és metódusai mellett deklarálhatóak SIGNAL-ok és SLOT-ok is. Egy osztály egyes metódusai jelzéseket adhatnak ki SIGNAL-ok segítségével amire a SLOT metódusok csatlakozhatnak. Egy adott SIGNAL kibocsátásakor a rá csatlakozott összes SLOT függvény le fog futni. Például egy grafikus felületen levő gomb lenyomásakor kibocsájtunk egy SIGNAL-t amire a neki megfelelő SLOT függvény meghívódik és lefut. A jelzéskibocsájtás működik többszálas program esetében is, az is megoldható, hogy egy adott jelzésre egy más szálon futó metódus válaszoljon. Természetesen a SIGNAL-SLOT megoldás a PyQt esetében is tökéletesen működik és egy nagyon kényelmes megoldást biztosít a grafikus felület és a business logika összekötésében.
 \newline
 \indent
-A PyQt egy másik előnye az, hogy elegánsan megoldható a modell-nézet-kontroller szoftverfejlesztési minta. Maga a nézet megvalósítható XML leíró nyelv segítségével. Ebből autmatikusan generálható egy Python osztály, ami fel fogja építeni maga a kinézetet. Ezt a kontrollerbe be lehet integrálni kompozicióval majd a SIGNAL-SLOT-ok összekötése után használni lehet azt. 
+A PyQt egy másik előnye az, hogy elegánsan megoldható a modell-nézet-kontroller szoftverfejlesztési minta. Maga a nézet megvalósítható XML leíró nyelv segítségével. Ebből automatikusan generálható egy Python osztály, ami fel fogja építeni maga a kinézetet. Ezt a kontrollerbe be lehet integrálni kompozicióval majd a SIGNAL-SLOT-ok összekötése után használni lehet azt. 
 \newline
 \indent
-A továbbiakban részletes bemutatásra és elemzésre kerül az aplikációnk objektum orientált megvalósítása (\ref{class_diagram}. ábra).
+A továbbiakban részletes bemutatásra és elemzésre kerül az applikációnk objektum orientált megvalósítása (\ref{class_diagram}. ábra).
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -782,19 +810,19 @@ A továbbiakban részletes bemutatásra és elemzésre kerül az aplikációnk o
 	\end{center}
 \end{figure}
 
-A MainWindow komponens magába foglalja a fő felhasználói implementációját meg pár ehhez szorosan kapcsolódó segítő segítő osztályt(\ref{mainwindow_class}. ábra). Maga a fő ablak megvalósítását két részre bontottuk: maga a nézettel foglalkozó osztály(Ui\_MainWindow) és maga a back-end logikával foglalkozó osztályra (MainWindow). Az Ui\_MainWindow egyetlen feladata maga felhasználói felület nézetének definiálása, ezért ezt kompozicióval integrálujk a MainWindow osztályba. A felület (lásd: \ref{graphical_ui)}. ábra) rendelkezik két grafikus kép kijelzésére szánt ablakkal, amik QGraphicsScene típusúak. Ezek közül a bal ablakba fog megjelenni a bemeneti kép amit a felhasználó megad. A QGraphicsScene sajnos nem képes videóanyag beágyazására, ezért az alkalmazás egy előre megadott képet fog ilyenkor kijelezni a felhasználónak. 
+A MainWindow komponens magába foglalja a fő felhasználói implementációját meg pár ehhez szorosan kapcsolódó segítő osztályt(\ref{mainwindow_class}. ábra). Maga a fő ablak megvalósítását két részre bontottuk: maga a nézettel foglalkozó osztály(Ui\_MainWindow) és maga a back-end logikával foglalkozó osztályra (MainWindow). Az Ui\_MainWindow egyetlen feladata maga felhasználói felület nézetének definiálása, ezért ezt kompozícióval integráljuk a MainWindow osztályba. A felület (lásd: \ref{graphical_ui)}. ábra) rendelkezik két grafikus kép kijelzésére szánt ablakkal, amik QGraphicsScene típusúak. Ezek közül a bal ablakba fog megjelenni a bemeneti kép amit a felhasználó megad. A QGraphicsScene sajnos nem képes videóanyag beágyazására, ezért az alkalmazás egy előre megadott képet fog ilyenkor kijelezni a felhasználónak. 
 \newline
 \indent
-A bemenet magadása a "Browse..." nyomógomb lenyomásával történik, ami jelzést fog küldeni a \_browse\_button\_clicked metódusnak. Ez létre fog hozni QFileDialog típusú beépített fájlböngésző ablakot. Ez fel van konfigurálva olyan módon, hogy csak az előre kijelölt típusú fájlkiterjesztéseket lehessen beolvasni ("Images/Videos (*.png *.jpg *.gif *.mp4)"). Ha fájlkiválasztás megtörtént, akkor a fájlnak az utvonala megjelenik a "Browse..." nyomógomb melletti szövegdobozban.
+A bemenet magadása a "Browse..." nyomógomb lenyomásával történik, ami jelzést fog küldeni a \_browse\_button\_clicked metódusnak. Ez létre fog hozni QFileDialog típusú beépített fájlböngésző ablakot. Ez fel van konfigurálva olyan módon, hogy csak az előre kijelölt típusú fájlkiterjesztéseket lehessen beolvasni ("Images/Videos (*.png *.jpg *.gif *.mp4)"). Ha fájlkiválasztás megtörtént, akkor a fájlnak az útvonala megjelenik a "Browse..." nyomógomb melletti szövegdobozban.
 \newline
 \indent
-A MainWindow belső osztályként tartalmazza a SelectableGraphicsView osztályt. Ennek célja a stílusképek közötti váltogatás megoldása(\ref{mainwindow_class}. ábra). Az alkalmazás összes előredefiniált stílusképe látható a \ref{styles}. ábrán. Alapértelmezetten a PyQt nem tartalmaz ilyen típusú előredefiniált osztályt, ezért ezt külön le kellett implementálni. A SelectableGraphicsView a QGraphicsView beépített PyQt osztályból származik. Ez azért került választásra mivel a QGraphicsView alkalmas bármiféle statikus grafikus elem beágyazására és ugyanakkor egy olyan területet kínál ami, ha nem fér ki teljesen a képernyőn, akkor scroll-ozni lehet. A SelectableGrahicsView biztosítja, hogy az alkalmazás futásának minden pillanatában egy stílus ki van jelölve. A felhasználó váltogathat ezen stílusok között. A SelectableGraphicsView típusú objektum minden váltogatás esetében jelzést fog küldeni a MainWindow objektumnak, ami lementi azt, hogy az épp kijelölt stílus bemeneti stílus képek a merev lemezen hol talalható.
+A MainWindow belső osztályként tartalmazza a SelectableGraphicsView osztályt. Ennek célja a stílusképek közötti váltogatás megoldása(\ref{mainwindow_class}. ábra). Az alkalmazás összes előre definiált stílusképe látható a \ref{styles}. ábrán. Alapértelmezetten a PyQt nem tartalmaz ilyen típusú előredefiniált osztályt, ezért ezt külön le kellett implementálni. A SelectableGraphicsView a QGraphicsView beépített PyQt osztályból származik. Ez azért került választásra mivel a QGraphicsView alkalmas bármiféle statikus grafikus elem beágyazására és ugyanakkor egy olyan területet kínál ami, ha nem fér ki teljesen a képernyőn, akkor scroll-ozni lehet. A SelectableGrahicsView biztosítja, hogy az alkalmazás futásának minden pillanatában egy stílus ki van jelölve. A felhasználó váltogathat ezen stílusok között. A SelectableGraphicsView típusú objektum minden váltogatás esetében jelzést fog küldeni a MainWindow objektumnak, ami lementi azt, hogy az épp kijelölt stílus bemeneti stílus képek a merevlemezen hol található.
 \newline
 \indent
 A főablak egyik fontos objektuma a Worker típusú objektum. Ez a típus a QThread beépített osztály leszármazottja, ami a párhuzamosításért felelős. A Worker típusú objektum felüldefiniálja a QThread run metódusát ami külön szálon fog majd lefutni. Ebben a metódusban lesz létrehozva az ArtisticVideo objektum ami a stílusátruházást végzi. Kezdetben a Worker objektumot a MainWindow inicializálja, az inicializálás még a főszálon történik. Miután ez megtörtént, a főablakon levő "Start" nyomógomb lenyomásával, meghívódik a run metódus. A Worker objektum kapcsolatban áll a MainWindow és a ProgressBar típusú objektumokkal is, amiknek különféle jelzéseket tud küldeni (work\_started, work\_finised, show\_progress, display\_image).
 \newline
 \indent
-Ugyancsak a MainWindow tartalmazza a ProgressBar létrehozásával felelős factory típusú metódust. Amint emlitettem, a felhasználó "Browse..." lenyomásával beolvashat statikus képet vagy mozgó kép típusú fájlt. Ezekre az átruházás különböző folyamatokat vesznek igénybe. Ahhoz, hogy a felhasználó részletesebb tájékoztatást kapjon arról, hogy mi folyik a háttérben, ezért három típusú progress sávval rendelkező dialogus ablakot implementáltunk le, amik egy közös ősosztállyal rendelkeznek.
+Ugyancsak a MainWindow tartalmazza a ProgressBar létrehozásával felelős factory típusú metódust. Amint említettem, a felhasználó "Browse..." lenyomásával beolvashat statikus képet vagy mozgó kép típusú fájlt. Ezekre az átruházás különböző folyamatokat vesznek igénybe. Ahhoz, hogy a felhasználó részletesebb tájékoztatást kapjon arról, hogy mi folyik a háttérben, ezért három típusú progress sávval rendelkező dialógus ablakot implementáltunk le, amik egy közös ősosztállyal rendelkeznek.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -851,18 +879,18 @@ Ugyancsak a MainWindow tartalmazza a ProgressBar létrehozásával felelős fact
 	\end{center}
 \end{figure}
 
-A bellítások komponens két objektumot tartalmaz, egyik a PreferencesDialog típusú objektum és az ebbe beágyazott nézetért felelős UiPreferencesDialog objektum. Értelemszerűen a PreferencesDialog tartalmazza a működési logikát.
+A beállítások komponens két objektumot tartalmaz, egyik a PreferencesDialog típusú objektum és az ebbe beágyazott nézetért felelős UiPreferencesDialog objektum. Értelemszerűen a PreferencesDialog tartalmazza a működési logikát.
 \newline
 \indent
 A PreferencesDialog a beépített QDialog osztály leszármazottja, örökli ennek tulajdonságait. Szülő objektumként természetesen a MainWindow objektumot kapja meg, ami Qt-ben annyit jelent, hogy ha a szülő objektum elhal, akkor fel fogja szabadítani a gyerek objektumot is, tehát valójában a szülő objektum felelős a gyerek objektum életciklusáért.
-A beállítások dialogus két tab-ot tartalmaz:
+A beállítások dialógus két tab-ot tartalmaz:
 
 \begin{itemize}
 	\item Settings: itt meg lehet adni a foldert ahova a kimenet automatikus mentve lesz. Ugyanitt meg kell adni az előre betanított háló útvonalát.
-	\item Advanced Settings: it a tanítással kapcsolator paramétereket lehet szabályozni. Ilyen paraméterek:
+	\item Advanced Settings: itt a tanítással kapcsolatos paramétereket lehet szabályozni. Ilyen paraméterek:
 	\begin{itemize}
 		\item Learning rate - tanítási együttható 
-		\item Iteration per Frame - egy adott képkocka esetében a maximálos tanítási iterációk száma;
+		\item Iteration per Frame - egy adott képkocka esetében a maximális tanítási iterációk száma;
 		\item Content Weight - súlyzó, a bemeneti kép veszteségfüggvénye esetében használatos;
 		\item Style Weight - súlyzó, a stílus veszteségfüggvényének az együtthatója;
 		\item Temporal Weight - súlyzó, a mozgóképek esetében bevezetett veszteségfüggvény együtthatója.
@@ -870,10 +898,10 @@ A beállítások dialogus két tab-ot tartalmaz:
 	\end{itemize}
 \end{itemize}
 
-Az beállítások komponens tárolja az előre megadott (default) értékeket a paraméterek esetében, ugyanakkor az is el lesz tárolva amit felhasználó módosít ezeken. A módosított értékek megmaradnak akkor is ha az alkalmazást bezárjuk majd újraindítjuk. Erre beéppített QSettings objektum használtuk, ami megoldja az beállítások tárolását és vissaolvasását. A QSettings kulcs-érték táblákba tárolja az paramétereket. Ezek majd az aplikációnk bármelyik objektumából elérhetőek, ha példányosítjuk a QSettings osztályt és megadjuk az adatbázisunk nevét ahova a paraméterek mentve lettek.
+Az beállítások komponens tárolja az előre megadott (default) értékeket a paraméterek esetében, ugyanakkor az is el lesz tárolva amit felhasználó módosít ezeken. A módosított értékek megmaradnak akkor is ha az alkalmazást bezárjuk majd újraindítjuk. Erre beépített QSettings objektum használtuk, ami megoldja az beállítások tárolását és visszaolvasását. A QSettings kulcs-érték táblákba tárolja az paramétereket. Ezek majd az applikációnk bármelyik objektumából elérhetőek, ha példányosítjuk a QSettings osztályt és megadjuk az adatbázisunk nevét ahova a paraméterek mentve lettek.
 \newline
 \indent
-Az alapértelmezett beállítások bármikor visszállíthatóak a "Use default values" gomb lenyomásával ugyanis ezek a paraméterek hardcode-olva vannak az aplikáción belül.
+Az alapértelmezett beállítások bármikor visszállíthatók a "Use default values" gomb lenyomásával ugyanis ezek a paraméterek hardcode-olva vannak az applikáción belül.
 
 \begin{figure}[!htbp]
 	\centering
@@ -899,7 +927,7 @@ Az alapértelmezett beállítások bármikor visszállíthatóak a "Use default 
 	\end{center}
 \end{figure}
 
-A progress sáv komponens feladata kimutatni a felhasználó számára a hátrelevő munkamennyiséget. Statikus képek esetében kimutatásre kerül az, hogy az össziterációk számának hány százaléke volt elvégezve. Mozgóképek esetén emellett kimutatásre kerül, hogy a képkockák közül hány százalékre volt stílus átruházva az összes képkockákból. Ha deep flow metódus is használatra kerül, akkor ennek is egy külön sáv fogja valós időben kijelezni, hogy hány képkocka van még hátra amire alkalmazni kell a deep flow metódust. Ezekből következtethető, hogy három típusú ProgressBar osztály példányosítható, amelyek az alábbiak:
+A progress sáv komponens feladata kimutatni a felhasználó számára a hátralevő munkamennyiséget. Statikus képek esetében kimutatásre kerül az, hogy az össziterációk számának hány százaléke volt elvégezve. Mozgóképek esetén emellett kimutatásre kerül, hogy a képkockák közül hány százalékre volt stílus átruházva az összes képkockákból. Ha deep flow metódus is használatra kerül, akkor ennek is egy külön sáv fogja valós időben kijelezni, hogy hány képkocka van még hátra, amire alkalmazni kell a deep flow metódust. Ezekből következtethető, hogy három típusú ProgressBar osztály példányosítható, amelyek az alábbiak:
 
 \begin{itemize}
 	\item ProgressBarImage(\ref{progressbar_image_ui}. ábra)
@@ -907,11 +935,11 @@ A progress sáv komponens feladata kimutatni a felhasználó számára a hátrel
 	\item ProgressBarVideoOpticalFlow (\ref{progressbar_video_deeplfow_ui}. ábra)
 \end{itemize}
 
-Mind a három egy közös ősosztályból öröklődik, ez a sima ProgressBar osztály. A ProgressBar osztály a beépített QDialog-ból öröklődik. A QDialog előnye, hogy be meg lehet határozni, hogy amikor a dialogus ablak fókuszban van, akkor ne lehessen interakciónálni a szűlő osztály interfészével. Ez fontos aspektus, mivel amikor maga a stílus átruházás történik, akkor nem szeretnénk, ha a felhasználó a fő ablakkal interakciónáljon, esetlegesen egy másik átruházási folyamatot indítson. Ez az aplikáció összeomlásához vezetne.
+Mind a három egy közös ősosztályból öröklődik, ez a sima ProgressBar osztály. A ProgressBar osztály a beépített QDialog-ból öröklődik. A QDialog előnye, hogy be meg lehet határozni, hogy amikor a dialógus ablak fókuszban van, akkor ne lehessen interakciónálni a szűlő osztály interfészével. Ez fontos aspektus, mivel amikor maga a stílus átruházás történik, akkor nem szeretnénk, ha a felhasználó a fő ablakkal interakciónáljon, esetlegesen egy másik átruházási folyamatot indítson. Ez az applikáció összeomlásához vezetne.
 \newline
 \indent
-Ahogyan már a MainWindow esetében is bemutatásra került, a ProgressBar típusú osztályok létrehozása a factory modell segítségével történik. Az hogy melyiket fogjuk példányosítani, az a bemeneti állomány típúsától, valamint a beállításoktól függ. A ProgressBar ősosztály SLOT metódust tartalmat a "Cancel\textbackslash OK" nyomógomb lekezelésére, és a státus üzenet kiíratására, amit a többi származtatott osztály is örökölni fog. 
-A videóval kapcsolatos ablakok emellet SLOT függvényeket definiálnak annak érdekében, hogy ki tudják jelezni hány képkocka van még hátra.
+Ahogyan már a MainWindow esetében is bemutatásra került, a ProgressBar típusú osztályok létrehozása a factory modell segítségével történik. Az hogy melyiket fogjuk példányosítani, az a bemeneti állomány típusától, valamint a beállításoktól függ. A ProgressBar ősosztály SLOT metódust tartalmat a "Cancel\textbackslash OK" nyomógomb lekezelésére, és a státus üzenet kiíratására, amit a többi származtatott osztály is örökölni fog. 
+A videóval kapcsolatos ablakok emellett SLOT függvényeket definiálnak annak érdekében, hogy ki tudják jelezni hány képkocka van még hátra.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -949,7 +977,7 @@ A videóval kapcsolatos ablakok emellet SLOT függvényeket definiálnak annak �
 	\end{center}
 \end{figure}
 
-A stílusátrhuzázó komponenst az ArtisticVideo, VGG19 és AtomBoolean osztályok alkotják (\ref{artisticvideo_class}. ábra). Ezek körül az ArtisticVideo osztály felelől a stílus átruházásával, a VGG19 osztály felelős az előredefiniált neuronháló beolvasásával. Az AtomBoolean egy segítő osztály, több szálról is módosítható flag-et definiál. Ezek mellett komponens még használ két csoport segítőfüggvényt amikot az Image meg a Video állományokba csoporosítottunk.
+A stílusátruházó komponenst az ArtisticVideo, VGG19 és AtomBoolean osztályok alkotják (\ref{artisticvideo_class}. ábra). Ezek körül az ArtisticVideo osztály felelől a stílus átruházásával, a VGG19 osztály felelős az előredefiniált neuronháló beolvasásával. Az AtomBoolean egy segítő osztály, több szálról is módosítható flag-et definiál. Ezek mellett komponens még használ két csoport segítőfüggvényt amikor az Image meg a Video állományokba csoporosítottuk.
 \newline
 \indent
 Az ArtisticVideo osztályt a Worker objektum példányosítja. Mivel a Worker objektumunk a mellákszálöóon fut, ezzért az ArtisticVideo objektumunk metódusai is a mellékszálon fognak elvégződni. Az ArtisicVideo-nak két fontos metódusa a create\_image és a stylize. A create\_image megkapja a bemenet útvonalát, amit az Image vagy Video segítő függvénycsomagok segítségével beolvas és feldolgoz. Amiután ez megtörtént, egyenként minden képkockára meghívódik a stylize metódus. A stylize metódus tartalmazza a tanítási algoritmus. Ennek a függvény eredménye minden esetben egy stilizált kép, kivételes eset, ha a tanítás megszakad, ekkor a visszatérített érték a null (None). Ugyancsak a create\_image metódusra hárul a képkockákból videót alkotni. 
@@ -961,32 +989,40 @@ Az ArtisticVideo jelzéseket küld a főablak és a progress dialógus komponens
 	\item flow\_created: akkor bocsájtódik ki amikor egy adott képkocka esetében a deep flow eljárás lefutott. Csak mozgóképek esetében bocsájtódik ki;
 	\item frame\_changed: akkor küldődik, amikor egy képkockára sikeresen át lett ruházva a stílus;
 	\item iter\_changed: egy kép esetében minden eltelt tanítási iteráció esetén kibocsájtódik;
-	\item set\_status: a progress dialógs ablakon levő státus üzenetet lehet állítani ezzel.
+	\item set\_status: a progress dialógus ablakon levő státus üzenetet lehet állítani ezzel.
 \end{itemize}
 
-A VGG19 osztály a bemeneti hálót parszolja és felépíti az alkalmazásban használatos hálót. Mivel a háló mérete nagy (549MB), ezért a merevlemezről törénő beolvasás egyszer történik. A háló a memóriában marad amig szükség van erre. Ennek hátránya a memória foglalása, de ekkora memóriahasználat modern számítógépek esetében nem jelent gondot.
+A VGG19 osztály a bemeneti hálót parszolja és felépíti az alkalmazásban használatos hálót. Mivel a háló mérete nagy (549MB), ezért a merevlemezről történő beolvasás egyszer történik. A háló a memóriában marad amig szükség van erre. Ennek hátránya a memória foglalása, de ekkora memóriahasználat modern számítógépek esetében nem jelent gondot.
 \newline
 \indent
-Ugyanehhez a komponenshez sorolhatunk két segítő (utility) függvéyneket tartalmaza csomagot: az egyik csoport az Image, a másik a Video névre hallgat.
+Ugyanehhez a komponenshez sorolhatunk két segítő (utility) függvényeket tartalmazza csomagot: az egyik csoport az Image, a másik a Video névre hallgat.
 \newline
 \indent
-Az Image csomag tartalmaz egy imread függvényt statikus kép beolvasására és egy imwrite függvényt statikus kép mentésére. Beolvasáskor preprocesszálás történik a bemeneti adaton, ami azt jelenti, hogy a színcsatornákból kivonódnak a következő középértékek: [123.68, 116.779, 103.939]. Ez arra szolgál, a hogy a pixelértékek 0-ás körüli értékeket vegyenek fel. Mentéskör ezek az értékeket hozzádajuk a kimeneti kép színcsatornáihoz.
+Az Image csomag tartalmaz egy imread függvényt statikus kép beolvasására és egy imwrite függvényt statikus kép mentésére. Beolvasáskor preprocesszálás történik a bemeneti adaton, ami azt jelenti, hogy a színcsatornákból kivonódnak a következő középértékek: [123.68, 116.779, 103.939]. Ez arra szolgál, a hogy a pixelértékek 0-ás körüli értékeket vegyenek fel. Mentéskör ezek az értékeket hozzáadjuk a kimeneti kép színcsatornáihoz.
 \newline
 \indent
 A Video csomag tartalmaz egy convert\_to\_frames függvényt ami a megadott útvonalon levő videót képkockákká alakítja. Ezeket a képkockákat majd az imread-del fogjuk feldolgozni. Emellett tartalmazza a convert\_to\_video függvényt, ami a kimentett képsorozazoz fogja videóvá alakítani. Továbbá tartalmazza a make\_opt\_flow és \_run\_consistency\_check függvényeket, amik az optical flow és képkockák mozgási határait eredményezik. Mindkét esetben a függvény egy külső bináris állomány futtatásával végzi el a feladatot. Ezek a binárisok nem saját programkódok a készítők lefordított állományait használtuk fel\cite{34}.
+
+\section{Limitációk}
+\secro{Limitații}
+\secen{Limitations}
+Az implementáláshoz használt deeplmatching és deeplfow algoritmusok esetében a készítők által kiadott binárisokat használtuk. Ezek tökéletesen működnek Linux alapú rendszereken. Mivel a forráskódjuk nyílt, ezért megpróbáltuk portálni azokat Windows környezet alá, sajnos többszörös próbálkozás után kénytelenek voltunk feladni. A forráskód eléggé komplex és nem dokumentált. Mivel a dolgozat célja nem ez a két algoritmus köré alapul, ezért inkább abbahagytuk azoknak az átírását. Ennek eredménye az, hogy a deepmatching és deepflow által biztosított funkcionalitások nem elérhetőek, ha az alkalmazás Windows operációs rendszer alatt fut.
+\newline
+\indent
+A deepmatching algoritmus is mesterséges intelligenciát használ, ezért itt is ajánlatos volna VGA megoldást használni. Sajnos a dolgozat elkészítésekor működő megoldás nem volt erre. A VGA-ás megoldás jelentőset gyorsítana az algoritmusokon.
 
 %----------------------------------------------------------------
 \chapter{A rendszer tesztelése}
 \capterro{Testarea sistemului}
 \capteren{The testing of the system}
 
-A rendszer tesztelése alatt fel szerettük volna mérni, hogy a rendszer hogyan viselkedik a mindennapi használatban. Többek között választ szerettünk volna kapni olyan kérdésekre, hogy a rendszer mennyi idő alatt ruházza át a stílust egy statikus képre, mekkor a memória igénye, mekkora a maximális képméret amire még működöképes.
+A rendszer tesztelése alatt fel szerettük volna mérni, hogy a rendszer hogyan viselkedik a mindennapi használatban. Többek között választ szerettünk volna kapni olyan kérdésekre, hogy a rendszer mennyi idő alatt ruházza át a stílust egy statikus képre, mekkora a memória igénye, mekkora a maximális képméret amire még működőképes.
 
 \section{A tesztrendszer ismertetése}
 \secro{Configurația de test}
 \secen{Test configuration}
 
-A rendszer tesztelésére a kovetkező konfigurációt használtuk:
+A rendszer tesztelésére a következő konfigurációt használtuk:
 
 \begin{itemize}
 	\item \textbf{Alaplap:} MSI Z170A-G45 GAMING
@@ -997,10 +1033,10 @@ A rendszer tesztelésére a kovetkező konfigurációt használtuk:
 	\item \textbf{Operációs rendszer:} Ubuntu 17.04 LTS
 \end{itemize}
 
-A használt videókártya egy nVidia GeForce GTX 1080 volt, ennek is a Gigabyte által kiadott G1 GAMING változata. A kártya főleg játékra van tervezve, de kiemelkedő hardver tulajdonságainak megfelelően tökéletesen használható párhuzam gépi tanulásra is. A videókártya a Pascal architektúrával rendelkezik. A kártya alapfrekvenciája 1695 MHz, terhelés alatt felugorhat 1860MHz-re. A kártya 2560 CUDA maggal rendelkezik valamint 8GB DDR5X típusú memóriával amiből gépi tanulásra használható 7860MB.
+A használt videókártya egy nVidia GeForce GTX 1080 volt, ennek is a Gigabyte által kiadott G1 GAMING változata. A kártya főleg játékra van tervezve, de kiemelkedő hardver tulajdonságainak megfelelően tökéletesen használható párhuzam gépi tanulásra is. A videókártya a Pascal architektúrával rendelkezik. A kártya alapfrekvenciája 1695 MHz, terhelés alatt felugorhat 1860MHz-re. A kártya 2560 CUDA maggal rendelkezik valamint 8GB DDR5X típusú memóriával, amiből gépi tanulásra használható 7860MB.
 \newline
 \indent 
-A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott. A rendszer egyes limitációkkal támogatja a Microsoft Windows operációs rendszert is, viszont a limitációk miatt az összes teszt nem végezhető el azalatt, ezért az Ubuntu-ra esett választás. A operációs rendszerünk az ekkori legújabb nVidia driver-ekkel volt ellátva ami a 375.66 változat. A Pascal architektúrának támogató CUDA 8.0-ás videókártya fejlesztő könyvtárat használtuk. Emellett a Tensorflow igényeli a cudnn videó kártya memórájával foglalkoző könyvtárat is.
+A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott. A rendszer egyes limitációkkal támogatja a Microsoft Windows operációs rendszert is, viszont a limitációk miatt az összes teszt nem végezhető el azalatt, ezért az Ubuntu-ra esett választás. A operációs rendszerünk az ekkori legújabb nVidia driver-ekkel volt ellátva ami a 375.66 változat. A Pascal architektúrának támogató CUDA 8.0-ás videókártya fejlesztő könyvtárat használtuk. Emellett a Tensorflow igényeli a cudnn videó kártya memóriájával foglalkoző könyvtárat is.
 
 \section{Egy képkockára történő stílusátruházási idő és memória igénye}
 \secro{Timpul și memoria necesară transferări stilului pe o imagine statică}
@@ -1033,7 +1069,7 @@ A \ref{time_per_res}. diagrammból lekövetkeztethetjük az, hogy az igényelt i
 	\end{center}
 \end{figure}
 
-Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kihasználtságát is. Amint észlelhettük, még az alacsony felbontású képek esetében is eléggé időigényes a folyamat. Feltételeztük, hogy a Tensorflow könyvtár a kártyát maximálisan ki tudja használni. A tesztéli folyamathoz egy teljesen egyedülálő programot készítettünk. Ezt a stílusátruházás előtt el kell indítani. A program a gpustats\cite{36} könyvtárat használja a videókártya működési paramétereinek a lekérdezésére. A programunk minden másodpercben lekéri egyszer a videókártya terheltségi százalékát és kimenti az egy fájlba amit később fel lehet használni.
+Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kihasználtságát is. Amint észlelhettük, még az alacsony felbontású képek esetében is eléggé időigényes a folyamat. Feltételeztük, hogy a Tensorflow könyvtár a kártyát maximálisan ki tudja használni. A tesztéli folyamathoz egy teljesen egyedülálló programot készítettünk. Ezt a stílusátruházás előtt el kell indítani. A program a gpustats\cite{36} könyvtárat használja a videókártya működési paramétereinek a lekérdezésére. A programunk minden másodpercben lekéri egyszer a videókártya terheltségi százalékát és kimenti az egy fájlba amit később fel lehet használni.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -1043,10 +1079,10 @@ Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kih
 	\end{center}
 \end{figure}
 
-A \ref{gpu_usage}. diagramm igazolta előrejelzésünket. A videókártya használati százaléka az művelet elején felugrik szinte maximálisra és azon marad addig amig be nem fejezte azt. A \ref{gpu_usage}. ábrán látható diagramm $640 \times $480-as febontásra keszült, de hasonló eredményeket kapunk bármely más felbontás esetében is.
+A \ref{gpu_usage}. diagramm igazolta előrejelzésünket. A videókártya használati százaléka az művelet elején felugrik szinte maximálisra és azon marad addig amig be nem fejezte azt. A \ref{gpu_usage}. ábrán látható diagramm $640 \times $480-as felbontásra keszült, de hasonló eredményeket kapunk bármely más felbontás esetében is.
 \newline
 \indent
-Továbbá azt szerettünk volna mérni, hogy mekkora a memórahasználat egy különböző felbontások esetében. Itt a logika azt sugallná, hogy a felbontásokkal arányosan lineárisan nőni fog. Ezzel ellenben a ábra azt igazolja, hogy a Tensorflow működése nem egyezik meg a előrejelzésünkkel. A mérés hasonlóan mint a kihasználtság esetében egy külön program méri ami egy külön processzen fut. A mérésre ugyancsak a gpustats könyvtárat használtuk.
+Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat egy különböző felbontások esetében. Itt a logika azt sugallná, hogy a felbontásokkal arányosan lineárisan nőni fog. Ezzel ellenben a ábra azt igazolja, hogy a Tensorflow működése nem egyezik meg a előrejelzésünkkel. A mérés hasonlóan mint a kihasználtság esetében egy külön program méri ami egy külön processzen fut. A mérésre ugyancsak a gpustats könyvtárat használtuk.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -1140,7 +1176,7 @@ Ulyanov, D., Lebedev, V., Vedaldi, A., and Lempitsky - Instance Normalization: T
 Manuel Ruder, Alexey Dosovitskiy, Thomas Brox - Artistic style transfer for videos (2016)
 
 \bibitem{22}
-asd
+-
 
 \bibitem{23}
 \url{https://www.python.org/} (2017.04.30)
