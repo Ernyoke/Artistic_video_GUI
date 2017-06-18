@@ -206,13 +206,37 @@
 \leavevmode
 \\[2cm]
 \indent
-Subsemnata/ul ............................................................., absolvent(ă) al/a specializării ......................................, promoţia ................... cunoscând prevederile Legii Educaţiei Naţionale 1/2011 şi a Codului de etică şi deontologie profesională a Universităţii Sapientia cu privire la furt intelectual declar pe propria răspundere că prezenta lucrare de disertație se bazează pe activitatea personală, cercetarea/proiectarea este efectuată de mine, informaţiile şi datele preluate din literatura de specialitate sunt citate în mod corespunzător.
+Subsemnata/ul ............................................................................, absolvent(ă) al/a specializării .................................................................., promoţia ............................. cunoscând prevederile Legii Educaţiei Naţionale 1/2011 şi a Codului de etică şi deontologie profesională a Universităţii Sapientia cu privire la furt intelectual declar pe propria răspundere că prezenta lucrare de disertație se bazează pe activitatea personală, cercetarea/proiectarea este efectuată de mine, informaţiile şi datele preluate din literatura de specialitate sunt citate în mod corespunzător.
 \newline
 \\[7cm]
 \indent
 \begin{tabular}{lcccccccccccccccccl}
 	Localitatea, & & &&&& &&&&&&&&&&&& Absolvent:\\
 	Data: &&&&&& &&&&&&&&&&&&Semnătura..................\\
+\end{tabular}
+
+%eredetisegi nyilatkozat2
+%-------------------------------------------------------------
+\newpage
+\thispagestyle{empty}
+\begin{center}
+	\textbf{Declaraţie}
+\end{center}
+\leavevmode
+\\[2cm]
+\indent
+Subsemnata/Subsemnatul ......................................................................................, funcţia .............................................,
+titlul ştiinţific ..................................................... declar pe propria răspundere că absolventa/absolventul .................................................. de la specializarea .................................................... a întocmit prezenta lucrare sub îndrumarea mea.
+\newline
+\indent
+Forma finală a lucrării a fost verificată de mine şi aceasta corespunde cerinţelor de formă şi conţinut precizate în Metodologia proprie de organizare a examenului de finalizare a studiilor (examen de licenţă/diplomă şi disertaţie) în cadrul Universităţii Sapientia din Cluj-Napoca. Lucrarea/proiectul corespunde şi cerinţelor impuse de Legea Educaţiei Naţionale 1/2011 cu modificări ulterioare, Codului de etică şi deontologie profesională a Universităţii Sapientia referitoare la furt intelectual.
+Sunt de acord cu susţinerea lucrării în faţa comisiei de examen de disertație.
+\newline
+\\[7cm]
+\indent
+\begin{tabular}{lcccccccccccccccl}
+	Localitatea,\\
+	Data: &&&&&& &&&&&&&&&&Semnătura îndrumătorului\\
 \end{tabular}
 
 
@@ -1042,7 +1066,7 @@ A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott.
 \secro{Timpul și memoria necesară transferări stilului pe o imagine statică}
 \secen{The amount of time and memory needed for transfering the style to a frame}
 
-Első tesztelési esetként az szerettük volna lemérni, hogy mennyi idő szükséges egy statikus képre történő stílusátruházáshoz. A művelethez a videókártya párhuzamos számítási képességeit is igénybe vesszük. Maga a stílusátrhuzás a videókártyán fog történni. Ehhez a teszthez kiválasztottunk pár ismertebb felbontással rendelkező bemeneti képet és mindenik esetben lemértük az átruházáshoz szükséges időd. Az átruházáshoz ugyanazt a stílusképet használtunk mindenik bemenet esetében. A stílus kép felbontása $600 \times $855 pixel volt. A következő eredményeket kaptuk (\ref{time_per_res}. 
+Első tesztelési esetként az szerettük volna lemérni, hogy mennyi idő szükséges egy statikus képre történő stílusátruházáshoz. A művelethez a videókártya párhuzamos számítási képességeit is igénybe vesszük. Maga a stílusátrhuzás a videókártyán fog történni. Ehhez a teszthez kiválasztottunk pár ismertebb felbontással rendelkező bemeneti képet és mindenik esetben lemértük az átruházáshoz szükséges időd. Az átruházás 300 iteráció alatt történt. Ugyanazt a stílusképet használtunk mindenik bemenet esetében. A stílus kép felbontása $600 \times $855 pixel volt. A következő eredményeket kaptuk (\ref{time_per_res}. 
 ábra):
 
 \begin{center}
@@ -1093,6 +1117,44 @@ Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat egy k�
 \end{figure} 
 
 A \ref{gpu_memory_usage}. diagramm $640 \times $480 felbontású kép esetében mért értékeket ábrázolja. A videokártyán maximálisan 7860MB volt használható a Tensorflow által. Amint látható, a Tensorflow a kezdetben lefoglalja az összes használható videómemóriát, majd ennek a felhasználásával végzi el a feladatát. A memóriahasználat ugyanakkora $1366 \times $768 felbontás esetében is. Mindez felvet egy másik kérdést, azt hogy mekkora az a maximális felbontás ami még elfér egy GTX 1080 típusú kártya memóriájában.
+
+
+\section{CPU-GPU futásidő összehasonlítása}
+\secro{Compararea timpului necesar pe CPU cu cel necesar pe GPU}
+\secen{Comparison of the running timp between CPU and GPU}
+
+Tisztába vagyunnk azzal, hogy a deep learning tanítási módszer alkalmas az adatpárhuzamosításra. Érthető módon elvárt, hogy a processzoron történő futtatás jóval alul kellene maradjon a GPU-un történő futtatással szemben. Ez igazolják a következő mérések is. Ugyanúgy mint az előző mérések esetében 300 iteráció alatt történt a stílusátruházás. A bemeneti teszt képek is az elöző teszthalmazból vannak kölcsönvéve, ebben az esetben három felbontásra futtattuk a tesztet. Ez elegendő kellene legyen arra, hogy lássuk a GPU használata által bevezetett gyorsulást. Minden teszt esetben ugyanazt a stílusképet alkalmaztuk, aminek felbontása $600 \times $855 pixel. Az mért eredmények a következők: 
+
+\begin{center}
+	\begin{tabular}{ | l | l | l | l| }
+		\hline
+		Felbontás(pixel) & GPU Idő(másodperc) &  CPU Idő(másodperc) & Gyorsulás\\ \hline
+		$320 \times $240 & 23.126104 & 862.980290 & 37.316285\\ \hline
+		$640 \times $480 & 82.640347 & 3487.931886 & 42.206162\\ \hline
+		$800 \times $600 & 127.973041 & 5446.849902 & 42.562479\\ \hline
+		$1024 \times $768 & 203.892024 & 8935.804122 & 43.826158\\ \hline
+	\end{tabular}
+\end{center}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{cpu_vs_gpu.png}
+		\caption{CPU futásideje összehasonlítva GPU futásidejével}
+		\label{cpu_vs_gpu}
+	\end{center}
+\end{figure}
+
+Előrejelzés szerint a párhuzamosított megoldás sokkal gyorsabb futásidőt igényel. Ahogyan a GPU esetében is láttuk, itt is a felbontás növekedésével lineárisan növekedik a futási idő is. Ami viszont megfigyelhető, hogy alacsonyabb felbontás esetében is a gyorsulás jelentős, $320 \times $240-es felbontás esetében 37-szeres gyorsulásról beszélünk. Ez, ugyan nem ennyire jelentősen, de észlelhetően növekedik a felbontás növekedésével egyaránt (\ref{speedup}. ábra), $1024 \times $768 felbontásnál, közel 44-es gyorsuláról beszélhetünk.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{speedup.png}
+		\caption{Gyorsulás}
+		\label{speedup}
+	\end{center}
+\end{figure}  
+
+Következtetésképpen kijelenthető, hogy ha rendelkezünk megfelelő videókártyával, akkor mindenképpen azt ajánlott használni. Az előbbiekben bemutatott gyorsulás a CPU és GPU között egyetlen képkockára voltak mérve. Összehasonlításképp, egy $1024 \times $768 felbontású képkocka GPU használatával 300 iterációs átruházás mellett körülbelül 3.4 perc alatt történik, míg CPU használatával körülbelül 149 perc alatt történik. Itt már órás különbségekről beszélünk, tehát mozgókép esetében semmiképp sem ajánlott CPU-t használni. 
 
 %----------------------------------------------------------------
 \chapter{Összefoglaló}
