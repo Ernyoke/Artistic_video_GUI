@@ -12,8 +12,8 @@
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.2.}Func\IeC {\textcommabelow t}ia de pierdere \IeC {\^\i }n cazul imaginii de stil}{27}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Reducerea zgomotului din imagenea stilizata}{29}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.4.}Definirea si \IeC {\^\i }nv\IeC {\u a}\IeC {\textcommabelow t}area func\IeC {\textcommabelow t}iei de pierdere totala la imagini statice}{30}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}Metoda de antrenare in cazul imaginilor video}{30}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Abordarea naiv\IeC {\u a}}{30}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}Metoda de antrenare in cazul imaginilor video}{31}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Abordarea naiv\IeC {\u a}}{31}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}Ini\IeC {\textcommabelow t}ializarea re\IeC {\textcommabelow t}elei pentru frame-uri}{32}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.3.}Introducerea optical flow-ului}{32}
 \select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.5.}Proiectarea \IeC {\textcommabelow s}i implementarea sistemului}{33}
@@ -29,5 +29,6 @@
 \select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}Testarea sistemului}{49}
 \select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.1.}Configura\IeC {\textcommabelow t}ia de test}{49}
 \select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.2.}Timpul \IeC {\textcommabelow s}i memoria necesar\IeC {\u a} transfer\IeC {\u a}ri stilului pe o imagine static\IeC {\u a}}{50}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Compararea timpului necesar pe CPU cu cel necesar pe GPU}{52}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{55}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Compararea timpului necesar pe CPU cu cel necesar pe GPU}{53}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.4.}Timpul necesar transfer\IeC {\u a}ri stilului pe un videoclip}{53}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{58}

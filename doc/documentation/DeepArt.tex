@@ -520,7 +520,7 @@ return content_loss
 
 \end{lstlisting}
 
-A \(CONTENT\_LAYER\) tuple típusú ami tartalmazza azoknak a rétegeknek az azonosítóját amik részt vesznek a veszteség függvény kiszámításában. A \(content\_features\) valtozó egy lista, ez tartalmazza az összes réteg válaszát a bemeneti eredeti képre. A visszaküldött érték egy tensor típusú, egyik részét fogja képezni a végső optimalizálandó veszteségfüggvénynek. 
+A \(CONTENT\_LAYER\) tuple típusú ami tartalmazza azoknak a rétegeknek az azonosítóját amik részt vesznek a veszteség függvény kiszámításában. A mi esetünkben ez egyedül a \(relu4\_2\) kimenetét jelenti, tehát valójában a \(conv4\_2\) konvolúciós réteget használtuk. A \(content\_features\) valtozó egy lista, ez tartalmazza az összes réteg válaszát a bemeneti eredeti képre. A visszaküldött érték egy tensor típusú, egyik részét fogja képezni a végső optimalizálandó veszteségfüggvénynek. 
 
 
 \subsection{Az stílus kép tanításának a veszteségi függvénye}
@@ -596,7 +596,7 @@ for style_layer in STYLE_LAYERS:
 		tf.nn.l2_loss(gram - style_gram) / style_gram.size)
 \end{lstlisting}
 
-A \(style\_features\) valtozó, ugyanúgy mint a \(content\_features\) esetében, egy lista, ez tartalmazza az összes réteg válaszát a bemeneti stílus képre.
+A \(style\_features\) valtozó, ugyanúgy mint a \(content\_features\) esetében, egy lista, ez tartalmazza az összes réteg válaszát a bemeneti stílus képre. Az alábbi konvolúciór rétegek kerülnek felhasználásra: \(conv1\_1\), \(conv2\_1\), \(conv3\_1\), \(conv4\_1\), \(conv5\_1\).
 
 \subsection{A stilizált kép tisztítása}
 \ssecro{Reducerea zgomotului din imagenea stilizata}
@@ -1116,7 +1116,10 @@ Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat egy k�
 	\end{center}
 \end{figure} 
 
-A \ref{gpu_memory_usage}. diagramm $640 \times $480 felbontású kép esetében mért értékeket ábrázolja. A videokártyán maximálisan 7860MB volt használható a Tensorflow által. Amint látható, a Tensorflow a kezdetben lefoglalja az összes használható videómemóriát, majd ennek a felhasználásával végzi el a feladatát. A memóriahasználat ugyanakkora $1366 \times $768 felbontás esetében is. Mindez felvet egy másik kérdést, azt hogy mekkora az a maximális felbontás ami még elfér egy GTX 1080 típusú kártya memóriájában.
+A \ref{gpu_memory_usage}. diagramm $640 \times $480 felbontású kép esetében mért értékeket ábrázolja. A videokártyán maximálisan 7860MB volt használható a Tensorflow által. Amint látható, a Tensorflow a kezdetben lefoglalja az összes használható videómemóriát, majd ennek a felhasználásával végzi el a feladatát. A memóriahasználat ugyanakkora $1366 \times $768 felbontás esetében is. Mindez felvet egy másik kérdést, azt hogy mekkora az a maximális felbontás ami még elfér egy GTX 1080 típusú kártya memóriájában?
+\newline
+\indent
+A kérdésre a válasz egyszerűen úgy adható meg, hogy vesszük az ismertebb felbontásokat és próbáljuk addig, amig a Tensorflow nem dob egy memóriával kapcsolatos kivételt. Tovább próbálkoztunk a következő felbontásokkal: $1440 \times $900, $1600 \times $900 és $1920 \times $1080. Ezennel elértük a fullHD minőséget. Statikus kép esetében egy GTX 1080-as kártyával ez meg elfogadható bemenet, viszont itt meg kell említeni, hogy az alkalmazás a HD minőséget célozta. Ebből kifolyólag a stílus képek mérete a HD felbontás környékén mozog. Ez fullHD felbontás esetében bevezethet látható torzulásokat, ami abból adódik, hogy a stílus kép át fel lesz skálázva. Tovább haladva $2560 \times $1440 felbontással próbálkoztunk, ami esetében jelentkezett a várt memória kivétel. Tehát a maximális felbontás amit lehetséges használni statikus képes esetében, az a $1920 \times $1080 felbontás.
 
 
 \section{CPU-GPU futásidő összehasonlítása}
@@ -1155,6 +1158,57 @@ Előrejelzés szerint a párhuzamosított megoldás sokkal gyorsabb futásidőt 
 \end{figure}  
 
 Következtetésképpen kijelenthető, hogy ha rendelkezünk megfelelő videókártyával, akkor mindenképpen azt ajánlott használni. Az előbbiekben bemutatott gyorsulás a CPU és GPU között egyetlen képkockára voltak mérve. Összehasonlításképp, egy $1024 \times $768 felbontású képkocka GPU használatával 300 iterációs átruházás mellett körülbelül 3.4 perc alatt történik, míg CPU használatával körülbelül 149 perc alatt történik. Itt már órás különbségekről beszélünk, tehát mozgókép esetében semmiképp sem ajánlott CPU-t használni. 
+
+\section{Videóra történő stílusátruházás időigénye}
+\secro{Timpul necesar transferări stilului pe un videoclip}
+\secen{The amount of time needed for transfering the style to a video}
+
+Mindenekelőtt le szerettük volna mérni az optical flow algoritmus futási idejét. Itt megjegyezzük, hogy a programban az deepmatching - deepflow algoritmust használtuk. A készítők által szolgáltatott nyílt forrsákodú binárisok lettek integrálva az alkalmazásba. A binárisok a számítógép processzorát használják, hivatalos GPU-ra készített bináris a dolgozat írása idejében nem volt kiadva.
+
+\begin{center}
+	\begin{tabular}{ | l | l |}
+		\hline
+		Felbontás(pixel) & Idő(másodperc) \\ \hline
+		$320 \times $240 & 3.700949 \\ \hline
+		$640 \times $480 & 71.693549 \\ \hline
+		$720 \times $480 & 75.388477 \\ \hline
+		$800 \times $600 & 186.4160516 \\ \hline
+		$1024 \times $764 & 371.140060 \\ \hline
+		$1280 \times $720 & 466.996901 \\ \hline
+		$1366 \times $768 & 481.25628 \\ \hline
+	\end{tabular}
+\end{center}
+
+\begin{figure}[!htbp]
+\begin{center}
+	\includegraphics[scale=0.8]{deepmatching_deeplfow.png}
+	\caption{Optical flow futási ideje}
+	\label{deepmatching_deepflow}
+\end{center}
+\end{figure}
+
+Az optical flow minden két egymást követő képkocka között ki van számolva mindkét irányba. Ez azt jelenti, hogy ha nekünk például 10 képkockánk van, akkor 9 + 9 eredményt kapunk. Amint a \ref{deepmatching_deepflow}. diagramm kimutatja, az optical flow eléggé költséges művelet, legtöbb esetben több időbe kerül, mint maga a stílusátvitel. 
+\newline
+\indent
+Továbbá egy 1 perces videóra történő stílusátruházás idejét szeretnénk lemérni. A videó 24 FPS (képkocka/másodperc) paraméterrel rendelkezik, ami azt jelenti, hogy 60 másodperces videó esetében 1440 képkockára kell átruházni a stílust.
+
+\begin{figure}[!htbp]
+\begin{center}
+	\includegraphics[scale=0.8]{one_min_video_opt_flow.png}
+	\caption{Egy perces videóra történő stílusátvitel optical flow használatával}
+	\label{one_min_video_opt_flow}
+\end{center}
+\end{figure} 
+ 
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.8]{one_min_video.png}
+		\caption{Egy perces videóra történő stílusátvitel optical flow használata nélkül}
+		\label{one_min_video}
+	\end{center}
+\end{figure} 
+
+A \ref{one_min_video_opt_flow}. ábrán látható diagramm tartalmazza az optical flow használatával történő átruházást, míg a \ref{one_min_video}. ábrán látható diagramm az optical flow nélküli átruházási időt szemlélteti. Mindkét esetben nagyon időigényes műveletről beszélünk, az első esetében HD felbontás esetében 12 napot futna a program. Ebből azt következtethetjük le, hogy a művelete természetesen kivitelezhető, de annak az időigényével számolni kell. 1 perc videóhoz 12 napos futási idő nem biztos, hogy megéri ez bárkinek a futtatást. Viszont ahogy már láttuk, hardver szempontjábol a Tensorflow nagyon skálázható, ebből a kifolyóla a futási idő simán csökkenthető egy újabb videókártya hozzáadásával. Sajnos erre a dolgozat nem tartalmaz átfogóbb méréseket és tesztelést. 
 
 %----------------------------------------------------------------
 \chapter{Összefoglaló}
