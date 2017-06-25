@@ -32,3 +32,4 @@
 \select@language {magyar} \contentsline {section}{\numberline {4.3}CPU-GPU fut\IeC {\'a}sid\IeC {\H o} \IeC {\"o}sszehasonl\IeC {\'\i }t\IeC {\'a}sa}{53}
 \select@language {magyar} \contentsline {section}{\numberline {4.4}Vide\IeC {\'o}ra t\IeC {\"o}rt\IeC {\'e}n\IeC {\H o} st\IeC {\'\i }lus\IeC {\'a}truh\IeC {\'a}z\IeC {\'a}s id\IeC {\H o}ig\IeC {\'e}nye}{53}
 \select@language {magyar} \contentsline {chapter}{\numberline {5}\IeC {\"O}sszefoglal\IeC {\'o}}{58}
+\select@language {magyar} \contentsline {section}{\numberline {5.1}Tov\IeC {\'a}bbfejleszt\IeC {\'e}si lehet\IeC {\H o}s\IeC {\'e}gek}{59}

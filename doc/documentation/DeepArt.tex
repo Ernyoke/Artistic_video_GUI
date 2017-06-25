@@ -1215,7 +1215,41 @@ A \ref{one_min_video_opt_flow}. ábrán látható diagramm tartalmazza az optica
 \capterro{Concluzie}
 \capteren{Conclusion}
 
-összefoglaló
+A dolgozat célja egy olyan rendszer kialakítása és fejlesztése volt, ami képes híres magyar festők festményeinek festészeti stílusát átvenni és átruházni azt olyan képekre valamint videókra amik nem rendelkeznek különös stílusértékkel. Ehhez egy olyan aztali pc-re szánt alkalmazás kifejlesztése volt a cél, ami képes elvégezni ezt a feladatot. Ezt a célt sikerült is elérni pár limitáció jelenlétében amiket nem hanyagolhatunk el. 
+\newline
+\indent
+Előszöris sikerült egy olyan applikációt fejleszteni ami képes statikus képre átruházni egy művészeti stílust. Az applikációt sikerült lefejleszteni Windows valamint Linux alapú rendszerekre úgy, hogy kihasználja a videókártya által biztosított párhuzmosítást. Statikus képre történő stílusátruházás kifogástalanul működik ugyanúgy a Linux valamint Windows rendszereken. Az átruházási idők amint a tesztekből is láthattuk elfogadhatóak abban az esetben, ha rendelekezünk megfelelő videókártyával. Azt is meghatároztuk, hogy noha a rendszer a maximális HD felbontású képek támogatására volt tervezve, működőképes marad akár fullHD felbontású bementi képek esetében is.
+\newline
+\indent
+Továbbá, mozgóképek esetében is próbáltuk megoldani a stílusátruházást. Ez a beépített funkció szintúgy működik Windows valamint Linux rendszerek alatt, megjegyezve az, hogy Windows alatt nem használható az optical flow algoritmus által bevezetett képminőség javítása. Itt fontos megemlíteni, hogy a dolgozat igazolni tudja, hogy videó esetében is megoldható a stílusátruházás, de ugyanakkor nagyobb felbontások esetében ez átruházási idő szempontjából ez nem feltétlenül kifizetödő. Az optical flow metódussal azt próbáltuk elérni, hogy a képkockák közötti átmenet legyen folyamatos elkerülve az úgymond "artifact"-et megjelenését. Ezt sikerült is elérni, viszont a hátránya az, hogy az időigény több mint duplájára növekedett.
+\newline
+\indent 
+Következtetésképpen levonható az, hogy az általunk ismertett megoldások működőképesek, de még szükség van a továbbfejlesztésekre és optimalizációkra ahhoz, hogy egy mindennapi felhasználó által ez gond nélkül használható lehessen.
+
+\section{Továbbfejlesztési lehetőségek}
+\secro{Dezvoltare ulterioară}
+\secen{Future improvements}
+
+A továbbfejlesztési lehetőségeket három csoportba sorolhatnánk: az álloképre történő stílusátvitellel kapcsolatos fejlesztése lehetőseg, a videóra történő stílusátruházással kapcsolatos fejlesztési lehetősgek valamint maga a szoftver fejlesztésével és működéséval kapcsolatos továbbfejlesztési lehetőségek.
+\newline
+\indent
+A állókép stilizálása esetében a performanciát javítani lehetne azzal, hogy a VGG19 háló helyett egy saját halót betanítani komondottan erre a célra. Yaroslav Nikulin és Roman Novak tudományos kutatása\cite{16} is ezt javasolja. Ugyanakkor az eredmény kép minőségén is lehetne javítani. Természetesen, a jelenleg fejlesztett program lehetőséget ad a tanítási paraméterek módosítására, viszont ajánlott lenne tovább kisérletezni ezekkel. A tanítás az ADAM tanítási módszert alkalmazza, ezzel szemben tovább lehetne kisérletezni más módszerekkel is esetleges idő és képminőség javítása érdekében.
+\newline
+\indent
+Mozgóképek esetében alapértelmezetten az idő javítása lenne a cél. Ez megoldható lenne többféle módon:
+\begin{itemize}
+	\item a Deepmatching - Deepflow algoritmus párhuzamosításával és GPU-ra történő leimplementálásával, amint láthattuk jelentős időjavulást lehet eléri adatpárhuzamos feladatok esetében
+	\item a Deepmatching - Deeplfow algorirtmus helyett valami más algoritmust használni ami vélhetőleg gyorsabb futási időt eredméynez.
+\end{itemize}
+
+Szoftverfejlesztés szempontjából javítani lehet maga a szoftver használhatóságán, kinézetén. Amint már említve volt az optical flow csak Linux alapú rendszereken támogatott, ezt portálni lehetne Windows-ra is. Továbbá fontos lenne egy komolyabb tesztelési mechanizmusnak alávetni, ugyanis a fejlesztés során ez nem volt feltétlenül szem előtt tartva.
+\newline
+\indent
+A szoftver annak köszönhetően, hogy olyan környezetben íródott valamint olyan könyvtárakat használ amik multiplatform támogatással rendelkeznek, valószínüleg futna OSX alapú rendszereken is, viszont ilyen alapú kísérlet nem volt végezve a fejlesztés alatt. A továbbiakban ez is megoldható lehetne. 
+\newline
+\indent
+Végezetül pedig, manapság eléggé elterjedtek a cloud alapú szolgáltatások. Az is megoldható lenne, hogy az applikációnkat átalakítjuk egy could alapú szolgáltatássás, amit bárki igénybe vehet akár mobilos eszközökről is.
+
 
 % Ábrajegyzék
 %---------------------------------
