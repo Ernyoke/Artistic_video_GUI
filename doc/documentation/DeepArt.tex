@@ -21,6 +21,7 @@
 \usepackage{listings}
 \usepackage{amsmath}
 \usepackage{subfig}
+\usepackage{appendix}
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
 
 %---------------------------------------------------------
@@ -137,7 +138,7 @@
 \end{center}
 
 \begin{center}
-    \vspace{3cm}\LARGE \textbf{DeepArt}\\
+    \vspace{3cm}\LARGE \textbf{Transferarea paralelă a stilului artistic prin folosința unei rețele neuronală convoluțională}\\
     \vspace{1cm}\LARGE\textbf{Lucrare de master}\\
 \end{center}
 
@@ -679,32 +680,26 @@ ffmpeg "-i" frame%05d.<ext> output_name.<ext>
 
 A naiv megközelítés működik, a kimenet egy olyan videó lesz, amely tartalmazza a bemeneti stíluskép jellegzetességeit. Ugyanakkor észlelhető, hogy az eredmény nem valami esztétikus. Észlelhető, hogy a képkockák közötti átmenet nem folyamatos. Emellett különböző zajokat, úgynevezett "artifact"-eket észlelhetünk. 
 
-\subsection{A haló inicializálása képkockák esetében}
-\ssecro{Inițializarea rețelei pentru frame-uri}
-\ssecen{The initialization of the neural net for the frames}
+\subsection{A haló inicializálása képkockák esetében. Az optical flow bevezetése}
+\ssecro{Inițializarea rețelei pentru frame-uri. Introducerea optical flow-ului}
+\ssecen{The initialization of the neural net for the frames. Introduction of the optical flow}
 Amint említettük, a háló inicalizálására egy fehér zaj képet használtunk statikus bemeneti képre való stílusátruházáskor. Több képkocka esetében ezzel az a gond, hogy a képkockák nem fognak egyanabba a lokális minimumba konvergálni tanításkor. Végeredményképp az átmenet egyik képkockáról a másikra nem lesz folyamatos.
 \newline
 \indent
-Egy megoldás kísérlet erre az lenne, hogy a ha egy képkocka stilizálása történik, a hálót ne fehér zaj képpel inicializáljuk, hanem az előtte levő stilizált képkockával. Ez simább átmenetet fog eredményezni abban az esetben, ha a képkockákon nincs mozgás. Ennek a módszernek a használata szükségszerű viszont nem elégséges ahhoz, hogy szemnek is kellemes eredményt kapjunk.
-
-\subsection{Optical flow bevezetése}
-\ssecro{Introducerea optical flow-ului}
-\ssecen{Introduction of the optical flow}
-
-Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képet képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek, mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
-Az optical flow meghatározásához a DeepMatching - Deepflow algoritmust használtuk. Ennek a kimenete egy .flo kiterjesztésű fájl ami tartalmazza adott pixelek esetében a horizontális és vertikális elmozdulás vektorokat.
+Egy megoldás kísérlet erre az lenne, hogy a ha egy képkocka stilizálása történik, a hálót nem fehér zaj képpel inicializáljuk, hanem figyelembe vesszük az előtte levő stilizált képkocka és mostani képkocka közötti optical flow-t. Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képet képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek, mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
+Az optical flow meghatározásához a DeepMatching - Deepflow algoritmust használtuk. Ennek a kimenete egy .flo kiterjesztésű fájl ami tartalmazza adott pixelek esetében a horizontális és vertikális elmozdulás vektorokat. Az optical flow segítségével torzítjuk az előző stilizált képet, ezt az opencv cv2.remap függvényével érjük el. Ez a torzított képpel inicializáljuk a hálót. Ez simább átmenetet fog eredményezni abban az esetben, ha a képkockákon nincs mozgás. Ennek a módszernek a használata szükségszerű viszont nem elégséges ahhoz, hogy szemnek is kellemes eredményt kapjunk.
 \newline
 \indent
-Az optical flow meghatározásával egy mozgóképen meghatározhatók azok a régiók, amik statikusak (adott időn belül az illető régióban nincs változás, úgymond nincs mozgás) valamint azokat a régiókat ahol változás történik. Ami még fontos nekünk meghatározni egy adott mozgó objektum/személy esetében azt az kétdimenziós intervallumot, amelyben mozog. Meghatározzuk a mozgási határait (lásd: ). Ennek a metódusát Sundaran és társai írják le a ... publikációjukban.
+Az optical flow meghatározásával egy mozgóképen meghatározhatók azok a régiók, amik statikusak (adott időn belül az illető régióban nincs változás, úgymond nincs mozgás) valamint azok a régiók ahol új objektumok jelennek meg (olyan objektumok amik eddig esetleg takarva voltak). Fontos nekünk meghatározni azokat a zónákat ahol ilyen objektumok jelennek meg (lásd: \ref{consistency_weights}). Ennek a metódusát Sundaran és társai írják le a \cite{22} publikációjukban.
 \newline
 \indent
-Két egymást követő képkocka esetében meghatározható az optical flow előre, tehát az képkockák időrendi sorrendjében, valamint meghatározható visszafele, az időrendi sorrend ellentett irányában. Jelölje \(w(i, j)\) az előre történő optical flow-t, valamint \(\hat{w}(i, j)\) a visszafele történő optical flow-t. Ekkor felírható a w torzítása a w alapján:
+Két egymást követő képkocka esetében meghatározható az optical flow előre, tehát az képkockák időrendi sorrendjében, valamint meghatározható visszafele, az időrendi sorrend ellentett irányában. Jelölje \(w(i, j)\) az előre történő optical flow-t, valamint \(\hat{w}(i, j)\) a visszafele történő optical flow-t. Ekkor felírható az előre történő optical flow torzítása a rá következő képkocka szerint:
 
 \begin{equation}
 \tilde{w}(i, j) = w((i, j) + \hat{w}(i, j))
 \end{equation}
 
-A mozgás néküli zónák meghatározhatóak a következőképpen:
+A mozgás néküli és újonnan megjelenő objektumok nélküli zónák meghatározhatóak a következőképpen:
 \begin{equation} \label{eq:1}
 |\tilde{w} + \hat{w}|^2 > 0.01(|\tilde{w}|^2 + |\hat{w}|^2) + 0.5
 \end{equation}
@@ -714,11 +709,30 @@ A mozgási határok pedig meghatározhatóak:
 |\nabla\hat{u}| + |\nabla\hat{v}| > 0.01|\tilde{w}|^2 + 0.002
 \end{equation}
 
-A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix, ami tartalmazza a mozgás nélküli zónánkat valamint a mozgási határokat. Ezt a mátrixot átalakítjuk olyan módon, hogy a mozgási határokra 1-est rakunk, a többi érték 0-ás lesz, jelöljük ez a mátrixot \(c^{(i-1,i)}\)-vel az \(i-1\) és \(i\)-dik képkocka között. Ezt felhasználva felírhatjuk egy újabb veszteség függvényt: 
+A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix, ami tartalmazza a mozgás nélküli zónánkat valamint a mozgási határokat(\ref{consistency_weights}. ábra). Ezt a mátrixot átalakítjuk olyan módon, hogy a mozgási határokra 1-est rakunk, a többi érték 0-ás lesz, jelöljük ez a mátrixot \(c^{(i-1,i)}\)-vel az \(i-1\) és \(i\)-dik képkocka között. Ezt felhasználva felírhatjuk egy újabb veszteség függvényt: 
 
 \begin{equation} \label{eq:2}
 L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
 \end{equation}
+
+\begin{figure}[!htbp]
+	\centering
+	\subfloat[Frame00001]{
+		\includegraphics[width=80mm]{input_frame00001.jpg}
+	}
+	\subfloat[Frame00002]{
+		\includegraphics[width=80mm]{input_frame00002.jpg}
+	}
+	\hspace{0mm}
+	\subfloat[Forward consistency matrix]{
+		\includegraphics[width=80mm]{forward.jpg}
+	}
+	\subfloat[Backward consistency matrix]{
+		\includegraphics[width=80mm]{backward.jpg}
+	}
+	\caption{Optical flow két egymást követő képkocka között}
+	\label{consistency_weights}
+\end{figure}
 
 
 \section{A rendszer tervezése és kivitelezése}
@@ -782,14 +796,14 @@ A rendszer a következő komponensekből tevődik össze (\ref{component_diagram
 \ssecro{Proiectarea pe mai multe fire computaționale a unelor componente}
 \ssecen{Multithreaded design and communication of components}
 
-Egy bemeneti képre való stílus átruházás időigényes folyamat. Mozgókép esetében ez a folyamat időigénye lineárisan növekedik a képkockák számának szorzatával. Annak érdekében, hogy az alkalmazásunk reszponzív legyen elhagyhatatlan aspektus egy olyan modell kialakítása ami igénybe veszi a modern processzorok többszálas működési tulajdonságát. Az Artistic video creator komponens működése során ugyan igénybe veszi a videókártya számítási kapacitását, de ez semmiképp sem jelenti azt, hogy a futási idő elhanyagolható. Ugyanakkor fontos kiemelni azt is, azon függvényhívások sorozata ami a videókártyán fog elvégződni, szinkron módon történik. Valójában a programunk meghívja az adott függvényt majd addig várakozik, amig megoldás nem érkezett erre.
+Egy bemeneti képre való stílus átruházás időigényes folyamat. Mozgókép esetében ez a folyamat időigénye lineárisan növekedik a képkockák számának szorzatával. Annak érdekében, hogy az alkalmazásunk reszponzív legyen, elhagyhatatlan aspektus egy olyan modell kialakítása ami igénybe veszi a modern processzorok többszálas működési tulajdonságát. Az "Artistic video creator" komponens működése során ugyan igénybe veszi a videókártya számítási kapacitását, de ez semmiképp sem jelenti azt, hogy a futási idő elhanyagolható. Ugyanakkor fontos kiemelni azt is, hogy azon függvényhívások sorozata ami a videókártyán fog elvégződni, szinkron módon történik. Valójában a programunk meghívja az adott függvényt majd addig várakozik, amig megoldás nem érkezett erre.
 \newline
 \indent
-Alkalmazásunk esetében megkülönböztetünk egy főszálat valamint egy mellékszálat (\ref{seq_diagram}. ábra). A főszálon fog futni a Main Window és a köréje csoportosuló felhasználói felülettel rendelkező komponensek, mint például a Settings vagy a ProgressBar. Az alkalmazás indításakor csak a főszál indul el ami létrehozza a Main Window és Settings komponenseket. Ezt követően, ha a felhasználó megadja a bemeneti állományt, létrejön a ProgressBar komponens. A ProgressBar azért jön létre csak ebben a pillanatban, mivel a rendszernek el kell döntenie a bemenet típusát és ennek függvényében egy factory modell segítségével dönti el, hogy milyen típusú komponens jön létre. Ebben a pillanatban azonban a Progressbar komponens még nem látható a felhasználó számára.
+Alkalmazásunk esetében megkülönböztetünk egy főszálat valamint egy mellékszálat (\ref{seq_diagram}. ábra). A főszálon fog futni a Main Window és a köréje csoportosuló felhasználói felülettel rendelkező komponensek, mint például a "Settings" vagy a "ProgressBar". Az alkalmazás indításakor csak a főszál indul el ami létrehozza a "Main Window" és "Settings" komponenseket. Ezt követően, ha a felhasználó megadja a bemeneti állományt, létrejön a "ProgressBar" komponens. A "ProgressBar" azért jön létre csak ebben a pillanatban, mivel a rendszernek tudnia kell a bemenet típusát és ennek függvényében egy factory modell segítségével dönti el, hogy milyen típusú komponens jön létre. Ebben a pillanatban azonban a "Progressbar" komponens még nem látható a felhasználó számára.
 \newline
 \indent
 Ha felhasználó úgy dönt, hogy a megfelelő bemenetet választotta ki, elindíthatja az átruházási folyamatot. Ekkor egy külön szál jön létre (Worker thread), ami átveszi a bemeneti adatokat és elkezdi a folyamatot. A terhelés ebben a pillanatban átkerül a másodlagos szálra, ennek eredményeképp a főszál nem fog blokkolódni. Így az felhasználói felület aktív marad a felhasználó számára és ki fogja tudni szolgálni annak kéréseit.
-A munkafolyamat közben az Artistic Video creator komponens kapcsolatban áll a ProgressBar komponenssel és jelzéseket küld a munkafolyamat státusáról így ez ki tudja jelezni, hogy mennyi munka van még hátra. A munkafolyamat bármikor leállítható még azelőtt, hogy az átruházás befejeződött volna. Ilyenkor a ProgressBar üzenetet küld az Artistic Video creator komponensnek, ami beállít egy saját leállításra szánt flag-et. A folyamat két iteráció között állítható le, ha az illető flag be volt állítva. Miután a munkafolyamat sikeresen leállt, egy jelzés fog érkezni a ProgressBar komponenshez ami majd nyugtázni fogja. Ha a munkafolyamat bevégződött, vagy a felhasználó által megszakításra került, a másodlagos szál el fog halni, az ezáltal igényelt erőforrások pedig fel fognak szabadulni.
+A munkafolyamat közben az "Artistic Video creator" komponens kapcsolatban áll a "ProgressBar" komponenssel és jelzéseket küld a munkafolyamat státusáról így ez ki tudja jelezni, hogy mennyi munka van még hátra. A munkafolyamat bármikor leállítható még azelőtt, hogy az átruházás befejeződött volna. Ilyenkor a "ProgressBar" üzenetet küld az "Artistic Video creator" komponensnek, ami beállít egy saját leállításra szánt flag-et. A folyamat két iteráció között állítható le, ha az illető flag be volt állítva. Miután a munkafolyamat sikeresen leállt, egy jelzés fog érkezni a "ProgressBar" komponenshez ami majd nyugtázni fogja azt. Ha a munkafolyamat bevégződött, vagy a felhasználó által megszakításra került, a másodlagos szál el fog halni, az ezáltal igényelt erőforrások pedig fel fognak szabadulni.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -834,7 +848,7 @@ A továbbiakban részletes bemutatásra és elemzésre kerül az applikációnk 
 	\end{center}
 \end{figure}
 
-A MainWindow komponens magába foglalja a fő felhasználói implementációját meg pár ehhez szorosan kapcsolódó segítő osztályt(\ref{mainwindow_class}. ábra). Maga a fő ablak megvalósítását két részre bontottuk: maga a nézettel foglalkozó osztály(Ui\_MainWindow) és maga a back-end logikával foglalkozó osztályra (MainWindow). Az Ui\_MainWindow egyetlen feladata maga felhasználói felület nézetének definiálása, ezért ezt kompozícióval integráljuk a MainWindow osztályba. A felület (lásd: \ref{graphical_ui)}. ábra) rendelkezik két grafikus kép kijelzésére szánt ablakkal, amik QGraphicsScene típusúak. Ezek közül a bal ablakba fog megjelenni a bemeneti kép amit a felhasználó megad. A QGraphicsScene sajnos nem képes videóanyag beágyazására, ezért az alkalmazás egy előre megadott képet fog ilyenkor kijelezni a felhasználónak. 
+A "Main Window" komponens magába foglalja a fő felhasználói implementációját meg pár ehhez szorosan kapcsolódó segítő osztályt(\ref{mainwindow_class}. ábra). Maga a fő ablak megvalósítását két részre bontottuk: maga a nézettel foglalkozó osztály(Ui\_MainWindow) és maga a back-end logikával foglalkozó osztályra (Main Window). Az Ui\_MainWindow egyetlen feladata maga felhasználói felület nézetének definiálása, ezért ezt kompozícióval integráljuk a MainWindow osztályba. A felület (lásd: \ref{graphical_ui)}. ábra) rendelkezik két grafikus kép kijelzésére szánt ablakkal, amik QGraphicsScene típusúak. Ezek közül a bal ablakba fog megjelenni a bemeneti kép amit a felhasználó megad. A QGraphicsScene sajnos nem képes videóanyag beágyazására, ezért az alkalmazás egy előre megadott képet fog ilyenkor kijelezni a felhasználónak. 
 \newline
 \indent
 A bemenet magadása a "Browse..." nyomógomb lenyomásával történik, ami jelzést fog küldeni a \_browse\_button\_clicked metódusnak. Ez létre fog hozni QFileDialog típusú beépített fájlböngésző ablakot. Ez fel van konfigurálva olyan módon, hogy csak az előre kijelölt típusú fájlkiterjesztéseket lehessen beolvasni ("Images/Videos (*.png *.jpg *.gif *.mp4)"). Ha fájlkiválasztás megtörtént, akkor a fájlnak az útvonala megjelenik a "Browse..." nyomógomb melletti szövegdobozban.
@@ -859,33 +873,33 @@ Ugyancsak a MainWindow tartalmazza a ProgressBar létrehozásával felelős fact
 \begin{figure}[!htbp]
 	\centering
 	\subfloat[Aba Novak Vilmos - Önarckép]{
-		\includegraphics[width=40mm]{aba_novak_vilmos_onarckep.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/aba_novak_vilmos_onarckep.jpg}
 	}
 	\subfloat[Aba Novak Vilmos - Selfportrait]{
-		\includegraphics[width=40mm]{aba-novak_vilmos_selfportrait.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/aba-novak_vilmos_selfportrait.jpg}
 	}
 	\subfloat[Csontvary Kosztka Tivadar - Traui tájkép naplemente idején]{
-		\includegraphics[width=40mm]{csontvary_kosztka_tivadar_traui_tajkep_naplemente_idejen.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/csontvary_kosztka_tivadar_traui_tajkep_naplemente_idejen.jpg}
 	}
 	\hspace{0mm}
 	\subfloat[Iványi Grunwald Béla - Parkrészlet Kecskeméten]{
-		\includegraphics[width=40mm]{ivanyi_grunwald_bela_parkreszlet_kecskemeten.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/ivanyi_grunwald_bela_parkreszlet_kecskemeten.jpg}
 	}
 	\subfloat[Munkácsi Mihály - Vihar a pusztán]{
-		\includegraphics[width=40mm]{munkacsi_mihaly_vihar_a_pusztan}
+		\includegraphics[width=40mm]{stylistic/styles/munkacsi_mihaly_vihar_a_pusztan}
 	}
 	\subfloat[Réti Alfréd]{
-		\includegraphics[width=40mm]{reti_alfred.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/reti_alfred.jpg}
 	}
 	\hspace{0mm}
 	\subfloat[Ripl-Rónai József - Apám és Piacsek bácsi vörösbor mellett]{
-		\includegraphics[width=40mm]{ripl_ronai_jozsef_apam_es_piacsek_bacsi_vorosbor_mellett.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/ripl_ronai_jozsef_apam_es_piacsek_bacsi_vorosbor_mellett.jpg}
 	}
 	\subfloat[Tihanyi Tzara]{
-		\includegraphics[width=40mm]{tihanyi_tzara.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/tihanyi_tzara.jpg}
 	}
 	\subfloat[Magyar Népmesék]{
-		\includegraphics[width=40mm]{magyar_nepmesek.jpg}
+		\includegraphics[width=40mm]{stylistic/styles/magyar_nepmesek.jpg}
 	}
 	\caption{Stílusképek}
 	\label{styles}
@@ -1001,10 +1015,10 @@ A videóval kapcsolatos ablakok emellett SLOT függvényeket definiálnak annak 
 	\end{center}
 \end{figure}
 
-A stílusátruházó komponenst az ArtisticVideo, VGG19 és AtomBoolean osztályok alkotják (\ref{artisticvideo_class}. ábra). Ezek körül az ArtisticVideo osztály felelől a stílus átruházásával, a VGG19 osztály felelős az előredefiniált neuronháló beolvasásával. Az AtomBoolean egy segítő osztály, több szálról is módosítható flag-et definiál. Ezek mellett komponens még használ két csoport segítőfüggvényt amikor az Image meg a Video állományokba csoporosítottuk.
+A stílusátruházó komponenst az ArtisticVideo, VGG19 és AtomicBoolean osztályok alkotják (\ref{artisticvideo_class}. ábra). Ezek körül az ArtisticVideo osztály felelől a stílus átruházásával, a VGG19 osztály felelős az előredefiniált neuronháló beolvasásával. Az AtomicBoolean egy segítő osztály, több szálról is módosítható flag-et definiál. Ezek mellett komponens még használ két csoport segítőfüggvényt amikor az Image meg a Video állományokba csoporosítottuk.
 \newline
 \indent
-Az ArtisticVideo osztályt a Worker objektum példányosítja. Mivel a Worker objektumunk a mellákszálöóon fut, ezzért az ArtisticVideo objektumunk metódusai is a mellékszálon fognak elvégződni. Az ArtisicVideo-nak két fontos metódusa a create\_image és a stylize. A create\_image megkapja a bemenet útvonalát, amit az Image vagy Video segítő függvénycsomagok segítségével beolvas és feldolgoz. Amiután ez megtörtént, egyenként minden képkockára meghívódik a stylize metódus. A stylize metódus tartalmazza a tanítási algoritmus. Ennek a függvény eredménye minden esetben egy stilizált kép, kivételes eset, ha a tanítás megszakad, ekkor a visszatérített érték a null (None). Ugyancsak a create\_image metódusra hárul a képkockákból videót alkotni. 
+Az ArtisticVideo osztályt a Worker objektum példányosítja. Mivel a Worker objektumunk a mellákszálöóon fut, ezzért az ArtisticVideo objektumunk metódusai is a mellékszálon fognak elvégződni. Az ArtisticVideo-nak két fontos metódusa a \(create\_image\) és a \(stylize\). A \(create\_image\) megkapja a bemenet útvonalát, amit az Image vagy Video segítő függvénycsomagok segítségével beolvas és feldolgoz. Amiután ez megtörtént, egyenként minden képkockára meghívódik a \(stylize\) metódus. A \(stylize\) metódus tartalmazza a tanítási algoritmus. Ennek a függvény eredménye minden esetben egy stilizált kép, kivételes eset, ha a tanítás megszakad, ekkor a visszatérített érték a null (\(None\)). Ugyancsak a \(create\_image\) metódusra hárul a képkockákból videót alkotni. 
 \newline
 \indent
 Az ArtisticVideo jelzéseket küld a főablak és a progress dialógus komponenseknek. A Qt kimondja, hogy a felhasználói felület mindenképpen a fő szálon kell fusson ezért az ArtisticVideo nem oldhatja meg az, hogy függvényhívással módosítja a felhasználói felületet. Ez mindenképp jelzéssel kell megoldani, kikötve azt, hogy a jelzésre válaszoló függvény a fő szálon fut. Az ArtisticVideo osztály által definiált jelzések:
@@ -1025,12 +1039,12 @@ Ugyanehhez a komponenshez sorolhatunk két segítő (utility) függvényeket tar
 Az Image csomag tartalmaz egy imread függvényt statikus kép beolvasására és egy imwrite függvényt statikus kép mentésére. Beolvasáskor preprocesszálás történik a bemeneti adaton, ami azt jelenti, hogy a színcsatornákból kivonódnak a következő középértékek: [123.68, 116.779, 103.939]. Ez arra szolgál, a hogy a pixelértékek 0-ás körüli értékeket vegyenek fel. Mentéskör ezek az értékeket hozzáadjuk a kimeneti kép színcsatornáihoz.
 \newline
 \indent
-A Video csomag tartalmaz egy convert\_to\_frames függvényt ami a megadott útvonalon levő videót képkockákká alakítja. Ezeket a képkockákat majd az imread-del fogjuk feldolgozni. Emellett tartalmazza a convert\_to\_video függvényt, ami a kimentett képsorozazoz fogja videóvá alakítani. Továbbá tartalmazza a make\_opt\_flow és \_run\_consistency\_check függvényeket, amik az optical flow és képkockák mozgási határait eredményezik. Mindkét esetben a függvény egy külső bináris állomány futtatásával végzi el a feladatot. Ezek a binárisok nem saját programkódok a készítők lefordított állományait használtuk fel\cite{34}.
+A Video csomag tartalmaz egy \(convert\_to\_frames\) függvényt ami a megadott útvonalon levő videót képkockákká alakítja. Ezeket a képkockákat majd az imread-del fogjuk feldolgozni. Emellett tartalmazza a \(convert\_to\_video\) függvényt, ami a kimentett képsorozazoz fogja videóvá alakítani. Továbbá tartalmazza a \(make\_opt\_flow\) és \(\_run\_consistency\_check\) függvényeket, amik az optical flow és képkockák mozgási határait eredményezik. Mindkét esetben a függvény egy külső bináris állomány futtatásával végzi el a feladatot. Ezek a binárisok nem saját programkódok a készítők lefordított állományait használtuk fel\cite{34}.
 
 \section{Limitációk}
 \secro{Limitații}
 \secen{Limitations}
-Az implementáláshoz használt deeplmatching és deeplfow algoritmusok esetében a készítők által kiadott binárisokat használtuk. Ezek tökéletesen működnek Linux alapú rendszereken. Mivel a forráskódjuk nyílt, ezért megpróbáltuk portálni azokat Windows környezet alá, sajnos többszörös próbálkozás után kénytelenek voltunk feladni. A forráskód eléggé komplex és nem dokumentált. Mivel a dolgozat célja nem ez a két algoritmus köré alapul, ezért inkább abbahagytuk azoknak az átírását. Ennek eredménye az, hogy a deepmatching és deepflow által biztosított funkcionalitások nem elérhetőek, ha az alkalmazás Windows operációs rendszer alatt fut.
+Az implementáláshoz használt deeplmatching és deeplfow algoritmusok esetében a készítők által kiadott binárisokat használtuk. Ezek tökéletesen működnek Linux alapú rendszereken. Mivel a forráskóduk nyílt, ezért megpróbáltuk átírni azokat Windows környezet alá, sajnos többszörös próbálkozás után kénytelenek voltunk feladni. A forráskód eléggé komplex és nem jól dokumentált. Mivel a dolgozat célja nem ez a két algoritmus lefejlesztése köré alapult, ezért inkább abbahagytuk azoknak az átírását. Ennek eredménye az, hogy a deepmatching és deepflow által biztosított funkcionalitások nem elérhetőek, ha az alkalmazás Windows operációs rendszer alatt fut.
 \newline
 \indent
 A deepmatching algoritmus is mesterséges intelligenciát használ, ezért itt is ajánlatos volna VGA megoldást használni. Sajnos a dolgozat elkészítésekor működő megoldás nem volt erre. A VGA-ás megoldás jelentőset gyorsítana az algoritmusokon.
@@ -1326,7 +1340,7 @@ Ulyanov, D., Lebedev, V., Vedaldi, A., and Lempitsky - Instance Normalization: T
 Manuel Ruder, Alexey Dosovitskiy, Thomas Brox - Artistic style transfer for videos (2016)
 
 \bibitem{22}
--
+Sundaram, N., Brox, T., Keutzer, K. - Dense point trajectories by gpu-accelerated large displacement optical flow (2010)
 
 \bibitem{23}
 \url{https://www.python.org/} (2017.04.30)
@@ -1372,5 +1386,113 @@ gpustats library: \url{https://github.com/dukestats/gpustats} (2017.06.04)
 
 
 \end{thebibliography}
+
+\newpage
+\appendix
+\chapter*{Függelékek}
+\begin{subappendices}
+	\section*{Példák stilizált képekre}
+		\begin{figure}[!htbp]
+			\begin{center}
+				\includegraphics[scale=0.3]{stylistic/original/girl.jpg}
+				\caption[]{Eredeti kép}
+				\label{original_girl}
+			\end{center}
+		\end{figure} 
+		
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Stíluskép]{
+				\includegraphics[width=40mm]{stylistic/styles/tihanyi_tzara.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=40mm]{stylistic/portre/tihanyi.jpg}
+			}
+			\caption[]{Tihanyi - Tzara}
+			\label{girl_1}
+		\end{figure}
+	
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Stíluskép]{
+				\includegraphics[width=40mm]{stylistic/styles/aba_novak_vilmos_onarckep.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=40mm]{stylistic/portre/aba.jpg}
+			}
+			\caption[]{Aba Novák Vilmos - Önarckép}
+			\label{girl_2}
+		\end{figure}
+	
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Stíluskép]{
+				\includegraphics[width=40mm]{stylistic/styles/reti_alfred.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=40mm]{stylistic/portre/reti.jpg}
+			}
+			\caption[]{Réti Alfréd - Kubizmus}
+			\label{girl_3}
+		\end{figure}
+	
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Stíluskép]{
+				\includegraphics[width=40mm]{stylistic/styles/magyar_nepmesek.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=40mm]{stylistic/portre/nepmesek.jpg}
+			}
+			\caption[]{Magyar népmesék}
+			\label{girl_4}
+		\end{figure}
+	
+		\begin{figure}[!htbp]
+			\begin{center}
+				\includegraphics[scale=0.5]{stylistic/original/sapientia.jpg}
+				\caption[]{Eredeti kép}
+				\label{original_sapientia}
+			\end{center}
+		\end{figure}
+		
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Stíluskép]{
+				\includegraphics[width=60mm]{stylistic/styles/csontvary_kosztka_tivadar_traui_tajkep_naplemente_idejen.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=60mm]{stylistic/place/csontvary.jpg}
+			}
+			\caption[]{Csontváry - Tájkép naplemente idején}
+			\label{sapi_1}
+		\end{figure}
+	
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Stíluskép]{
+				\includegraphics[width=60mm]{stylistic/styles/munkacsi_mihaly_vihar_a_pusztan.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=60mm]{stylistic/place/munkacsi.jpg}
+			}
+			\caption[]{Csontváry - Tájkép naplemente idején}
+			\label{sapi_2}
+		\end{figure}
+	
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Stíluskép]{
+				\includegraphics[width=60mm]{stylistic/styles/ivanyi_grunwald_bela_parkreszlet_kecskemeten.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=60mm]{stylistic/place/wald.jpg}
+			}
+			\caption[]{Grunwald Béla - Parkrészlet Kecskeméten}
+			\label{sapi_3}
+		\end{figure} 	
+	
+	\section*{Forráskód}
+\end{subappendices}
 
 \end{document}

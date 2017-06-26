@@ -14,22 +14,21 @@
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.4.}The definition and optimization of the total loss function for static images}{30}
 \select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}Learning method in case of video inputs}{31}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Naiv approach}{31}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}The initialization of the neural net for the frames}{32}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.3.}Introduction of the optical flow}{32}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.5.}The design and implementation of the system}{33}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.1.}Interraction and behavioral model of the system}{33}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}The initialization of the neural net for the frames. Introduction of the optical flow}{32}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.5.}The design and implementation of the system}{34}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.1.}Interraction and behavioral model of the system}{34}
 \select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.2.}Structural model of the system}{34}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.3.}Multithreaded design and communication of components}{35}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.4.}The implementation of the system}{38}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.1.}The implementation of the Main Window component}{38}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.2.}The implementation of the Settings component}{43}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.3.}The implementation of the Progress bar component}{44}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.4.}The implementation of the Artistic video creatorr component}{45}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.6.}Limitations}{48}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{49}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.1.}Test configuration}{49}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.2.}The amount of time and memory needed for transfering the style to a frame}{50}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Comparison of the running timp between CPU and GPU}{53}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.4.}The amount of time needed for transfering the style to a video}{53}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{58}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{5.1.}Future improvements}{59}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.3.}Multithreaded design and communication of components}{36}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.4.}The implementation of the system}{37}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.1.}The implementation of the Main Window component}{39}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.2.}The implementation of the Settings component}{42}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.3.}The implementation of the Progress bar component}{45}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.4.}The implementation of the Artistic video creatorr component}{46}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.6.}Limitations}{49}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{50}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.1.}Test configuration}{50}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.2.}The amount of time and memory needed for transfering the style to a frame}{51}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Comparison of the running timp between CPU and GPU}{54}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.4.}The amount of time needed for transfering the style to a video}{54}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{59}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{5.1.}Future improvements}{60}
