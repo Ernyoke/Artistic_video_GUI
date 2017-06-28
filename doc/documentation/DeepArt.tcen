@@ -1,34 +1,34 @@
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{1.}Indroduction}{15}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{2.}Bibliographic study}{17}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{3.}The system}{19}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.1.}Overview}{19}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.2.}Parallel machine learning using Tensorflow}{21}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.1.}The basic concepts of Tensorflow library}{21}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.2.}Execution in case of a single device}{22}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.3.}Execution in case of multiple devices}{22}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.4.}Parallel trainig}{23}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.3.}Learning method in case of static image inputs}{24}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.1.}The loss function of the content image}{24}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.2.}The loss function of the style image}{27}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Denoising the stylized image}{29}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.4.}The definition and optimization of the total loss function for static images}{30}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}Learning method in case of video inputs}{31}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Naiv approach}{31}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}The initialization of the neural net for the frames. Introduction of the optical flow}{32}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.5.}The design and implementation of the system}{34}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.1.}Interraction and behavioral model of the system}{34}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.2.}Structural model of the system}{34}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.3.}Multithreaded design and communication of components}{36}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.4.}The implementation of the system}{37}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.1.}The implementation of the Main Window component}{39}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.2.}The implementation of the Settings component}{42}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.3.}The implementation of the Progress bar component}{45}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.4.}The implementation of the Artistic video creatorr component}{46}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.6.}Limitations}{49}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{50}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.1.}Test configuration}{50}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.2.}The amount of time and memory needed for transfering the style to a frame}{51}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Comparison of the running timp between CPU and GPU}{54}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.4.}The amount of time needed for transfering the style to a video}{54}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{59}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{5.1.}Future improvements}{60}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{1.}Indroduction}{18}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{2.}Bibliographic study}{20}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{3.}The system}{22}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.1.}Overview}{22}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.2.}Parallel machine learning using Tensorflow}{24}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.1.}The basic concepts of Tensorflow library}{24}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.2.}Execution in case of a single device}{25}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.3.}Execution in case of multiple devices}{25}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.4.}Parallel trainig}{26}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.3.}Learning method in case of static image inputs}{27}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.1.}The loss function of the content image}{27}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.2.}The loss function of the style image}{29}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Denoising the stylized image}{32}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.4.}The definition and optimization of the total loss function for static images}{33}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}Learning method in case of video inputs}{33}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Naiv approach}{33}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}The initialization of the neural net for the frames. Introduction of the optical flow}{35}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.5.}The design and implementation of the system}{36}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.1.}Interraction and behavioral model of the system}{36}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.2.}Structural model of the system}{38}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.3.}Multithreaded design and communication of components}{39}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.4.}The implementation of the system}{40}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.1.}The implementation of the Main Window component}{42}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.2.}The implementation of the Settings component}{45}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.3.}The implementation of the Progress bar component}{47}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.4.}The implementation of the Artistic video creatorr component}{49}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.6.}Limitations}{52}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}The testing of the system}{53}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.1.}Test configuration}{53}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.2.}The amount of time and memory needed for transfering the style to a frame}{54}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Comparison of the running timp between CPU and GPU}{57}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.4.}The amount of time needed for transfering the style to a video}{59}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Conclusion}{62}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{5.1.}Future improvements}{63}

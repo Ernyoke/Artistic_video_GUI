@@ -22,6 +22,7 @@
 \usepackage{amsmath}
 \usepackage{subfig}
 \usepackage{appendix}
+\usepackage{afterpage}
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
 
 %---------------------------------------------------------
@@ -87,6 +88,13 @@
 
 %---------------------------------------------------------
 
+\newcommand{\blankpage}{
+	\newpage
+	\thispagestyle{empty}
+	\mbox{}
+	\newpage
+}
+
 %---------------------------------------------------------
 \begin{document}
 \pagenumbering{arabic}
@@ -126,6 +134,7 @@
     \vspace{0.5cm}\textbf{2017 Július}
 \end{center}
 \vspace*{\fill}
+\afterpage{\blankpage}
 %roman borito
 %-------------------------------------------------------------
 \newpage
@@ -161,6 +170,7 @@
 \begin{center}
     \vspace{1cm}\textbf{2017 Iulie}
 \end{center}
+\afterpage{\blankpage}
 
 %angol borito
 %-------------------------------------------------------------
@@ -196,6 +206,7 @@
 \begin{center}
     \vspace{1cm}\textbf{2017 July}
 \end{center}
+\afterpage{\blankpage}
 
 %eredetisegi nyilatkozat
 %-------------------------------------------------------------
@@ -270,13 +281,13 @@ A dolgozat a deep learning gépi tanulási módszert használja arra, hogy a mű
     \Large ABSTRACT
 \end{center}
 
-Pe parcursul anilor s-au dezvoltat numeroase curente artistice în domeniul picturii si a artelor plastice. Fiecare curent artistic posedă un stil unic care îl caracterizează. În prezent stiința prelucrării imaginilor pe calculator a ajuns la un nivel, la care are posibilitatea de a recunoaște și de a cataloga curentele artistice. Se poate pune intrebarea dacă s-ar putea inversa acest proces îtrucât calculatorul să fie capabil de a creea imagini artistice.
+Pe parcursul anilor s-au dezvoltat numeroase curente artistice în domeniul picturii si a artelor plastice. Fiecare curent artistic posedă un stil unic care îl caracterizează. În prezent stiința prelucrării imaginilor pe calculator a ajuns la un nivel, la care are posibilitatea de a recunoaște și de a cataloga curentele artistice. Se poate pune intrebarea dacă s-ar putea inversa acest proces îtrucât calculatorul să fie capabil de a creea imagini artistice?
 \newline
 \indent
 Aplicarea trăsăturilor ale anumitor curente artistice la crearea unor picturi artistice reprezintă o provocare chiar și pentru un artist instruit. Totodată, timpul necesar creării unor picturi sau imagini artistice nu poate fi neglijat. Scopul acestei teze este de a prezenta și de a implementa o aplicație care să fie capabilă să preia trăsăturile artistice de pe picturi recunscute ale marilor pictori maghiari. Aceste trăsături vor transferate și aplicate pe imagini neartistice și pe videouri.
 \newline
 \indent
-Modalitatea de transfer a stilului artistic prezentată în această lucrare se bazează pe învățare automată folosind metoda deep learning. În cazul videoclipurilor se prezintă o metodă care ia în atenție și tranzițiile de pe un frame pe celălalt. Procesul de transfer a stilului se folosește de capabilitatea de multithreading a plăcii video, reducând astel timpul procesului semnificativ. 
+Modalitatea de transfer a stilului artistic prezentată în această lucrare se bazează pe învățare automată folosind metoda deep learning. În cazul videoclipurilor se prezintă o metodă care ia în considerare și tranzițiile de pe un frame pe celălalt. Procesul de transfer a stilului se folosește de capabilitatea de multithreading a plăcii video, reducând astel timpul procesului semnificativ. 
 
 \begin{flushright}
 \textbf{Szilágyi Ervin,}\\
@@ -291,13 +302,13 @@ Modalitatea de transfer a stilului artistic prezentată în această lucrare se 
     \Large ABSTRACT
 \end{center}
 
-Over the years several artistic movements were developed which had a considerable impact on the painting and fine arts. Every movement has an unique style with its own properties. In the present days computer vision reached to the point where distinguishing artistic style features does not represent a problem. A simple computer can recognize and group painting by their art movements. We can ask the question if there is possibility to reverse this process meaning that the machine itself would be able to create artistic pictures.  
+Over the years several artistic movements were developed which had a considerable impact on the painting and fine arts. Every movement has an unique style with its own features. In the present days computer vision reached to the point where distinguishing artistic style features does not represent a problem. A simple computer can recognize and group paintings by their art movements. We can ask the question if there is possibility to reverse this process meaning that the machine itself would be able to generate artistic pictures?  
 \newline
 \indent
-Applying style features from a give artistic movement consists a challenge even from a well-trained artist. Meanwhile, the necessary time for being able to create a good looking artistic picture is not neglectable at all. The scope of this project is to present and implement a solution which is able to transfer the style features from creation of well-known Hungarian painters and apply the features to images and videos created by the user.
+Applying style features from a given artistic movement consists a challenge even for a well-trained artist. Meanwhile, the necessary time for being able to create a good looking artistic picture is not neglectable at all. The scope of this project is to present and implement a solution which is able to transfer the style features from creations of well-known Hungarian painters and apply the features to images and videos created by the user.
 \newline
 \indent
-The artistic style transfer is done using deep learning, a widespread machine learning method used for computer vision applications. The project also contains a solution which takes in consideration the transition and the temporal differences between frames in case of video input. The style transferring process is using the capability of the video card which is running massively parallel application. By using the data parallelization capability of a video card, we can reduce the learning time considerably. 
+The artistic style transfer is done using deep learning, a widespread machine learning method used for computer vision applications. The project also contains a solution which takes in consideration the transition and the temporal differences between frames in case of video input. The style transferring process is using the capability of the video card, which is running massively parallel application. By using the data parallelization capability of a video card, we can reduce the learning time considerably. 
 
 \begin{flushright}
 \textbf{Szilágyi Ervin,}\\
@@ -320,16 +331,16 @@ The artistic style transfer is done using deep learning, a widespread machine le
 \capterro{Întroducere}
 \capteren{Indroduction}
 
-Napjainkban a képfeldolgozás egy eléggé elterjedt kutatási terület. A kutatások célja főleg az információ kinyerésére, gépi látás kivitelezésére irányult. Minderre kiváló megoldást jelentett a mély konvolúciós hálók (ConvNets)\cite{1}\cite{2} sikeres használata növelve ezzel ezek népszerűségét. Fontos megjegyezni, hogy a konvolúciós neuron hálók felfedezése már pár évtizede történt, tehát maga a technológia már régebb ismert volt. Az újrafelfedezésüket és hirtelen népszerűség növekedését annak köszönhetik, hogy az utóbbi években olyan hardveres megoldások jelentek meg, amik lehetővé teszik az ilyen típusú hálók létrehozását és működtetését. 
+Napjainkban a képfeldolgozás egy eléggé elterjedt kutatási terület. A kutatások célja főleg az információ kinyerésére, gépi látás kivitelezésére irányult. Minderre kiváló megoldást jelentett a mély konvolúciós hálók (ConvNets)\cite{1}\cite{2} sikeres használata növelve ezzel ezek népszerűségét. Fontos megjegyezni, hogy a konvolúciós neuron hálók felfedezése már pár évtizede történt, tehát maga a technológia már régebben is ismert volt. Az újrafelfedezésüket és népszerűségük hirtelen növekedését annak köszönhetik, hogy az utóbbi években olyan hardveres megoldások jelentek meg, amik lehetővé teszik az ilyen típusú hálók létrehozását és működtetését. 
 \newline 
 \indent
-Az Nvidia cég 2007-ben bevezette az Nvidia CUDA platformot\cite{3}. Ez egy komoly, használható fejlesztő környezetett jelentett olyan fejlesztők számára akik nagy méretű adatpárhuzamos algoritmusokat szerettek volna fejleszteni. A CUDA környezet direkt elérhetőséget nyújt a videókártya utasításkészletéhez megengedve ezzel ennek a programozását. Ugyanakkor számos olyan videókártya került piacra ami egyre komolyabb számítási készségekkel bírt. Ezt a lehetőséget értelemszerűen a kutatók ki is használták így számos újabb publikáció és javaslat jelent meg amik neuron hálókat használnak az illető probléma megoldására.
+Az Nvidia cég 2007-ben bevezette az Nvidia CUDA platformot\cite{3}. Ez egy komoly, használható fejlesztő környezetett jelentett olyan fejlesztők számára akik nagy méretű adatpárhuzamos algoritmusokat szerettek volna lefejleszteni. A CUDA környezet direkt elérhetőséget nyújt a videókártya utasításkészletéhez megengedve ezzel ennek a programozását. Ugyanakkor számos olyan videókártya került piacra ami egyre komolyabb számítási készségekkel bírt. Ezt a lehetőséget értelemszerűen a kutatók ki is használták így számos újabb publikáció és javaslat jelent meg amik neuron hálókat használnak az illető problémák megoldására.
 \newline
 \indent
-A deep konvolúciós hálók népszerűségének növekedésével egyre több olyan fejlesztői környezet jelent meg amiknek célja a mesterséges intelligencia feladatok megoldása. Ilyen könyvtárak például a Caffe\cite{4}, Keras\cite{5}, Theano\cite{6}, Tensorflow\cite{7}, Torch\cite{8} stb. Ezek a környezetekben, habár különböző stílusban de egyazon problémákra hivatottak gyors és egyszerű megoldásokat ajánlja ugyanúgy mezei szoftverfejlesztők, mint kutatók számára.
+A mély konvolúciós hálók népszerűségének növekedésével egyre több olyan fejlesztői környezet jelent meg amiknek célja a mesterséges intelligencia feladatok megoldása. Ilyen könyvtárak például a Caffe\cite{4}, Keras\cite{5}, Theano\cite{6}, Tensorflow\cite{7}, Torch\cite{8} stb. Ezek a környezetekben, habár különböző stílusban, de egyazon problémákra hivatottak gyors és egyszerű megoldásokat ajánlja ugyanúgy mezei szoftverfejlesztők, mint kutatók számára.
 \newline
 \indent
-Az gépi látás egyik fontos alkalmazási területe a képen levő tárgyak, élőlények emberek felismerése. Ilyen területen a konvolúciós hálók kimagasló teljesítményt nyújtanak, olyannyira, hogy egyes kisérletek szerint ez már nemhogy az emberi látással megegyező, hanem azt felülmúló teljesítményt nyújtanak\cite{9}. Feltevődik a kérdés, hogyha ennyire szofisztikált a gépi látás, akkor nem-e lehetne használni arra, hogy új képeket alkosson. Amint kiderült erre is alkalmasak. Az általam bemutatandó dolgozat is ezt a témát próbálja megcélozni. A gépi látás a tárgyak, élőlények mellett képes felismerni maga a kép művészeti stílusát. Ez elsősorban kihasználható arra, hogy híres művészek alkotásait csoportosítsuk, rendszerezzük\cite{10}, de amint e dolgozatból ki fog derülni, ki lehet használni arra is, hogy egy művészeti stílust egy adott festményről átvigyük egy mindennapi képre, fotóra. 
+Az gépi látás egyik fontos alkalmazási területe a képen levő tárgyak, élőlények emberek felismerése. Ilyen területen a konvolúciós hálók kimagasló teljesítményt nyújtanak, olyannyira, hogy egyes kisérletek szerint ezek már nemhogy az emberi látással megegyező, hanem azt felülmúló teljesítményt nyújtanak\cite{9}. Feltevődik a kérdés, hogyha ennyire szofisztikált a gépi látás, akkor nem-e lehetne használni arra, hogy új képeket alkosson. Amint kiderült erre is alkalmasak. Az általam bemutatandó dolgozat is ezt a témát próbálja megcélozni. A gépi látás a tárgyak, élőlények mellett képes felismerni maga a kép művészeti stílusát. Ez elsősorban kihasználható arra, hogy híres művészek alkotásait csoportosítsuk, rendszerezzük\cite{10}, de amint e dolgozatból ki fog derülni, ki lehet használni arra is, hogy egy művészeti stílust egy adott festményről átvigyük egy mindennapi képre, fotóra. 
 \newline
 \indent
 A dolgozatom célja magyar híres festőművészek festészeti stílusát átvenni és ezt alkalmazni mindennapi képekre illetve mozgóképekre. Eddigiekben, ahhoz hogy egy mindennapi fényképből művészeti képet varázsoljunk, képszerkesztő szoftverek segítségével lehetett elérni manuálisan. Mindezt egy olyan egyén végezhette, akinek képszerkesztési illetve képmanipulálási szakismere volt adott képszerkesztési szoftverkörnyezetben. Magától értődik az, hogy ez mozgóképek esetében egy időigényes folyamat. Dolgozatom mindezekre megoldást próbál adni, azáltal, hogy az általam elkészített szoftvert bárki használhatja, nincs szükség különböző képszerkesztői szakértelemre, emellett a folyamat ideje jelentősen csökkenni fog. 
@@ -338,7 +349,7 @@ A dolgozatom célja magyar híres festőművészek festészeti stílusát átven
 \chapter{Hasonló rendszerek feltérképezése}
 \capterro{Studiu bibliografic}
 \capteren{Bibliographic study}
-A neuron hálók használata a számítástechnikában nem egy újonnan kialakult terület. Frank Rosenblatt 1958-ban publikált egy olyan mintafelismerő algoritmust\cite{11}, ami egyszerű összeadást és kivonást használva képes volt "tanulni". A rendszer képes volt finomhangolni állapotát a bekövetkező iterációk során. Ezt az algoritmust perceptronnak nevezzük. 1975-ben Paul Werbos bevezette a backpropagation algoritmust\cite{12}, amit a perceptronnal együtt használva megoldotta a perceptron azon problémáját miszerint az csak lineárisan elválasztható osztályokat volt képes kategorizálni. Habár a neuron hálók tanulmányozása eléggé ígéretesnek látszott, számítási igényük, komplexitásuk és lassú válasz idejük miatt a kutatók arra következtetésre jutottak, hogy a gyakorlatban még nem lehet alkalmazni őket.
+A neuron hálók használata a számítástechnikában nem egy újonnan kialakult terület. Frank Rosenblatt 1958-ban publikált egy olyan mintafelismerő algoritmust\cite{11}, ami egyszerű összeadást és kivonást használva képes volt "tanulni". A rendszer képes volt finomhangolni állapotát a bekövetkező iterációk során. Ezt az algoritmust perceptronnak nevezzük. 1975-ben Paul Werbos bevezette a backpropagation algoritmust\cite{12}, amit a perceptronnal együtt használva megoldotta a perceptron azon problémáját miszerint az csak lineárisan elválasztható osztályokat volt képes kategorizálni. Habár a neuron hálók tanulmányozása eléggé ígéretesnek látszott, számítási igényük, komplexitásuk és lassú válaszidejük miatt a kutatók arra következtetésre jutottak, hogy a gyakorlatban még nem lehet alkalmazni őket.
 \newline
 \indent
 Yann LeCun professzor és csapata 1998-ban egy újabb topológiájú hálót vezetett be\cite{13}. A LeNet-5 elnevezésű háló konvoluciós rétegeket is tartalmazott ezért konvolúciós neuron hálónak nevezzük. A publikáció célja kézzel írott számjegyek kategorizálása volt, létrehozva ezáltal a MNIST adatbázist, ami 60000 28x28-as felbontású kézzel írott számjegyet tartalmaz, emellett tartalmaz egy 10000 tagból álló teszthalmazt. A dolgozatban bemutatott LeNet-5 háló 0,7\%-os hiba aránnyal volt képes kategorizálni a számjegyeket, ami messze felülmúlta a többrétegű perceptronos megoldást. 
@@ -350,7 +361,7 @@ Dave Steinkraus, Patrice Simard és Ian Buck 2005-ben publikált dolgozata\cite{
 Eddigiekben sikerült nagyon pontos felismerő illetve osztályozó rendszereket alkotni. A mély konvolúciós hálók használata azonban nem merül ki ennyiben. 2015-ben publikálásra került egy olyan deep learning-et használó algoritmus, ami képes képek illetve festmények művészeti stílusát átvinni egy másik digitális képre\cite{15}. Mostani dolgozatom is erre a publikációra alapoz, az ebben bemutatott módszereket próbálja alkalmazni illetve továbbfejleszteni. A tanuláshoz egy korábban bevezetett és gépi látáshoz használt, előre betanított neuron hálót használnak fel, a VGG-19-et. Yaroslav Nikulin és Roman Novak tudományos kutatása\cite{16} ezzel szemben eddig ugyanezt a módszert alkalmazta más ismertebb előre betanított hálókra, mint például AlexNet, GoogLeNet vagy VGG-16. Ugyanúgy a VGG-16 háló használata is kiváló eredményeket mutatott míg a GoogLeNet és az AlexNet architektúrájuk miatt komolyabb információvesztéshez vezetnek így a végeredmény nem lesz annyira látványos. Ugyanúgy kísérletek irányultak az eredi eljárás optimalizálására, megjelentek olyan rendszerek amik sajátos, erre a célre betanított neuron hálókat alkalmaznak\cite{17}\cite{18}\cite{19}.
 \newline
 \indent
-2016-ban a Prisma labs inc. kiadta mobilos applikációját Prisma név alatt\cite{20}. Az aplikáció előre megadott ismert festői/grafikai stílusokat alkalmazza a telefon kamerája által készített képekre. Az applikáció az előbbiekben bemutatott kutatásokra alapoz. Ugyanakkor fontos megjegyezni, hogy maga a stílus alkalmazását a különböző fotókra nem az okostelefon végzi. A szerkeszteni kívánt képet a telefon felkülde egy szervergépre ami majd válaszként a szerkesztett képet küldi vissza. 
+2016-ban a Prisma labs inc. kiadta mobilos applikációját Prisma név alatt\cite{20}. Az aplikáció előre megadott ismert festői/grafikai stílusokat alkalmazza a telefon kamerája által készített képekre. Az applikáció az előbbiekben bemutatott kutatásokra alapoz. Ugyanakkor fontos megjegyezni, hogy maga a stílus alkalmazását a különböző fotókra nem az okostelefon végzi. A szerkeszteni kívánt képet a telefon felküldi egy szervergépre ami majd válaszként a szerkesztett képet küldi vissza. 
 \newline
 \indent
 Maga stílusátvitel nem csak állóképekre alkalmazható, ezt bizonyította Manuel R., Alexey D., Thomas B. tudományos dolgozata\cite{21}, valamit ezt próbalja megoldani a jelenlegi dolgozatom is. Értelemszerűen egy adott videót több álló képkocka alkot. Viszont ahhoz, hogy látványos művészeti mozgóképet gyártsunk, nem elegendő maga a videót darabokra vágni és minden képkockára alkalmazni a stílust. Erre adott megoldást Manuel R. és társainak kutatása. 
@@ -365,7 +376,7 @@ Maga stílusátvitel nem csak állóképekre alkalmazható, ezt bizonyította Ma
 \section{Áttekintés}
 \secro{Privire de ansamblu asupra}
 \secen{Overview}
-Dolgozatom célja egy olyan multiplatform számítástechnikai szoftver tervezése és fejlesztése ami deep learning-et használva képes híres magyar festők festményeinek a stílusát átvenni és alkalmazni a felhasználó által megadott digitális képekre illetve videókra. A fejlesztett szoftver könnyen használható grafikus felhasználói felülettel rendelkezik és támogatja a Linux valamint a Microsoft Windows alapú operációs rendszereket. A szoftver futtatásához a felhasználónak rendelkeznie kell egy olyan videókártyával ami támogatja az Nvidia CUDA platformot. 
+Dolgozatom célja egy olyan multiplatform számítástechnikai szoftver tervezése és fejlesztése ami deep learning-et használva képes híres magyar festők festményeinek a stílusát átvenni és alkalmazni a felhasználó által megadott digitális képekre illetve videókra. A fejlesztett szoftver könnyen használható, grafikus felhasználói felülettel rendelkezik és támogatja a Linux valamint a Microsoft Windows alapú operációs rendszereket. A szoftver futtatásához a felhasználónak rendelkeznie kell egy olyan videókártyával ami támogatja az Nvidia CUDA platformot. 
 \newline
 \indent
 A szoftver fejlesztése Python3.5\cite{23} programozási nyelvben történt, viszont egyes esetekben felhasználásra kerülnek egyes előre legyártott önállóan is futtatható állományok. Emellett még használva vannak a következő Python könyvtárak:
@@ -377,9 +388,9 @@ A szoftver fejlesztése Python3.5\cite{23} programozási nyelvben történt, vis
 	\item OpenCV\cite{26}: képfeldolgozásra szakosodott könyvtár, főleg a különböző kiterjesztésű képek beolvasására és mentésére volt használva.
 \end{itemize}
 
-A rendszer működése felülnézetből nagyon egyszerű (\ref{felulnezet_1} ábra). A felhasználó kiválaszt egy bemeneti állományt, ami kép kiterjesztésű (.jpg, .png) vagy mozgókép kiterjesztésű (.gif, .avi, .mp4) lehet valamint kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén egyszerűen lefuttatja a tanulási algoritmust amely során az átveszi a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd minden képkockára alkalmazva lesz a tanítási algoritmus. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Ezek után, függetlenül, hogy kép vagy videó lett a végeredmény, a rendszer kimenti azt egy megadott folderbe.
+A rendszer működése felülnézetből nagyon egyszerű (\ref{felulnezet_1} ábra). A felhasználó kiválaszt egy bemeneti állományt, ami kép kiterjesztésű (.jpg, .png) vagy mozgókép kiterjesztésű (.gif, .avi, .mp4) lehet valamint kiválaszt egy stílust a megadottak közül. A rendszer annak függvényében, hogy milyen bemenetet adtunk, eldönti, hogy kép vagy mozgóképpel kell dolgoznia. Kép esetén egyszerűen lefuttatja a tanulási algoritmust amely során az átveszi a művészeti kép stílusát. Mozgókép esetén képkockákra bontja azt, majd minden képkockára alkalmazva lesz a tanítási algoritmus. Ha összes képkocka szerkesztve lett, akkor a rendszer felépíti a képkockákból a kimeneti videót. Ezek után, függetlenül, hogy kép vagy videó lett a végeredmény, a rendszer kimenti azt egy megadott állományba.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 	\begin{center}
 		\includegraphics[scale=0.5]{software_overview.png}
 		\caption{A rendszer működése felülnézetből}
@@ -398,7 +409,7 @@ A rendszer működése felülnézetből nagyon egyszerű (\ref{felulnezet_1} áb
 A Tensorflow egy gépi tanításra alkalmas könyvtár. Tensorflow segítségével leírt algoritmus nagyon kevés kódmódosítással számos eszközön futtatható, kezdve a mobil eszközöktől egészen a GPU-kal ellátott osztott rendszerekig. Főleg a deep learning típusú algoritmusok implementálására használatos, viszont flexibilitásából adódóan számos más tanítási folyamat elvégzésére is képes \cite{35}.
 \newline
 \indent
-A Tensorflow működése leírható egy irányított gráf segítségével. A gráf az adat áramlását reprezentálja, míg a gráfban levő csúcsok jelentik a kontrollt az adat áramlása fölött. Egy ilyen gráfban minden csúcsnak 0 vagy több bemenetele van, valamint 0 vagy több kimenettel rendelkezik. Minden csúcs egy operációt jelent. A csúcsok közt folyó adathalmazokat tenzoroknak nevezzük. Valójában egy tenzor egy N dimenziós tömböt jelent. Speciális élek is létezhetnek a gráfban az adatfolyam kontrollálására. Ilyen él lehet például egy olyan, ami megtiltja, hogy adat folyjon át rajta \cite{35}.
+A Tensorflow működése leírható egy irányított gráf segítségével. A gráf az adat áramlását reprezentálja, míg a gráfban levő csúcsok jelentik a kontrollt az adat áramlása fölött. Egy ilyen gráfban minden csúcsnak 0 vagy több bemenetele van, valamint 0 vagy több kimenettel rendelkezik. Minden csúcs egy operációt jelent. A csúcsok közt folyó adathalmazokat tenzoroknak nevezzük. Valójában egy tenzor egy N dimenziós tömböt jelent. Speciális élek is létezhetnek a gráfban az adatfolyam kontrollálására. Ilyen lehet például egy olyan él, ami megtiltja, hogy adat folyjon át rajta \cite{35}.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -417,12 +428,12 @@ Ahhoz, hogy a számítási gráfban definiált műveleteket elvégezhessük, sze
 A változó egy olyan tenzor ami megtartja az értékét többszörös számítási gráf kiértékelés esetén is. A változó egy olyan tenzorra utal aminek tartalma megváltozhat, ezzel ellentétben létezik a konstans aminek tartalma nem változhat.
 \newline
 \indent
-A Tensorflow párhuzamosításra úgynevezett processzeket használ (\ref{single_proc_vs_multiple_proc}. ábra). A kliens szoftver egy szesszió interfészen keresztül kommunikál a master processzel és a worker proceszekkel. Mindenik procesz felelős egy vagy több számítási eszközért (computation device), amik lehetnek CPU magok vagy GPU kártyák. Ezek az eszközök lehetnek lokálisak, ami azt jelenti, hogy ugyanabban a rendszerben helyezkednek el, vagy lehetnek osztottak, ez esetben külön rendszerekben helyezkednek el a különféle eszközök. Minden eszköz saját névvel rendelkezik\cite{35}.
+A Tensorflow párhuzamosításra úgynevezett processzeket használ (\ref{single_proc_vs_multiple_proc}. ábra). A kliens szoftver egy szesszió interfészen keresztül kommunikál a "master" processzel és a "worker" proceszekkel. Mindenik procesz felelős egy vagy több számítási eszközért (computation device), amik lehetnek CPU magok vagy GPU kártyák. Ezek az eszközök lehetnek lokálisak, ami azt jelenti, hogy ugyanabban a rendszerben helyezkednek el, vagy lehetnek osztottak, ez esetben külön rendszerekben helyezkednek el a különféle eszközök. Minden eszköz saját névvel rendelkezik\cite{35}.
 
 \subsection{Futtatás egyetlen készülék esetében}
 \ssecro{Execuție pe un simplu device}
 \ssecen{Execution in case of a single device}
-Egyetlen eszköz jelenlétében a csúcsok egymást követően lesznek kiértékelve figyelembe véve a közöttük levő dependenciákat. Minden csúcs esetében számolva van, hogy hány dependenciát tartalmaz, ha ezek közül egyik ki volt értékelve, akkor ez a számláló csökken. Mikor a számláló elérta a 0-át, akkor tovább lép és kiértékeli e következő csúcsot. A kiértékelésre várakozó csúcsok egy listába vannak elhelyezve.
+Egyetlen eszköz jelenlétében a csúcsok egymást követően lesznek kiértékelve figyelembe véve a közöttük levő dependenciákat. Minden csúcs esetében számolva van, hogy hány dependenciát tartalmaz. Ha ezek közül egyik ki volt értékelve, akkor ez a számláló csökken. Mikor a számláló elérta a 0-át, akkor tovább lép és kiértékeli e következő csúcsot. A kiértékelésre várakozó csúcsok egy listába vannak elhelyezve.
 
 \subsection{Futtatás több készülék esetében}
 \ssecro{Execuție pe mai multe device-uri}
@@ -430,7 +441,7 @@ Egyetlen eszköz jelenlétében a csúcsok egymást követően lesznek kiérték
 Több készülék esetében szükséges eldönteni, hogy az adott csúcsok melyik készüléken fognak kiértékelődni, valamint fontos megoldani a készülékek közötti kommunikációt.
 \newline
 \indent
-A csúcsok elhelyezése egy mohó esztimációs módszert követ. Minden csúcs esetében megesztimálható, hogy a bemeneti és kimeneti tenzorok mérete byte-ban. Ugyanakkor megesztimálható a futási idő adott csúcsok esetében. Ezután egy szimuláció fog lefutni ami az összes csúcs esetében kilistázza a használható eszközöket majd kiértékeli a futási időt valamit a kommunikáció idejét az eddigi elhelyezett csúcsokkal. A mohó algoritmus szerint arra az eszközre fog kerülni, ami a szimuláció során a legjobb eredményt adta.
+A csúcsok elhelyezése egy mohó esztimációs módszert követ. Minden csúcs esetében megesztimálható, hogy a bemeneti és kimeneti tenzorok mérete byte-ban. Ugyanakkor megesztimálható a futási idő adott csúcsok esetében. Ezután egy szimuláció fog lefutni ami az összes csúcs esetében kilistázza a használható eszközöket majd kiértékeli a futási időt valamit a kommunikáció idejét az eddigi elhelyezett csúcsokkal. A mohó algoritmus szerint egy csúcs arra az eszközre fog kerülni, ami a szimuláció során a legjobb eredményt adta.
 \newline
 \indent
 Az eszközök közötti kommunikációt Send-Receive csúcsok beiktatásával oldja meg. Ezek a csúcsok ugyanakkor megoldják az eszközök közötti szinkronizációt is. Osztott rendszerek esetében ugyancsak Send-Receive csúcsok oldják meg a kommunikációt. Ezek TCP és RDMA protokollokat használnak az adat mozgatásához\cite{35}.
@@ -447,7 +458,7 @@ Az eszközök közötti kommunikációt Send-Receive csúcsok beiktatásával ol
 \ssecro{Antrenare paralelă}
 \ssecen{Parallel trainig}
 
-A Tensorflow könyvtár az adatpárhuzamosítást megközelíti úgy adatpárhuzamosítás szempontjából, mint feladat párhuzamosítás szempontjából. Adatpárhuzamosítás esetében az adatot kisebb csomagokba bontja, majd ezeket párhuzamosan bemenetként táplálja a megfelelő csomópontonknak. A kiértékelendő csomópontokból egy másolat kerül az összes szálra (\ref{data_parallel_tf_model}. ábra). A végeredményt egy redukciós művelet gyűjti össze.
+A Tensorflow könyvtár a párhuzamosítást megközelíti úgy adatpárhuzamosítás szempontjából, mint feladat párhuzamosítás szempontjából. Adatpárhuzamosítás esetében az adatot kisebb csomagokba bontja, majd ezeket párhuzamosan bemenetként táplálja a megfelelő csomópontonknak. A kiértékelendő csomópontokból egy másolat kerül az összes szálra (\ref{data_parallel_tf_model}. ábra). A végeredményt egy redukciós művelet gyűjti össze.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -457,7 +468,7 @@ A Tensorflow könyvtár az adatpárhuzamosítást megközelíti úgy adatpárhuz
 	\end{center}
 \end{figure}
 
-Feladatpárhuzamosítás esetében külömböző gráfrészletek lesznek megtanítva ugyanabban az időben különböző szálakon. Mikor a tanítás befejeződik, akkor az a procesz egy újabb gráfrészlet kiértékelésének fog neki. Ilyenfajta tanítás esetében fontos figyelembe venni azt, hogy egyes gráfrészletek csak akkor értékelhetőek ki, ha már előttük egy másik gráfrészlet le volt futtatva. Feladatpárhuzamos tanítást a \ref{data_parallel_tf_model}. ábra szemlélteti.
+Feladatpárhuzamosítás esetében külömböző gráfrészletek lesznek megtanítva ugyanabban az időben különböző szálakon. Mikor a tanítás befejeződik, akkor az a processz egy újabb gráfrészlet kiértékelésének fog neki. Ilyenfajta tanítás esetében fontos figyelembe venni azt, hogy egyes gráfrészletek csak akkor értékelhetőek ki, ha már előttük egy másik gráfrészlet le volt futtatva. Feladatpárhuzamos tanítást a \ref{data_parallel_tf_model}. ábra szemlélteti.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -478,10 +489,10 @@ A rendszer tanításához állokép esetében két legalább képet bemenet szü
 \ssecro{Funcția de pierdere în cazul imaginii originale}
 \ssecen{The loss function of the content image}
 
-A mély neurálos hálók (Deep Neural Networks) azon típusai amik a legeredményesebbek a képfeldolgozási feladatok elvégzésben a konvolúciós hálók. Mesterséges intelligencia területén a konvolúciós hálók olyan feed-forward típusú neuronhálók, amiket a biológiai elsődleges látókéregről mintáztak. A háló kifejezetten arra volt tervezve és kifejlesztve, hogy kétdimenziós formákat ismerjen fel. A háló alapértelmezetten több rétegből tevődik össze:
+A mély neurális hálók (Deep Neural Networks) azon típusai amik a legeredményesebbek a képfeldolgozási feladatok elvégzésben a konvolúciós hálók. Mesterséges intelligencia területén a konvolúciós hálók olyan feed-forward típusú neuronhálók, amiket a biológiai elsődleges látókéregről mintáztak. A háló kifejezetten arra volt tervezve és kifejlesztve, hogy kétdimenziós formákat ismerjen fel. A háló alapértelmezetten több rétegből tevődik össze:
 
 \begin{itemize}
-	\item konvolúciós réteg: a konvolúciós hálók alap kövei. A réteg súlyai úgynevezett konvolúciós szűrők alkotják, amelyek a forward pass lépés során tanítva vannak. Ez a tanítási lépés úgy történik, hogy a szűrőt végig toljuk a bemeneten és konvolúciónak nevezett műveletet végzünk. 
+	\item konvolúciós réteg: a konvolúciós hálók alapkövei. A réteg súlyai úgynevezett konvolúciós szűrők alkotják, amelyek a forward pass lépés során tanítva vannak. Ez a tanítási lépés úgy történik, hogy a szűrőt végig toljuk a bemeneten és konvolúciónak nevezett műveletet végzünk. 
 	\item pooling layer: arra használatos, hogy a bemeneti adathalmazt méretét leszűkítsük úgy, hogy a halmaz adott értékein valamely matematikai műveletet végzünk (átlagszámolás, maximum számolás, minimum számolás). Erre azért van szükségünk, hogy növeljük a tanulás gyorsaságát, csökkentsük a számítások komplexitását megakadályozva ezzel az "overfitting" bekövetkezését.
 	\item fully connected layer: minden bemenet mindem más bemenettel kapcsolatban áll.
 \end{itemize}
@@ -490,9 +501,9 @@ A konvolúciós hálók súlyzókként konvolúciós szűrőket tartalmaznak. Ez
 
 Az eredi kép tanításához egy már előre betanított mély konvolúciós neuronhálót használunk fel. A háló tudományos kontextusban VGG-19 név alatt terjedt el amit Simonyan K. és  Zisserman A. vezetett be publikációjukban\cite{29} ahol még a "model E" nevet viselte. Ez a háló gépi látás és tárgyfelismerés céljából volt bevezetve olyan eredményeket produkálva e téren amik az emberi látással versengenek. Rétegei és topológiájának részletes bemutatása a \cite{29} publikációban történik, valamint a \ref{vgg_19} figurán is látható. Fontos megjegyezni, hogy a háló rétegeiből használva volt a 16 konvolúciós réteg, valamint az 5 pooling réteg, a teljesen összekötött rétegek nem voltak használva.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 	\begin{center}
-		\includegraphics[scale=0.7]{VGG19.png}
+		\includegraphics[scale=0.3]{VGG19.png}
 		\caption{VGG-19 (Model E) háló topológiája\cite{29}}
 		\label{vgg_19}
 	\end{center}
@@ -639,7 +650,7 @@ A teljes veszteségfüggvény tanítására az Adam\cite{32} optimalizáló algo
 \end{aligned}
 \end{equation}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 	\begin{center}
 		\includegraphics[scale=0.9]{total_loss_values.png}
 		\caption{Tanítási függvény optimalizálása különböző tanítási ráták esetében}
@@ -1054,7 +1065,7 @@ A deepmatching algoritmus is mesterséges intelligenciát használ, ezért itt i
 \capterro{Testarea sistemului}
 \capteren{The testing of the system}
 
-A rendszer tesztelése alatt fel szerettük volna mérni, hogy a rendszer hogyan viselkedik a mindennapi használatban. Többek között választ szerettünk volna kapni olyan kérdésekre, hogy a rendszer mennyi idő alatt ruházza át a stílust egy statikus képre, mekkora a memória igénye, mekkora a maximális képméret amire még működőképes.
+A rendszer tesztelése alatt fel szerettük volna mérni, hogy a rendszer hogyan viselkedik a mindennapi használatban. Többek között választ szerettünk volna kapni olyan kérdésekre, hogy a rendszer mennyi idő alatt ruházza át a stílust egy statikus képre vagy egy videóra, mekkora a memória igénye, mekkora a maximális képméret amire még működőképes.
 
 \section{A tesztrendszer ismertetése}
 \secro{Configurația de test}
@@ -1071,10 +1082,10 @@ A rendszer tesztelésére a következő konfigurációt használtuk:
 	\item \textbf{Operációs rendszer:} Ubuntu 17.04 LTS
 \end{itemize}
 
-A használt videókártya egy nVidia GeForce GTX 1080 volt, ennek is a Gigabyte által kiadott G1 GAMING változata. A kártya főleg játékra van tervezve, de kiemelkedő hardver tulajdonságainak megfelelően tökéletesen használható párhuzam gépi tanulásra is. A videókártya a Pascal architektúrával rendelkezik. A kártya alapfrekvenciája 1695 MHz, terhelés alatt felugorhat 1860MHz-re. A kártya 2560 CUDA maggal rendelkezik valamint 8GB DDR5X típusú memóriával, amiből gépi tanulásra használható 7860MB.
+A használt videókártya egy nVidia GeForce GTX 1080 volt, ennek is a Gigabyte által kiadott G1 GAMING változata. A kártya főleg játékra volt tervezve, de kiemelkedő hardver tulajdonságainak megfelelően tökéletesen használható párhuzamos gépi tanulásra is. A videókártya a Pascal architektúrával rendelkezik. A kártya alapfrekvenciája 1695 MHz, terhelés alatt felugorhat 1860MHz-re. A kártya 2560 CUDA maggal rendelkezik valamint 8GB DDR5X típusú memóriával, amiből gépi tanulásra használható 7860MB.
 \newline
 \indent 
-A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott. A rendszer egyes limitációkkal támogatja a Microsoft Windows operációs rendszert is, viszont a limitációk miatt az összes teszt nem végezhető el azalatt, ezért az Ubuntu-ra esett választás. A operációs rendszerünk az ekkori legújabb nVidia driver-ekkel volt ellátva ami a 375.66 változat. A Pascal architektúrának támogató CUDA 8.0-ás videókártya fejlesztő könyvtárat használtuk. Emellett a Tensorflow igényeli a cudnn videó kártya memóriájával foglalkoző könyvtárat is.
+A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott. A rendszer egyes limitációkkal támogatja a Microsoft Windows operációs rendszert is, viszont a limitációk miatt az összes teszt nem végezhető el azalatt, ezért az Ubuntu-ra esett választás. A operációs rendszerünk az ekkori legújabb nVidia driver-ekkel volt ellátva ami a 375.66 verziója kiadás. A Pascal architektúrának támogató CUDA 8.0-ás videókártya fejlesztő könyvtárat használtuk. Emellett a Tensorflow igényeli a cudnn videó kártya memóriájával foglalkoző könyvtárat is.
 
 \section{Egy képkockára történő stílusátruházási idő és memória igénye}
 \secro{Timpul și memoria necesară transferări stilului pe o imagine statică}
@@ -1107,7 +1118,7 @@ A \ref{time_per_res}. diagrammból lekövetkeztethetjük az, hogy az igényelt i
 	\end{center}
 \end{figure}
 
-Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kihasználtságát is. Amint észlelhettük, még az alacsony felbontású képek esetében is eléggé időigényes a folyamat. Feltételeztük, hogy a Tensorflow könyvtár a kártyát maximálisan ki tudja használni. A tesztéli folyamathoz egy teljesen egyedülálló programot készítettünk. Ezt a stílusátruházás előtt el kell indítani. A program a gpustats\cite{36} könyvtárat használja a videókártya működési paramétereinek a lekérdezésére. A programunk minden másodpercben lekéri egyszer a videókártya terheltségi százalékát és kimenti az egy fájlba amit később fel lehet használni.
+Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kihasználtságát is. Amint észlelhettük, még az alacsony felbontású képek esetében is eléggé időigényes a folyamat. Feltételeztük, hogy a Tensorflow könyvtár a kártyát maximálisan ki tudja használni. A tesztelési folyamathoz egy teljesen egyedülálló programot készítettünk. Ezt a stílusátruházás előtt el kell indítani. A program a gpustats\cite{36} könyvtárat használja a videókártya működési paramétereinek a lekérdezésére. A programunk minden másodpercben lekéri egyszer a videókártya terheltségi százalékát és kimenti azt egy fájlba amit később fel lehet használni.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -1117,10 +1128,10 @@ Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kih
 	\end{center}
 \end{figure}
 
-A \ref{gpu_usage}. diagramm igazolta előrejelzésünket. A videókártya használati százaléka az művelet elején felugrik szinte maximálisra és azon marad addig amig be nem fejezte azt. A \ref{gpu_usage}. ábrán látható diagramm $640 \times $480-as felbontásra keszült, de hasonló eredményeket kapunk bármely más felbontás esetében is.
+A \ref{gpu_usage}. diagramm igazolta előrejelzésünket. A videókártya használati százaléka a művelet elején felugrik szinte maximálisra és azon marad addig amig be nem fejezte azt. A \ref{gpu_usage}. ábrán látható diagramm $640 \times $480-as felbontásra keszült, de hasonló eredményeket kapunk bármely más felbontás esetében is.
 \newline
 \indent
-Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat egy különböző felbontások esetében. Itt a logika azt sugallná, hogy a felbontásokkal arányosan lineárisan nőni fog. Ezzel ellenben a ábra azt igazolja, hogy a Tensorflow működése nem egyezik meg a előrejelzésünkkel. A mérés hasonlóan mint a kihasználtság esetében egy külön program méri ami egy külön processzen fut. A mérésre ugyancsak a gpustats könyvtárat használtuk.
+Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat egy különböző felbontások esetében. Itt a logika azt sugallná, hogy a memóriaigény a felbontásokkal arányosan lineárisan nőni fog. Ezzel ellenben a \ref{gpu_memory_usage}. ábra azt igazolja, hogy a Tensorflow működése nem egyezik meg a előrejelzésünkkel. A mérés hasonlóan mint a kihasználtság esetében egy külön program méri ami egy külön processzen fut. A mérésre ugyancsak a gpustats könyvtárat használtuk.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -1140,7 +1151,7 @@ A kérdésre a válasz egyszerűen úgy adható meg, hogy vesszük az ismertebb 
 \secro{Compararea timpului necesar pe CPU cu cel necesar pe GPU}
 \secen{Comparison of the running timp between CPU and GPU}
 
-Tisztába vagyunnk azzal, hogy a deep learning tanítási módszer alkalmas az adatpárhuzamosításra. Érthető módon elvárt, hogy a processzoron történő futtatás jóval alul kellene maradjon a GPU-un történő futtatással szemben. Ez igazolják a következő mérések is. Ugyanúgy mint az előző mérések esetében 300 iteráció alatt történt a stílusátruházás. A bemeneti teszt képek is az elöző teszthalmazból vannak kölcsönvéve, ebben az esetben három felbontásra futtattuk a tesztet. Ez elegendő kellene legyen arra, hogy lássuk a GPU használata által bevezetett gyorsulást. Minden teszt esetben ugyanazt a stílusképet alkalmaztuk, aminek felbontása $600 \times $855 pixel. Az mért eredmények a következők: 
+Tisztába vagyunnk azzal, hogy a deep learning tanítási módszer alkalmas az adatpárhuzamosításra. Érthető módon elvárt, hogy a processzoron történő futtatás jóval alul kellene maradjon a GPU-un történő futtatással szemben. Ezt igazolják a következő mérések is. Ugyanúgy mint az előző mérések esetében 300 iteráció alatt történt a stílusátruházás. A bemeneti teszt képek is az elöző teszthalmazból vannak kölcsönvéve, ebben az esetben három felbontásra futtattuk a tesztet. Ez elegendő kellene legyen arra, hogy lássuk a GPU használata által bevezetett gyorsulást. Minden teszt esetben ugyanazt a stílusképet alkalmaztuk, aminek felbontása $600 \times $855 pixel. Az mért eredmények a következők: 
 
 \begin{center}
 	\begin{tabular}{ | l | l | l | l| }
@@ -1177,7 +1188,7 @@ Következtetésképpen kijelenthető, hogy ha rendelkezünk megfelelő videóká
 \secro{Timpul necesar transferări stilului pe un videoclip}
 \secen{The amount of time needed for transfering the style to a video}
 
-Mindenekelőtt le szerettük volna mérni az optical flow algoritmus futási idejét. Itt megjegyezzük, hogy a programban az deepmatching - deepflow algoritmust használtuk. A készítők által szolgáltatott nyílt forrsákodú binárisok lettek integrálva az alkalmazásba. A binárisok a számítógép processzorát használják, hivatalos GPU-ra készített bináris a dolgozat írása idejében nem volt kiadva.
+Mindenekelőtt le szerettük volna mérni az optical flow algoritmus futási idejét. Itt megjegyezzük, hogy a programunk a deepmatching - deepflow algoritmust használja. A készítők által szolgáltatott nyílt forrsákodú binárisok lettek integrálva az alkalmazásba. A binárisok a számítógép processzorát használják, hivatalos GPU-ra készített bináris a dolgozat írása idejében nem volt kiadva.
 
 \begin{center}
 	\begin{tabular}{ | l | l |}
@@ -1201,7 +1212,7 @@ Mindenekelőtt le szerettük volna mérni az optical flow algoritmus futási ide
 \end{center}
 \end{figure}
 
-Az optical flow minden két egymást követő képkocka között ki van számolva mindkét irányba. Ez azt jelenti, hogy ha nekünk például 10 képkockánk van, akkor 9 + 9 eredményt kapunk. Amint a \ref{deepmatching_deepflow}. diagramm kimutatja, az optical flow eléggé költséges művelet, legtöbb esetben több időbe kerül, mint maga a stílusátvitel. 
+Az optical flow minden két egymást követő képkocka között ki van számolva mindkét irányba. Ez azt jelenti, hogy ha nekünk például 10 képkockánk van, akkor 9 + 9 flow fájlt kapunk kimenetként. Amint a \ref{deepmatching_deepflow}. diagramm kimutatja, az optical flow eléggé költséges művelet, legtöbb esetben több időbe kerül, mint maga a stílusátvitel. 
 \newline
 \indent
 Továbbá egy 1 perces videóra történő stílusátruházás idejét szeretnénk lemérni. A videó 24 FPS (képkocka/másodperc) paraméterrel rendelkezik, ami azt jelenti, hogy 60 másodperces videó esetében 1440 képkockára kell átruházni a stílust.
@@ -1235,10 +1246,10 @@ A dolgozat célja egy olyan rendszer kialakítása és fejlesztése volt, ami k�
 Előszöris sikerült egy olyan applikációt fejleszteni ami képes statikus képre átruházni egy művészeti stílust. Az applikációt sikerült lefejleszteni Windows valamint Linux alapú rendszerekre úgy, hogy kihasználja a videókártya által biztosított párhuzmosítást. Statikus képre történő stílusátruházás kifogástalanul működik ugyanúgy a Linux valamint Windows rendszereken. Az átruházási idők amint a tesztekből is láthattuk elfogadhatóak abban az esetben, ha rendelekezünk megfelelő videókártyával. Azt is meghatároztuk, hogy noha a rendszer a maximális HD felbontású képek támogatására volt tervezve, működőképes marad akár fullHD felbontású bementi képek esetében is.
 \newline
 \indent
-Továbbá, mozgóképek esetében is próbáltuk megoldani a stílusátruházást. Ez a beépített funkció szintúgy működik Windows valamint Linux rendszerek alatt, megjegyezve az, hogy Windows alatt nem használható az optical flow algoritmus által bevezetett képminőség javítása. Itt fontos megemlíteni, hogy a dolgozat igazolni tudja, hogy videó esetében is megoldható a stílusátruházás, de ugyanakkor nagyobb felbontások esetében ez átruházási idő szempontjából ez nem feltétlenül kifizetödő. Az optical flow metódussal azt próbáltuk elérni, hogy a képkockák közötti átmenet legyen folyamatos elkerülve az úgymond "artifact"-et megjelenését. Ezt sikerült is elérni, viszont a hátránya az, hogy az időigény több mint duplájára növekedett.
+Továbbá, mozgóképek esetében is próbáltuk megoldani a stílusátruházást. Ez a beépített funkció szintúgy működik Windows valamint Linux rendszerek alatt, megjegyezve az, hogy Windows alatt nem használható az optical flow algoritmus által bevezetett képminőség javítása. Itt fontos megemlíteni, hogy a dolgozat igazolni tudja, hogy videó esetében is megoldható a stílusátruházás, de ugyanakkor nagyobb felbontások esetében az átruházási idő szempontjából ez nem feltétlenül kifizetödő. Az optical flow metódussal azt próbáltuk elérni, hogy a képkockák közötti átmenet legyen folyamatos elkerülve az úgymond "artifact"-et megjelenését. Ezt sikerült is elérni, viszont a hátránya az, hogy az időigény több mint duplájára növekedett.
 \newline
 \indent 
-Következtetésképpen levonható az, hogy az általunk ismertett megoldások működőképesek, de még szükség van a továbbfejlesztésekre és optimalizációkra ahhoz, hogy egy mindennapi felhasználó által ez gond nélkül használható lehessen.
+Következtetésképpen levonható az, hogy az általunk ismertett megoldások működőképesek, de még szükség van a továbbfejlesztésekre és optimalizációkra ahhoz, hogy egy mindennapi felhasználó által a szoftver gond nélkül használható lehessen.
 
 \section{Továbbfejlesztési lehetőségek}
 \secro{Dezvoltare ulterioară}
@@ -1256,13 +1267,13 @@ Mozgóképek esetében alapértelmezetten az idő javítása lenne a cél. Ez me
 	\item a Deepmatching - Deeplfow algorirtmus helyett valami más algoritmust használni ami vélhetőleg gyorsabb futási időt eredméynez.
 \end{itemize}
 
-Szoftverfejlesztés szempontjából javítani lehet maga a szoftver használhatóságán, kinézetén. Amint már említve volt az optical flow csak Linux alapú rendszereken támogatott, ezt portálni lehetne Windows-ra is. Továbbá fontos lenne egy komolyabb tesztelési mechanizmusnak alávetni, ugyanis a fejlesztés során ez nem volt feltétlenül szem előtt tartva.
+Szoftverfejlesztés szempontjából javítani lehet maga a szoftver használhatóságán, kinézetén. Amint már említve volt az optical flow csak Linux alapú rendszereken támogatott, ezt át lehetne írni Windows alapú rendszerekre is. Továbbá fontos lenne egy komolyabb tesztelési mechanizmusnak alávetni az alkalmazást, ugyanis a fejlesztés során ez nem volt feltétlenül szem előtt tartva.
 \newline
 \indent
-A szoftver annak köszönhetően, hogy olyan környezetben íródott valamint olyan könyvtárakat használ amik multiplatform támogatással rendelkeznek, valószínüleg futna OSX alapú rendszereken is, viszont ilyen alapú kísérlet nem volt végezve a fejlesztés alatt. A továbbiakban ez is megoldható lehetne. 
+A szoftver annak köszönhetően, hogy olyan környezetben íródott, valamint olyan könyvtárakat használ amik multiplatform támogatással rendelkeznek, valószínüleg futna OSX alapú rendszereken is, viszont ilyen alapú kísérlet nem volt végezve a fejlesztés alatt. A továbbiakban erre is ki lehetne térni. 
 \newline
 \indent
-Végezetül pedig, manapság eléggé elterjedtek a cloud alapú szolgáltatások. Az is megoldható lenne, hogy az applikációnkat átalakítjuk egy could alapú szolgáltatássás, amit bárki igénybe vehet akár mobilos eszközökről is.
+Végezetül pedig, manapság eléggé elterjedtek a cloud alapú szolgáltatások. Azt is javasolt lenne megoldani, hogy az applikációnkból cloud alapú szolgáltatást készítsünk, amit bárki igénybe vehet akár mobilos eszközökről is.
 
 
 % Ábrajegyzék
