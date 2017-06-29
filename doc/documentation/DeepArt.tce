@@ -1,34 +1,34 @@
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{1.}\IeC {\^I}ntroducere}{18}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{2.}Studiu bibliografic}{20}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{3.}Sistemul}{22}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.1.}Privire de ansamblu asupra}{22}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.2.}\IeC {\^I}nv\IeC {\u a}\IeC {\textcommabelow t}are automat\IeC {\u a} cu ajutorul libr\IeC {\u a}riei Tensorflow}{24}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.1.}Conceptele de baz\IeC {\u a} a libr\IeC {\u a}riei Tensorflow}{24}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.2.}Execu\IeC {\textcommabelow t}ie pe un simplu device}{25}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.3.}Execu\IeC {\textcommabelow t}ie pe mai multe device-uri}{25}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.4.}Antrenare paralel\IeC {\u a}}{26}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.3.}Metoda de antrenare \IeC {\^\i }n cazul imaginilor statice}{27}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.1.}Func\IeC {\textcommabelow t}ia de pierdere \IeC {\^\i }n cazul imaginii originale}{27}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.2.}Func\IeC {\textcommabelow t}ia de pierdere \IeC {\^\i }n cazul imaginii de stil}{29}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Reducerea zgomotului din imagenea stilizata}{32}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.4.}Definirea si \IeC {\^\i }nv\IeC {\u a}\IeC {\textcommabelow t}area func\IeC {\textcommabelow t}iei de pierdere totala la imagini statice}{33}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}Metoda de antrenare in cazul imaginilor video}{33}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Abordarea naiv\IeC {\u a}}{33}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}Ini\IeC {\textcommabelow t}ializarea re\IeC {\textcommabelow t}elei pentru frame-uri. Introducerea optical flow-ului}{35}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.5.}Proiectarea \IeC {\textcommabelow s}i implementarea sistemului}{36}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.1.}Modelul de interac\IeC {\textcommabelow t}iune \IeC {\textcommabelow s}i comportament al sistemului}{36}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.2.}Modelul structural al sistemului}{38}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.3.}Proiectarea pe mai multe fire computa\IeC {\textcommabelow t}ionale a unelor componente}{39}
-\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.4.}Impementarea sistemului}{40}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.1.}Implementarea componentei Main Window}{42}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.2.}Implementarea componentei Settings}{45}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.3.}Implementarea componentei Progress bar}{47}
-\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.4.}Implementarea componentei Artistic video creator}{49}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.6.}Limita\IeC {\textcommabelow t}ii}{52}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}Testarea sistemului}{53}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.1.}Configura\IeC {\textcommabelow t}ia de test}{53}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.2.}Timpul \IeC {\textcommabelow s}i memoria necesar\IeC {\u a} transfer\IeC {\u a}ri stilului pe o imagine static\IeC {\u a}}{54}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Compararea timpului necesar pe CPU cu cel necesar pe GPU}{57}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.4.}Timpul necesar transfer\IeC {\u a}ri stilului pe un videoclip}{59}
-\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{62}
-\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{5.1.}Dezvoltare ulterioar\IeC {\u a}}{63}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{1.}\IeC {\^I}ntroducere}{15}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{2.}Studiu bibliografic}{17}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{3.}Sistemul}{19}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.1.}Privire de ansamblu asupra}{19}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.2.}\IeC {\^I}nv\IeC {\u a}\IeC {\textcommabelow t}are automat\IeC {\u a} cu ajutorul libr\IeC {\u a}riei Tensorflow}{21}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.1.}Conceptele de baz\IeC {\u a} a libr\IeC {\u a}riei Tensorflow}{21}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.2.}Execu\IeC {\textcommabelow t}ie pe un simplu device}{22}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.3.}Execu\IeC {\textcommabelow t}ie pe mai multe device-uri}{22}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.2.4.}Antrenare paralel\IeC {\u a}}{23}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.3.}Metoda de antrenare \IeC {\^\i }n cazul imaginilor statice}{24}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.1.}Func\IeC {\textcommabelow t}ia de pierdere \IeC {\^\i }n cazul imaginii originale}{24}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.2.}Func\IeC {\textcommabelow t}ia de pierdere \IeC {\^\i }n cazul imaginii de stil}{26}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.3.}Reducerea zgomotului din imagenea stilizata}{29}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.3.4.}Definirea si \IeC {\^\i }nv\IeC {\u a}\IeC {\textcommabelow t}area func\IeC {\textcommabelow t}iei de pierdere totala la imagini statice}{30}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.4.}Metoda de antrenare in cazul imaginilor video}{30}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.1.}Abordarea naiv\IeC {\u a}}{30}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.4.2.}Ini\IeC {\textcommabelow t}ializarea re\IeC {\textcommabelow t}elei pentru frame-uri. Introducerea optical flow-ului}{32}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.5.}Proiectarea \IeC {\textcommabelow s}i implementarea sistemului}{33}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.1.}Modelul de interac\IeC {\textcommabelow t}iune \IeC {\textcommabelow s}i comportament al sistemului}{33}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.2.}Modelul structural al sistemului}{35}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.3.}Proiectarea pe mai multe fire computa\IeC {\textcommabelow t}ionale a unelor componente}{36}
+\select@language {magyar} \contentsline {subsection}{\makebox [3em][l]{3.5.4.}Impementarea sistemului}{37}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.1.}Implementarea componentei Main Window}{39}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.2.}Implementarea componentei Settings}{42}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.3.}Implementarea componentei Progress bar}{44}
+\select@language {magyar} \contentsline {subsubsection}{\makebox [3em][l]{3.5.4.4.}Implementarea componentei Artistic video creator}{46}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{3.6.}Limita\IeC {\textcommabelow t}ii}{49}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{4.}Testarea sistemului}{50}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.1.}Configura\IeC {\textcommabelow t}ia de test}{50}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.2.}Timpul \IeC {\textcommabelow s}i memoria necesar\IeC {\u a} transfer\IeC {\u a}ri stilului pe o imagine static\IeC {\u a}}{51}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.3.}Compararea timpului necesar pe CPU cu cel necesar pe GPU}{54}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{4.4.}Timpul necesar transfer\IeC {\u a}ri stilului pe un videoclip}{56}
+\select@language {magyar} \contentsline {chapter}{\makebox [1.3em][l]{5.}Concluzie}{59}
+\select@language {magyar} \contentsline {section}{\makebox [2.8em][l]{5.1.}Dezvoltare ulterioar\IeC {\u a}}{60}
