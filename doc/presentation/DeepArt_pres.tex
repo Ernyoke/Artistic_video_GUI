@@ -8,18 +8,15 @@
 \usepackage{caption}
 \usepackage[absolute,overlay]{textpos}
 \usepackage{subfig}
+\usepackage{url}
 
 
-\title[DeepArt]{Párhuzamos képstílus átruházás konvolúciós neuronhálókkal}
-\author[Szilágyi Ervin]{Szilágyi Ervin\\{\small Témavezető: Dr. Iclanzan Dávid}}
+\title[Artistic style transfer]{Párhuzamos képstílus átruházás konvolúciós neuronhálókkal}
+\author[Szilágyi Ervin]{Szerző: Szilágyi Ervin\\{\small Témavezető: Dr. Iclănzan Dávid}}
 \institute[Sapientia EMTE]{Sapientia Eredélyi Magyar Tudományegyetem \\ Műszaki és Humántudományok kar \\ Szoftverfejlesztés szak}
 \date{\today}
 
-\newcommand{\source}[1]{\begin{textblock*}{4cm}(8.7cm,8.6cm)
-		\begin{beamercolorbox}[ht=0.5cm,right]{framesource}
-			\usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Forrás: {#1}
-		\end{beamercolorbox}
-\end{textblock*}}
+\newcommand{\credit}[1]{\par\hfill \footnotesize \tiny Forrás:~\itshape#1}
 
 \begin{document}
 	\begin{frame}
@@ -30,11 +27,9 @@
 	
 	\begin{frame}
 		\frametitle{Mi értünk stílusátruházás alatt?}
-		\begin{figure}[htb]
-			\begin{center}
-				\includegraphics[scale=0.15]{system_presentation.png}
-			\end{center}
-		\end{figure}
+		\begin{center}
+			\includegraphics[scale=0.15]{system_presentation.png}
+		\end{center}
 	\end{frame}
 	
 	\begin{frame}
@@ -52,7 +47,7 @@
 		\begin{center}
 			\includegraphics[scale=0.5]{tensorflow_graph.png}
 			\captionof{figure}{Tensorflow számítási gráf}
-			\source{Google.com}
+			\credit{Google.com}
 			\label{tensorflow_graph}
 		\end{center}
 	\end{frame}
@@ -68,11 +63,12 @@
 				\includegraphics[width=40mm]{task_parallel_tf_model.png}
 			}
 			\caption{Párhuzamos tanítás}
-			\source{Google.com}
+			\credit{Google.com}
 		\end{figure}
 	\end{frame}
 
 	\section{Megvalósítás}
+	\subsection{Statikus kép tanítása}
 	
 	\begin{frame}
 		\frametitle{A rendszer tanítása}
@@ -143,9 +139,8 @@
 		A veszteségfüggvény egyetlen rétegre felírható mint a fehér zaj kép Gramm mátrixa és a stílus kép Gramm mátrixának átlagos négyzetes hibájaként:
 		 
 		\begin{equation}
-		E_l = \frac{1}{4N^2_l M^2_l} \sum_{i,j} (G_{ij} - A_{lj})^2
+			E_l = \frac{1}{4N^2_l M^2_l} \sum_{i,j} (G_{ij} - A_{lj})^2
 		\end{equation}
-		
 	\end{frame}
 
 	\begin{frame}
@@ -154,21 +149,190 @@
 		
 		A stilizált képet és eltoljuk X koordináta mentén egy pixellel, majd az Y koordináta mentén is eltoljuk egy pixellel.
 		\begin{equation}
-		L_{tv}(\vec{a}, \vec{x}) = \sum_{i,j} \left|(X_{ij} - A_{{i+1}j})\right| + \sum_{i, j} \left|(X_{ij} - A_{i {j+1}})\right|
+			L_{tv}(\vec{a}, \vec{x}) = \sum_{i,j} \left|(X_{ij} - A_{{i+1}j})\right| + \sum_{i, j} \left|(X_{ij} - A_{i {j+1}})\right|
 		\end{equation}
-		
 	\end{frame}
 
-	\section{A rendszer tesztelese}
+	\subsection{Mozgókép tanítása}
 	
 	\begin{frame}
-		\frametitle{A rendszer tesztelese}
+		\frametitle{Mozgókép tanítása}
+		\framesubtitle{Naív megközelítés}
+		A videót feldaraboljuk képkockákra, majd az összes képkockára átruházzuk a stílust.
+		\newline
+		
+		Előnyei:
+		\begin{itemize}
+			\item Gyors.
+		\end{itemize}
+		
+		Hátrányai:
+		\begin{itemize}
+			\item Nincs folyamatos átmenet a képkockák között
+			\item Artifacts, pop-ins
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Mozgókép tanítása}
+		\framesubtitle{Optical flow bevezetése}
+		\begin{center}
+			\includegraphics[scale=0.6]{optical_flow.png}
+			\credit{\url{http://www.scholarpedia.org/article/Optic_flow}}
+			\captionof{figure}{Optical flow szemléltetése}
+		\end{center}
+	\end{frame}
+
+	\subsection{A szoftvet architektúrája}
+	
+	\begin{frame}
+		\frametitle{A szoftvet architektúrája}
+		\framesubtitle{A szoftver komponensei}
+		\begin{center}
+			\includegraphics[scale=0.3]{component_diagram.png}
+			\captionof{figure}{A szoftver komponensei}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{A szoftvet architektúrája}
+		\framesubtitle{Többszálas megvalósítás}
+		\begin{center}
+			\includegraphics[scale=0.2]{seq_diagram.png}
+		\end{center}
+	\end{frame}
+
+	\section{A rendszer tesztelése}
+	
+	\begin{frame}
+		\frametitle{A rendszer tesztelése}
+		\framesubtitle{A tesztkonfiguráció meghatározása}
+		
+		\begin{itemize}
+			\item \textbf{Alaplap:} MSI Z170A-G45 GAMING
+			\item \textbf{Processzor:} Intel(R) Core(TM) Skylake i7-6700 ("non-K") CPU @ 3.40GHz (Turbo Boost: 3.90GHz)
+			\item \textbf{Videokártya:} GIGABYTE GeForce GTX 1080 G1 GAMING 8GB DDR5X 256-bit
+			\item \textbf{RAM Memória:} Corsair Vengeance LPX Black 32GB DDR4 3000MHz
+			\item \textbf{Merev lemez}: HyperX Savage SSD, 240GB, 2.5", SATA III
+			\item \textbf{Operációs rendszer:} Ubuntu 17.04 LTS
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Egy képkockára történő stílusátruházási idő}
+		
+		\begin{columns}
+			\column{0.5\textwidth}
+			\begin{tabular}{ | l | l |}
+				\hline
+				Felbontás(pixel) & Idő(másodperc) \\ \hline
+				$320 \times $240 & 23.126104 \\ \hline
+				$640 \times $480 & 82.640347 \\ \hline
+				$720 \times $480 & 93.487573 \\ \hline
+				$800 \times $600 & 127.973041 \\ \hline
+				$1024 \times $764 & 203.892024 \\ \hline
+				$1280 \times $720 & 245.769916 \\ \hline
+				$1366 \times $768 & 279.945757 \\ \hline
+			\end{tabular}
+			\column{0.5\textwidth}
+			\includegraphics[scale=0.4]{time_per_res.png}
+		\end{columns}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Videókártya memóriahasználata és kihasználtsága}
+		
+		\begin{columns}
+			\column{0.5\textwidth}
+			\includegraphics[scale=0.4]{gpu_memory_usage.png}
+			\captionof{figure}{Memóriahasználat}
+			\column{0.5\textwidth}
+			\includegraphics[scale=0.4]{gpu_usage.png}
+			\captionof{figure}{Kihasználtság}
+		\end{columns}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{CPU - GPU összehasonlítás}
+		\begin{center}
+			\begin{tabular}{ | l | l | l | l| }
+				\hline
+				Felbontás(pixel) & GPU Idő(sec.) &  CPU Idő(sec.) & Gyorsulás\\ \hline
+				$320 \times $240 & 23.126104 & 862.980290 & 37.316285\\ \hline
+				$640 \times $480 & 82.640347 & 3487.931886 & 42.206162\\ \hline
+				$800 \times $600 & 127.973041 & 5446.849902 & 42.562479\\ \hline
+				$1024 \times $768 & 203.892024 & 8935.804122 & 43.826158\\ \hline
+			\end{tabular}
+			\begin{columns}
+				\column{0.5\textwidth}
+				\includegraphics[scale=0.38]{cpu_vs_gpu.png}
+				\column{0.5\textwidth}
+				\includegraphics[scale=0.38]{speedup.png}
+			\end{columns}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Az Optical flow időigénye}
+		\begin{center}
+			\begin{columns}
+				\column{0.5\textwidth}
+				\begin{tabular}{ | l | l |}
+					\hline
+					Felbontás(pixel) & Idő(másodperc) \\ \hline
+					$320 \times $240 & 3.700949 \\ \hline
+					$640 \times $480 & 71.693549 \\ \hline
+					$720 \times $480 & 75.388477 \\ \hline
+					$800 \times $600 & 186.4160516 \\ \hline
+					$1024 \times $764 & 371.140060 \\ \hline
+					$1280 \times $720 & 466.996901 \\ \hline
+					$1366 \times $768 & 481.25628 \\ \hline
+				\end{tabular}
+				\column{0.5\textwidth}
+				\includegraphics[scale=0.42]{deepmatching_deeplfow.png}
+			\end{columns}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Egy perces videóra történő stílusátvitel}
+		24 FPS, 60 másodperc, 1440 képkocka
+		\begin{center}
+			\begin{columns}
+				\column{0.5\textwidth}
+				\includegraphics[scale=0.42]{one_min_video_opt_flow.png}
+				\captionof{figure}{Optical flow használatával}
+				\column{0.5\textwidth}
+				\includegraphics[scale=0.42]{one_min_video.png}
+				\captionof{figure}{Optical flow használata nélkül}
+			\end{columns}
+		\end{center}
 	\end{frame}
 	
-	\section{Osszefoglalo}
+	\section{Összefoglaló}
 	
 	\begin{frame}
-		\frametitle{Osszefoglalo}
+		\frametitle{Összefoglaló}
+		\begin{itemize}
+			\item Grafikus felhasználói felülettel rendelkező szoftver fejlesztése
+			\item Magyar festők híres műveinek stíluást alkalmazni mindennapi képekre/mozgóképekre
+			\item Képkockák közötti temporális összefüggések kihasználása mozgóképek esetében
+			\item Tesztek, mérések elvégzése
+		\end{itemize}
+		
+		\vspace{0.5cm}
+		Továbbfejlesztési lehetőségek:
+		\begin{itemize}
+			\item Saját háló betanítása, más tanítási eljárás használata
+			\item Optical flow algoritmus gyorsítása (párhuzamosítás, más algoritmusok kipróbálása)
+			\item Teljes Windows-os támogatás
+			\item Grafikus felület úrjatervezése, szépítése
+			\item Cloud alapú szolgáltatás készítése
+		\end{itemize}
+		\vspace{0.5cm}
+		\begin{center}
+			Köszönöm a figyelmet!
+		\end{center}
 	\end{frame}
 	
 	
