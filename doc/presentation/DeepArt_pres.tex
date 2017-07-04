@@ -47,7 +47,7 @@
 		\begin{center}
 			\includegraphics[scale=0.5]{tensorflow_graph.png}
 			\captionof{figure}{Tensorflow számítási gráf}
-			\credit{Google.com}
+			\credit{Google Research Team - TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems}
 			\label{tensorflow_graph}
 		\end{center}
 	\end{frame}
@@ -63,7 +63,7 @@
 				\includegraphics[width=40mm]{task_parallel_tf_model.png}
 			}
 			\caption{Párhuzamos tanítás}
-			\credit{Google.com}
+			\credit{Google Research Team - TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems}
 		\end{figure}
 	\end{frame}
 
@@ -86,6 +86,7 @@
 		\begin{center}
 			\includegraphics[scale=0.2]{VGG19.png}
 			\captionof{figure}{VGG-19 háló szerkezete}
+			\credit{Simonyan, K., Zisserman, A. - Very Deep Convolutional Networks for Large-Scale ImageRecognition}
 		\end{center}
 	\end{frame}
 
@@ -141,6 +142,11 @@
 		\begin{equation}
 			E_l = \frac{1}{4N^2_l M^2_l} \sum_{i,j} (G_{ij} - A_{lj})^2
 		\end{equation}
+		
+		\begin{equation}
+			L_{style}(\vec{a}, \vec{x}) = \sum w_lE_l
+		\end{equation}
+		
 	\end{frame}
 
 	\begin{frame}
@@ -151,6 +157,17 @@
 		\begin{equation}
 			L_{tv}(\vec{a}, \vec{x}) = \sum_{i,j} \left|(X_{ij} - A_{{i+1}j})\right| + \sum_{i, j} \left|(X_{ij} - A_{i {j+1}})\right|
 		\end{equation}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Tanítási függvény}
+		
+		\begin{equation}
+			L = L_{content} + L_{style} + L_{tv}
+		\end{equation}
+		
+		Optimalizációs algoritmus: ADAM ( Adaptive Moment Estimation). felhasználja a elsődleges, valamint a másodlagos gradiensek átlagát ahhoz, hogy a veszteségfüggvényt minimalizálja.
+		
 	\end{frame}
 
 	\subsection{Mozgókép tanítása}
@@ -183,6 +200,77 @@
 		\end{center}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Mozgókép tanítása}
+		\framesubtitle{A háló inicializálása}
+		A cél:
+		\begin{itemize}
+			\item A mintázatok ugyanabba a pontba konvergáljanak
+			\item "Flickering" jelenség elkerülése
+		\end{itemize}
+	
+		Megoldás - a neuronhálót a következőképpnek inicializáljuk:
+		\begin{itemize}
+			\item Optical flow-t számolunk az elöző stilizált képkocka és a mostani képkocka között
+			\item Az elöző stilizált képkockát trozítjuk az optical flow vektorai szerint
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Mozgókép tanítása}
+		\framesubtitle{Temporális összeföggések a képkockák között}
+		
+		Jelölje \(w(u, u)\) az előre történő optical flow-t, valamint \(\hat{w}(\hat{u}, \hat{u})\) a visszafele történő optical flow-t. Az előre történő optical flow torzítása:
+		\begin{equation}
+			\tilde{w}(i, j) = w((i, j) + \hat{w}(i, j))
+		\end{equation}
+		
+		A mozgás néküli és újonnan megjelenő objektumok nélküli zónák azok amelyekre a következő egyenlőtlenség fenn áll:
+		\begin{equation} \label{eq:1}
+			|\tilde{w} + \hat{w}|^2 > 0.01(|\tilde{w}|^2 + |\hat{w}|^2) + 0.5
+		\end{equation}
+		
+		A mozgási határok pedig meghatározhatóak:
+		\begin{equation} \label{eq:2}
+			|\nabla\hat{u}| + |\nabla\hat{v}| > 0.01|\tilde{w}|^2 + 0.002
+		\end{equation}
+		
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Frame00001]{
+				\includegraphics[width=30mm]{input_frame00001.jpg}
+			}
+			\subfloat[Frame00002]{
+				\includegraphics[width=30mm]{input_frame00002.jpg}
+			}
+			\hspace{0mm}
+			\subfloat[Forward consistency matrix]{
+				\includegraphics[width=25mm]{forward.jpg}
+			}
+			\label{consistency_weights}
+		\end{figure}
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Mozgókép tanítása}
+		\framesubtitle{Veszteségfüggvény meghatározása}
+		
+		\begin{equation} \label{eq:2}
+			L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
+		\end{equation}
+		Ahol: \\ 
+		C - mátrix: mozgási határokra 1-est rakunk, a többi érték 0-ás \\
+		x - bemeneti kép \\
+		W - előző torzított kép \\
+		\vspace{1cm}
+		Végső tanítási függvény:
+		\begin{equation}
+			L = L_{content} + L_{style} + L_{tv} + L_{temporal}
+		\end{equation}
+		
+	\end{frame}
+
 	\subsection{A szoftvet architektúrája}
 	
 	\begin{frame}
@@ -190,7 +278,6 @@
 		\framesubtitle{A szoftver komponensei}
 		\begin{center}
 			\includegraphics[scale=0.3]{component_diagram.png}
-			\captionof{figure}{A szoftver komponensei}
 		\end{center}
 	\end{frame}
 
@@ -202,10 +289,58 @@
 		\end{center}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{A felhasználói felület}
+		\begin{itemize}
+			\item Python
+			\item PyQt5
+		\end{itemize}
+		\begin{center}
+			\includegraphics[scale=0.18]{main_ui.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Stílusképek}
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[\tiny{Aba Novak Vilmos - Önarckép}]{
+				\includegraphics[width=20mm]{stylistic/styles/aba_novak_vilmos_onarckep.jpg}
+			}
+			\subfloat[\tiny{Aba Novak Vilmos - Selfportrait}]{
+				\includegraphics[width=20mm]{stylistic/styles/aba-novak_vilmos_selfportrait.jpg}
+			}
+			\subfloat[\tiny{Kosztka Tivadar} - Traui tájkép naplemente idején]{
+				\includegraphics[width=20mm]{stylistic/styles/csontvary_kosztka_tivadar_traui_tajkep_naplemente_idejen.jpg}
+			}
+			\subfloat[\tiny{Grunwald Béla} - Parkrészlet Kecskeméten]{
+				\includegraphics[width=20mm]{stylistic/styles/ivanyi_grunwald_bela_parkreszlet_kecskemeten.jpg}
+			}
+			\subfloat[\tiny{Munkácsi Mihály - Vihar a pusztán}]{
+				\includegraphics[width=20mm]{stylistic/styles/munkacsi_mihaly_vihar_a_pusztan}
+			}
+			\vspace{0cm}
+			\subfloat[\tiny{Réti Alfréd}]{
+				\includegraphics[width=20mm]{stylistic/styles/reti_alfred.jpg}
+			}
+			\subfloat[\tiny{Ripl-Rónai József - Apám és Piacsek...}]{
+				\includegraphics[width=20mm]{stylistic/styles/ripl_ronai_jozsef_apam_es_piacsek_bacsi_vorosbor_mellett.jpg}
+			}
+			\subfloat[\tiny{Tihanyi - Tzara}]{
+				\includegraphics[width=20mm]{stylistic/styles/tihanyi_tzara.jpg}
+			}
+			\subfloat[\tiny{Magyar Népmesék}]{
+				\includegraphics[width=20mm]{stylistic/styles/magyar_nepmesek.jpg}
+			}
+			\caption{Stílusképek}
+			\label{styles}
+		\end{figure}
+	\end{frame}
+
 	\section{A rendszer tesztelése}
 	
 	\begin{frame}
-		\frametitle{A rendszer tesztelése}
+		\frametitle{Mérések}
 		\framesubtitle{A tesztkonfiguráció meghatározása}
 		
 		\begin{itemize}

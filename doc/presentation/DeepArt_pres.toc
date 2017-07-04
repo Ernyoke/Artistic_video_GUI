@@ -2,7 +2,7 @@
 \select@language {magyar} \beamer@sectionintoc {1}{Bevezet\IeC {\H o}}{2}{0}{1}
 \select@language {magyar} \beamer@sectionintoc {2}{Megval\IeC {\'o}s\IeC {\'\i }t\IeC {\'a}s}{6}{0}{2}
 \select@language {magyar} \beamer@subsectionintoc {2}{1}{Statikus k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{6}{0}{2}
-\select@language {magyar} \beamer@subsectionintoc {2}{2}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{12}{0}{2}
-\select@language {magyar} \beamer@subsectionintoc {2}{3}{A szoftvet architekt\IeC {\'u}r\IeC {\'a}ja}{14}{0}{2}
-\select@language {magyar} \beamer@sectionintoc {3}{A rendszer tesztel\IeC {\'e}se}{16}{0}{3}
-\select@language {magyar} \beamer@sectionintoc {4}{\IeC {\"O}sszefoglal\IeC {\'o}}{22}{0}{4}
+\select@language {magyar} \beamer@subsectionintoc {2}{2}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{13}{0}{2}
+\select@language {magyar} \beamer@subsectionintoc {2}{3}{A szoftvet architekt\IeC {\'u}r\IeC {\'a}ja}{18}{0}{2}
+\select@language {magyar} \beamer@sectionintoc {3}{A rendszer tesztel\IeC {\'e}se}{22}{0}{3}
+\select@language {magyar} \beamer@sectionintoc {4}{\IeC {\"O}sszefoglal\IeC {\'o}}{28}{0}{4}
