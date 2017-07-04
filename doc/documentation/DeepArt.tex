@@ -701,7 +701,7 @@ Az optical flow meghatározásához a DeepMatching - Deepflow algoritmust haszn�
 Az optical flow meghatározásával egy mozgóképen meghatározhatók azok a régiók, amik statikusak (adott időn belül az illető régióban nincs változás, úgymond nincs mozgás) valamint azok a régiók ahol új objektumok jelennek meg (olyan objektumok amik eddig esetleg takarva voltak). Fontos nekünk meghatározni azokat a zónákat ahol ilyen objektumok jelennek meg (lásd: \ref{consistency_weights}). Ennek a metódusát Sundaran és társai írják le a \cite{22} publikációjukban.
 \newline
 \indent
-Két egymást követő képkocka esetében meghatározható az optical flow előre, tehát az képkockák időrendi sorrendjében, valamint meghatározható visszafele, az időrendi sorrend ellentett irányában. Jelölje \(w(i, j)\) az előre történő optical flow-t, valamint \(\hat{w}(i, j)\) a visszafele történő optical flow-t. Ekkor felírható az előre történő optical flow torzítása a rá következő képkocka szerint:
+Két egymást követő képkocka esetében meghatározható az optical flow előre, tehát az képkockák időrendi sorrendjében, valamint meghatározható visszafele, az időrendi sorrend ellentett irányában. Jelölje \(w(u, v)\) az előre történő optical flow-t, valamint \(\hat{w}(\hat{u}, \hat{v})\) a visszafele történő optical flow-t. Ekkor felírható az előre történő optical flow torzítása a rá következő képkocka szerint:
 
 \begin{equation}
 \tilde{w}(i, j) = w((i, j) + \hat{w}(i, j))
@@ -720,7 +720,7 @@ A mozgási határok pedig meghatározhatóak:
 A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix, ami tartalmazza a mozgás nélküli zónánkat valamint a mozgási határokat(\ref{consistency_weights}. ábra). Ezt a mátrixot átalakítjuk olyan módon, hogy a mozgási határokra 1-est rakunk, a többi érték 0-ás lesz, jelöljük ez a mátrixot \(c^{(i-1,i)}\)-vel az \(i-1\) és \(i\)-dik képkocka között. Ezt felhasználva felírhatjuk egy újabb veszteség függvényt: 
 
 \begin{equation} \label{eq:2}
-L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
+	L_{temporal}(x, w, c) = \frac{1}{D}\sum_{k=1}^{D}c_k\cdot(x_k-w_k)^2
 \end{equation}
 
 \begin{figure}[!htbp]
