@@ -9,6 +9,7 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{subfig}
 \usepackage{url}
+\usepackage{movie15}
 
 
 \title[Artistic style transfer]{Párhuzamos képstílus átruházás konvolúciós neuronhálókkal}
@@ -116,15 +117,15 @@
 
 	\begin{frame}
 		\frametitle{A stílus kép tanítása}
-		\framesubtitle{A Gramm-matrix ismertetése}
+		\framesubtitle{A Gram mátrix ismertetése}
 		
 		\begin{itemize}
-			\item A Gramm mátrix egy szorzatot jelen egy adott vektorhalmaz összes elemei között.
-			\item Hogyha adott egy vektorhalmazunk \(v_1...v_n\), akkor a \(G\) Gramm mátrixot a következő eljárás szerint határozzuk meg:
+			\item A Gram mátrix egy szorzatot jelen egy adott vektorhalmaz összes elemei között.
+			\item Hogyha adott egy vektorhalmazunk \(v_1...v_n\), akkor a \(G\) Gram mátrixot a következő eljárás szerint határozzuk meg:
 				\begin{equation}
 					G_{ij} = v_i \cdot v_j
 				\end{equation}
-			\item A Gramm mátrix \(ij\) pozíciójában elhelyezkedő elem megadja, hogy egy adott réteg \(i\)-dik tulajdonsága mennyire teljesül a \(j\)-dik tulajdonság jelenlétében,
+			\item A Gram mátrix \(ij\) pozíciójában elhelyezkedő elem megadja, hogy egy adott réteg \(i\)-dik tulajdonsága mennyire teljesül a \(j\)-dik tulajdonság jelenlétében,
 		\end{itemize}
 	\end{frame}
 
@@ -132,12 +133,12 @@
 		\frametitle{A stílus kép tanítása}
 		\framesubtitle{A veszteségfüggvény meghatározása}
 		
-		Ha az \(l\) rétegnek \(N\) szűrője van, akkor felírható \(G \in R^{N_l*N_l}\) Gramm-mátrix, ahol:
+		Ha az \(l\) rétegnek \(N\) szűrője van, akkor felírható \(G \in R^{N_l*N_l}\) Gram mátrix, ahol:
 		\begin{equation}
 			G^l_{ij} = \sum_{k} F^l_{ik} \cdot F^l_{jk}
 		\end{equation}
 		
-		A veszteségfüggvény egyetlen rétegre felírható mint a fehér zaj kép Gramm mátrixa és a stílus kép Gramm mátrixának átlagos négyzetes hibájaként:
+		A veszteségfüggvény egyetlen rétegre felírható mint a fehér zaj kép Gram mátrixa és a stílus kép Gram mátrixának átlagos négyzetes hibájaként:
 		 
 		\begin{equation}
 			E_l = \frac{1}{4N^2_l M^2_l} \sum_{i,j} (G_{ij} - A_{lj})^2
@@ -268,6 +269,20 @@
 		\begin{equation}
 			L = L_{content} + L_{style} + L_{tv} + L_{temporal}
 		\end{equation}
+		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Mozgókép tanítása}
+		\framesubtitle{Végeredmény}
+		\begin{columns}
+			\column{0.5\textwidth}
+				\includemovie{5cm}{5cm}{dog_stylized.gif}
+				\captionof{figure}{Optical flow nélkül}
+			\column{0.5\textwidth}
+				\includemovie{5cm}{5cm}{dog_stylized_opt_flow.gif}
+				\captionof{figure}{Optical flow használatával}
+		\end{columns}
 		
 	\end{frame}
 
