@@ -340,7 +340,7 @@ A mély konvolúciós hálók népszerűségének növekedésével egyre több o
 Az gépi látás egyik fontos alkalmazási területe a képen levő tárgyak, élőlények emberek felismerése. Ilyen területen a konvolúciós hálók kimagasló teljesítményt nyújtanak, olyannyira, hogy egyes kisérletek szerint ezek már nemhogy az emberi látással megegyező, hanem azt felülmúló teljesítményt nyújtanak\cite{9}. Feltevődik a kérdés, hogyha ennyire szofisztikált a gépi látás, akkor nem-e lehetne használni arra, hogy új képeket alkosson. Amint kiderült erre is alkalmasak. Az általam bemutatandó dolgozat is ezt a témát próbálja megcélozni. A gépi látás a tárgyak, élőlények mellett képes felismerni maga a kép művészeti stílusát. Ez elsősorban kihasználható arra, hogy híres művészek alkotásait csoportosítsuk, rendszerezzük\cite{10}, de amint e dolgozatból ki fog derülni, ki lehet használni arra is, hogy egy művészeti stílust egy adott festményről átvigyük egy mindennapi képre, fotóra. 
 \newline
 \indent
-A dolgozatom célja magyar híres festőművészek festészeti stílusát átvenni és ezt alkalmazni mindennapi képekre illetve mozgóképekre. Eddigiekben, ahhoz hogy egy mindennapi fényképből művészeti képet varázsoljunk, képszerkesztő szoftverek segítségével lehetett elérni manuálisan. Mindezt egy olyan egyén végezhette, akinek képszerkesztési illetve képmanipulálási szakismere volt adott képszerkesztési szoftverkörnyezetben. Magától értődik az, hogy ez mozgóképek esetében egy időigényes folyamat. Dolgozatom mindezekre megoldást próbál adni, azáltal, hogy az általam elkészített szoftvert bárki használhatja, nincs szükség különböző képszerkesztői szakértelemre, emellett a folyamat ideje jelentősen csökkenni fog. 
+A dolgozatom célja magyar híres festőművészek festészeti stílusát átvenni és ezt alkalmazni mindennapi képekre illetve mozgóképekre. Eddigiekben, ahhoz hogy egy mindennapi fényképből művészeti képet varázsoljunk, képszerkesztő szoftverek segítségével lehetett azt elérni manuálisan. Mindezt egy olyan egyén végezhette, akinek képszerkesztési illetve képmanipulálási szakismerete volt adott képszerkesztési szoftverkörnyezetben. Magától értődik az, hogy ez mozgóképek esetében egy időigényes folyamat. Dolgozatom mindezekre megoldást próbál adni, azáltal, hogy az általam elkészített szoftvert bárki használhatja, nincs szükség különböző képszerkesztői szakértelemre, emellett a folyamat ideje jelentősen csökkenni fog. 
 
 %-------------------------------------------------------------
 \chapter{Hasonló rendszerek feltérképezése}
@@ -358,7 +358,7 @@ Dave Steinkraus, Patrice Simard és Ian Buck 2005-ben publikált dolgozata\cite{
 Eddigiekben sikerült nagyon pontos felismerő illetve osztályozó rendszereket alkotni. A mély konvolúciós hálók használata azonban nem merül ki ennyiben. 2015-ben publikálásra került egy olyan deep learning-et használó algoritmus, ami képes képek illetve festmények művészeti stílusát átvinni egy másik digitális képre\cite{15}. Mostani dolgozatom is erre a publikációra alapoz, az ebben bemutatott módszereket próbálja alkalmazni illetve továbbfejleszteni. A tanuláshoz egy korábban bevezetett és gépi látáshoz használt, előre betanított neuron hálót használnak fel, a VGG-19-et. Yaroslav Nikulin és Roman Novak tudományos kutatása\cite{16} ezzel szemben eddig ugyanezt a módszert alkalmazta más ismertebb előre betanított hálókra, mint például AlexNet, GoogLeNet vagy VGG-16. Ugyanúgy a VGG-16 háló használata is kiváló eredményeket mutatott míg a GoogLeNet és az AlexNet architektúrájuk miatt komolyabb információvesztéshez vezetnek így a végeredmény nem lesz annyira látványos. Ugyanúgy kísérletek irányultak az eredi eljárás optimalizálására, megjelentek olyan rendszerek amik sajátos, erre a célre betanított neuron hálókat alkalmaznak\cite{17}\cite{18}\cite{19}.
 \newline
 \indent
-2016-ban a Prisma labs inc. kiadta mobilos applikációját Prisma név alatt\cite{20}. Az aplikáció előre megadott ismert festői/grafikai stílusokat alkalmazza a telefon kamerája által készített képekre. Az applikáció az előbbiekben bemutatott kutatásokra alapoz. Ugyanakkor fontos megjegyezni, hogy maga a stílus alkalmazását a különböző fotókra nem az okostelefon végzi. A szerkeszteni kívánt képet a telefon felküldi egy szervergépre ami majd válaszként a szerkesztett képet küldi vissza. 
+2016-ban a Prisma labs inc. kiadta mobilos applikációját Prisma név alatt\cite{20}. Az aplikáció előre megadott ismert festői/grafikai stílusokat alkalmazza a telefon kamerája által készített képekre. Az applikáció az előbbiekben bemutatott kutatásokra alapoz. Ugyanakkor fontos megjegyezni, hogy maga a stílus alkalmazását a különböző fotókra nem az okostelefon végzi. A szerkeszteni kívánt képet a telefon felküldi egy szervergépre, ami majd válaszként a szerkesztett képet küldi vissza. 
 \newline
 \indent
 Maga stílusátvitel nem csak állóképekre alkalmazható, ezt bizonyította Manuel R., Alexey D., Thomas B. tudományos dolgozata\cite{21}, valamit ezt próbalja megoldani a jelenlegi dolgozatom is. Értelemszerűen egy adott videót több álló képkocka alkot. Viszont ahhoz, hogy látványos művészeti mozgóképet gyártsunk, nem elegendő maga a videót darabokra vágni és minden képkockára alkalmazni a stílust. Erre adott megoldást Manuel R. és társainak kutatása. 
@@ -455,7 +455,7 @@ Az eszközök közötti kommunikációt Send-Receive csúcsok beiktatásával ol
 \ssecro{Antrenare paralelă}
 \ssecen{Parallel trainig}
 
-A Tensorflow könyvtár a párhuzamosítást megközelíti úgy adatpárhuzamosítás szempontjából, mint feladat párhuzamosítás szempontjából. Adatpárhuzamosítás esetében az adatot kisebb csomagokba bontja, majd ezeket párhuzamosan bemenetként táplálja a megfelelő csomópontonknak. A kiértékelendő csomópontokból egy másolat kerül az összes szálra (\ref{data_parallel_tf_model}. ábra). A végeredményt egy redukciós művelet gyűjti össze.
+A Tensorflow könyvtár a párhuzamosítást megközelíti úgy adatpárhuzamosítás szempontjából, mint feladatpárhuzamosítás szempontjából. Adatpárhuzamosítás esetében az adatot kisebb csomagokba bontja, majd ezeket párhuzamosan bemenetként táplálja a megfelelő csomópontonknak. A kiértékelendő csomópontokból egy másolat kerül az összes szálra (\ref{data_parallel_tf_model}. ábra). A végeredményt egy redukciós művelet gyűjti össze.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -465,7 +465,7 @@ A Tensorflow könyvtár a párhuzamosítást megközelíti úgy adatpárhuzamos�
 	\end{center}
 \end{figure}
 
-Feladatpárhuzamosítás esetében külömböző gráfrészletek lesznek megtanítva ugyanabban az időben különböző szálakon. Mikor a tanítás befejeződik, akkor az a processz egy újabb gráfrészlet kiértékelésének fog neki. Ilyenfajta tanítás esetében fontos figyelembe venni azt, hogy egyes gráfrészletek csak akkor értékelhetőek ki, ha már előttük egy másik gráfrészlet le volt futtatva. Feladatpárhuzamos tanítást a \ref{data_parallel_tf_model}. ábra szemlélteti.
+Feladatpárhuzamosítás esetében különböző gráfrészletek lesznek megtanítva ugyanabban az időben különböző szálakon. Mikor a tanítás befejeződik, akkor az a processz egy újabb gráfrészlet kiértékelésének fog neki. Ilyenfajta tanítás esetében fontos figyelembe venni azt, hogy egyes gráfrészletek csak akkor értékelhetőek ki, ha már előttük egy másik gráfrészlet le volt futtatva. Feladatpárhuzamos tanítást a \ref{data_parallel_tf_model}. ábra szemlélteti.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -480,7 +480,7 @@ Feladatpárhuzamosítás esetében külömböző gráfrészletek lesznek megtan�
 \secro{Metoda de antrenare în cazul imaginilor statice}
 \secen{Learning method in case of static image inputs}
 
-A rendszer tanításához állokép esetében két legalább képet bemenet szükséges, az eredeti kép, amire át szeretnénk ruházni a stílust és a stílust tartalmazó kép, aminek a stílusát át szeretnénk ruházni. Mindkét bemenet esetében felírunk egy veszteség függvényt amik részei a végső nagy tanítási függvénynek.
+A rendszer tanításához állokép esetében két bemeneti kép szükséges, az eredeti kép, amire át szeretnénk ruházni a stílust és a stílust tartalmazó kép, aminek a stílusát át szeretnénk ruházni. Mindkét bemenet esetében felírunk egy veszteség függvényt, amik részei a végső nagy tanítási függvénynek.
 
 \subsection{Az eredeti kép tanításának a veszteségi függvénye}
 \ssecro{Funcția de pierdere în cazul imaginii originale}
@@ -490,7 +490,7 @@ A mély neurális hálók (Deep Neural Networks) azon típusai amik a legeredmé
 
 \begin{itemize}
 	\item konvolúciós réteg: a konvolúciós hálók alapkövei. A réteg súlyai úgynevezett konvolúciós szűrők alkotják, amelyek a forward pass lépés során tanítva vannak. Ez a tanítási lépés úgy történik, hogy a szűrőt végig toljuk a bemeneten és konvolúciónak nevezett műveletet végzünk. 
-	\item pooling layer: arra használatos, hogy a bemeneti adathalmazt méretét leszűkítsük úgy, hogy a halmaz adott értékein valamely matematikai műveletet végzünk (átlagszámolás, maximum számolás, minimum számolás). Erre azért van szükségünk, hogy növeljük a tanulás gyorsaságát, csökkentsük a számítások komplexitását megakadályozva ezzel az "overfitting" bekövetkezését.
+	\item pooling layer: arra használatos, hogy a bemeneti adathalmaz méretét leszűkítsük úgy, hogy a halmaz adott értékein valamely matematikai műveletet végzünk (átlagszámolás, maximum számolás, minimum számolás). Erre azért van szükségünk, hogy növeljük a tanulás gyorsaságát, csökkentsük a számítások komplexitását megakadályozva ezzel az "overfitting" bekövetkezését.
 	\item fully connected layer: minden bemenet mindem más bemenettel kapcsolatban áll.
 \end{itemize}
 
@@ -509,7 +509,7 @@ Az eredi kép tanításához egy már előre betanított mély konvolúciós neu
 A választás azért esett erre az előre betanított hálóra, mivel Yaroslav N. és Roman N. kutatása alapján\cite{16} összehasonlítva a AlexNet, GoogLeNet VGG-16 és VGG-19 halókat, a VGG-19 használata során sikerült a leglátványosabb képeket készíteni.
 \newline
 \indent
-A konvolúciós neuron háló minden rétege tartalmaz egy adott számú szűrőt, amik különbőző tulajdonságokat tartalmaznak a bementi képről. Ebből kifolyólag maga a bemenet kódolva van a szűrőkben. Egy \(N\) tulajdonságót tartalmazó réteg \(N\) szűrővel rendelkezik amelyek mérete \(M\). Maga a réteg kimenete lementhető egy \(N * M\) -es mátrixban. Egy adott réteg válasza egy bemeneti képre vizualizálható, ha gradient descent módszert alkalmazunk egy fehér zajt tartalmazó bemeneti képen. Tehát, legyen \(R^l\) egy adott az \(l\) haló válasza egy adott bemeneti képre. Legyen \(W^l\) ugyanaz az \(l\) háló válasza egy adott fehér zajt tartalmazó bemeneti kép esetében. Akkor felírható a veszteségfüggvény mint:
+A konvolúciós neuron háló minden rétege tartalmaz egy adott számú szűrőt, amik különbőző tulajdonságokat tartalmaznak a bementi képről. Ebből kifolyólag maga a bemenet kódolva van a szűrőkben. Egy \(N\) tulajdonságót tartalmazó réteg \(N\) szűrővel rendelkezik, amelyek mérete \(M\). Maga a réteg kimenete lementhető egy \(N * M\) -es mátrixban. Egy adott réteg válasza egy bemeneti képre vizualizálható, ha gradient descent módszert alkalmazunk egy fehér zajt tartalmazó bemeneti képen. Tehát, legyen \(R^l\) egy adott az \(l\) haló válasza egy adott bemeneti képre. Legyen \(W^l\) ugyanaz az \(l\) háló válasza egy adott fehér zajt tartalmazó bemeneti kép esetében. Akkor felírható a veszteségfüggvény mint:
 
 \begin{equation}
 L_{content}(\vec{x}, \vec{r}, l) = \frac{1}{2}\sum{R^l_{ij} - W^l_{ij}}
@@ -529,25 +529,25 @@ return content_loss
 
 \end{lstlisting}
 
-A \(CONTENT\_LAYER\) tuple típusú ami tartalmazza azoknak a rétegeknek az azonosítóját amik részt vesznek a veszteség függvény kiszámításában. A mi esetünkben ez egyedül a \(relu4\_2\) kimenetét jelenti, tehát valójában a \(conv4\_2\) konvolúciós réteget használtuk. A \(content\_features\) valtozó egy lista, ez tartalmazza az összes réteg válaszát a bemeneti eredeti képre. A visszaküldött érték egy tensor típusú, egyik részét fogja képezni a végső optimalizálandó veszteségfüggvénynek. 
+A \(CONTENT\_LAYER\) tuple típusú, ami tartalmazza azoknak a rétegeknek az azonosítóját, amik részt vesznek a veszteség függvény kiszámításában. A mi esetünkben ez egyedül a \(relu4\_2\) kimenetét jelenti, tehát valójában a \(conv4\_2\) konvolúciós réteget használtuk. A \(content\_features\) valtozó egy lista, ez tartalmazza az összes réteg válaszát a bemeneti eredeti képre. A visszaküldött érték egy tensor típusú, egyik részét fogja képezni a végső optimalizálandó veszteségfüggvénynek. 
 
 
 \subsection{Az stílus kép tanításának a veszteségi függvénye}
 \ssecro{Funcția de pierdere în cazul imaginii de stil}
 \ssecen{The loss function of the style image}
-Az előbbiekben az eredeti bemeneti kép tartalmára voltunk kíváncsiak. A stílus kép esetében viszont nem maga a kép tartalma a fontos. Ebben az esetben egy mintázatot szeretnénk kinyerni a stílusképből. Ehhez fontos megismerni maga a Gramm mátrix fogalmát. Hogyha adott egy vektorhalmazunk \(v_1...v_n\), akkor a \(G\) Gramm mátrixot a következő eljárás szerint határozzuk meg\cite{30}:
+Az előbbiekben az eredeti bemeneti kép tartalmára voltunk kíváncsiak. A stílus kép esetében viszont nem maga a kép tartalma a fontos. Ebben az esetben egy mintázatot szeretnénk kinyerni a stílusképből. Ehhez fontos megismerni maga a Gram mátrix fogalmát. Hogyha adott egy vektorhalmazunk \(v_1...v_n\), akkor a \(G\) Gram mátrixot a következő eljárás szerint határozzuk meg\cite{30}:
 
 \begin{equation}
 G_{ij} = v_i \cdot v_j
 \end{equation}
 
-Tehát hogyha az \(A\) mátrixunk oszlopait maga a \(v_1, v_2 ... v_n\) vektorok képezik, akkor a \(G\) Gramm mátrix a következőképpen kapható meg:
+Tehát hogyha az \(A\) mátrixunk oszlopait maga a \(v_1, v_2 ... v_n\) vektorok képezik, akkor a \(G\) Gram mátrix a következőképpen kapható meg:
 
 \begin{equation}
 G_{ij} = A A^T
 \end{equation}
 
-A Gramm mátrix egy szorzatot jelen egy adott vektorhalmaz összes elemei között. A mi esetünkben ez a vektorhalmaz jelentheti egy adott konvolúciós réteg által kiszűrt tulajdonságokat az adott bemeneti stílusképből. Amint már említettem, maga a konvolúciós réteg szűrői egy adott kép tulajdonságait tartalmazzák. A Gramm mátrix \(ij\) pozíciójában elhelyezkedő elem megadja, hogy egy adott réteg \(i\)-dik tulajdonsága mennyire teljesül a \(j\)-dik tulajdonság jelenlétében, tehát a két tulajdonság milyen mértékben aktiválódik egyszerre. Ha az \(ij\) pozícion levő elem közelít a \(0\)-hoz, akkor az azt jelenti, hogy a két tulajdonság nem aktiválódik egyszerre, ezzel ellentétben, ha az érték nagy, akkor az azt jelenti, hogy a két tulajdonság nagy valószínűséggel aktiválódik egyszerre.
+A Gram mátrix egy szorzatot jelen egy adott vektorhalmaz összes elemei között. A mi esetünkben ez a vektorhalmaz jelentheti egy adott konvolúciós réteg által kiszűrt tulajdonságokat az adott bemeneti stílusképből. Amint már említettem, maga a konvolúciós réteg szűrői egy adott kép tulajdonságait tartalmazzák. A Gram mátrix \(ij\) pozíciójában elhelyezkedő elem megadja, hogy egy adott réteg \(i\)-dik tulajdonsága mennyire teljesül a \(j\)-dik tulajdonság jelenlétében, tehát a két tulajdonság milyen mértékben aktiválódik egyszerre. Ha az \(ij\) pozícion levő elem közelít a \(0\)-hoz, akkor az azt jelenti, hogy a két tulajdonság nem aktiválódik egyszerre, ezzel ellentétben, ha az érték nagy, akkor az azt jelenti, hogy a két tulajdonság nagy valószínűséggel aktiválódik egyszerre.
 \newline
 \indent
 Hogyha az \(l\) rétegnek \(N\) szűrője van, akkor \(G \in R^{N_l*N_l}\), ahol:
@@ -556,13 +556,13 @@ Hogyha az \(l\) rétegnek \(N\) szűrője van, akkor \(G \in R^{N_l*N_l}\), ahol
 G^l_{ij} = \sum_{k} F^l_{ik} \cdot F^l_{jk}
 \end{equation}
 
-Ahhoz, hogy megkapjuk egy adott háló által generált mintát, textúrát, hasonlóan mint az előzőekben, fehér zaj képet adunk bemenetként. A veszteségfüggvény egyetlen rétegre felírható mint a fehér zaj kép Gramm mátrixa és a stílus kép Gramm mátrixának átlagos négyzetes hibájaként. A \(G\) jelöli a fehér zaj kép Gramm mátrixát, az \(A\) pedig a stílus kép Gramm mátrixát.
+Ahhoz, hogy megkapjuk egy adott háló által generált mintát, textúrát, hasonlóan mint az előzőekben, fehér-zaj képet adunk bemenetként. A veszteségfüggvény egyetlen rétegre felírható mint a fehér-zaj kép Gram mátrixa és a stílus kép Gram mátrixának átlagos négyzetes hibájaként. A \(G\) jelöli a fehér zaj kép Gramm mátrixát, az \(A\) pedig a stílus kép Gramm mátrixát.
 
 \begin{equation}
 E_l = \frac{1}{4N^2_l M^2_l} \sum_{i,j} (G_{ij} - A_{lj})^2
 \end{equation}
 
-Az összes stílus réteg válasza felírható, mint egy összeg, ahol \(w_l\) egy súlyzó faktort jelent:
+Az összes stílus réteg válasza felírható mint egy összeg, ahol \(w_l\) egy súlyzó faktort jelent:
 
 \begin{equation}
 L_{style}(\vec{a}, \vec{x}) = \sum w_lE_l
@@ -605,12 +605,12 @@ for style_layer in STYLE_LAYERS:
 		tf.nn.l2_loss(gram - style_gram) / style_gram.size)
 \end{lstlisting}
 
-A \(style\_features\) valtozó, ugyanúgy mint a \(content\_features\) esetében, egy lista, ez tartalmazza az összes réteg válaszát a bemeneti stílus képre. Az alábbi konvolúciór rétegek kerülnek felhasználásra: \(conv1\_1\), \(conv2\_1\), \(conv3\_1\), \(conv4\_1\), \(conv5\_1\).
+A \(style\_features\) valtozó, ugyanúgy mint a \(content\_features\) esetében, egy lista, ez tartalmazza az összes réteg válaszát a bemeneti stílus képre. Az alábbi konvolúciós rétegek kerülnek felhasználásra: \(conv1\_1\), \(conv2\_1\), \(conv3\_1\), \(conv4\_1\), \(conv5\_1\).
 
 \subsection{A stilizált kép tisztítása}
 \ssecro{Reducerea zgomotului din imagenea stilizata}
 \ssecen{Denoising the stylized image}
-A két veszteségfüggvényt alkalmazva sikeresen át tudjuk ruházni a stílust a művészi képről a bemeneti mindennapi képre. Viszont észlelhetjük, hogy az eredmény kép eléggé zajos. Ennek érdekében bevezetünk egy újabb veszteségfüggvényt a zaj csökkentésére, ami a Total Variation Denoising algoritmusra alapszik. Az algoritmus szerint vesszük a stilizált képet és eltoljuk X koordináta mentén egy pixellel, majd az Y koordináta mentén is eltoljuk egy pixellel. Az eltolt képeket kivonjuk az eredi képekből, majd az eredmények abszolút értékeit pixelenként összeadjuk. Ezáltal egy újabb veszteségi függvényt alítunk elő, amit ugyancsak minimalizálni kell.
+A két veszteségfüggvényt alkalmazva sikeresen át tudjuk ruházni a stílust a művészi képről a bemeneti mindennapi képre. Viszont észlelhetjük, hogy az eredmény kép eléggé zajos. Ennek érdekében bevezetünk egy újabb veszteségfüggvényt a zaj csökkentésére, ami a Total Variation Denoising algoritmusra alapszik. Az algoritmus szerint vesszük a stilizált képet és eltoljuk X koordináta mentén egy pixellel, majd az Y koordináta mentén is eltoljuk egy pixellel. Az eltolt képeket kivonjuk az eredi képekből, majd az eredmények abszolút értékeit pixelenként összeadjuk. Ezáltal egy újabb veszteségfüggvényt alítunk elő, amit ugyancsak minimalizálni kell.
 
 \begin{equation}
 L_{tv}(\vec{a}, \vec{x}) = \sum_{i,j} \left|(X_{ij} - A_{{i+1}j})\right| + \sum_{i, j} \left|(X_{ij} - A_{i {j+1}})\right|
@@ -629,13 +629,13 @@ self.size_of_tensor(image[:, :, 1:, :])))
 \ssecro{Definirea si învățarea funcției de pierdere totala la imagini statice}
 \ssecen{The definition and optimization of the total loss function for static images}
 
-Eddig bemutatásra került a stílus kép tanításának veszteségfüggvénye, az eredeti kép veszteség függvényének tanítása valamint egy veszteségfüggvény a kimeneti kép zajtalanítására. A végső veszteségfüggvény egyszerűen felírható a három veszteségfüggvény összegeként. 
+Eddig bemutatásra került a stílus kép tanításának veszteségfüggvénye, az eredeti kép veszteségfüggvényének tanítása valamint egy veszteségfüggvény a kimeneti kép zajtalanítására. A végső veszteségfüggvény egyszerűen felírható a három veszteségfüggvény összegeként. 
 
 \begin{equation}
 L = L_{content} + L_{style} + L_{tv}
 \end{equation}
 
-A teljes veszteségfüggvény tanítására az Adam\cite{32} optimalizáló algoritmus alkalmaztuk. Az Adam ( Adaptive Moment Estimation) momentum algoritmus egy sztochasztikus gradiens alapú optimalizáló algoritmus. Az algoritmus felhasználja a elsődleges, valamint a másodlagos gradiensek átlagát ahhoz, hogy a veszteségfüggvényt minimalizálja. Az optimalizálási lépések a következő eljárás szerint történnek:
+A teljes veszteségfüggvény tanítására az ADAM\cite{32} optimalizáló algoritmus alkalmaztuk. Az ADAM ( Adaptive Moment Estimation) momentum algoritmus egy sztochasztikus gradiens alapú optimalizáló algoritmus. Az algoritmus felhasználja a elsődleges, valamint a másodlagos gradiensek átlagát ahhoz, hogy a veszteségfüggvényt minimalizálja. Az optimalizálási lépések a következő eljárás szerint történnek:
 
 \begin{equation}
 \begin{aligned}
@@ -668,7 +668,7 @@ Ahol, \(m\) és \(v\) jelentik az elsőfokú valamint másodfokú gradienseket, 
 \ssecro{Abordarea naivă}
 \ssecen{Naiv approach}
 
-Eddigiekben bemutatásra keszült miképpen vihető át a stílus egyik statikus képről a másikra. Mindenki tisztába van azzal, hogy egy videó statikus képek sorozatából tevődik össze, amiket képkockáknak (frame) nevezünk. Ennek megfelelően a naiv megközelítés az lenne, hogy ha adott egy videó, akkor vágjuk azt darabokra, pontosabban statikus képkockákra, majd az összes képkockára alkalmazzuk a stílus átruházási módszert.
+Eddigiekben bemutatásra került miképpen vihető át a stílus egyik statikus képről a másikra. Mindenki tisztába van azzal, hogy egy videó statikus képek sorozatából tevődik össze, amiket képkockáknak (frame) nevezünk. Ennek megfelelően a naiv megközelítés az lenne, hogy ha adott egy videó, akkor vágjuk azt darabokra, pontosabban statikus képkockákra, majd az összes képkockára alkalmazzuk a stílus átruházási módszert.
 \newline
 \indent
 A bemeneti videót frame-ekre való bontásához az ffmpeg nyílt forráskodú alkalmazást használtuk. Az ffmpeg parancssorból futtatható, a következő paraméterek szükségesek, ahhoz, hogy a mozgóképet statikus képek sorozatává alakítsa:
@@ -691,10 +691,10 @@ A naiv megközelítés működik, a kimenet egy olyan videó lesz, amely tartalm
 \subsection{A haló inicializálása képkockák esetében. Az optical flow bevezetése}
 \ssecro{Inițializarea rețelei pentru frame-uri. Introducerea optical flow-ului}
 \ssecen{The initialization of the neural net for the frames. Introduction of the optical flow}
-Amint említettük, a háló inicalizálására egy fehér zaj képet használtunk statikus bemeneti képre való stílusátruházáskor. Több képkocka esetében ezzel az a gond, hogy a képkockák nem fognak egyanabba a lokális minimumba konvergálni tanításkor. Végeredményképp az átmenet egyik képkockáról a másikra nem lesz folyamatos.
+Amint említettük, a háló inicalizálására egy fehér-zaj képet használtunk statikus bemeneti képre való stílusátruházáskor. Több képkocka esetében ezzel az a gond, hogy a képkockák nem fognak ugyanabba a lokális minimumba konvergálni tanításkor. Végeredményképp az átmenet egyik képkockáról a másikra nem lesz folyamatos.
 \newline
 \indent
-Egy megoldás kísérlet erre az lenne, hogy a ha egy képkocka stilizálása történik, a hálót nem fehér zaj képpel inicializáljuk, hanem figyelembe vesszük az előtte levő stilizált képkocka és mostani képkocka közötti optical flow-t. Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képet képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek, mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
+Egy megoldási kísérlet erre az lenne, hogy ha egy képkocka stilizálása történik, a hálót nem fehér-zaj képpel inicializáljuk, hanem figyelembe vesszük az előtte levő stilizált képkocka és mostani képkocka közötti optical flow-t. Az optical flow egy mozgóképen megjelenő objektum különböző sebességvektorait jelenti. A képet képkocka közötti optical flow megesztimálásával mérhető az adott objektum valós mozgási sebessége. A kamerához távolabb levő objektumok kisebb sebességvektorokkal rendelkeznek, mint azon objektumok amelyek ugyanazon sebességgel mozognak, viszont közelebb vannak a kamerához\cite{34}.
 Az optical flow meghatározásához a DeepMatching - Deepflow algoritmust használtuk. Ennek a kimenete egy .flo kiterjesztésű fájl ami tartalmazza adott pixelek esetében a horizontális és vertikális elmozdulás vektorokat. Az optical flow segítségével torzítjuk az előző stilizált képet, ezt az opencv cv2.remap függvényével érjük el. Ez a torzított képpel inicializáljuk a hálót. Ez simább átmenetet fog eredményezni abban az esetben, ha a képkockákon nincs mozgás. Ennek a módszernek a használata szükségszerű viszont nem elégséges ahhoz, hogy szemnek is kellemes eredményt kapjunk.
 \newline
 \indent
@@ -714,7 +714,7 @@ A mozgás néküli és újonnan megjelenő objektumok nélküli zónák meghatá
 
 A mozgási határok pedig meghatározhatóak:
 \begin{equation} \label{eq:2}
-|\nabla\hat{u}| + |\nabla\hat{v}| > 0.01|\tilde{w}|^2 + 0.002
+|\nabla\hat{u}|^2 + |\nabla\hat{v}|^2 > 0.01|\tilde{w}|^2 + 0.002
 \end{equation}
 
 A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix, ami tartalmazza a mozgás nélküli zónánkat valamint a mozgási határokat(\ref{consistency_weights}. ábra). Ezt a mátrixot átalakítjuk olyan módon, hogy a mozgási határokra 1-est rakunk, a többi érték 0-ás lesz, jelöljük ez a mátrixot \(c^{(i-1,i)}\)-vel az \(i-1\) és \(i\)-dik képkocka között. Ezt felhasználva felírhatjuk egy újabb veszteség függvényt: 
@@ -751,10 +751,10 @@ A \ref{eq:1} és \ref{eq:2} képletek alapján alkotható egy olyan mátrix, ami
 \ssecro{Modelul de interacțiune și comportament al sistemului}
 \ssecen{Interraction and behavioral model of the system}
 
-A rendszer interakciós modellje (\ref{use_case_diagram}. ábra) a lehető legegyszerűbb. Egyetlen aktort határozunk meg, aki maga a felhasználó. A rendszer esetében nem beszélhetünk bármilyen adminisztrációs felületről mivel nem rendelkezik semmiféle háttértárral valamint nem pillanatnyilag nem definiál semmifel hálózati komponenst.
+A rendszer interakciós modellje (\ref{use_case_diagram}. ábra) a lehető legegyszerűbb. Egyetlen aktort határozunk meg, aki maga a felhasználó. A rendszer esetében nem beszélhetünk bármilyen adminisztrációs felületről mivel nem rendelkezik semmiféle háttértárral valamint pillanatnyilag nem definiál semmiféle hálózati komponenst.
 \newline
 \indent
-A felhasználónak lehetősége van új kép illetve videó anyag bevitelére. Ez a funkcionalitást egyazon komponens végzi aminek az egyik feladata eldönteni, hogy a kijelölt bemenet kép vagy videó típusú. A felhasználónak lehetősége van a meghatározott kiterjesztésű fájlok közül választani bemenethez.
+A felhasználónak lehetősége van új kép illetve videó anyag bevitelére. Ezt a funkcionalitást egyazon komponens végzi aminek az egyik feladata eldönteni, hogy a kijelölt bemenet kép vagy videó típusú. A felhasználónak lehetősége van a meghatározott kiterjesztésű fájlok közül választani bemenethez.
 \newline
 \indent
 A felhasználónak lehetősége van a rendszer által biztosított stílusok közül választani. A felhasználó nem határozhat meg új stílust. A rendszer nem biztosít erre adminisztrációs felületet.
@@ -804,7 +804,7 @@ A rendszer a következő komponensekből tevődik össze (\ref{component_diagram
 \ssecro{Proiectarea pe mai multe fire computaționale a unelor componente}
 \ssecen{Multithreaded design and communication of components}
 
-Egy bemeneti képre való stílus átruházás időigényes folyamat. Mozgókép esetében ez a folyamat időigénye lineárisan növekedik a képkockák számának szorzatával. Annak érdekében, hogy az alkalmazásunk reszponzív legyen, elhagyhatatlan aspektus egy olyan modell kialakítása ami igénybe veszi a modern processzorok többszálas működési tulajdonságát. Az "Artistic video creator" komponens működése során ugyan igénybe veszi a videókártya számítási kapacitását, de ez semmiképp sem jelenti azt, hogy a futási idő elhanyagolható. Ugyanakkor fontos kiemelni azt is, hogy azon függvényhívások sorozata ami a videókártyán fog elvégződni, szinkron módon történik. Valójában a programunk meghívja az adott függvényt majd addig várakozik, amig megoldás nem érkezett erre.
+Egy bemeneti képre való stílus átruházás időigényes folyamat. Mozgókép esetében ez a folyamat időigénye lineárisan növekedik a képkockák számának szorzatával. Annak érdekében, hogy az alkalmazásunk reszponzív legyen, elhagyhatatlan aspektus egy olyan modell kialakítása ami igénybe veszi a modern processzorok többszálas működési tulajdonságát. Az "Artistic video creator" komponens működése során ugyan igénybe veszi a videókártya számítási kapacitását, de ez semmiképp sem jelenti azt, hogy a futási idő elhanyagolható. Ugyanakkor fontos kiemelni azt is, hogy azon függvényhívások sorozata ami a videókártyán fognak elvégződni, szinkron módon történnek. Valójában a programunk meghívja az adott függvényt majd addig várakozik, amig megoldás nem érkezett erre.
 \newline
 \indent
 Alkalmazásunk esetében megkülönböztetünk egy főszálat valamint egy mellékszálat (\ref{seq_diagram}. ábra). A főszálon fog futni a Main Window és a köréje csoportosuló felhasználói felülettel rendelkező komponensek, mint például a "Settings" vagy a "ProgressBar". Az alkalmazás indításakor csak a főszál indul el ami létrehozza a "Main Window" és "Settings" komponenseket. Ezt követően, ha a felhasználó megadja a bemeneti állományt, létrejön a "ProgressBar" komponens. A "ProgressBar" azért jön létre csak ebben a pillanatban, mivel a rendszernek tudnia kell a bemenet típusát és ennek függvényében egy factory modell segítségével dönti el, hogy milyen típusú komponens jön létre. Ebben a pillanatban azonban a "Progressbar" komponens még nem látható a felhasználó számára.
@@ -825,7 +825,7 @@ A munkafolyamat közben az "Artistic Video creator" komponens kapcsolatban áll 
 \ssecro{Impementarea sistemului}
 \ssecen{The implementation of the system}
 
-A rendszer implementációja Python környezetben történt. Ahogy már a bevezetőben is említésre került, az alábbi könyvtárak kerültek felhasználásra: numpy, Tensorflow, opencv, PyQt. Az elkövetkezőkben ki szeretnék térni a PyQt könyvtár bemutatására ugyanis a szoftver jelentős része ennek a felhasználásával valósult meg és az implementációban használt egyes tervezési minták a PyQt sajátosságait próbálják kiaknázni.
+A rendszer implementációja Python környezetben történt. Ahogy már a bevezetőben is említésre került, az alábbi könyvtárak kerültek felhasználásra: numpy, Tensorflow, opencv, PyQt. Az elkövetkezőkben ki szeretnék térni a PyQt könyvtár bemutatására, ugyanis a szoftver jelentős része ennek a felhasználásával valósult meg és az implementációban használt egyes tervezési minták a PyQt sajátosságait próbálják kiaknázni.
 \newline
 \indent
 A PyQt a híres Qt könyvtárra épül. A Qt egy C++ könyvtár, aminek célja olyan grafikus szoftverek megvalósítása amik különböző platformokat is támogatnak. A Qt univerzális megoldást ad a grafikus felületek elkészítésére, de emellett számos más komponenseket is implementál, mint például tömbök, listák, konténerek, párhuzamos szálak, smartpointerek, hálózati protokollok, stb. A Qt egyik újítása a SIGNAL-ok és a SLOT-ok bevezetése. Ennek működése egyszerű, egy adott osztály adattagjai és metódusai mellett deklarálhatóak SIGNAL-ok és SLOT-ok is. Egy osztály egyes metódusai jelzéseket adhatnak ki SIGNAL-ok segítségével amire a SLOT metódusok csatlakozhatnak. Egy adott SIGNAL kibocsátásakor a rá csatlakozott összes SLOT függvény le fog futni. Például egy grafikus felületen levő gomb lenyomásakor kibocsájtunk egy SIGNAL-t amire a neki megfelelő SLOT függvény meghívódik és lefut. A jelzéskibocsájtás működik többszálas program esetében is, az is megoldható, hogy egy adott jelzésre egy más szálon futó metódus válaszoljon. Természetesen a SIGNAL-SLOT megoldás a PyQt esetében is tökéletesen működik és egy nagyon kényelmes megoldást biztosít a grafikus felület és a business logika összekötésében.
@@ -1052,17 +1052,17 @@ A Video csomag tartalmaz egy \(convert\_to\_frames\) függvényt ami a megadott 
 \section{Limitációk}
 \secro{Limitații}
 \secen{Limitations}
-Az implementáláshoz használt deeplmatching és deeplfow algoritmusok esetében a készítők által kiadott binárisokat használtuk. Ezek tökéletesen működnek Linux alapú rendszereken. Mivel a forráskóduk nyílt, ezért megpróbáltuk átírni azokat Windows környezet alá, sajnos többszörös próbálkozás után kénytelenek voltunk feladni. A forráskód eléggé komplex és nem jól dokumentált. Mivel a dolgozat célja nem ez a két algoritmus lefejlesztése köré alapult, ezért inkább abbahagytuk azoknak az átírását. Ennek eredménye az, hogy a deepmatching és deepflow által biztosított funkcionalitások nem elérhetőek, ha az alkalmazás Windows operációs rendszer alatt fut.
+Az implementáláshoz használt Deepmatching és Deepflow algoritmusok esetében a készítők által kiadott binárisokat használtuk. Ezek tökéletesen működnek Linux alapú rendszereken. Mivel a forráskóduk nyílt, ezért megpróbáltuk átírni azokat Windows környezet alá, sajnos többszörös próbálkozás után kénytelenek voltunk feladni. A forráskód eléggé komplex és nem jól dokumentált. Mivel a dolgozat célja nem ez a két algoritmus lefejlesztése köré alapult, ezért inkább abbahagytuk azoknak az átírását. Ennek eredménye az, hogy a Deepmatching és Deepflow által biztosított funkcionalitások nem elérhetőek, ha az alkalmazás Windows operációs rendszer alatt fut.
 \newline
 \indent
-A deepmatching algoritmus is mesterséges intelligenciát használ, ezért itt is ajánlatos volna VGA megoldást használni. Sajnos a dolgozat elkészítésekor működő megoldás nem volt erre. A VGA-ás megoldás jelentőset gyorsítana az algoritmusokon.
+A Deepmatching algoritmus is mesterséges intelligenciát használ, ezért itt is ajánlatos volna VGA megoldást használni. Sajnos a dolgozat elkészítésekor működő megoldás nem volt erre. A VGA-ás megoldás jelentőset gyorsítana az algoritmuson.
 
 %----------------------------------------------------------------
 \chapter{A rendszer tesztelése}
 \capterro{Testarea sistemului}
 \capteren{The testing of the system}
 
-A rendszer tesztelése alatt fel szerettük volna mérni, hogy a rendszer hogyan viselkedik a mindennapi használatban. Többek között választ szerettünk volna kapni olyan kérdésekre, hogy a rendszer mennyi idő alatt ruházza át a stílust egy statikus képre vagy egy videóra, mekkora a memória igénye, mekkora a maximális képméret amire még működőképes.
+A rendszer tesztelése alatt fel szerettük volna mérni, hogy a ez miképpen viselkedik a mindennapi használatban. Többek között választ szerettünk volna kapni olyan kérdésekre, hogy a rendszer mennyi idő alatt ruházza át a stílust egy statikus képre vagy egy videóra, mekkora a memória igénye, mekkora a maximális képméret amire még működőképes.
 
 \section{A tesztrendszer ismertetése}
 \secro{Configurația de test}
@@ -1082,7 +1082,7 @@ A rendszer tesztelésére a következő konfigurációt használtuk:
 A használt videókártya egy nVidia GeForce GTX 1080 volt, ennek is a Gigabyte által kiadott G1 GAMING változata. A kártya főleg játékra volt tervezve, de kiemelkedő hardver tulajdonságainak megfelelően tökéletesen használható párhuzamos gépi tanulásra is. A videókártya a Pascal architektúrával rendelkezik. A kártya alapfrekvenciája 1695 MHz, terhelés alatt felugorhat 1860MHz-re. A kártya 2560 CUDA maggal rendelkezik valamint 8GB DDR5X típusú memóriával, amiből gépi tanulásra használható 7860MB.
 \newline
 \indent 
-A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott. A rendszer egyes limitációkkal támogatja a Microsoft Windows operációs rendszert is, viszont a limitációk miatt az összes teszt nem végezhető el azalatt, ezért az Ubuntu-ra esett választás. A operációs rendszerünk az ekkori legújabb nVidia driver-ekkel volt ellátva ami a 375.66 verziója kiadás. A Pascal architektúrának támogató CUDA 8.0-ás videókártya fejlesztő könyvtárat használtuk. Emellett a Tensorflow igényeli a cudnn videó kártya memóriájával foglalkoző könyvtárat is.
+A rendszer a legújabb Linux Debian alapú Ubuntu operációs rendszeren futott. A rendszer egyes limitációkkal támogatja a Microsoft Windows operációs rendszert is, viszont a limitációk miatt az összes teszt nem végezhető el azalatt, ezért az Ubuntu-ra esett választás. A operációs rendszerünk az ekkori legújabb nVidia driver-ekkel volt ellátva ami a 375.66 verziójú kiadás. A Pascal architektúrát támogató CUDA 8.0-ás videókártya fejlesztő könyvtárat használtuk. Emellett a Tensorflow igényeli a cudnn videó kártya memóriájával foglalkozó könyvtárat is.
 
 \section{Egy képkockára történő stílusátruházási idő és memória igénye}
 \secro{Timpul și memoria necesară transferări stilului pe o imagine statică}
@@ -1105,7 +1105,7 @@ Első tesztelési esetként az szerettük volna lemérni, hogy mennyi idő szük
 	\end{tabular}
 \end{center}
 
-A \ref{time_per_res}. diagrammból lekövetkeztethetjük az, hogy az igényelt idő lineárisan nő a felbontás növekedésének megfelelően ugyanaz a stílus kép használatával. Az is egyértelművé válik, hogy a stílusátruházás high definition(HD) felbontású képek esetében elég időigényessé válik, ugyanis közel 5 percre van szükség egyetlen bemenet elvégzésére.
+A \ref{time_per_res}. diagrammból lekövetkeztethetjük azt, hogy az igényelt idő lineárisan nő a felbontás növekedésének megfelelően ugyanaz a stílus kép használatával. Az is egyértelművé válik, hogy a stílusátruházás high definition(HD) felbontású képek esetében elég időigényessé válik, ugyanis közel 5 percre van szükség egyetlen bemenet elvégzésére.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -1128,7 +1128,7 @@ Az előbbi bemeneti képek esetében mérni szerettük volna a videókártya kih
 A \ref{gpu_usage}. diagramm igazolta előrejelzésünket. A videókártya használati százaléka a művelet elején felugrik szinte maximálisra és azon marad addig amig be nem fejezte azt. A \ref{gpu_usage}. ábrán látható diagramm $640 \times $480-as felbontásra keszült, de hasonló eredményeket kapunk bármely más felbontás esetében is.
 \newline
 \indent
-Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat egy különböző felbontások esetében. Itt a logika azt sugallná, hogy a memóriaigény a felbontásokkal arányosan lineárisan nőni fog. Ezzel ellenben a \ref{gpu_memory_usage}. ábra azt igazolja, hogy a Tensorflow működése nem egyezik meg a előrejelzésünkkel. A mérés hasonlóan mint a kihasználtság esetében egy külön program méri ami egy külön processzen fut. A mérésre ugyancsak a gpustats könyvtárat használtuk.
+Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat különböző felbontások esetében. Itt a logika azt sugallná, hogy a memóriaigény a felbontásokkal arányosan lineárisan nőni fog. Ezzel ellenben a \ref{gpu_memory_usage}. ábra azt igazolja, hogy a Tensorflow működése nem egyezik meg az előrejelzésünkkel. A memóriahasználatot, hasonlóan mint a kihasználtság esetében, egy külön program méri, ami egy külön processzen fut. A mérésre ugyancsak a gpustats könyvtárat használtuk.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -1141,14 +1141,14 @@ Továbbá azt szerettünk volna mérni, hogy mekkora a memóriahasználat egy k�
 A \ref{gpu_memory_usage}. diagramm $640 \times $480 felbontású kép esetében mért értékeket ábrázolja. A videokártyán maximálisan 7860MB volt használható a Tensorflow által. Amint látható, a Tensorflow a kezdetben lefoglalja az összes használható videómemóriát, majd ennek a felhasználásával végzi el a feladatát. A memóriahasználat ugyanakkora $1366 \times $768 felbontás esetében is. Mindez felvet egy másik kérdést, azt hogy mekkora az a maximális felbontás ami még elfér egy GTX 1080 típusú kártya memóriájában?
 \newline
 \indent
-A kérdésre a válasz egyszerűen úgy adható meg, hogy vesszük az ismertebb felbontásokat és próbáljuk addig, amig a Tensorflow nem dob egy memóriával kapcsolatos kivételt. Tovább próbálkoztunk a következő felbontásokkal: $1440 \times $900, $1600 \times $900 és $1920 \times $1080. Ezennel elértük a fullHD minőséget. Statikus kép esetében egy GTX 1080-as kártyával ez meg elfogadható bemenet, viszont itt meg kell említeni, hogy az alkalmazás a HD minőséget célozta. Ebből kifolyólag a stílus képek mérete a HD felbontás környékén mozog. Ez fullHD felbontás esetében bevezethet látható torzulásokat, ami abból adódik, hogy a stílus kép át fel lesz skálázva. Tovább haladva $2560 \times $1440 felbontással próbálkoztunk, ami esetében jelentkezett a várt memória kivétel. Tehát a maximális felbontás amit lehetséges használni statikus képes esetében, az a $1920 \times $1080 felbontás.
+A kérdésre a válasz egyszerűen úgy adható meg, hogy vesszük az ismertebb felbontásokat és próbáljuk addig, amig a Tensorflow nem dob egy memóriával kapcsolatos kivételt. Tovább próbálkoztunk a következő felbontásokkal: $1440 \times $900, $1600 \times $900 és $1920 \times $1080. Ezennel elértük a fullHD minőséget. Statikus kép esetében egy GTX 1080-as kártyával ez meg elfogadható bemenet, viszont itt meg kell említeni, hogy az alkalmazás a HD minőséget célozta. Ebből kifolyólag a stílus képek mérete a HD felbontás környékén mozog. Ez fullHD felbontás esetében bevezethet látható torzulásokat, ami abból adódik, hogy a stílus kép fel lesz skálázva. Tovább haladva $2560 \times $1440 felbontással próbálkoztunk, ami esetében jelentkezett a várt memória kivétel. Tehát a maximális felbontás amit lehetséges használni statikus képes esetében, az a $1920 \times $1080 felbontás.
 
 
 \section{CPU-GPU futásidő összehasonlítása}
 \secro{Compararea timpului necesar pe CPU cu cel necesar pe GPU}
 \secen{Comparison of the running timp between CPU and GPU}
 
-Tisztába vagyunnk azzal, hogy a deep learning tanítási módszer alkalmas az adatpárhuzamosításra. Érthető módon elvárt, hogy a processzoron történő futtatás jóval alul kellene maradjon a GPU-un történő futtatással szemben. Ezt igazolják a következő mérések is. Ugyanúgy mint az előző mérések esetében 300 iteráció alatt történt a stílusátruházás. A bemeneti teszt képek is az elöző teszthalmazból vannak kölcsönvéve, ebben az esetben három felbontásra futtattuk a tesztet. Ez elegendő kellene legyen arra, hogy lássuk a GPU használata által bevezetett gyorsulást. Minden teszt esetben ugyanazt a stílusképet alkalmaztuk, aminek felbontása $600 \times $855 pixel. Az mért eredmények a következők: 
+Tisztába vagyunnk azzal, hogy a deep learning tanítási módszer alkalmas az adatpárhuzamosításra. Érthető módon elvárt, hogy a processzoron történő futtatás jóval alul kellene maradjon a GPU-un történő futtatással szemben. Ezt igazolják a következő mérések is. Ugyanúgy mint az előző mérések esetében 300 iteráció alatt történt a stílusátruházás. A bemeneti teszt képek is az elöző teszthalmazból vannak kölcsönvéve, ebben az esetben négy felbontásra futtattuk a tesztet. Ez elegendő kellene legyen arra, hogy lássuk a GPU használata által bevezetett gyorsulást. Minden teszt esetben ugyanazt a stílusképet alkalmaztuk, aminek felbontása $600 \times $855 pixel. Az mért eredmények a következők: 
 
 \begin{center}
 	\begin{tabular}{ | l | l | l | l| }
@@ -1237,13 +1237,13 @@ A \ref{one_min_video_opt_flow}. ábrán látható diagramm tartalmazza az optica
 \capterro{Concluzie}
 \capteren{Conclusion}
 
-A dolgozat célja egy olyan rendszer kialakítása és fejlesztése volt, ami képes híres magyar festők festményeinek festészeti stílusát átvenni és átruházni azt olyan képekre valamint videókra amik nem rendelkeznek különös stílusértékkel. Ehhez egy olyan aztali pc-re szánt alkalmazás kifejlesztése volt a cél, ami képes elvégezni ezt a feladatot. Ezt a célt sikerült is elérni pár limitáció jelenlétében amiket nem hanyagolhatunk el. 
+A dolgozat célja egy olyan rendszer kialakítása és fejlesztése volt, ami képes híres magyar festők festményeinek festészeti stílusát átvenni és átruházni azt olyan képekre valamint videókra, amik nem rendelkeznek különös stílusértékkel. Ehhez egy olyan aztali pc-re szánt alkalmazás kifejlesztése volt a cél, ami képes elvégezni ezt a feladatot. Ezt a célt sikerült is elérni pár limitáció jelenlétében, amiket nem hanyagolhatunk el. 
 \newline
 \indent
-Előszöris sikerült egy olyan applikációt fejleszteni ami képes statikus képre átruházni egy művészeti stílust. Az applikációt sikerült lefejleszteni Windows valamint Linux alapú rendszerekre úgy, hogy kihasználja a videókártya által biztosított párhuzmosítást. Statikus képre történő stílusátruházás kifogástalanul működik ugyanúgy a Linux valamint Windows rendszereken. Az átruházási idők amint a tesztekből is láthattuk elfogadhatóak abban az esetben, ha rendelekezünk megfelelő videókártyával. Azt is meghatároztuk, hogy noha a rendszer a maximális HD felbontású képek támogatására volt tervezve, működőképes marad akár fullHD felbontású bementi képek esetében is.
+Előszöris sikerült egy olyan applikációt fejleszteni, ami képes statikus képre átruházni egy művészeti stílust. Az applikációt sikerült lefejleszteni Windows valamint Linux alapú rendszerekre úgy, hogy kihasználja a videókártya által biztosított párhuzmosítást. Statikus képre történő stílusátruházás kifogástalanul működik ugyanúgy a Linux valamint Windows rendszereken. Az átruházási idők amint a tesztekből is láthattuk elfogadhatóak abban az esetben, ha rendelekezünk megfelelő videókártyával. Azt is meghatároztuk, hogy noha a rendszer a maximális HD felbontású képek támogatására volt tervezve, működőképes marad akár fullHD felbontású bementi képek esetében is.
 \newline
 \indent
-Továbbá, mozgóképek esetében is próbáltuk megoldani a stílusátruházást. Ez a beépített funkció szintúgy működik Windows valamint Linux rendszerek alatt, megjegyezve az, hogy Windows alatt nem használható az optical flow algoritmus által bevezetett képminőség javítása. Itt fontos megemlíteni, hogy a dolgozat igazolni tudja, hogy videó esetében is megoldható a stílusátruházás, de ugyanakkor nagyobb felbontások esetében az átruházási idő szempontjából ez nem feltétlenül kifizetödő. Az optical flow metódussal azt próbáltuk elérni, hogy a képkockák közötti átmenet legyen folyamatos elkerülve az úgymond "artifact"-et megjelenését. Ezt sikerült is elérni, viszont a hátránya az, hogy az időigény több mint duplájára növekedett.
+Továbbá, mozgóképek esetében is próbáltuk megoldani a stílusátruházást. Ez a beépített funkció szintúgy működik Windows valamint Linux rendszerek alatt, megjegyezve azt, hogy Windows alatt nem használható az optical flow algoritmus által bevezetett képminőség javítása. Itt fontos megemlíteni, hogy a dolgozat igazolni tudja, hogy videó esetében is megoldható a stílusátruházás, de ugyanakkor nagyobb felbontások esetében az átruházási idő szempontjából ez nem feltétlenül kifizetödő. Az optical flow metódussal azt próbáltuk elérni, hogy a képkockák közötti átmenet legyen folyamatos elkerülve az úgymond "artifact"-et megjelenését. Ezt sikerült is elérni, viszont a hátránya az, hogy az időigény több mint duplájára növekedett.
 \newline
 \indent 
 Következtetésképpen levonható az, hogy az általunk ismertett megoldások működőképesek, de még szükség van a továbbfejlesztésekre és optimalizációkra ahhoz, hogy egy mindennapi felhasználó által a szoftver gond nélkül használható lehessen.
@@ -1252,10 +1252,10 @@ Következtetésképpen levonható az, hogy az általunk ismertett megoldások m�
 \secro{Dezvoltare ulterioară}
 \secen{Future improvements}
 
-A továbbfejlesztési lehetőségeket három csoportba sorolhatnánk: az álloképre történő stílusátvitellel kapcsolatos fejlesztése lehetőseg, a videóra történő stílusátruházással kapcsolatos fejlesztési lehetősgek valamint maga a szoftver fejlesztésével és működéséval kapcsolatos továbbfejlesztési lehetőségek.
+A továbbfejlesztési lehetőségeket három csoportba sorolhatnánk: az álloképre történő stílusátvitellel kapcsolatos fejlesztése lehetőségek, a videóra történő stílusátruházással kapcsolatos fejlesztési lehetőségek valamint maga a szoftver fejlesztésével és működéséval kapcsolatos továbbfejlesztési lehetőségek.
 \newline
 \indent
-A állókép stilizálása esetében a performanciát javítani lehetne azzal, hogy a VGG19 háló helyett egy saját halót betanítani komondottan erre a célra. Yaroslav Nikulin és Roman Novak tudományos kutatása\cite{16} is ezt javasolja. Ugyanakkor az eredmény kép minőségén is lehetne javítani. Természetesen, a jelenleg fejlesztett program lehetőséget ad a tanítási paraméterek módosítására, viszont ajánlott lenne tovább kisérletezni ezekkel. A tanítás az ADAM tanítási módszert alkalmazza, ezzel szemben tovább lehetne kisérletezni más módszerekkel is esetleges idő és képminőség javítása érdekében.
+A állókép stilizálása esetében a performanciát javítani lehetne azzal, hogy a VGG19 háló helyett egy saját halót betanítunk komondottan erre a célra. Yaroslav Nikulin és Roman Novak tudományos kutatása\cite{16} is ezt javasolja. Ugyanakkor az eredmény kép minőségén is lehetne javítani. Természetesen, a jelenleg fejlesztett program lehetőséget ad a tanítási paraméterek módosítására, viszont ajánlott lenne tovább kisérletezni ezekkel. A tanítás az ADAM tanítási módszert alkalmazza, ezzel szemben tovább lehetne kisérletezni más módszerekkel is esetleges idő és képminőség javítása érdekében.
 \newline
 \indent
 Mozgóképek esetében alapértelmezetten az idő javítása lenne a cél. Ez megoldható lenne többféle módon:
@@ -1484,7 +1484,7 @@ gpustats library: \url{https://github.com/dukestats/gpustats} (2017.06.04)
 			\subfloat[Eredmény]{
 				\includegraphics[width=60mm]{stylistic/place/munkacsi.jpg}
 			}
-			\caption[]{Csontváry - Tájkép naplemente idején}
+			\caption[]{Munkácsi Mihály - Vihar a pusztán}
 			\label{sapi_2}
 		\end{figure}
 	
