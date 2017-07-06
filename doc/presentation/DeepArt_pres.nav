@@ -1,3 +1,4 @@
+\select@language {magyar} \beamer@endinputifotherversion {3.36pt}
 \select@language {magyar} \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {1}{1}}
 \select@language {magyar} \headcommand {\sectionentry {1}{Bevezet\IeC {\H o}}{2}{Bevezet\IeC {\H o}}{0}}
@@ -29,20 +30,20 @@
 \select@language {magyar} \headcommand {\beamer@framepages {11}{11}}
 \select@language {magyar} \headcommand {\slideentry {2}{1}{7}{12/12}{Statikus k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {12}{12}}
-\select@language {magyar} \headcommand {\beamer@subsectionentry {0}{2}{2}{13}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}}\headcommand {\beamer@subsectionpages {6}{12}}
-\select@language {magyar} \headcommand {\slideentry {2}{2}{1}{13/13}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
+\select@language {magyar} \headcommand {\slideentry {2}{1}{8}{13/13}{Statikus k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {13}{13}}
-\select@language {magyar} \headcommand {\slideentry {2}{2}{2}{14/14}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
+\select@language {magyar} \headcommand {\beamer@subsectionentry {0}{2}{2}{14}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}}\headcommand {\beamer@subsectionpages {6}{13}}
+\select@language {magyar} \headcommand {\slideentry {2}{2}{1}{14/14}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {14}{14}}
-\select@language {magyar} \headcommand {\slideentry {2}{2}{3}{15/15}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
+\select@language {magyar} \headcommand {\slideentry {2}{2}{2}{15/15}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {15}{15}}
-\select@language {magyar} \headcommand {\slideentry {2}{2}{4}{16/16}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
+\select@language {magyar} \headcommand {\slideentry {2}{2}{3}{16/16}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {16}{16}}
-\select@language {magyar} \headcommand {\slideentry {2}{2}{5}{17/17}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
+\select@language {magyar} \headcommand {\slideentry {2}{2}{4}{17/17}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {17}{17}}
-\select@language {magyar} \headcommand {\slideentry {2}{2}{6}{18/18}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
+\select@language {magyar} \headcommand {\slideentry {2}{2}{5}{18/18}{Mozg\IeC {\'o}k\IeC {\'e}p tan\IeC {\'\i }t\IeC {\'a}sa}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {18}{18}}
-\select@language {magyar} \headcommand {\beamer@subsectionentry {0}{2}{3}{19}{A szoftvet architekt\IeC {\'u}r\IeC {\'a}ja}}\headcommand {\beamer@subsectionpages {13}{18}}
+\select@language {magyar} \headcommand {\beamer@subsectionentry {0}{2}{3}{19}{A szoftvet architekt\IeC {\'u}r\IeC {\'a}ja}}\headcommand {\beamer@subsectionpages {14}{18}}
 \select@language {magyar} \headcommand {\slideentry {2}{3}{1}{19/19}{A szoftvet architekt\IeC {\'u}r\IeC {\'a}ja}{0}}
 \select@language {magyar} \headcommand {\beamer@framepages {19}{19}}
 \select@language {magyar} \headcommand {\slideentry {2}{3}{2}{20/20}{A szoftvet architekt\IeC {\'u}r\IeC {\'a}ja}{0}}

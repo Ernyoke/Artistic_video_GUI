@@ -9,8 +9,6 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{subfig}
 \usepackage{url}
-\usepackage{movie15}
-
 
 \title[Artistic style transfer]{Párhuzamos képstílus átruházás konvolúciós neuronhálókkal}
 \author[Szilágyi Ervin]{Szerző: Szilágyi Ervin\\{\small Témavezető: Dr. Iclănzan Dávid}}
@@ -27,7 +25,7 @@
 	\section{Bevezető}
 	
 	\begin{frame}
-		\frametitle{Mi értünk stílusátruházás alatt?}
+		\frametitle{Mit értünk stílusátruházás alatt?}
 		\begin{center}
 			\includegraphics[scale=0.15]{system_presentation.png}
 		\end{center}
@@ -74,11 +72,10 @@
 	\begin{frame}
 		\frametitle{A rendszer tanítása}
 		\begin{itemize}
-			\item "Deep learning" tanítási metódus
-			\item Előre betanított neuronháló (VGG19: 16 konvolúciós réteg, 5 pooling réteg)
-			\item Statikus kép esetében külön tanításra kerül a bemeneti kép és a stílus kép is
-			\item Mozgókép esetében minden képkocka tanításra kerül
-			\item Temporális összefüggések a képkockák között
+			\item Előre betanított neuronháló (VGG-19: 16 konvolúciós réteg, 5 pooling réteg);
+			\item Statikus kép esetében külön tanításra kerül a bemeneti kép és a stílus kép is;
+			\item Mozgókép esetében minden képkocka tanításra kerül;
+			\item Temporális összefüggések a képkockák között.
 		\end{itemize}
 	\end{frame}
 	
@@ -94,21 +91,20 @@
 	\begin{frame}
 		\frametitle{A bemeneti kép tanítása}
 		\begin{itemize}
-			\item A konvolúciós szűrök tartalmazzák a kép sajátosságait
-			\item Egy adott betanított réteg válasza egy bemeneti képre vizualizálható, ha fehér zaj képre értékeljük ki azt
+			\item A konvolúciós szűrök tartalmazzák a képek sajátosságait
+			\item A bemeneti kép veszteségfüggvénye felírható mint:
 		\end{itemize}
 			
-		A bemeneti kép veszteségfüggvénye felírható mint:
 		\begin{equation}
 			L_{content}(\vec{x}, \vec{r}, l) = \frac{1}{2}\sum{R^l_{ij} - W^l_{ij}}
 		\end{equation}
 		
 		Ahol:
 		\begin{itemize}
-			\item \(\vec{x}\) - a bemeneti képet
-			\item \(R^l\) - az l-edik réteg válasza a bemeneti képre
-			\item \(W^l\) - az l-edik réteg válasza a fehér zaj bemenetre
-			\item \(\vec{r}\) - pedig azt a kimeneti képet jelenti amit a rendszer generál a rétegek tulajdonságaiból
+			\item \(\vec{x}\) - a bemeneti képet;
+			\item \(R^l\) - az l-edik réteg válasza a bemeneti képre;
+			\item \(W^l\) - az l-edik réteg válasza a fehér zaj bemenetre;
+			\item \(\vec{r}\) - a kimeneti képet jelenti amit a rendszer generál a rétegek tulajdonságaiból.
 		\end{itemize}
 		
 		Kiértékelt réteg: \(conv4\_2\)
@@ -138,7 +134,7 @@
 			G^l_{ij} = \sum_{k} F^l_{ik} \cdot F^l_{jk}
 		\end{equation}
 		
-		A veszteségfüggvény egyetlen rétegre felírható mint a fehér zaj kép Gram mátrixa és a stílus kép Gram mátrixának átlagos négyzetes hibájaként:
+		A veszteségfüggvény egyetlen rétegre felírható mint a fehér-zaj kép Gram mátrixa és a stílus kép Gram mátrixának átlagos négyzetes hibájaként:
 		 
 		\begin{equation}
 			E_l = \frac{1}{4N^2_l M^2_l} \sum_{i,j} (G_{ij} - A_{lj})^2
@@ -148,34 +144,69 @@
 			L_{style}(\vec{a}, \vec{x}) = \sum w_lE_l
 		\end{equation}
 		
+		Használt rétegek: \(conv1\_1\), \(conv2\_1\), \(conv3\_1\), \(conv4\_1\), \(conv5\_1\)
+		
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{A stilizált kép tisztítása}
 		\framesubtitle{Total Variation Denoising}
 		
-		A stilizált képet és eltoljuk X koordináta mentén egy pixellel, majd az Y koordináta mentén is eltoljuk egy pixellel.
+		A stilizált képet eltoljuk X koordináta mentén egy pixellel, majd az Y koordináta mentén is eltoljuk egy pixellel.
 		\begin{equation}
 			L_{tv}(\vec{a}, \vec{x}) = \sum_{i,j} \left|(X_{ij} - A_{{i+1}j})\right| + \sum_{i, j} \left|(X_{ij} - A_{i {j+1}})\right|
 		\end{equation}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Tanítási függvény}
+		\frametitle{Végső veszteségfüggvénye függvény}
 		
 		\begin{equation}
 			L = L_{content} + L_{style} + L_{tv}
 		\end{equation}
 		
-		Optimalizációs algoritmus: ADAM ( Adaptive Moment Estimation). felhasználja a elsődleges, valamint a másodlagos gradiensek átlagát ahhoz, hogy a veszteségfüggvényt minimalizálja.
+		Optimalizációs algoritmus: ADAM ( Adaptive Moment Estimation) felhasználja a elsődleges, valamint a másodlagos gradiensek átlagát ahhoz, hogy a veszteségfüggvényt minimalizálja.
 		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Eredmény képek}
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Eredit kép]{
+				\includegraphics[width=25mm]{stylistic/original/sapientia.jpg}
+			}
+			\subfloat[Stíluskép]{
+				\includegraphics[width=25mm]{stylistic/styles/csontvary_kosztka_tivadar_traui_tajkep_naplemente_idejen.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=25mm]{stylistic/place/csontvary.jpg}
+			}
+			\caption[]{Csontváry - Tájkép naplemente idején}
+			\label{sapi_1}
+		\end{figure}
+		
+		\begin{figure}[!htbp]
+			\centering
+			\subfloat[Eredeti kép]{
+				\includegraphics[width=25mm]{stylistic/original/sapientia.jpg}
+			}
+			\subfloat[Stíluskép]{
+				\includegraphics[width=25mm]{stylistic/styles/munkacsi_mihaly_vihar_a_pusztan.jpg}
+			}
+			\subfloat[Eredmény]{
+				\includegraphics[width=25mm]{stylistic/place/munkacsi.jpg}
+			}
+			\caption[]{Munkácsi Mihály - Vihar a pusztán}
+			\label{sapi_2}
+		\end{figure}
 	\end{frame}
 
 	\subsection{Mozgókép tanítása}
 	
 	\begin{frame}
 		\frametitle{Mozgókép tanítása}
-		\framesubtitle{Naív megközelítés}
+		\framesubtitle{Naiv megközelítés}
 		A videót feldaraboljuk képkockákra, majd az összes képkockára átruházzuk a stílust.
 		\newline
 		
@@ -187,7 +218,7 @@
 		Hátrányai:
 		\begin{itemize}
 			\item Nincs folyamatos átmenet a képkockák között
-			\item Artifacts, pop-ins
+			\item "Flickering", "pop-ins"
 		\end{itemize}
 	\end{frame}
 
@@ -213,7 +244,7 @@
 		Megoldás - a neuronhálót a következőképpnek inicializáljuk:
 		\begin{itemize}
 			\item Optical flow-t számolunk az elöző stilizált képkocka és a mostani képkocka között
-			\item Az elöző stilizált képkockát trozítjuk az optical flow vektorai szerint
+			\item Az elöző stilizált képkockát torzítjuk az optical flow vektorai szerint
 		\end{itemize}
 	\end{frame}
 
@@ -221,19 +252,16 @@
 		\frametitle{Mozgókép tanítása}
 		\framesubtitle{Temporális összeföggések a képkockák között}
 		
-		Jelölje \(w(u, u)\) az előre történő optical flow-t, valamint \(\hat{w}(\hat{u}, \hat{u})\) a visszafele történő optical flow-t. Az előre történő optical flow torzítása:
-		\begin{equation}
-			\tilde{w}(i, j) = w((i, j) + \hat{w}(i, j))
-		\end{equation}
+		Jelölje \(w(u, v)\) az előre történő optical flow-t, valamint \(\hat{w}(\hat{u}, \hat{v})\) a visszafele történő optical flow-t.
 		
-		A mozgás néküli és újonnan megjelenő objektumok nélküli zónák azok amelyekre a következő egyenlőtlenség fenn áll:
+		Az újonnan megjelenő objektumokra a következő egyenlőtlenség áll fenn:
 		\begin{equation} \label{eq:1}
-			|\tilde{w} + \hat{w}|^2 > 0.01(|\tilde{w}|^2 + |\hat{w}|^2) + 0.5
+			|w + \hat{w}|^2 > 0.01(|w|^2 + |\hat{w}|^2) + 0.5
 		\end{equation}
 		
 		A mozgási határok pedig meghatározhatóak:
 		\begin{equation} \label{eq:2}
-			|\nabla\hat{u}| + |\nabla\hat{v}| > 0.01|\tilde{w}|^2 + 0.002
+			|\nabla u|^2 + |\nabla v|^2 > 0.01|w|^2 + 0.002
 		\end{equation}
 		
 		\begin{figure}[!htbp]
@@ -245,7 +273,7 @@
 				\includegraphics[width=30mm]{input_frame00002.jpg}
 			}
 			\hspace{0mm}
-			\subfloat[Forward consistency matrix]{
+			\subfloat[Forward optical flow]{
 				\includegraphics[width=25mm]{forward.jpg}
 			}
 			\label{consistency_weights}
@@ -263,26 +291,12 @@
 		Ahol: \\ 
 		C - mátrix: mozgási határokra 1-est rakunk, a többi érték 0-ás \\
 		x - bemeneti kép \\
-		W - előző torzított kép \\
+		W - elöző torzított kép \\
 		\vspace{1cm}
 		Végső tanítási függvény:
 		\begin{equation}
 			L = L_{content} + L_{style} + L_{tv} + L_{temporal}
 		\end{equation}
-		
-	\end{frame}
-
-	\begin{frame}
-		\frametitle{Mozgókép tanítása}
-		\framesubtitle{Végeredmény}
-		\begin{columns}
-			\column{0.5\textwidth}
-				\includemovie{5cm}{5cm}{dog_stylized.gif}
-				\captionof{figure}{Optical flow nélkül}
-			\column{0.5\textwidth}
-				\includemovie{5cm}{5cm}{dog_stylized_opt_flow.gif}
-				\captionof{figure}{Optical flow használatával}
-		\end{columns}
 		
 	\end{frame}
 
@@ -464,20 +478,20 @@
 	\begin{frame}
 		\frametitle{Összefoglaló}
 		\begin{itemize}
-			\item Grafikus felhasználói felülettel rendelkező szoftver fejlesztése
-			\item Magyar festők híres műveinek stíluást alkalmazni mindennapi képekre/mozgóképekre
-			\item Képkockák közötti temporális összefüggések kihasználása mozgóképek esetében
-			\item Tesztek, mérések elvégzése
+			\item Grafikus felhasználói felülettel rendelkező szoftver fejlesztése;
+			\item Magyar festők híres műveinek stíluást alkalmazni mindennapi képekre/mozgóképekre;
+			\item Képkockák közötti temporális összefüggések kihasználása mozgóképek esetében;
+			\item Tesztek, mérések elvégzése.
 		\end{itemize}
 		
 		\vspace{0.5cm}
 		Továbbfejlesztési lehetőségek:
 		\begin{itemize}
-			\item Saját háló betanítása, más tanítási eljárás használata
-			\item Optical flow algoritmus gyorsítása (párhuzamosítás, más algoritmusok kipróbálása)
-			\item Teljes Windows-os támogatás
-			\item Grafikus felület úrjatervezése, szépítése
-			\item Cloud alapú szolgáltatás készítése
+			\item Saját háló betanítása, más tanítási eljárás használata;
+			\item Optical flow algoritmus gyorsítása (párhuzamosítás, más algoritmusok kipróbálása);
+			\item Teljes Windows-os támogatás;
+			\item Grafikus felület úrjatervezése, szépítése;
+			\item Cloud alapú szolgáltatás készítése.
 		\end{itemize}
 		\vspace{0.5cm}
 		\begin{center}
