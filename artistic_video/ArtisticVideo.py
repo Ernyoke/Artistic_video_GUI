@@ -13,7 +13,7 @@ from artistic_video.Atomic import AtomicBoolean
 from PyQt5.Qt import QObject, pyqtSlot, pyqtSignal
 
 from artistic_video.Image import imread, imsave
-from artistic_video.Video import convert_to_frames, convert_to_video, make_opt_flow
+from artistic_video.Video import Video
 from artistic_video.Utils import get_input_type, get_separator, get_base_name, get_file_extension, InputType
 
 CONTENT_LAYER = ('relu4_2',)
@@ -36,6 +36,7 @@ class ArtisticVideo(QObject):
         super(ArtisticVideo, self).__init__(parent)
         self.stop = AtomicBoolean()
         self.log_dir = 'logs'
+        self.video = Video()
 
     iter_changed = pyqtSignal(int, int)     # emitted when an iteration is done in case of an image
     frame_changed = pyqtSignal(int, int, str)    # emitted when a frame is completed to the Progressbar
@@ -572,7 +573,7 @@ class ArtisticVideo(QObject):
             frames_output_folder = 'frames' + get_separator() + file_name
 
             # try to cut the video intro frames
-            error_code, frame_list = convert_to_frames(content_path, frames_output_folder, '.jpg')
+            error_code, frame_list = self.video.convert_to_frames(content_path, frames_output_folder, '.jpg')
 
             if error_code != 0:
                 raise FFMPEGException(error_code)
@@ -592,7 +593,7 @@ class ArtisticVideo(QObject):
                     for i in range(1, len(frame_list)):
                         if not self.stop.get():
                             forward_flow, backward_flow, forward_consistency, backward_consistency \
-                                = make_opt_flow(frame_list[i - 1], frame_list[i], frames_output_folder +
+                                = self.video.make_opt_flow(frame_list[i - 1], frame_list[i], frames_output_folder +
                                                 get_separator() + 'flow')
                             forward_flow_list[frame_list[i]] = forward_flow
                             backward_flow_list[frame_list[i]] = backward_flow
@@ -655,7 +656,7 @@ class ArtisticVideo(QObject):
                 else:
                     return
 
-            convert_to_video(output_path + file_name + "_stylized", get_file_extension(content_path),
+            self.video.convert_to_video(output_path + file_name + "_stylized", get_file_extension(content_path),
                              output_path + file_name, file_name + '%05d', '.jpg')
 
         if not self.stop.get():

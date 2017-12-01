@@ -2,6 +2,7 @@ import sys
 from enum import Enum
 from os import listdir, system, getcwd
 from os.path import isfile, join, basename, splitext
+import subprocess
 
 
 class NotSupportedOS(Exception):
@@ -125,3 +126,10 @@ def run_binary(bin_path, arguments):
     for arg in arguments:
         command += " " + arg
     return system(command)
+
+
+def run_binary_with_output(bin_path, arguments):
+    command = bin_path
+    for arg in arguments:
+        command += " " + arg
+    return subprocess.getoutput(command)
